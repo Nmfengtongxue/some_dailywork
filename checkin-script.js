@@ -6,7 +6,7 @@ let dates = [];
 
 const departmentPersonLists = {
   "行政部": ["朱甦雅", "王斌斌", "杜永丽", "张巧花", "李雁程"],
-  "销售部": ["史正蓓", "陈炳森", "白金玉", "王莉莉", "王佳", "刘倩倩"],
+  "销售部": ["史正蓓", "陈炳森", "白金玉", "王莉莉", "王佳", "刘倩倩", "周东升"],
   "医疗部": [
     "苏丹",
     "张改霞",
@@ -56,6 +56,12 @@ const trialPeriodStatStartByPerson = {
   "张彩荷": "2026-04-08",
 };
 
+// 离职后不再纳入“未打卡对比统计”的起始日期（从该日期开始不参与）
+const departNotIncludeAfterByPerson = {
+  "陈佳佳": "2026-05-06",
+  "卢林博": "2026-05-06",
+};
+
 function parseStatDateForCompare(val) {
   if (val == null || val === "") return null;
   if (val instanceof Date && !isNaN(val.getTime())) {
@@ -81,15 +87,26 @@ function parseStatDateForCompare(val) {
 }
 
 function shouldIncludeInAttendanceStat(personName, selectedDateStr) {
-  const startStr = trialPeriodStatStartByPerson[personName];
-  if (!startStr) return true;
   const selected = parseStatDateForCompare(selectedDateStr);
-  const start = parseStatDateForCompare(startStr);
-  if (!selected || !start) return true;
-  return selected.getTime() >= start.getTime();
+  if (!selected) return true;
+
+  const startStr = trialPeriodStatStartByPerson[personName];
+  if (startStr) {
+    const start = parseStatDateForCompare(startStr);
+    if (start && selected.getTime() < start.getTime()) return false;
+  }
+
+  const departAfterStr = departNotIncludeAfterByPerson[personName];
+  if (departAfterStr) {
+    const departAfter = parseStatDateForCompare(departAfterStr);
+    if (departAfter && selected.getTime() >= departAfter.getTime()) return false;
+  }
+
+  return true;
 }
 
 const updateLogs = [
+  "2026-04-29: 销售部新增周东升；五一后陈佳佳、卢林博离职，自 2026-05-06 起不再纳入统计",
   "2026-04-07: 行政部新增李雁程",
   "2026-04-07: 医疗部新增王敏敏、张彩荷（试岗），自 2026-04-08 起纳入未打卡对比",
   "2026-04-07: 医疗部新增孔娟娟、马艳萍；行政部移除曹娟；隐藏请假人员朱英、孙绿萍",
@@ -477,6 +494,13 @@ function renderPersonList() {
         li.style.color = "#92400e";
         li.style.textDecoration = "line-through";
         li.textContent = `${index + 1}. ${person} (请假)`;
+      } else if (departNotIncludeAfterByPerson[person]) {
+        const departAfter = departNotIncludeAfterByPerson[person];
+        // “离职后不参与统计”是按日期生效，这里仅做标注，不做删除/删除线避免误解
+        li.style.backgroundColor = "#f3f4f6";
+        li.style.color = "#4b5563";
+        li.style.textDecoration = "none";
+        li.textContent = `${index + 1}. ${person}（离职，${departAfter} 起不参与统计）`;
       } else {
         li.style.backgroundColor = "#e0f2fe";
         const trialStart = trialPeriodStatStartByPerson[person];
