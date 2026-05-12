@@ -5,8 +5,8 @@ let departments = [];
 let dates = [];
 
 const departmentPersonLists = {
-  "行政部": ["朱甦雅", "王斌斌", "杜永丽", "张巧花", "李雁程"],
-  "销售部": ["史正蓓", "陈炳森", "白金玉", "王莉莉", "王佳", "刘倩倩", "周东升"],
+  "行政部": ["朱甦雅", "王斌斌", "杜永丽", "张巧花", "李雁程", "王晶玉"],
+  "销售部": ["史正蓓", "陈炳森", "白金玉", "王莉莉", "王佳", "刘倩倩", "周东升", "刘晓霞"],
   "医疗部": [
     "苏丹",
     "张改霞",
@@ -45,6 +45,8 @@ const departmentPersonLists = {
     "马艳萍",
     "王敏敏",
     "张彩荷",
+    "王凯迪",
+    "朱文婷",
   ],
 };
 
@@ -60,6 +62,28 @@ const trialPeriodStatStartByPerson = {
 const departNotIncludeAfterByPerson = {
   "陈佳佳": "2026-05-06",
   "卢林博": "2026-05-06",
+};
+
+// 返岗日前不参与统计（所选打卡日期早于该日则不作为应打卡人员对比）
+const statIncludeFromDateByPerson = {
+  "朱艳丽": "2026-11-06",
+};
+
+// 名单展示用备注（不影响 Excel 姓名匹配）
+const personViewNoteSuffixByPerson = {
+  "王凯迪": "（客服）",
+};
+
+// 首页悬浮提示：名单部门对应的组织/中心展示名（可与 Excel 里的「部门」文案区分）
+const rosterTooltipOrgByListDepartment = {
+  "行政部": "行政部门",
+  "销售部": "销售部门",
+  "医疗部": "医疗中心",
+};
+
+// 个人在「组织」行额外补充（如客服部）
+const rosterTooltipOrgExtraByPerson = {
+  "王凯迪": "客服部",
 };
 
 function parseStatDateForCompare(val) {
@@ -86,9 +110,19 @@ function parseStatDateForCompare(val) {
   return isNaN(d.getTime()) ? null : new Date(d.getFullYear(), d.getMonth(), d.getDate());
 }
 
+function personViewNoteSuffix(personName) {
+  return personViewNoteSuffixByPerson[personName] || "";
+}
+
 function shouldIncludeInAttendanceStat(personName, selectedDateStr) {
   const selected = parseStatDateForCompare(selectedDateStr);
   if (!selected) return true;
+
+  const includeFromStr = statIncludeFromDateByPerson[personName];
+  if (includeFromStr) {
+    const includeFrom = parseStatDateForCompare(includeFromStr);
+    if (includeFrom && selected.getTime() < includeFrom.getTime()) return false;
+  }
 
   const startStr = trialPeriodStatStartByPerson[personName];
   if (startStr) {
@@ -106,6 +140,7 @@ function shouldIncludeInAttendanceStat(personName, selectedDateStr) {
 }
 
 const updateLogs = [
+  "2026-05-12: 销售部新增刘晓霞；医疗部新增王凯迪（客服）、朱文婷；行政部新增王晶玉；朱艳丽孕假，所选打卡日期早于 2026-11-06 时不纳入未打卡对比，返岗日起恢复",
   "2026-04-29: 销售部新增周东升；五一后陈佳佳、卢林博离职，自 2026-05-06 起不再纳入统计",
   "2026-04-07: 行政部新增李雁程",
   "2026-04-07: 医疗部新增王敏敏、张彩荷（试岗），自 2026-04-08 起纳入未打卡对比",
@@ -129,6 +164,110 @@ function getPersonDepartment(personName) {
     }
   }
   return "医疗部";
+}
+
+function rosterOrganizationLine(listDepartment, personName) {
+  const base = rosterTooltipOrgByListDepartment[listDepartment] || listDepartment;
+  const extra = rosterTooltipOrgExtraByPerson[personName];
+  return extra ? `${base} · ${extra}` : base;
+}
+
+function buildPersonRosterTooltipText(personName) {
+  const dept = getPersonDepartment(personName);
+  const lines = [];
+  lines.push(`姓名：${personName}`);
+  lines.push(`名单部门：${dept}`);
+  lines.push(`组织：${rosterOrganizationLine(dept, personName)}`);
+  const suffix = personViewNoteSuffix(personName);
+  if (suffix && suffix.includes("客服")) {
+    lines.push("岗位：客服人员");
+  } else if (suffix) {
+    lines.push(`备注：${suffix.replace(/[()（）]/g, "").trim()}`);
+  }
+
+  if (leavePersons.includes(personName)) {
+    lines.push("未打卡对比：请假期间已排除");
+  }
+  if (statIncludeFromDateByPerson[personName]) {
+    lines.push(`未打卡对比：孕假，${statIncludeFromDateByPerson[personName]} 起纳入应到名单`);
+  }
+  if (departNotIncludeAfterByPerson[personName]) {
+    lines.push(`未打卡对比：${departNotIncludeAfterByPerson[personName]} 起离职不参与`);
+  }
+  if (trialPeriodStatStartByPerson[personName]) {
+    lines.push(`未打卡对比：试岗，${trialPeriodStatStartByPerson[personName]} 起纳入`);
+  }
+  return lines.join("\n");
+}
+
+function homeRosterDepartmentClass(department) {
+  if (department === "行政部") return "admin";
+  if (department === "销售部") return "sales";
+  if (department === "医疗部") return "medical";
+  return "medical";
+}
+
+function disposeHomeRosterTooltips() {
+  const root = document.getElementById("homePersonRoster");
+  if (!root) return;
+  root.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((el) => {
+    const inst = bootstrap.Tooltip.getInstance(el);
+    if (inst) inst.dispose();
+  });
+}
+
+function initHomeRosterTooltips() {
+  const root = document.getElementById("homePersonRoster");
+  if (!root || typeof bootstrap === "undefined" || !bootstrap.Tooltip) return;
+  root.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((el) => {
+    new bootstrap.Tooltip(el, {
+      customClass: "tooltip-home-roster",
+      trigger: "hover focus",
+      container: "body",
+    });
+  });
+}
+
+function renderHomePersonRoster() {
+  const root = document.getElementById("homePersonRoster");
+  if (!root) return;
+
+  disposeHomeRosterTooltips();
+  root.innerHTML = "";
+
+  const deptOrder = ["行政部", "销售部", "医疗部"];
+  deptOrder.forEach((department) => {
+    const persons = departmentPersonLists[department];
+    if (!persons || persons.length === 0) return;
+
+    const group = document.createElement("div");
+    group.className = "home-roster-group";
+
+    const title = document.createElement("div");
+    title.className = "home-roster-group-title";
+    title.textContent = `${department}（${persons.length} 人）`;
+    group.appendChild(title);
+
+    const chips = document.createElement("div");
+    chips.className = "home-roster-chips";
+
+    const deptClass = homeRosterDepartmentClass(department);
+    persons.forEach((person) => {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = `home-roster-chip ${deptClass}`;
+      chip.textContent = person;
+      chip.setAttribute("data-bs-toggle", "tooltip");
+      chip.setAttribute("data-bs-placement", "top");
+      chip.setAttribute("title", buildPersonRosterTooltipText(person));
+      chips.appendChild(chip);
+    });
+
+    group.appendChild(chips);
+    root.appendChild(group);
+  });
+
+  initHomeRosterTooltips();
 }
 
 function addPerson(name) {
@@ -493,20 +632,27 @@ function renderPersonList() {
         li.style.backgroundColor = "#fef3c7";
         li.style.color = "#92400e";
         li.style.textDecoration = "line-through";
-        li.textContent = `${index + 1}. ${person} (请假)`;
+        li.textContent = `${index + 1}. ${person}${personViewNoteSuffix(person)} (请假)`;
+      } else if (statIncludeFromDateByPerson[person]) {
+        const resumeOn = statIncludeFromDateByPerson[person];
+        li.style.backgroundColor = "#fce7f3";
+        li.style.color = "#9d174d";
+        li.style.textDecoration = "none";
+        li.textContent = `${index + 1}. ${person}${personViewNoteSuffix(person)}（孕假，${resumeOn} 起纳入对比）`;
       } else if (departNotIncludeAfterByPerson[person]) {
         const departAfter = departNotIncludeAfterByPerson[person];
         // “离职后不参与统计”是按日期生效，这里仅做标注，不做删除/删除线避免误解
         li.style.backgroundColor = "#f3f4f6";
         li.style.color = "#4b5563";
         li.style.textDecoration = "none";
-        li.textContent = `${index + 1}. ${person}（离职，${departAfter} 起不参与统计）`;
+        li.textContent = `${index + 1}. ${person}${personViewNoteSuffix(person)}（离职，${departAfter} 起不参与统计）`;
       } else {
         li.style.backgroundColor = "#e0f2fe";
         const trialStart = trialPeriodStatStartByPerson[person];
+        const suffix = personViewNoteSuffix(person);
         li.textContent = trialStart
-          ? `${index + 1}. ${person}（试岗，${trialStart} 起纳入对比）`
-          : `${index + 1}. ${person}`;
+          ? `${index + 1}. ${person}${suffix}（试岗，${trialStart} 起纳入对比）`
+          : `${index + 1}. ${person}${suffix}`;
       }
       ul.appendChild(li);
     });
@@ -567,6 +713,8 @@ function renderPersonList() {
 }
 
 window.addEventListener("DOMContentLoaded", function () {
+  renderHomePersonRoster();
+
   const compareBtn = document.getElementById("compareBtn");
   if (compareBtn) compareBtn.addEventListener("click", comparePersonLists);
 
@@ -588,6 +736,7 @@ window.addEventListener("DOMContentLoaded", function () {
       addPerson(addName);
       document.getElementById("addName").value = "";
       renderPersonList();
+      renderHomePersonRoster();
     });
   }
 
@@ -598,6 +747,7 @@ window.addEventListener("DOMContentLoaded", function () {
       removePerson(removeName);
       document.getElementById("removeName").value = "";
       renderPersonList();
+      renderHomePersonRoster();
     });
   }
 
@@ -610,6 +760,7 @@ window.addEventListener("DOMContentLoaded", function () {
       document.getElementById("oldName").value = "";
       document.getElementById("newName").value = "";
       renderPersonList();
+      renderHomePersonRoster();
     });
   }
 
