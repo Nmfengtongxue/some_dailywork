@@ -59,6 +59,7 @@ const trialPeriodStatStartByPerson = {
 };
 
 // 离职后不再纳入“未打卡对比统计”的起始日期（从该日期开始不参与）
+// 同时不在首页「全员名单」展示；名单数据保留，管理人员名单中灰色标注
 const departNotIncludeAfterByPerson = {
   "陈佳佳": "2026-05-06",
   "卢林博": "2026-05-06",
@@ -116,6 +117,14 @@ function personViewNoteSuffix(personName) {
   return personViewNoteSuffixByPerson[personName] || "";
 }
 
+function isDepartedPerson(personName) {
+  return Object.prototype.hasOwnProperty.call(departNotIncludeAfterByPerson, personName);
+}
+
+function filterActivePersonsForHomeRoster(persons) {
+  return persons.filter((person) => !isDepartedPerson(person));
+}
+
 function shouldIncludeInAttendanceStat(personName, selectedDateStr) {
   const selected = parseStatDateForCompare(selectedDateStr);
   if (!selected) return true;
@@ -142,6 +151,7 @@ function shouldIncludeInAttendanceStat(personName, selectedDateStr) {
 }
 
 const updateLogs = [
+  "2026-05-25: 离职人员（含销售部王佳）不在首页「全员名单」展示；名单保留、管理人员名单灰色标注、未打卡对比按离职日排除",
   "2026-05-25: 销售部王佳离职，名单保留，自 2026-05-25 起未打卡对比不再纳入统计",
   "2026-05-12: 医疗部张文慧离职，名单保留，自 2026-05-12 起未打卡对比不再纳入统计",
   "2026-05-12: 销售部新增刘晓霞；医疗部新增王凯迪（客服）、朱文婷；行政部新增王晶玉；朱艳丽孕假，所选打卡日期早于 2026-11-06 时不纳入未打卡对比，返岗日起恢复",
@@ -241,8 +251,8 @@ function renderHomePersonRoster() {
 
   const deptOrder = ["行政部", "销售部", "医疗部"];
   deptOrder.forEach((department) => {
-    const persons = departmentPersonLists[department];
-    if (!persons || persons.length === 0) return;
+    const persons = filterActivePersonsForHomeRoster(departmentPersonLists[department] || []);
+    if (persons.length === 0) return;
 
     const group = document.createElement("div");
     group.className = "home-roster-group";
