@@ -249,7 +249,7 @@
         }
     </style><script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script></head><body><div class="container"><h1>喜报生成工具</h1><div class="return-button" style="position: absolute; top: 20px; right: 20px;"><a href="index.html" class="btn btn-secondary btn-sm">返回导航页面</a></div><div class="card mb-4"><div class="card-header">
                 上传图片
-            </div><div class="card-body"><div class="upload-section"><input type="file" id="fileInput" accept="image/jpeg,image/png"><p>请上传图片，系统将自动定位需要替换的文字区域</p></div></div></div><div class="main-layout"><div class="controls-container"><h2>文字编辑</h2><div class="text-editors"><div class="editor-section"><h3>1. 部门</h3><div class="control-group"><label for="deptContent">文字内容:</label><input type="text" id="deptContent" placeholder="请输入部门" value="销售部"><div style="margin-top: 8px;"><label for="deptPreset">预选部门:</label><select id="deptPreset" onchange="if(this.value){document.getElementById('deptContent').value=this.value; updateTextObject('dept'); this.value='';}"><option value="">请选择</option><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="总经理">总经理</option><option value="副总经理">副总经理</option></select></div></div><div class="control-row"><div class="control-group"><label for="deptFontFamily">字体:</label><select id="deptFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="deptFontSize">字号:</label><input type="number" id="deptFontSize" value="48" min="12" max="200"></div><div class="control-group"><label for="deptFontColor">颜色:</label><input type="color" id="deptFontColor" value="#fff2eb"></div></div></div><div class="editor-section"><h3>2. 姓名</h3><div class="control-group"><label for="nameContent">文字内容:</label><input type="text" id="nameContent" placeholder="请输入姓名" oninput="updateCongratsText()"></div><div class="control-row"><div class="control-group"><label for="nameFontFamily">字体:</label><select id="nameFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="nameFontSize">字号:</label><input type="number" id="nameFontSize" value="40" min="12" max="200"></div><div class="control-group"><label for="nameFontColor">颜色:</label><input type="color" id="nameFontColor" value="#fff2eb"></div></div></div><div class="editor-section"><h3>3. 恭喜</h3><div class="control-group"><label for="congratsContent">文字内容:</label><input type="text" id="congratsContent" placeholder="请输入恭喜语"></div><div class="control-row"><div class="control-group"><label for="congratsFontFamily">字体:</label><select id="congratsFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack">黑体</option><option value="NotoSansSCMedium" selected>中等黑体</option></select></div><div class="control-group"><label for="congratsFontSize">字号:</label><input type="number" id="congratsFontSize" value="42" min="12" max="300"></div><div class="control-group"><label for="congratsFontColor">颜色:</label><input type="color" id="congratsFontColor" value="#9f0913"></div></div></div><div class="editor-section"><h3>4. 下单</h3><div class="control-group"><label for="orderContent">文字内容:</label><input type="text" id="orderContent" placeholder="请输入下单信息" value="开门红套餐下单"></div><div class="control-row"><div class="control-group"><label for="orderFontFamily">字体:</label><select id="orderFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="orderFontSize">字号:</label><input type="number" id="orderFontSize" value="48" min="12" max="200"></div><div class="control-group"><label for="orderFontColor">颜色:</label><input type="color" id="orderFontColor" value="#80090d"></div></div></div><div class="editor-section"><h3>5. 金额</h3><div class="control-group"><label for="amountContent">文字内容:</label><input type="text" id="amountContent" placeholder="请输入金额"></div><div class="control-row"><div class="control-group"><label for="amountFontFamily">字体:</label><select id="amountFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="amountFontSize">字号:</label><input type="number" id="amountFontSize" value="170" min="12" max="300"></div><div class="control-group"><label for="amountFontColor">颜色:</label><input type="color" id="amountFontColor" value="#ffb875"></div></div></div><div class="editor-section"><h3>6. 头像管理</h3><div class="control-group"><label for="deptFilter">按部门筛选:</label><select id="deptFilter" onchange="filterNamesByDepartment()"><option value="">全部部门</option><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="副总经理">副总经理</option></select></div><div class="control-group"><label for="nameFilter">按姓名选择:</label><select id="nameFilter" onchange="if(this.value){document.getElementById('avatarNameInput').value=this.value; previewAvatar();}"><option value="">请选择姓名</option></select></div><div class="control-group"><label for="avatarNameInput">或输入姓名查找:</label><input type="text" id="avatarNameInput" placeholder="请输入姓名"></div><div class="control-row"><div class="control-group" style="flex: 2;"><button id="previewAvatarBtn" class="btn btn-secondary" style="width: 100%;">预览头像</button></div><div class="control-group" style="flex: 2;"><button id="confirmAvatarBtn" class="btn btn-primary" style="width: 100%;" disabled>确认上传头像</button></div></div><div style="margin: 15px 0; text-align: center;"><div style="display: inline-block; width: 120px; height: 120px; border: 2px dashed #dee2e6; border-radius: 50%; overflow: hidden; position: relative;"><div id="avatarPreviewArea" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa;"><span style="color: #6c757d; font-size: 14px;">头像预览</span></div></div></div><div class="control-group"><label for="avatarFileInput">上传图片更新/添加头像:</label><input type="file" id="avatarFileInput" accept="image/jpeg,image/png"></div><div class="control-group"><label for="avatarReverseName">姓名:</label><input type="text" id="avatarReverseName" placeholder="请输入姓名"></div><div class="control-group"><label for="avatarReverseDept">部门:</label><select id="avatarReverseDept"><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="副总经理">副总经理</option></select></div><div class="control-row"><div class="control-group" style="flex: 1;"><button id="uploadImageWithNameBtn" class="btn btn-success" style="width: 100%;">上传并保存</button></div><div class="control-group" style="flex: 1;"><button id="deletePersonBtn" class="btn btn-danger" style="width: 100%;">删除人员</button></div></div><div class="control-group"><button id="viewAllPersonsBtn" class="btn btn-info" style="width: 100%; margin-top: 10px;">查看所有人员</button></div><div id="avatarTip" style="margin-top: 10px; font-size: 12px; color: #6c757d; text-align: center;"></div><div id="personListModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);"><div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; max-height: 80vh; overflow-y: auto;"><div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;"><h4>所有人员名单</h4><span class="close" style="color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span></div><div class="modal-body"><div id="personListContent"></div></div></div></div></div></div><div class="export-settings"><h3>导出设置</h3><div class="control-row"><div class="control-group"><label for="exportWidth">宽度:</label><input type="number" id="exportWidth" value="1080" min="100" max="4000"></div><div class="control-group"><label for="exportHeight">高度:</label><input type="number" id="exportHeight" value="1990" min="100" max="4000"></div></div></div><div class="button-group"><button id="exportBtn" class="btn btn-primary">导出JPG</button><button id="resetBtn" class="btn btn-danger">重置</button></div></div><div class="card"><div class="card-header">
+            </div><div class="card-body"><div class="upload-section"><input type="file" id="fileInput" accept="image/jpeg,image/png"><p>请上传图片，系统将自动定位需要替换的文字区域</p></div></div></div><div class="main-layout"><div class="controls-container"><h2>文字编辑</h2><div class="text-editors"><div class="editor-section"><h3>1. 部门</h3><div class="control-group"><label for="deptContent">文字内容:</label><input type="text" id="deptContent" placeholder="请输入部门" value="销售部"><div style="margin-top: 8px;"><label for="deptPreset">预选部门:</label><select id="deptPreset" onchange="if(this.value){document.getElementById('deptContent').value=this.value; updateTextObject('dept'); this.value='';}"><option value="">请选择</option><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="总经理">总经理</option><option value="副总经理">副总经理</option></select></div></div><div class="control-row"><div class="control-group"><label for="deptFontFamily">字体:</label><select id="deptFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="deptFontSize">字号:</label><input type="number" id="deptFontSize" value="48" min="12" max="200"></div><div class="control-group"><label for="deptFontColor">颜色:</label><input type="color" id="deptFontColor" value="#fff2eb"></div></div></div><div class="editor-section"><h3>2. 姓名</h3><div class="control-group"><label for="nameContent">文字内容:</label><input type="text" id="nameContent" placeholder="请输入姓名" oninput="updateCongratsText()"></div><div class="control-row"><div class="control-group"><label for="nameFontFamily">字体:</label><select id="nameFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="nameFontSize">字号:</label><input type="number" id="nameFontSize" value="40" min="12" max="200"></div><div class="control-group"><label for="nameFontColor">颜色:</label><input type="color" id="nameFontColor" value="#fff2eb"></div></div></div><div class="editor-section"><h3>3. 恭喜</h3><div class="control-group"><label for="congratsContent">文字内容:</label><input type="text" id="congratsContent" placeholder="请输入恭喜语"></div><div class="control-row"><div class="control-group"><label for="congratsFontFamily">字体:</label><select id="congratsFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack">黑体</option><option value="NotoSansSCMedium" selected>中等黑体</option></select></div><div class="control-group"><label for="congratsFontSize">字号:</label><input type="number" id="congratsFontSize" value="42" min="12" max="300"></div><div class="control-group"><label for="congratsFontColor">颜色:</label><input type="color" id="congratsFontColor" value="#9f0913"></div></div></div><div class="editor-section"><h3>4. 下单</h3><div class="control-group"><label for="orderContent">文字内容:</label><input type="text" id="orderContent" placeholder="请输入下单信息" value="618活动套餐下单"><div style="margin-top: 8px;"><label for="orderPreset">预选套餐:</label><select id="orderPreset" onchange="if(this.value){document.getElementById('orderContent').value=this.value; updateTextObject('order'); this.value='';}"><option value="">请选择</option><option value="开门红套餐下单">开门红套餐下单</option><option value="618活动套餐下单">618活动套餐下单</option></select></div></div><div class="control-row"><div class="control-group"><label for="orderFontFamily">字体:</label><select id="orderFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="orderFontSize">字号:</label><input type="number" id="orderFontSize" value="48" min="12" max="200"></div><div class="control-group"><label for="orderFontColor">颜色:</label><input type="color" id="orderFontColor" value="#80090d"></div></div></div><div class="editor-section"><h3>5. 金额</h3><div class="control-group"><label for="amountContent">文字内容:</label><input type="text" id="amountContent" placeholder="请输入金额"></div><div class="control-row"><div class="control-group"><label for="amountFontFamily">字体:</label><select id="amountFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="amountFontSize">字号:</label><input type="number" id="amountFontSize" value="170" min="12" max="300"></div><div class="control-group"><label for="amountFontColor">颜色:</label><input type="color" id="amountFontColor" value="#ffb875"></div></div></div><div class="editor-section"><h3>6. 头像管理</h3><div class="control-group"><label for="deptFilter">按部门筛选:</label><select id="deptFilter" onchange="filterNamesByDepartment()"><option value="">全部部门</option><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="副总经理">副总经理</option></select></div><div class="control-group"><label for="nameFilter">按姓名选择:</label><select id="nameFilter" onchange="if(this.value){document.getElementById('avatarNameInput').value=this.value; previewAvatar();}"><option value="">请选择姓名</option></select></div><div class="control-group"><label for="avatarNameInput">或输入姓名查找:</label><input type="text" id="avatarNameInput" placeholder="请输入姓名"></div><div class="control-row"><div class="control-group" style="flex: 2;"><button id="previewAvatarBtn" class="btn btn-secondary" style="width: 100%;">预览头像</button></div><div class="control-group" style="flex: 2;"><button id="confirmAvatarBtn" class="btn btn-primary" style="width: 100%;" disabled>确认上传头像</button></div></div><div style="margin: 15px 0; text-align: center;"><div style="display: inline-block; width: 120px; height: 120px; border: 2px dashed #dee2e6; border-radius: 50%; overflow: hidden; position: relative;"><div id="avatarPreviewArea" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa;"><span style="color: #6c757d; font-size: 14px;">头像预览</span></div></div></div><div class="control-group"><label for="avatarFileInput">上传图片更新/添加头像:</label><input type="file" id="avatarFileInput" accept="image/jpeg,image/png"></div><div class="control-group"><label for="avatarReverseName">姓名:</label><input type="text" id="avatarReverseName" placeholder="请输入姓名"></div><div class="control-group"><label for="avatarReverseDept">部门:</label><select id="avatarReverseDept"><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="副总经理">副总经理</option></select></div><div class="control-row"><div class="control-group" style="flex: 1;"><button id="uploadImageWithNameBtn" class="btn btn-success" style="width: 100%;">上传并保存</button></div><div class="control-group" style="flex: 1;"><button id="deletePersonBtn" class="btn btn-danger" style="width: 100%;">删除人员</button></div></div><div class="control-group"><button id="viewAllPersonsBtn" class="btn btn-info" style="width: 100%; margin-top: 10px;">查看所有人员</button></div><div id="avatarTip" style="margin-top: 10px; font-size: 12px; color: #6c757d; text-align: center;"></div><div id="personListModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);"><div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; max-height: 80vh; overflow-y: auto;"><div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;"><h4>所有人员名单</h4><span class="close" style="color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span></div><div class="modal-body"><div id="personListContent"></div></div></div></div></div></div><div class="export-settings"><h3>导出设置</h3><div class="control-row"><div class="control-group"><label for="exportWidth">宽度:</label><input type="number" id="exportWidth" value="1080" min="100" max="4000"></div><div class="control-group"><label for="exportHeight">高度:</label><input type="number" id="exportHeight" value="1990" min="100" max="4000"></div></div></div><div class="button-group"><button id="exportBtn" class="btn btn-primary">导出JPG</button><button id="resetBtn" class="btn btn-danger">重置</button></div></div><div class="card"><div class="card-header">
                     预览效果
                 </div><div class="card-body"><div class="canvas-container"><canvas id="canvas" width="1080" height="1990"></canvas></div></div></div></div></div><script>
         // 文字区域坐标定义
@@ -260,61 +260,82 @@
             order: { x: 100, y: 1400, width: 880, height: 100 }, // 下单：垂直居中，y坐标1400px
             amount: { x: 100, y: 1550, width: 880, height: 150 } // 金额：垂直居中，y坐标1550px
         };
+        // 人员名单版本号（变更后递增，用于覆盖浏览器 localStorage 中的旧名单）
+        const PERSONNEL_MAP_REVISION = '2026-06-07-v3';
         // 人员名单映射（姓名 -> 部门）
         const PERSONNEL_MAP = {
-            // 管理层
-            '范宏云': '副总经理',
-            // 行政部
-            '朱甦雅': '行政部',
-            '王斌斌': '行政部',
-            '杜永丽': '行政部',
-            '张巧花': '行政部',
             // 销售部
-            '史正蓓': '销售部',
             '陈炳森': '销售部',
             '白金玉': '销售部',
             '王莉莉': '销售部',
-            '董博': '销售部',
-            '王佳': '销售部',
             '刘倩倩': '销售部',
+            // 行政部
+            '范宏云': '行政部',
+            '杜永丽': '行政部',
+            '朱甦雅': '行政部',
+            '王斌斌': '行政部',
+            '张巧花': '行政部',
+            '俞帅文': '行政部',
+            '李雁程': '行政部',
+            '王晶玉': '行政部',
             // 医疗中心
-            '苏丹': '医疗中心',
-            '曹娟': '医疗中心',
+            '童守义': '医疗中心',
+            '张静': '医疗中心',
             '张改霞': '医疗中心',
-            '李雨婷': '医疗中心',
             '赵改过': '医疗中心',
-            '张英玲': '医疗中心',
-            '胡立茹': '医疗中心',
-            '杨晓昭': '医疗中心',
-            '王烁楠': '医疗中心',
-            '朱丹': '医疗中心',
-            '朱英': '医疗中心',
-            '胡秀娥': '医疗中心',
-            '韩万忠': '医疗中心',
-            '郭锦霞': '医疗中心',
-            '程芸': '医疗中心',
-            '张文慧': '医疗中心',
-            '王倩倩': '医疗中心',
             '孙悦': '医疗中心',
-            '郑晓燕': '医疗中心',
-            '魏霞': '医疗中心',
-            '姚建强': '医疗中心',
-            '潘雨萍': '医疗中心',
-            '朱艳丽': '医疗中心',
-            '董凯雨': '医疗中心',
-            '张鹤廷': '医疗中心',
-            '孙绿萍': '医疗中心',
-            '刘丹丹': '医疗中心',
-            '张丽娟': '医疗中心',
-            '邵倩': '医疗中心',
+            '苏丹': '医疗中心',
+            '李雨婷': '医疗中心',
+            '郭锦霞': '医疗中心',
             '王晓霞': '医疗中心',
+            '汪佑安': '医疗中心',
+            '杨晓晖': '医疗中心',
+            '张英玲': '医疗中心',
+            '刘力榕': '医疗中心',
+            '耿新民': '医疗中心',
+            '刘艳丽': '医疗中心',
+            '胡立茹': '医疗中心',
+            '胡秀娥': '医疗中心',
+            '梁晓菊': '医疗中心',
+            '王烁楠': '医疗中心',
+            '赵润蕊': '医疗中心',
+            '韩万忠': '医疗中心',
+            '郑晓燕': '医疗中心',
+            '潘丽萍': '医疗中心',
+            '魏霞': '医疗中心',
+            '董凯丽': '医疗中心',
+            '姜媛媛': '医疗中心',
             '党江娟': '医疗中心',
             '刘沛': '医疗中心',
-            '周娜': '医疗中心',
-            '姜媛媛': '医疗中心',
+            '姚建强': '医疗中心',
             '苏巧燕': '医疗中心',
-            '杨文娟': '医疗中心'
+            '杨文娟': '医疗中心',
+            '张丽娟': '医疗中心',
+            '周娜': '医疗中心',
+            '朱丹': '医疗中心',
+            '邵倩': '医疗中心',
+            '程芸': '医疗中心',
+            '王倩倩': '医疗中心',
+            '张鹤延': '医疗中心',
+            '孔娟娟': '医疗中心',
+            '马艳萍': '医疗中心',
+            '王敏敏': '医疗中心',
+            '张彩荷': '医疗中心',
+            '朱文婷': '医疗中心',
+            '张园胜': '医疗中心',
+            '曹圆圆': '医疗中心'
         };
+        // 头像文件名别名（名单姓名 -> 服务器旧文件名，待图片重命名后可删除对应项）
+        const PHOTO_NAME_ALIASES = {};
+        const updateLogs = [
+            '2026-06-07: 新增李雁程.png 至 GitHub 头像库',
+            '2026-06-07: 同步 2026-06-07 新增人员文件夹 22 张头像至 GitHub，文件名与喜报名单一一对应；移除史正蓓、张文慧、曹娟、王佳等不在名单内的旧图',
+            '2026-06-07: GitHub 头像同步：潘雨萍→潘丽萍、董凯雨→董凯丽（文件重命名）；新增张静.png；移除头像别名配置',
+            '2026-06-06: 曹娟与曹圆圆为不同人员，曹娟已离职不在名单内；曹圆圆不再关联曹娟头像。潘丽萍、董凯丽为统一标准姓名',
+            '2026-06-06: 同步现行人员名单（共 57 人：销售部 4、行政部 8、医疗中心 45）；姓名以最新版为准：朱甦雅、童守义、李雨婷、郭锦霞、邵倩、曹圆圆等',
+            '2026-06-06: 按最新名单整体替换人员名单；范宏云调至行政部；新增俞帅文、汪佑安、耿新民、赵润蕊等；移除史正蓓、王佳、董博、张文慧、朱英等',
+            '2026-06-01: 杨晓昭更正为杨晓晖'
+        ];
         // 存储当前预览的头像信息
         let currentPreviewAvatar = null;
         // 存储上传的头像数据（姓名 -> 头像DataURL）
@@ -326,17 +347,26 @@
         
         // 从localStorage恢复数据
         function loadFromLocalStorage() {
-            // 恢复PERSONNEL_MAP
+            const savedRevision = localStorage.getItem('personnelMapRevision');
             const savedPersonnelMap = localStorage.getItem('personnelMap');
-            if (savedPersonnelMap) {
+
+            if (savedRevision === PERSONNEL_MAP_REVISION && savedPersonnelMap) {
+                Object.keys(PERSONNEL_MAP).forEach(key => delete PERSONNEL_MAP[key]);
                 Object.assign(PERSONNEL_MAP, JSON.parse(savedPersonnelMap));
+            } else {
+                localStorage.setItem('personnelMapRevision', PERSONNEL_MAP_REVISION);
+                localStorage.setItem('personnelMap', JSON.stringify(PERSONNEL_MAP));
             }
-            
+
             // 恢复uploadedAvatars
             const savedAvatars = localStorage.getItem('uploadedAvatars');
             if (savedAvatars) {
                 uploadedAvatars = JSON.parse(savedAvatars);
             }
+        }
+
+        function getPhotoLookupName(name) {
+            return PHOTO_NAME_ALIASES[name] || name;
         }
         /**
          * 初始化Fabric.js画布
@@ -434,7 +464,7 @@
                             const currentDept = document.getElementById('deptContent').value;
                             
                             // 只重置订单内容，保持部门和姓名不变
-                            document.getElementById('orderContent').value = '开门红套餐下单';
+                            document.getElementById('orderContent').value = '618活动套餐下单';
                             
                             // 确保部门和姓名仍然正确
                             if (currentName) {
@@ -860,8 +890,9 @@
                     }
                     
                     const extension = extensions[extensionIndex];
+                    const photoName = getPhotoLookupName(nameInput);
                     // 使用GitHub仓库的URL路径
-                    const avatarPath = `https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/${nameInput}${extension}`;
+                    const avatarPath = `https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/${photoName}${extension}`;
                     
                     // 创建图片对象
                     const img = new Image();
@@ -1035,6 +1066,7 @@
             initNameDropdown();
             
             // 保存PERSONNEL_MAP到localStorage
+            localStorage.setItem('personnelMapRevision', PERSONNEL_MAP_REVISION);
             localStorage.setItem('personnelMap', JSON.stringify(PERSONNEL_MAP));
             
             // 处理文件上传（仅用于预览，实际保存需要服务器支持）
@@ -1120,6 +1152,7 @@
                     localStorage.setItem('uploadedAvatars', JSON.stringify(uploadedAvatars));
                 }
                 // 更新localStorage中的PERSONNEL_MAP
+                localStorage.setItem('personnelMapRevision', PERSONNEL_MAP_REVISION);
                 localStorage.setItem('personnelMap', JSON.stringify(PERSONNEL_MAP));
                 // 重新初始化姓名下拉列表
                 initNameDropdown();
@@ -1165,6 +1198,16 @@
                 html += '</ul>';
             });
             html += '</div>';
+
+            if (updateLogs.length > 0) {
+                html += '<hr style="margin: 20px 0;">';
+                html += '<h5 style="color: #6c757d; margin-bottom: 10px;">更新记录</h5>';
+                html += '<ul style="margin: 0; padding-left: 20px; font-size: 13px; color: #495057;">';
+                updateLogs.forEach(log => {
+                    html += `<li style="margin-bottom: 8px;">${log}</li>`;
+                });
+                html += '</ul>';
+            }
             
             content.innerHTML = html;
             modal.style.display = 'block';
@@ -1213,7 +1256,7 @@
                         addTextObjects();
                         // 设置默认值
                         document.getElementById('deptContent').value = '销售部';
-                        document.getElementById('orderContent').value = '开门红套餐下单';
+                        document.getElementById('orderContent').value = '618活动套餐下单';
                         updateTextObject('dept');
                         updateTextObject('order');
                         // 渲染画布

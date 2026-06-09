@@ -138,6 +138,49 @@
             color: var(--primary-color);
             font-size: 1.2rem;
         }
+        .result-card .copy-indicator {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #2e7d32;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .result-card.copy-success .copy-indicator {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .copy-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background-color: #2e7d32;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .copy-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
         .result-keyword {
             font-size: 1.3rem;
             font-weight: 700;
@@ -299,7 +342,7 @@
                 gap: 15px;
             }
         }
-    </style></head><body><div class="container"><div class="return-button" style="position: absolute; top: 20px; right: 20px;"><a href="index.html" class="btn btn-secondary btn-sm">返回导航页面</a></div><h1 class="text-center mb-4"><i class="fas fa-chart-bar"></i> Excel动态关键词筛选分析工具</h1><div class="main-layout" style="display: grid; grid-template-columns: 320px 1fr; gap: 20px; margin-bottom: 20px;"><div class="controls-container" style="background-color: #f8f9fa; border-radius: 8px; padding: 15px; height: auto; overflow-y: auto; box-sizing: border-box; min-width: 0;"><h2 style="text-align: center; font-size: 18px; color: var(--primary-color); margin-top: 0; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--primary-color);">使用说明</h2><ol style="margin-left: 20px;"><li style="margin-bottom: 8px;">上传包含"订单名称"和"结账总金额"列的Excel文件</li><li style="margin-bottom: 8px;">选择要筛选的列，输入关键词（每行一个关键词）</li><li style="margin-bottom: 8px;">点击"开始筛选"按钮，系统将按关键词筛选订单</li><li style="margin-bottom: 8px;">点击分析结果卡片，下方表格将只显示该关键词对应的订单</li><li style="margin-bottom: 8px;">点击"复制筛选结果"按钮可以复制所有关键词的金额结果</li></ol></div><div class="card"><div class="card-header">
+    </style></head><body><div class="container"><div class="return-button" style="position: absolute; top: 20px; right: 20px;"><a href="index.html" class="btn btn-secondary btn-sm">返回导航页面</a></div><h1 class="text-center mb-4"><i class="fas fa-chart-bar"></i> Excel动态关键词筛选分析工具</h1><div class="main-layout" style="display: grid; grid-template-columns: 320px 1fr; gap: 20px; margin-bottom: 20px;"><div class="controls-container" style="background-color: #f8f9fa; border-radius: 8px; padding: 15px; height: auto; overflow-y: auto; box-sizing: border-box; min-width: 0;"><h2 style="text-align: center; font-size: 18px; color: var(--primary-color); margin-top: 0; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--primary-color);">使用说明</h2><ol style="margin-left: 20px;"><li style="margin-bottom: 8px;">上传包含"订单名称"和"结账总金额"列的Excel文件</li><li style="margin-bottom: 8px;">选择要筛选的列，输入关键词（每行一个关键词）</li><li style="margin-bottom: 8px;">点击"开始筛选"按钮，系统将按关键词筛选订单</li><li style="margin-bottom: 8px;">点击分析结果卡片，可复制金额数字（不含¥符号）并筛选下方表格数据</li><li style="margin-bottom: 8px;">点击"复制筛选结果"按钮可以复制所有关键词的金额结果</li></ol></div><div class="card"><div class="card-header">
                     上传文件
                 </div><div class="card-body"><div class="upload-area" id="uploadArea" style="max-width: 600px; margin: 0 auto;"><div class="upload-icon" style="font-size: 40px; color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-file-excel"></i></div><div class="upload-text" style="font-size: 1rem; margin-bottom: 10px; color: var(--text-color);">
                             点击此处或拖放Excel文件到此区域上传
@@ -307,10 +350,10 @@
                     </button><div class="file-name" id="fileName">未选择文件</div></div><div class="loading" id="loading"><div class="loading-spinner"></div><p>正在分析Excel文件，请稍候...</p></div><div class="error-message" id="errorMessage"></div><div class="success-message" id="successMessage"></div></div></div></div><div class="card mb-4" id="filterSection" style="display: none;"><div class="card-header"><h3 class="mb-0"><i class="fas fa-filter"></i> 筛选设置</h3></div><div class="card-body"><div class="filter-controls"><div class="column-selector"><div class="control-group"><label class="control-label"><i class="fas fa-columns"></i> 选择筛选列</label><select id="columnSelect" class="select-box"><option value="">请先上传Excel文件</option></select><div class="keywords-hint">系统已自动选择"订单名称"列，您也可以手动选择其他列</div></div></div><div class="keywords-input"><div class="control-group"><label class="control-label"><i class="fas fa-key"></i> 输入关键词</label><textarea id="keywordsInput" class="keywords-textarea" placeholder="请输入关键词，每行一个关键词&#10;例如：&#10;全国&#10;美团&#10;千爱&#10;中药房&#10;公司药房&#10;散户"></textarea><div class="keywords-hint">每行一个关键词，系统将按输入顺序依次筛选（备注：散户=传统个检）</div></div></div></div><div class="filter-actions"><button class="btn btn-primary" id="analyzeBtn"><i class="fas fa-play-circle"></i> 开始筛选
                     </button><button class="btn btn-secondary" id="resetBtn"><i class="fas fa-redo"></i> 重置筛选
                     </button></div></div></div><div class="card mb-4" id="resultSection" style="display: none;"><div class="card-header"><h3 class="mb-0"><i class="fas fa-chart-pie"></i> 分析结果</h3></div><div class="card-body"><div class="mb-3"><button class="btn btn-success" id="copyResultsBtn"><i class="fas fa-copy"></i> 复制筛选结果
-                    </button><span style="font-size: 0.9rem; color: #6c757d; margin-left: 10px;">点击结果卡片可筛选下方表格数据</span></div><div class="results-container" id="resultsContainer"></div><div class="total-card"><div class="total-title">所有筛选订单总金额</div><div class="total-amount" id="totalAmount">¥0.00</div></div><div class="copyable-results" id="copyableResults"><div class="copyable-results-title"><span>可复制的结果列表</span><button class="btn btn-success" id="copyTextBtn"><i class="fas fa-copy"></i> 复制
+                    </button><span style="font-size: 0.9rem; color: #6c757d; margin-left: 10px;">点击结果卡片可复制金额数字（不含¥）并筛选下方表格</span></div><div class="results-container" id="resultsContainer"></div><div class="total-card"><div class="total-title">所有筛选订单总金额</div><div class="total-amount" id="totalAmount">¥0.00</div></div><div class="copyable-results" id="copyableResults"><div class="copyable-results-title"><span>可复制的结果列表</span><button class="btn btn-success" id="copyTextBtn"><i class="fas fa-copy"></i> 复制
                         </button></div><div id="resultsText"></div></div></div></div><div class="card mb-4" id="dataTableSection" style="display: none;"><div class="card-header"><h3 class="mb-0"><i class="fas fa-table"></i> 订单详情</h3></div><div class="card-body"><div class="data-table-container"><table class="data-table" id="dataTable"><thead><tr><th>订单名称</th><th>原价</th><th>结账总金额</th><th>关键词</th><th>体检人</th><th>所属单位</th></tr></thead><tbody id="tableBody"></tbody></table></div><div class="no-data" id="noDataMessage">
                     暂无数据，请先上传Excel文件并开始筛选
-                </div></div></div><footer class="text-center mt-5 mb-4"><p>Excel动态关键词筛选分析工具 &copy; 2023 | 支持自定义关键词筛选和结果复制</p></footer></div><script>
+                </div></div></div><footer class="text-center mt-5 mb-4"><p>Excel动态关键词筛选分析工具 &copy; 2023 | 支持自定义关键词筛选和结果复制</p></footer><div class="copy-toast" id="copyToast"><i class="fas fa-check-circle"></i><span id="copyToastText">已复制</span></div></div><script>
         // 获取DOM元素
         const fileInput = document.getElementById('fileInput');
         const uploadArea = document.getElementById('uploadArea');
@@ -333,6 +376,14 @@
         const copyableResults = document.getElementById('copyableResults');
         const resultsText = document.getElementById('resultsText');
         const copyTextBtn = document.getElementById('copyTextBtn');
+        const copyToast = document.getElementById('copyToast');
+        const copyToastText = document.getElementById('copyToastText');
+        let copyToastTimer = null;
+        const keywordDisplayMap = {
+            '公司药房': '公司药房（西药房）',
+            '中药房': '中药房（中医）',
+            '散户': '散户（传统个检）',
+        };
         // 全局变量
         let excelData = null;
         let columnHeaders = [];
@@ -644,12 +695,6 @@
             resultsContainer.innerHTML = '';
             let allTotal = 0;
             let allCount = 0;
-            // 只用于“展示文字”，筛选仍然使用 keywords 里的原始值作为键
-            const keywordDisplayMap = {
-                '公司药房': '公司药房（西药房）',
-                '中药房': '中药房（中医）',
-                '散户': '散户（传统个检）',
-            };
             keywords.forEach(keyword => {
                 const result = keywordResults[keyword] || { total: 0, count: 0 };
                 const total = result.total || 0;
@@ -668,11 +713,14 @@
                 card.dataset.keyword = keyword;
                 const displayKeyword = keywordDisplayMap[keyword] || keyword;
                 card.innerHTML = `
+                    <div class="copy-indicator"><i class="fas fa-check"></i> 已复制</div>
                     ${activeKeyword === keyword ? '<div class="active-indicator"><i class="fas fa-check-circle"></i></div>' : ''}
                     <div class="result-keyword"><i class="fas ${icon}"></i> ${displayKeyword}</div><div class="result-amount">¥${total.toFixed(2)}</div><div class="result-count">${count} 个订单</div>
                 `;
-                // 添加点击事件
-                card.addEventListener('click', () => filterTableByKeyword(keyword));
+                card.addEventListener('click', () => {
+                    filterTableByKeyword(keyword);
+                    copyCardResultToClipboard(card);
+                });
                 resultsContainer.appendChild(card);
             });
             // 计算本地私域（千爱+传统个检+中药房）的结果
@@ -685,9 +733,14 @@
             const localPrivateDomainCard = document.createElement('div');
             localPrivateDomainCard.className = 'result-card';
             localPrivateDomainCard.dataset.keyword = '本地私域（千爱+传统个检+中药房）';
+            const localPrivateDomainLabel = '本地私域（千爱+传统个检+中药房）';
             localPrivateDomainCard.innerHTML = `
-                <div class="result-keyword"><i class="fas fa-home"></i> 本地私域（千爱+传统个检+中药房）</div><div class="result-amount">¥${localPrivateDomainTotal.toFixed(2)}</div><div class="result-count">${localPrivateDomainCount} 个订单</div>
+                <div class="copy-indicator"><i class="fas fa-check"></i> 已复制</div>
+                <div class="result-keyword"><i class="fas fa-home"></i> ${localPrivateDomainLabel}</div><div class="result-amount">¥${localPrivateDomainTotal.toFixed(2)}</div><div class="result-count">${localPrivateDomainCount} 个订单</div>
             `;
+            localPrivateDomainCard.addEventListener('click', () => {
+                copyCardResultToClipboard(localPrivateDomainCard);
+            });
             resultsContainer.appendChild(localPrivateDomainCard);
             // 更新总金额
             totalAmount.textContent = `¥${allTotal.toFixed(2)}`;
@@ -753,14 +806,41 @@
                 tableBody.appendChild(row);
             });
         }
+        function getAmountTextFromCard(cardElement) {
+            const amountEl = cardElement.querySelector('.result-amount');
+            if (!amountEl) return '';
+            return amountEl.textContent.replace(/[¥￥,\s]/g, '').trim();
+        }
+        function showCopyFeedback(cardElement, copiedText) {
+            if (cardElement) {
+                cardElement.classList.add('copy-success');
+                setTimeout(() => cardElement.classList.remove('copy-success'), 2000);
+            }
+            if (copyToastTimer) {
+                clearTimeout(copyToastTimer);
+            }
+            copyToastText.textContent = `已复制：${copiedText}`;
+            copyToast.classList.add('show');
+            copyToastTimer = setTimeout(() => {
+                copyToast.classList.remove('show');
+            }, 2000);
+        }
+        function copyCardResultToClipboard(cardElement) {
+            const textToCopy = getAmountTextFromCard(cardElement);
+            if (!textToCopy) {
+                showError('未找到可复制的金额');
+                return;
+            }
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => showCopyFeedback(cardElement, textToCopy))
+                .catch(err => {
+                    console.error('复制失败: ', err);
+                    showError('复制失败，请手动选择并复制文本');
+                });
+        }
         // 更新可复制的结果文本
         function updateCopyableResults(allTotal, allCount) {
             let resultsTextContent = '';
-            const keywordDisplayMap = {
-                '公司药房': '公司药房（西药房）',
-                '中药房': '中药房（中医）',
-                '散户': '散户（传统个检）',
-            };
             keywords.forEach(keyword => {
                 const result = keywordResults[keyword] || { total: 0, count: 0 };
                 const total = result.total || 0;
