@@ -198,6 +198,51 @@
             border: 1px solid var(--border-color);
             border-radius: 4px;
         }
+        /* 姓名搜索建议列表 */
+        .avatar-name-search-box {
+            position: relative;
+        }
+        .avatar-name-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            margin: 4px 0 0;
+            padding: 0;
+            list-style: none;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            max-height: 220px;
+            overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .avatar-name-suggestions li {
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            border-bottom: 1px solid #f1f3f5;
+        }
+        .avatar-name-suggestions li:last-child {
+            border-bottom: none;
+        }
+        .avatar-name-suggestions li:hover,
+        .avatar-name-suggestions li.active {
+            background: rgba(59, 130, 246, 0.08);
+            color: var(--primary-color);
+        }
+        .avatar-name-suggestions .suggestion-dept {
+            float: right;
+            font-size: 12px;
+            color: #6c757d;
+        }
+        .avatar-name-suggestions .suggestion-meta {
+            display: block;
+            font-size: 11px;
+            color: #adb5bd;
+            margin-top: 2px;
+        }
         /* 优化滚动条样式 */
         .controls-container::-webkit-scrollbar {
             width: 6px;
@@ -247,9 +292,9 @@
                 height: auto;
             }
         }
-    </style><script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script></head><body><div class="container"><h1>喜报生成工具</h1><div class="return-button" style="position: absolute; top: 20px; right: 20px;"><a href="index.html" class="btn btn-secondary btn-sm">返回导航页面</a></div><div class="card mb-4"><div class="card-header">
+    </style><script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.js"></script></head><body><div class="container"><h1>喜报生成工具</h1><div class="return-button" style="position: absolute; top: 20px; right: 20px;"><a href="index.html" class="btn btn-secondary btn-sm">返回导航页面</a></div><div class="card mb-4"><div class="card-header">
                 上传图片
-            </div><div class="card-body"><div class="upload-section"><input type="file" id="fileInput" accept="image/jpeg,image/png"><p>请上传图片，系统将自动定位需要替换的文字区域</p></div></div></div><div class="main-layout"><div class="controls-container"><h2>文字编辑</h2><div class="text-editors"><div class="editor-section"><h3>1. 部门</h3><div class="control-group"><label for="deptContent">文字内容:</label><input type="text" id="deptContent" placeholder="请输入部门" value="销售部"><div style="margin-top: 8px;"><label for="deptPreset">预选部门:</label><select id="deptPreset" onchange="if(this.value){document.getElementById('deptContent').value=this.value; updateTextObject('dept'); this.value='';}"><option value="">请选择</option><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="总经理">总经理</option><option value="副总经理">副总经理</option></select></div></div><div class="control-row"><div class="control-group"><label for="deptFontFamily">字体:</label><select id="deptFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="deptFontSize">字号:</label><input type="number" id="deptFontSize" value="48" min="12" max="200"></div><div class="control-group"><label for="deptFontColor">颜色:</label><input type="color" id="deptFontColor" value="#fff2eb"></div></div></div><div class="editor-section"><h3>2. 姓名</h3><div class="control-group"><label for="nameContent">文字内容:</label><input type="text" id="nameContent" placeholder="请输入姓名" oninput="updateCongratsText()"></div><div class="control-row"><div class="control-group"><label for="nameFontFamily">字体:</label><select id="nameFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="nameFontSize">字号:</label><input type="number" id="nameFontSize" value="40" min="12" max="200"></div><div class="control-group"><label for="nameFontColor">颜色:</label><input type="color" id="nameFontColor" value="#fff2eb"></div></div></div><div class="editor-section"><h3>3. 恭喜</h3><div class="control-group"><label for="congratsContent">文字内容:</label><input type="text" id="congratsContent" placeholder="请输入恭喜语"></div><div class="control-row"><div class="control-group"><label for="congratsFontFamily">字体:</label><select id="congratsFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack">黑体</option><option value="NotoSansSCMedium" selected>中等黑体</option></select></div><div class="control-group"><label for="congratsFontSize">字号:</label><input type="number" id="congratsFontSize" value="42" min="12" max="300"></div><div class="control-group"><label for="congratsFontColor">颜色:</label><input type="color" id="congratsFontColor" value="#9f0913"></div></div></div><div class="editor-section"><h3>4. 下单</h3><div class="control-group"><label for="orderContent">文字内容:</label><input type="text" id="orderContent" placeholder="请输入下单信息" value="618活动套餐下单"><div style="margin-top: 8px;"><label for="orderPreset">预选套餐:</label><select id="orderPreset" onchange="if(this.value){document.getElementById('orderContent').value=this.value; updateTextObject('order'); this.value='';}"><option value="">请选择</option><option value="开门红套餐下单">开门红套餐下单</option><option value="618活动套餐下单">618活动套餐下单</option></select></div></div><div class="control-row"><div class="control-group"><label for="orderFontFamily">字体:</label><select id="orderFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="orderFontSize">字号:</label><input type="number" id="orderFontSize" value="48" min="12" max="200"></div><div class="control-group"><label for="orderFontColor">颜色:</label><input type="color" id="orderFontColor" value="#80090d"></div></div></div><div class="editor-section"><h3>5. 金额</h3><div class="control-group"><label for="amountContent">文字内容:</label><input type="text" id="amountContent" placeholder="请输入金额"></div><div class="control-row"><div class="control-group"><label for="amountFontFamily">字体:</label><select id="amountFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="amountFontSize">字号:</label><input type="number" id="amountFontSize" value="170" min="12" max="300"></div><div class="control-group"><label for="amountFontColor">颜色:</label><input type="color" id="amountFontColor" value="#ffb875"></div></div></div><div class="editor-section"><h3>6. 头像管理</h3><div class="control-group"><label for="deptFilter">按部门筛选:</label><select id="deptFilter" onchange="filterNamesByDepartment()"><option value="">全部部门</option><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="副总经理">副总经理</option></select></div><div class="control-group"><label for="nameFilter">按姓名选择:</label><select id="nameFilter" onchange="if(this.value){document.getElementById('avatarNameInput').value=this.value; previewAvatar();}"><option value="">请选择姓名</option></select></div><div class="control-group"><label for="avatarNameInput">或输入姓名查找:</label><input type="text" id="avatarNameInput" placeholder="请输入姓名"></div><div class="control-row"><div class="control-group" style="flex: 2;"><button id="previewAvatarBtn" class="btn btn-secondary" style="width: 100%;">预览头像</button></div><div class="control-group" style="flex: 2;"><button id="confirmAvatarBtn" class="btn btn-primary" style="width: 100%;" disabled>确认上传头像</button></div></div><div style="margin: 15px 0; text-align: center;"><div style="display: inline-block; width: 120px; height: 120px; border: 2px dashed #dee2e6; border-radius: 50%; overflow: hidden; position: relative;"><div id="avatarPreviewArea" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa;"><span style="color: #6c757d; font-size: 14px;">头像预览</span></div></div></div><div class="control-group"><label for="avatarFileInput">上传图片更新/添加头像:</label><input type="file" id="avatarFileInput" accept="image/jpeg,image/png"></div><div class="control-group"><label for="avatarReverseName">姓名:</label><input type="text" id="avatarReverseName" placeholder="请输入姓名"></div><div class="control-group"><label for="avatarReverseDept">部门:</label><select id="avatarReverseDept"><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="副总经理">副总经理</option></select></div><div class="control-row"><div class="control-group" style="flex: 1;"><button id="uploadImageWithNameBtn" class="btn btn-success" style="width: 100%;">上传并保存</button></div><div class="control-group" style="flex: 1;"><button id="deletePersonBtn" class="btn btn-danger" style="width: 100%;">删除人员</button></div></div><div class="control-group"><button id="viewAllPersonsBtn" class="btn btn-info" style="width: 100%; margin-top: 10px;">查看所有人员</button></div><div id="avatarTip" style="margin-top: 10px; font-size: 12px; color: #6c757d; text-align: center;"></div><div id="personListModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);"><div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; max-height: 80vh; overflow-y: auto;"><div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;"><h4>所有人员名单</h4><span class="close" style="color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span></div><div class="modal-body"><div id="personListContent"></div></div></div></div></div></div><div class="export-settings"><h3>导出设置</h3><div class="control-row"><div class="control-group"><label for="exportWidth">宽度:</label><input type="number" id="exportWidth" value="1080" min="100" max="4000"></div><div class="control-group"><label for="exportHeight">高度:</label><input type="number" id="exportHeight" value="1990" min="100" max="4000"></div></div></div><div class="button-group"><button id="exportBtn" class="btn btn-primary">导出JPG</button><button id="resetBtn" class="btn btn-danger">重置</button></div></div><div class="card"><div class="card-header">
+            </div><div class="card-body"><div class="upload-section"><input type="file" id="fileInput" accept="image/jpeg,image/png"><p>请上传图片，系统将自动定位需要替换的文字区域</p></div></div></div><div class="main-layout"><div class="controls-container"><h2>文字编辑</h2><div class="text-editors"><div class="editor-section"><h3>1. 部门</h3><div class="control-group"><label for="deptContent">文字内容:</label><input type="text" id="deptContent" placeholder="请输入部门" value="销售部"><div style="margin-top: 8px;"><label for="deptPreset">预选部门:</label><select id="deptPreset" onchange="if(this.value){document.getElementById('deptContent').value=this.value; updateTextObject('dept'); this.value='';}"><option value="">请选择</option><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="总经理">总经理</option><option value="副总经理">副总经理</option></select></div></div><div class="control-row"><div class="control-group"><label for="deptFontFamily">字体:</label><select id="deptFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="deptFontSize">字号:</label><input type="number" id="deptFontSize" value="48" min="12" max="200"></div><div class="control-group"><label for="deptFontColor">颜色:</label><input type="color" id="deptFontColor" value="#fff2eb"></div></div></div><div class="editor-section"><h3>2. 姓名</h3><div class="control-group"><label for="nameContent">文字内容:</label><input type="text" id="nameContent" placeholder="请输入姓名" oninput="updateCongratsText()"></div><div class="control-row"><div class="control-group"><label for="nameFontFamily">字体:</label><select id="nameFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="nameFontSize">字号:</label><input type="number" id="nameFontSize" value="40" min="12" max="200"></div><div class="control-group"><label for="nameFontColor">颜色:</label><input type="color" id="nameFontColor" value="#fff2eb"></div></div></div><div class="editor-section"><h3>3. 恭喜</h3><div class="control-group"><label for="congratsContent">文字内容:</label><input type="text" id="congratsContent" placeholder="请输入恭喜语"></div><div class="control-row"><div class="control-group"><label for="congratsFontFamily">字体:</label><select id="congratsFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack">黑体</option><option value="NotoSansSCMedium" selected>中等黑体</option></select></div><div class="control-group"><label for="congratsFontSize">字号:</label><input type="number" id="congratsFontSize" value="42" min="12" max="300"></div><div class="control-group"><label for="congratsFontColor">颜色:</label><input type="color" id="congratsFontColor" value="#9f0913"></div></div></div><div class="editor-section"><h3>4. 下单</h3><div class="control-group"><label for="orderContent">文字内容:</label><input type="text" id="orderContent" placeholder="请输入下单信息" value="618活动套餐下单"><div style="margin-top: 8px;"><label for="orderPreset">预选套餐:</label><select id="orderPreset" onchange="if(this.value){document.getElementById('orderContent').value=this.value; updateTextObject('order'); this.value='';}"><option value="">请选择</option><option value="开门红套餐下单">开门红套餐下单</option><option value="618活动套餐下单">618活动套餐下单</option></select></div></div><div class="control-row"><div class="control-group"><label for="orderFontFamily">字体:</label><select id="orderFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="orderFontSize">字号:</label><input type="number" id="orderFontSize" value="48" min="12" max="200"></div><div class="control-group"><label for="orderFontColor">颜色:</label><input type="color" id="orderFontColor" value="#80090d"></div></div></div><div class="editor-section"><h3>5. 金额</h3><div class="control-group"><label for="amountContent">文字内容:</label><input type="text" id="amountContent" placeholder="请输入金额"></div><div class="control-row"><div class="control-group"><label for="amountFontFamily">字体:</label><select id="amountFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="amountFontSize">字号:</label><input type="number" id="amountFontSize" value="170" min="12" max="300"></div><div class="control-group"><label for="amountFontColor">颜色:</label><input type="color" id="amountFontColor" value="#ffb875"></div></div></div><div class="editor-section"><h3>6. 头像管理</h3><div class="control-group"><label for="deptFilter">按部门筛选:</label><select id="deptFilter" onchange="filterNamesByDepartment()"><option value="">全部部门</option><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="副总经理">副总经理</option></select></div><div class="control-group"><label for="nameFilter">按姓名选择:</label><select id="nameFilter" onchange="if(this.value){document.getElementById('avatarNameInput').value=this.value; previewAvatar();}"><option value="">请选择姓名</option></select></div><div class="control-group avatar-name-search"><label for="avatarNameInput">或输入姓名查找:</label><div class="avatar-name-search-box"><input type="text" id="avatarNameInput" placeholder="姓名 / 拼音 / 首字母" autocomplete="off" spellcheck="false"><ul id="avatarNameSuggestions" class="avatar-name-suggestions" role="listbox" hidden></ul></div></div><div class="control-row"><div class="control-group" style="flex: 2;"><button id="previewAvatarBtn" class="btn btn-secondary" style="width: 100%;">预览头像</button></div><div class="control-group" style="flex: 2;"><button id="confirmAvatarBtn" class="btn btn-primary" style="width: 100%;" disabled>确认上传头像</button></div></div><div style="margin: 15px 0; text-align: center;"><div style="display: inline-block; width: 120px; height: 120px; border: 2px dashed #dee2e6; border-radius: 50%; overflow: hidden; position: relative;"><div id="avatarPreviewArea" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa;"><span style="color: #6c757d; font-size: 14px;">头像预览</span></div></div></div><div class="control-group"><label for="avatarFileInput">上传图片更新/添加头像:</label><input type="file" id="avatarFileInput" accept="image/jpeg,image/png"></div><div class="control-group"><label for="avatarReverseName">姓名:</label><input type="text" id="avatarReverseName" placeholder="请输入姓名"></div><div class="control-group"><label for="avatarReverseDept">部门:</label><select id="avatarReverseDept"><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="副总经理">副总经理</option></select></div><div class="control-row"><div class="control-group" style="flex: 1;"><button id="uploadImageWithNameBtn" class="btn btn-success" style="width: 100%;">上传并保存</button></div><div class="control-group" style="flex: 1;"><button id="deletePersonBtn" class="btn btn-danger" style="width: 100%;">删除人员</button></div></div><div class="control-group"><button id="viewAllPersonsBtn" class="btn btn-info" style="width: 100%; margin-top: 10px;">查看所有人员</button></div><div id="avatarTip" style="margin-top: 10px; font-size: 12px; color: #6c757d; text-align: center;"></div><div id="personListModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);"><div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; max-height: 80vh; overflow-y: auto;"><div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;"><h4>所有人员名单</h4><span class="close" style="color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span></div><div class="modal-body"><div id="personListContent"></div></div></div></div></div></div><div class="export-settings"><h3>导出设置</h3><div class="control-row"><div class="control-group"><label for="exportWidth">宽度:</label><input type="number" id="exportWidth" value="1080" min="100" max="4000"></div><div class="control-group"><label for="exportHeight">高度:</label><input type="number" id="exportHeight" value="1990" min="100" max="4000"></div></div></div><div class="button-group"><button id="exportBtn" class="btn btn-primary">导出JPG</button><button id="resetBtn" class="btn btn-danger">重置</button></div></div><div class="card"><div class="card-header">
                     预览效果
                 </div><div class="card-body"><div class="canvas-container"><canvas id="canvas" width="1080" height="1990"></canvas></div></div></div></div></div><script>
         // 文字区域坐标定义
@@ -261,7 +306,7 @@
             amount: { x: 100, y: 1550, width: 880, height: 150 } // 金额：垂直居中，y坐标1550px
         };
         // 人员名单版本号（变更后递增，用于覆盖浏览器 localStorage 中的旧名单）
-        const PERSONNEL_MAP_REVISION = '2026-06-07-v3';
+        const PERSONNEL_MAP_REVISION = '2026-06-07-v4';
         // 人员名单映射（姓名 -> 部门）
         const PERSONNEL_MAP = {
             // 销售部
@@ -328,6 +373,7 @@
         // 头像文件名别名（名单姓名 -> 服务器旧文件名，待图片重命名后可删除对应项）
         const PHOTO_NAME_ALIASES = {};
         const updateLogs = [
+            '2026-06-07: 头像姓名查找支持模糊中文搜索与拼音首字母搜索（含搜索建议列表）',
             '2026-06-07: 新增李雁程.png 至 GitHub 头像库',
             '2026-06-07: 同步 2026-06-07 新增人员文件夹 22 张头像至 GitHub，文件名与喜报名单一一对应；移除史正蓓、张文慧、曹娟、王佳等不在名单内的旧图',
             '2026-06-07: GitHub 头像同步：潘雨萍→潘丽萍、董凯雨→董凯丽（文件重命名）；新增张静.png；移除头像别名配置',
@@ -368,6 +414,217 @@
         function getPhotoLookupName(name) {
             return PHOTO_NAME_ALIASES[name] || name;
         }
+
+        let personnelSearchIndex = [];
+        let avatarNameSuggestionIndex = -1;
+
+        function rebuildPersonnelSearchIndex() {
+            personnelSearchIndex = Object.keys(PERSONNEL_MAP).map(name => {
+                const dept = PERSONNEL_MAP[name];
+                let initials = '';
+                let pinyinFull = '';
+                let pinyinText = '';
+
+                if (window.pinyinPro && typeof window.pinyinPro.pinyin === 'function') {
+                    try {
+                        const pinyinArr = window.pinyinPro.pinyin(name, { toneType: 'none', type: 'array' });
+                        initials = pinyinArr.map(part => (part && part[0]) || '').join('').toLowerCase();
+                        pinyinFull = pinyinArr.join('').toLowerCase();
+                        pinyinText = pinyinArr.join(' ').toLowerCase();
+                    } catch (error) {
+                        console.warn('拼音索引生成失败:', name, error);
+                    }
+                }
+
+                return { name, dept, initials, pinyinFull, pinyinText };
+            });
+        }
+
+        function normalizeSearchQuery(query) {
+            return query.trim().toLowerCase().replace(/\s+/g, '');
+        }
+
+        function isChineseSubsequence(text, query) {
+            if (!query) return false;
+            let index = 0;
+            for (const ch of query) {
+                const found = text.indexOf(ch, index);
+                if (found === -1) return false;
+                index = found + 1;
+            }
+            return true;
+        }
+
+        function scorePersonMatch(entry, queryRaw) {
+            const trimmed = queryRaw.trim();
+            const query = normalizeSearchQuery(queryRaw);
+            if (!trimmed) return -1;
+
+            const { name, initials, pinyinFull, pinyinText } = entry;
+
+            if (name === trimmed) return 1000;
+            if (name.includes(trimmed)) return 900;
+            if (isChineseSubsequence(name, trimmed)) return 800;
+
+            if (/^[a-z]+$/.test(query)) {
+                if (initials === query) return 850;
+                if (initials.startsWith(query)) return 780;
+                if (initials.includes(query)) return 720;
+                if (pinyinFull.startsWith(query)) return 700;
+                if (pinyinFull.includes(query)) return 650;
+            }
+
+            if (query && (pinyinText.includes(query) || pinyinFull.includes(query))) {
+                return 600;
+            }
+
+            return -1;
+        }
+
+        function getFilteredPersonnelNames() {
+            const selectedDept = document.getElementById('deptFilter')?.value || '';
+            return personnelSearchIndex.filter(entry => !selectedDept || entry.dept === selectedDept);
+        }
+
+        function searchPersonnel(query) {
+            return getFilteredPersonnelNames()
+                .map(entry => ({ entry, score: scorePersonMatch(entry, query) }))
+                .filter(item => item.score >= 0)
+                .sort((a, b) => {
+                    if (b.score !== a.score) return b.score - a.score;
+                    return a.entry.name.localeCompare(b.entry.name, 'zh-CN', { sensitivity: 'accent' });
+                })
+                .map(item => item.entry);
+        }
+
+        function resolveAvatarNameInput(rawInput) {
+            const trimmed = rawInput.trim();
+            if (!trimmed) return null;
+            if (Object.prototype.hasOwnProperty.call(PERSONNEL_MAP, trimmed)) return trimmed;
+
+            const matched = getFilteredPersonnelNames()
+                .map(entry => ({ entry, score: scorePersonMatch(entry, trimmed) }))
+                .filter(item => item.score >= 0)
+                .sort((a, b) => {
+                    if (b.score !== a.score) return b.score - a.score;
+                    return a.entry.name.localeCompare(b.entry.name, 'zh-CN', { sensitivity: 'accent' });
+                });
+
+            if (matched.length === 1) return matched[0].entry.name;
+            if (matched.length > 1 && matched[0].score >= 850 && matched[0].score > matched[1].score) {
+                return matched[0].entry.name;
+            }
+            return null;
+        }
+
+        function hideAvatarNameSuggestions() {
+            const list = document.getElementById('avatarNameSuggestions');
+            if (!list) return;
+            list.hidden = true;
+            list.innerHTML = '';
+            avatarNameSuggestionIndex = -1;
+        }
+
+        function selectAvatarNameSuggestion(name) {
+            const input = document.getElementById('avatarNameInput');
+            input.value = name;
+            hideAvatarNameSuggestions();
+            previewAvatar();
+        }
+
+        function renderAvatarNameSuggestions(results) {
+            const list = document.getElementById('avatarNameSuggestions');
+            if (!list) return;
+
+            list.innerHTML = '';
+            avatarNameSuggestionIndex = -1;
+
+            if (!results.length) {
+                list.hidden = true;
+                return;
+            }
+
+            results.slice(0, 12).forEach((entry, index) => {
+                const item = document.createElement('li');
+                item.setAttribute('role', 'option');
+                item.dataset.index = String(index);
+                item.dataset.name = entry.name;
+                item.innerHTML = `<span>${entry.name}</span><span class="suggestion-dept">${entry.dept}</span><span class="suggestion-meta">${entry.initials ? entry.initials.toUpperCase() : ''}${entry.pinyinText ? ' · ' + entry.pinyinText : ''}</span>`;
+                item.addEventListener('mousedown', function(event) {
+                    event.preventDefault();
+                    selectAvatarNameSuggestion(entry.name);
+                });
+                list.appendChild(item);
+            });
+
+            list.hidden = false;
+        }
+
+        function updateAvatarNameSuggestions() {
+            const input = document.getElementById('avatarNameInput');
+            const query = input.value.trim();
+            if (!query) {
+                hideAvatarNameSuggestions();
+                return;
+            }
+            renderAvatarNameSuggestions(searchPersonnel(query));
+        }
+
+        function setActiveAvatarNameSuggestion(index) {
+            const list = document.getElementById('avatarNameSuggestions');
+            if (!list || list.hidden) return;
+
+            const items = list.querySelectorAll('li');
+            if (!items.length) return;
+
+            avatarNameSuggestionIndex = Math.max(0, Math.min(index, items.length - 1));
+            items.forEach((item, itemIndex) => {
+                item.classList.toggle('active', itemIndex === avatarNameSuggestionIndex);
+            });
+            items[avatarNameSuggestionIndex].scrollIntoView({ block: 'nearest' });
+        }
+
+        function initAvatarNameSearch() {
+            const input = document.getElementById('avatarNameInput');
+            const list = document.getElementById('avatarNameSuggestions');
+            if (!input || !list) return;
+
+            input.addEventListener('input', updateAvatarNameSuggestions);
+            input.addEventListener('focus', updateAvatarNameSuggestions);
+            input.addEventListener('blur', function() {
+                setTimeout(hideAvatarNameSuggestions, 150);
+            });
+            input.addEventListener('keydown', function(event) {
+                const items = list.querySelectorAll('li');
+                if (event.key === 'ArrowDown') {
+                    if (!list.hidden && items.length) {
+                        event.preventDefault();
+                        setActiveAvatarNameSuggestion(avatarNameSuggestionIndex + 1);
+                    }
+                    return;
+                }
+                if (event.key === 'ArrowUp') {
+                    if (!list.hidden && items.length) {
+                        event.preventDefault();
+                        setActiveAvatarNameSuggestion(avatarNameSuggestionIndex <= 0 ? items.length - 1 : avatarNameSuggestionIndex - 1);
+                    }
+                    return;
+                }
+                if (event.key === 'Enter') {
+                    if (!list.hidden && items.length && avatarNameSuggestionIndex >= 0) {
+                        event.preventDefault();
+                        selectAvatarNameSuggestion(items[avatarNameSuggestionIndex].dataset.name);
+                        return;
+                    }
+                    previewAvatar();
+                    return;
+                }
+                if (event.key === 'Escape') {
+                    hideAvatarNameSuggestions();
+                }
+            });
+        }
+
         /**
          * 初始化Fabric.js画布
          */
@@ -769,7 +1026,9 @@
             });
             
             // 初始化姓名下拉列表
+            rebuildPersonnelSearchIndex();
             initNameDropdown();
+            initAvatarNameSearch();
             // 头像管理功能事件监听
             // 预览头像按钮
             document.getElementById('previewAvatarBtn').addEventListener('click', previewAvatar);
@@ -798,7 +1057,8 @@
          * 预览头像
          */
         function previewAvatar() {
-            const nameInput = document.getElementById('avatarNameInput').value.trim();
+            const inputEl = document.getElementById('avatarNameInput');
+            let nameInput = inputEl.value.trim();
             const previewArea = document.getElementById('avatarPreviewArea');
             const confirmBtn = document.getElementById('confirmAvatarBtn');
             const avatarTip = document.getElementById('avatarTip');
@@ -814,6 +1074,27 @@
                 avatarTip.textContent = '请输入姓名！';
                 return;
             }
+
+            const resolvedName = resolveAvatarNameInput(nameInput);
+            if (!resolvedName) {
+                const results = searchPersonnel(nameInput);
+                if (results.length > 0) {
+                    renderAvatarNameSuggestions(results);
+                    avatarTip.textContent = results.length === 1
+                        ? '已找到 1 个匹配，请从建议列表选择或按 Enter 预览'
+                        : `找到 ${results.length} 个匹配，请选择具体姓名`;
+                    avatarTip.style.color = '#ffc107';
+                    return;
+                }
+                avatarTip.textContent = `暂无【${nameInput}】的信息，请检查姓名！`;
+                return;
+            }
+
+            if (resolvedName !== nameInput) {
+                inputEl.value = resolvedName;
+            }
+            nameInput = resolvedName;
+            hideAvatarNameSuggestions();
             
             // 检查是否在人员名单中
             if (!PERSONNEL_MAP.hasOwnProperty(nameInput)) {
@@ -1007,6 +1288,7 @@
                 option.textContent = name;
                 nameFilter.appendChild(option);
             });
+            rebuildPersonnelSearchIndex();
         }
         
         /**
@@ -1035,6 +1317,7 @@
                 option.textContent = name;
                 nameFilter.appendChild(option);
             });
+            rebuildPersonnelSearchIndex();
         }
         
         /**
