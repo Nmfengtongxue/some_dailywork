@@ -510,14 +510,18 @@
             }
         }
     </style><script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.js"></script></head><body><div class="container congrats-page"><header class="page-header text-center"><h1>喜报生成工具</h1><p class="page-subtitle">选择人员头像，编辑文字内容，导出喜报图片</p></header><div class="return-button" style="position: absolute; top: 20px; right: 20px;"><a href="index.html" class="btn btn-secondary btn-sm">返回导航页面</a></div><div class="card mb-4" id="uploadCard"><div class="card-header">上传图片</div><div class="card-body"><div class="upload-section"><input type="file" id="fileInput" accept="image/jpeg,image/png"><p>请上传图片，系统将自动定位需要替换的文字区域</p></div></div></div><div class="main-layout"><div class="controls-container"><h2 class="controls-panel-title">编辑面板</h2><p class="controls-panel-desc">默认展开头像管理，其他模块可按需展开</p><div class="text-editors"><div class="editor-section"><h3>1. 部门</h3><div class="control-group"><label for="deptContent">文字内容:</label><input type="text" id="deptContent" placeholder="请输入部门" value="销售部"><div style="margin-top: 8px;"><label for="deptPreset">预选部门:</label><select id="deptPreset" onchange="if(this.value){document.getElementById('deptContent').value=this.value; updateTextObject('dept'); this.value='';}"><option value="">请选择</option><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="总经理">总经理</option><option value="副总经理">副总经理</option></select></div></div><div class="control-row"><div class="control-group"><label for="deptFontFamily">字体:</label><select id="deptFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="deptFontSize">字号:</label><input type="number" id="deptFontSize" value="48" min="12" max="200"></div><div class="control-group"><label for="deptFontColor">颜色:</label><input type="color" id="deptFontColor" value="#fff2eb"></div></div></div><div class="editor-section"><h3>2. 姓名</h3><div class="control-group"><label for="nameContent">文字内容:</label><input type="text" id="nameContent" placeholder="请输入姓名" oninput="updateCongratsText()"></div><div class="control-row"><div class="control-group"><label for="nameFontFamily">字体:</label><select id="nameFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="nameFontSize">字号:</label><input type="number" id="nameFontSize" value="40" min="12" max="200"></div><div class="control-group"><label for="nameFontColor">颜色:</label><input type="color" id="nameFontColor" value="#fff2eb"></div></div></div><div class="editor-section"><h3>3. 恭喜</h3><div class="control-group"><label for="congratsContent">文字内容:</label><input type="text" id="congratsContent" placeholder="请输入恭喜语"></div><div class="control-row"><div class="control-group"><label for="congratsFontFamily">字体:</label><select id="congratsFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack">黑体</option><option value="NotoSansSCMedium" selected>中等黑体</option></select></div><div class="control-group"><label for="congratsFontSize">字号:</label><input type="number" id="congratsFontSize" value="42" min="12" max="300"></div><div class="control-group"><label for="congratsFontColor">颜色:</label><input type="color" id="congratsFontColor" value="#9f0913"></div></div></div><div class="editor-section"><h3>4. 下单</h3><div class="control-group"><label for="orderContent">文字内容:</label><input type="text" id="orderContent" placeholder="请输入下单信息" value="618活动套餐下单"><div style="margin-top: 8px;"><label for="orderPreset">预选套餐:</label><select id="orderPreset" onchange="if(this.value){document.getElementById('orderContent').value=this.value; updateTextObject('order'); this.value='';}"><option value="">请选择</option><option value="开门红套餐下单">开门红套餐下单</option><option value="618活动套餐下单">618活动套餐下单</option></select></div></div><div class="control-row"><div class="control-group"><label for="orderFontFamily">字体:</label><select id="orderFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="orderFontSize">字号:</label><input type="number" id="orderFontSize" value="48" min="12" max="200"></div><div class="control-group"><label for="orderFontColor">颜色:</label><input type="color" id="orderFontColor" value="#80090d"></div></div></div><div class="editor-section"><h3>5. 金额</h3><div class="control-group"><label for="amountContent">文字内容:</label><input type="text" id="amountContent" placeholder="请输入金额"></div><div class="control-row"><div class="control-group"><label for="amountFontFamily">字体:</label><select id="amountFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="amountFontSize">字号:</label><input type="number" id="amountFontSize" value="170" min="12" max="300"></div><div class="control-group"><label for="amountFontColor">颜色:</label><input type="color" id="amountFontColor" value="#ffb875"></div></div></div><div class="editor-section"><h3>6. 头像管理</h3><div class="control-group"><label for="deptFilter">按部门筛选:</label><select id="deptFilter" onchange="filterNamesByDepartment()"><option value="">全部部门</option><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="副总经理">副总经理</option></select></div><div class="control-group"><label for="nameFilter">按姓名选择:</label><select id="nameFilter" onchange="if(this.value){document.getElementById('avatarNameInput').value=this.value; previewAvatar();}"><option value="">请选择姓名</option></select></div><div class="control-group avatar-name-search"><label for="avatarNameInput">或输入姓名查找:</label><div class="avatar-name-search-box"><input type="text" id="avatarNameInput" placeholder="姓名 / 拼音 / 首字母" autocomplete="off" spellcheck="false"><ul id="avatarNameSuggestions" class="avatar-name-suggestions" role="listbox" hidden></ul></div></div><div class="control-row"><div class="control-group" style="flex: 2;"><button id="previewAvatarBtn" class="btn btn-secondary" style="width: 100%;">预览头像</button></div><div class="control-group" style="flex: 2;"><button id="confirmAvatarBtn" class="btn btn-primary" style="width: 100%;" disabled>确认上传头像</button></div></div><div class="avatar-preview-wrap"><div class="avatar-preview-circle"><div id="avatarPreviewArea"><span style="color: #6c757d; font-size: 14px;">头像预览</span></div></div></div><div class="control-group"><label for="avatarFileInput">上传图片更新/添加头像:</label><input type="file" id="avatarFileInput" accept="image/jpeg,image/png"></div><div class="control-group"><label for="avatarReverseName">姓名:</label><input type="text" id="avatarReverseName" placeholder="请输入姓名"></div><div class="control-group"><label for="avatarReverseDept">部门:</label><select id="avatarReverseDept"><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="副总经理">副总经理</option></select></div><div class="control-row"><div class="control-group" style="flex: 1;"><button id="uploadImageWithNameBtn" class="btn btn-success" style="width: 100%;">上传并保存</button></div><div class="control-group" style="flex: 1;"><button id="deletePersonBtn" class="btn btn-danger" style="width: 100%;">删除人员</button></div></div><div class="control-group"><button id="viewAllPersonsBtn" class="btn btn-info" style="width: 100%; margin-top: 10px;">查看所有人员</button></div><div id="avatarTip" style="margin-top: 10px; font-size: 12px; color: #6c757d; text-align: center;"></div><div id="personListModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);"><div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; max-height: 80vh; overflow-y: auto;"><div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;"><h4>所有人员名单</h4><span class="close" style="color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span></div><div class="modal-body"><div id="personListContent"></div></div></div></div></div></div><div class="export-settings"><h3>导出设置</h3><div class="control-row"><div class="control-group"><label for="exportWidth">宽度:</label><input type="number" id="exportWidth" value="1080" min="100" max="4000"></div><div class="control-group"><label for="exportHeight">高度:</label><input type="number" id="exportHeight" value="1990" min="100" max="4000"></div></div></div><div class="button-group"><button id="exportBtn" class="btn btn-primary">导出JPG</button><button id="resetBtn" class="btn btn-danger">重置</button></div></div><div class="card preview-card"><div class="card-header"><span>预览效果</span><span class="preview-scale-label" id="previewScaleLabel">1080 × 1990</span></div><div class="card-body preview-card-body"><div class="canvas-preview-panel" id="canvasPreviewPanel"><canvas id="canvas" width="1080" height="1990"></canvas></div></div></div></div></div><script>
-        // 文字区域坐标定义
+        // 设计稿基准尺寸（与底图 6.jpg / 7.png 一致）
+        const DESIGN_SIZE = { width: 1080, height: 1990 };
+        // 文字区域坐标（相对设计稿，非画布绝对像素）
         const TEXT_AREAS = {
             dept: { x: 966, y: 500, width: 80, height: 300 }, // 部门：竖排文字
-            name: { x: 898, y: 505, width: 80, height: 200 }, // 姓名：竖排文字，定位点110*1272
-            congrats: { x: 110, y: 1272, width: 880, height: 150 }, // 恭喜：定位点110*1272
-            order: { x: 100, y: 1400, width: 880, height: 100 }, // 下单：垂直居中，y坐标1400px
-            amount: { x: 100, y: 1550, width: 880, height: 150 } // 金额：垂直居中，y坐标1550px
+            name: { x: 898, y: 505, width: 80, height: 200 }, // 姓名：竖排文字
+            congrats: { x: 110, y: 1272, width: 880, height: 150 }, // 恭喜
+            order: { x: 100, y: 1400, width: 880, height: 100 }, // 下单
+            amount: { x: 100, y: 1550, width: 880, height: 150 } // 金额
         };
+        // 头像区域（相对设计稿）
+        const AVATAR_LAYOUT = { cx: 540, cy: 790, size: 391 };
         // 人员名单版本号（变更后递增，用于覆盖浏览器 localStorage 中的旧名单）
         const PERSONNEL_MAP_REVISION = '2026-06-07-v4';
         // 人员名单映射（姓名 -> 部门）
@@ -586,6 +590,7 @@
         // 头像文件名别名（名单姓名 -> 服务器旧文件名，待图片重命名后可删除对应项）
         const PHOTO_NAME_ALIASES = {};
         const updateLogs = [
+            '2026-06-07: 文字、头像、顶层装饰均以底图为基准相对定位，底图位置变化时整体保持相对位置不变',
             '2026-06-07: 预览画布按视口等比缩放完整展示，修复 Fabric 容器类名冲突导致的超高显示问题',
             '2026-06-07: 优化页面排版：头像管理默认置顶展开，文字编辑/导出/上传模块改为折叠侧栏',
             '2026-06-07: 头像姓名查找支持模糊中文搜索与拼音首字母搜索（含搜索建议列表）',
@@ -604,14 +609,182 @@
         // 全局变量
         let canvas; // Fabric.js画布实例
         let backgroundImage = null; // 背景图片对象
+        let topOverlayImage = null; // 顶层装饰图 7.png
         let textObjects = {}; // 文字对象集合
+        let backgroundFrame = { left: 0, top: 0, width: 1080, height: 1990, scale: 1 };
         let canvasPreviewResizeObserver = null;
         let canvasPreviewScale = 1;
 
+        function refreshBackgroundFrame() {
+            if (!canvas) {
+                backgroundFrame = {
+                    left: 0,
+                    top: 0,
+                    width: DESIGN_SIZE.width,
+                    height: DESIGN_SIZE.height,
+                    scale: 1
+                };
+                return backgroundFrame;
+            }
+            const scale = Math.min(
+                canvas.width / DESIGN_SIZE.width,
+                canvas.height / DESIGN_SIZE.height
+            );
+            const width = DESIGN_SIZE.width * scale;
+            const height = DESIGN_SIZE.height * scale;
+            backgroundFrame = {
+                left: (canvas.width - width) / 2,
+                top: (canvas.height - height) / 2,
+                width,
+                height,
+                scale
+            };
+            return backgroundFrame;
+        }
+
+        function designToCanvas(x, y) {
+            return {
+                x: backgroundFrame.left + x * backgroundFrame.scale,
+                y: backgroundFrame.top + y * backgroundFrame.scale
+            };
+        }
+
+        function designToCanvasSize(value) {
+            return value * backgroundFrame.scale;
+        }
+
+        function fitTemplateImageToFrame(img) {
+            refreshBackgroundFrame();
+            img.set({
+                left: backgroundFrame.left,
+                top: backgroundFrame.top,
+                scaleX: backgroundFrame.width / img.width,
+                scaleY: backgroundFrame.height / img.height,
+                originX: 'left',
+                originY: 'top',
+                selectable: false,
+                evented: false
+            });
+            img.setCoords();
+            return img;
+        }
+
+        function buildAvatarClip(radius) {
+            return function(ctx) {
+                ctx.save();
+                ctx.globalCompositeOperation = 'destination-in';
+                ctx.arc(0, 0, radius, 0, Math.PI * 2, false);
+                ctx.fill();
+                ctx.restore();
+            };
+        }
+
+        function configureAvatarImage(img) {
+            refreshBackgroundFrame();
+            const maxSize = designToCanvasSize(AVATAR_LAYOUT.size);
+            const scale = Math.min(maxSize / img.width, maxSize / img.height);
+            const radius = maxSize / 2;
+            const center = designToCanvas(AVATAR_LAYOUT.cx, AVATAR_LAYOUT.cy);
+            img.set({
+                scaleX: scale,
+                scaleY: scale,
+                left: center.x,
+                top: center.y,
+                originX: 'center',
+                originY: 'center',
+                clipTo: buildAvatarClip(radius),
+                selectable: true,
+                evented: true
+            });
+            img.setCoords();
+            return img;
+        }
+
+        function getTextObjectPosition(key) {
+            const area = TEXT_AREAS[key];
+            if (!area) return {};
+
+            if (key === 'dept' || key === 'name') {
+                const point = designToCanvas(area.x + area.width / 2, area.y);
+                return { left: point.x, top: point.y, originX: 'center', originY: 'top' };
+            }
+            if (key === 'congrats') {
+                const point = designToCanvas(area.x, area.y);
+                return { left: point.x, top: point.y, originX: 'left', originY: 'top' };
+            }
+            if (key === 'order' || key === 'amount') {
+                const point = designToCanvas(area.x + area.width / 2, area.y);
+                return { left: point.x, top: point.y, originX: 'center', originY: 'middle' };
+            }
+            return {};
+        }
+
+        function applyLayoutToTextObjects() {
+            Object.keys(textObjects).forEach(key => {
+                if (!textObjects[key]) return;
+                textObjects[key].set(getTextObjectPosition(key));
+                textObjects[key].setCoords();
+            });
+        }
+
+        function applyLayoutToAvatarImages() {
+            if (!canvas) return;
+            const maxSize = designToCanvasSize(AVATAR_LAYOUT.size);
+            const radius = maxSize / 2;
+            const center = designToCanvas(AVATAR_LAYOUT.cx, AVATAR_LAYOUT.cy);
+            canvas.getObjects().forEach(obj => {
+                if (!obj.clipTo) return;
+                const scale = Math.min(maxSize / obj.width, maxSize / obj.height);
+                obj.set({
+                    scaleX: scale,
+                    scaleY: scale,
+                    left: center.x,
+                    top: center.y,
+                    originX: 'center',
+                    originY: 'center',
+                    clipTo: buildAvatarClip(radius)
+                });
+                obj.setCoords();
+            });
+        }
+
+        function syncCanvasLayerOrder() {
+            if (!canvas) return;
+            let index = 0;
+            if (backgroundImage) {
+                backgroundImage.moveTo(index);
+                index += 1;
+            }
+            canvas.getObjects().filter(obj => obj.clipTo).forEach(obj => {
+                obj.moveTo(index);
+                index += 1;
+            });
+            if (topOverlayImage) {
+                topOverlayImage.moveTo(index);
+                index += 1;
+            }
+            Object.values(textObjects).forEach(obj => {
+                if (!obj) return;
+                obj.moveTo(index);
+                index += 1;
+            });
+        }
+
+        function relayoutCanvasElements() {
+            if (!canvas) return;
+            refreshBackgroundFrame();
+            if (backgroundImage) fitTemplateImageToFrame(backgroundImage);
+            if (topOverlayImage) fitTemplateImageToFrame(topOverlayImage);
+            applyLayoutToAvatarImages();
+            applyLayoutToTextObjects();
+            syncCanvasLayerOrder();
+            canvas.requestRenderAll();
+        }
+
         function getCanvasDesignSize() {
             return {
-                designWidth: canvas?.width || 1080,
-                designHeight: canvas?.height || 1990
+                designWidth: DESIGN_SIZE.width,
+                designHeight: DESIGN_SIZE.height
             };
         }
 
@@ -630,11 +803,12 @@
             const scale = Math.min(availableWidth / designWidth, availableHeight / designHeight);
 
             canvasPreviewScale = scale;
-            canvas.setZoom(scale);
+            canvas.setZoom(1);
+            canvas.setDimensions({ width: designWidth, height: designHeight });
             canvas.setDimensions({
                 width: Math.round(designWidth * scale),
                 height: Math.round(designHeight * scale)
-            });
+            }, { cssOnly: true });
             canvas.calcOffset();
             canvas.requestRenderAll();
 
@@ -902,9 +1076,12 @@
          */
         function initCanvas() {
             canvas = new fabric.Canvas('canvas', {
+                width: DESIGN_SIZE.width,
+                height: DESIGN_SIZE.height,
                 backgroundColor: '#ffffff',
                 preserveObjectStacking: true
             });
+            refreshBackgroundFrame();
             initCanvasPreviewResize();
             updateCanvasPreviewScale();
         }
@@ -915,106 +1092,25 @@
         function handleFileUpload(file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                // 加载图片到画布
                 fabric.Image.fromURL(e.target.result, function(img) {
-                    // 保持原始宽高比例，调整图片大小以适应391x391的圆形区域
-                    const maxSize = 391;
-                    
-                    // 计算缩放比例，确保图片完全适应圆形区域
-                    const scaleX = maxSize / img.width;
-                    const scaleY = maxSize / img.height;
-                    const scale = Math.min(scaleX, scaleY);
-                    
-                    // 使用统一的缩放比例，保持原始宽高比例
-                    img.scale(scale);
-                    
-                    // 创建圆形裁剪区域
-                    const radius = maxSize / 2;
-                    // 设置图片位置：画布中央，y坐标790px
-                    const canvasCenterX = canvas.width / 2;
-                    img.set({
-                        left: canvasCenterX,
-                        top: 790,
-                        originX: 'center',
-                        originY: 'center',
-                        clipTo: function(ctx) {
-                            // 保存当前状态
-                            ctx.save();
-                            // 确保路径外的区域透明
-                            ctx.globalCompositeOperation = 'destination-in';
-                            // 绘制圆形路径
-                            ctx.arc(0, 0, radius, 0, Math.PI * 2, false);
-                            ctx.fill();
-                            // 恢复状态
-                            ctx.restore();
-                        },
-                        selectable: true, // 允许拖拽移动
-                        evented: true
-                    });
-                    // 移除之前可能存在的圆形图片
-                    const objects = canvas.getObjects();
-                    for (let i = objects.length - 1; i >= 0; i--) {
-                        if (objects[i].clipTo) {
-                            canvas.remove(objects[i]);
+                    canvas.getObjects().filter(obj => obj.clipTo).forEach(obj => canvas.remove(obj));
+                    configureAvatarImage(img);
+                    canvas.add(img);
+                    relayoutCanvasElements();
+                    setTimeout(function() {
+                        const currentName = document.getElementById('nameContent').value;
+                        const currentDept = document.getElementById('deptContent').value;
+                        document.getElementById('orderContent').value = '618活动套餐下单';
+                        if (currentName) {
+                            document.getElementById('nameContent').value = currentName;
                         }
-                    }
-                    // 添加圆形图片到画布
-                    // 确保图片在顶层的下一层
-                    if (objects.length > 0) {
-                        // 移除所有对象
-                        canvas.clear();
-                        // 重新添加背景图片（6.jpg）
-                        canvas.add(backgroundImage);
-                        // 添加上传的圆形图片
-                        canvas.add(img);
-                        // 重新添加顶层图片（7.png）
-                        const topImageUrl = 'https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/7.png';
-                        fabric.Image.fromURL(topImageUrl, function(topImg) {
-                            // 调整图片大小以适应画布
-                            topImg.scaleToWidth(canvas.width);
-                            topImg.scaleToHeight(canvas.height);
-                            // 设置图片不可拖拽移动
-                            topImg.selectable = false;
-                            topImg.evented = false;
-                            // 添加顶层图片
-                            canvas.add(topImg);
-                            // 重新添加文字对象
-                            addTextObjects();
-                            // 渲染画布
-                            canvas.renderAll();
-                            updateCanvasPreviewScale();
-                            console.log('圆形图片已添加完成，层级在顶层的下一层');
-                        }, {
-                            crossOrigin: 'anonymous', // 解决画布污染问题
-                            onError: function(err) {
-                                console.error('加载顶层图片失败:', err);
-                            }
+                        if (currentDept) {
+                            document.getElementById('deptContent').value = currentDept;
+                        }
+                        Object.keys(TEXT_AREAS).forEach(key => {
+                            updateTextObject(key);
                         });
-                        // 重新设置默认文字值，但保持当前的部门和姓名
-                        setTimeout(function() {
-                            const currentName = document.getElementById('nameContent').value;
-                            const currentDept = document.getElementById('deptContent').value;
-                            
-                            // 只重置订单内容，保持部门和姓名不变
-                            document.getElementById('orderContent').value = '618活动套餐下单';
-                            
-                            // 确保部门和姓名仍然正确
-                            if (currentName) {
-                                document.getElementById('nameContent').value = currentName;
-                            }
-                            if (currentDept) {
-                                document.getElementById('deptContent').value = currentDept;
-                            }
-                            
-                            Object.keys(TEXT_AREAS).forEach(key => {
-                                updateTextObject(key);
-                            });
-                        }, 100);
-                    } else {
-                        canvas.add(img);
-                        canvas.renderAll();
-                        updateCanvasPreviewScale();
-                    }
+                    }, 100);
                 });
             };
             reader.readAsDataURL(file);
@@ -1023,97 +1119,75 @@
          * 添加所有文字对象到画布
          */
         function addTextObjects() {
-            // 清除现有文字对象
             Object.values(textObjects).forEach(obj => canvas.remove(obj));
             textObjects = {};
-            // 创建部门文字 - 竖排（从上到下）
-            textObjects.dept = new fabric.Text('', {
-                left: TEXT_AREAS.dept.x + TEXT_AREAS.dept.width / 2,
-                top: TEXT_AREAS.dept.y,
-                fontSize: 48,
+            refreshBackgroundFrame();
+
+            const textStyle = (key, defaults) => Object.assign(defaults, getTextObjectPosition(key));
+
+            textObjects.dept = new fabric.Text('', textStyle('dept', {
+                fontSize: designToCanvasSize(48),
                 fontFamily: 'NotoSansSCBlack',
                 fill: '#fff2eb',
                 fontWeight: 'bold',
                 textAlign: 'center',
-                originX: 'center',
-                originY: 'top',
-                lineHeight: 58/48 // 字间距10px
-            });
-            // 创建姓名文字 - 竖排（从上到下）
-            textObjects.name = new fabric.Text('', {
-                left: TEXT_AREAS.name.x + TEXT_AREAS.name.width / 2,
-                top: TEXT_AREAS.name.y,
-                fontSize: 40,
+                lineHeight: 58 / 48
+            }));
+            textObjects.name = new fabric.Text('', textStyle('name', {
+                fontSize: designToCanvasSize(40),
                 fontFamily: 'NotoSansSCBlack',
                 fill: '#fff2eb',
                 fontWeight: 'bold',
                 textAlign: 'center',
-                originX: 'center',
-                originY: 'top',
-                lineHeight: 50/40, // 字间距10px
+                lineHeight: 50 / 40,
                 shadow: new fabric.Shadow({
                     color: 'rgba(0,0,0,0.3)',
-                    blur: 5,
-                    offsetX: 2,
-                    offsetY: 2
+                    blur: designToCanvasSize(5),
+                    offsetX: designToCanvasSize(2),
+                    offsetY: designToCanvasSize(2)
                 })
-            });
-            // 创建恭喜文字
-            textObjects.congrats = new fabric.Text('', {
-                left: TEXT_AREAS.congrats.x,
-                top: TEXT_AREAS.congrats.y,
-                fontSize: 42,
+            }));
+            textObjects.congrats = new fabric.Text('', textStyle('congrats', {
+                fontSize: designToCanvasSize(42),
                 fontFamily: 'NotoSansSCMedium',
-                fill: '#9f0913', // 默认颜色#9f0913
+                fill: '#9f0913',
                 fontWeight: 'bold',
                 textAlign: 'left',
-                originX: 'left',
-                originY: 'top',
                 shadow: new fabric.Shadow({
                     color: 'rgba(0,0,0,0.3)',
-                    blur: 8,
-                    offsetX: 3,
-                    offsetY: 3
+                    blur: designToCanvasSize(8),
+                    offsetX: designToCanvasSize(3),
+                    offsetY: designToCanvasSize(3)
                 })
-            });
-            // 创建下单文字 - 垂直居中
-            textObjects.order = new fabric.Text('', {
-                left: TEXT_AREAS.order.x + TEXT_AREAS.order.width / 2,
-                top: TEXT_AREAS.order.y,
-                fontSize: 48,
+            }));
+            textObjects.order = new fabric.Text('', textStyle('order', {
+                fontSize: designToCanvasSize(48),
                 fontFamily: 'ChuangkitZongYi',
-                fill: '#80090d', // 默认颜色#80090d
+                fill: '#80090d',
                 fontWeight: 'bold',
                 textAlign: 'center',
-                originX: 'center',
-                originY: 'middle', // 垂直居中对齐
                 shadow: new fabric.Shadow({
                     color: 'rgba(0,0,0,0.3)',
-                    blur: 5,
-                    offsetX: 2,
-                    offsetY: 2
+                    blur: designToCanvasSize(5),
+                    offsetX: designToCanvasSize(2),
+                    offsetY: designToCanvasSize(2)
                 })
-            });
-            // 创建金额文字 - 垂直居中
-            textObjects.amount = new fabric.Text('', {
-                left: TEXT_AREAS.amount.x + TEXT_AREAS.amount.width / 2,
-                top: TEXT_AREAS.amount.y,
-                fontSize: 170,
+            }));
+            textObjects.amount = new fabric.Text('', textStyle('amount', {
+                fontSize: designToCanvasSize(170),
                 fontFamily: 'NotoSansSCBlack',
-                fill: '#ffb875', // 默认颜色#ffb875
+                fill: '#ffb875',
                 fontWeight: 'bold',
                 textAlign: 'center',
-                originX: 'center',
-                originY: 'middle', // 垂直居中对齐
                 shadow: new fabric.Shadow({
                     color: 'rgba(0,0,0,0.4)',
-                    blur: 10,
-                    offsetX: 4,
-                    offsetY: 4
+                    blur: designToCanvasSize(10),
+                    offsetX: designToCanvasSize(4),
+                    offsetY: designToCanvasSize(4)
                 })
-            });
-            // 添加所有文字对象到画布
+            }));
             Object.values(textObjects).forEach(obj => canvas.add(obj));
+            syncCanvasLayerOrder();
         }
         /**
          * 更新指定的文字对象
@@ -1121,34 +1195,33 @@
          */
         function updateTextObject(key) {
             if (!textObjects[key]) return;
-            // 获取输入值
+            refreshBackgroundFrame();
             let content = document.getElementById(`${key}Content`).value;
             const fontFamily = document.getElementById(`${key}FontFamily`).value;
-            const fontSize = parseInt(document.getElementById(`${key}FontSize`).value);
+            const fontSize = parseInt(document.getElementById(`${key}FontSize`).value, 10);
             const fontColor = document.getElementById(`${key}FontColor`).value;
+            const scaledFontSize = designToCanvasSize(fontSize);
+            const layout = getTextObjectPosition(key);
             if (key === 'dept' || key === 'name') {
-                // 部门和姓名文字特殊处理 - 竖排从上到下
-                // 通过在每个字符之间添加换行符实现竖排
                 content = content.split('').join('\n');
-                // 计算行高，实现10px字间距
                 const lineHeight = (fontSize + 10) / fontSize;
-                textObjects[key].set({
+                textObjects[key].set(Object.assign({
                     text: content,
                     fontFamily: fontFamily,
-                    fontSize: fontSize,
+                    fontSize: scaledFontSize,
                     fill: fontColor,
                     textAlign: 'center',
-                    lineHeight: lineHeight // 字间距10px
-                });
+                    lineHeight: lineHeight
+                }, layout));
             } else {
-                // 其他文字正常处理
-                textObjects[key].set({
+                textObjects[key].set(Object.assign({
                     text: content,
                     fontFamily: fontFamily,
-                    fontSize: fontSize,
+                    fontSize: scaledFontSize,
                     fill: fontColor
-                });
+                }, layout));
             }
+            textObjects[key].setCoords();
             canvas.renderAll();
         }
         /**
@@ -1203,6 +1276,7 @@
         function resetCanvas() {
             canvas.clear();
             backgroundImage = null;
+            topOverlayImage = null;
             textObjects = {};
             // 清空输入框
             Object.keys(TEXT_AREAS).forEach(key => {
@@ -1978,37 +2052,21 @@
                 // 预加载6.jpg作为背景（底层）
                 const bgImageUrl = 'https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/6.jpg';
                 fabric.Image.fromURL(bgImageUrl, function(bgImg) {
-                    // 保存背景图片对象
                     backgroundImage = bgImg;
-                    // 调整图片大小以适应画布
-                    bgImg.scaleToWidth(canvas.width);
-                    bgImg.scaleToHeight(canvas.height);
-                    // 设置图片不可拖拽移动
-                    bgImg.selectable = false;
-                    bgImg.evented = false;
-                    // 清除画布并添加背景图片
+                    fitTemplateImageToFrame(bgImg);
                     canvas.clear();
                     canvas.add(bgImg);
-                    // 预加载7.png作为顶层图片
                     const topImageUrl = 'https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/7.png';
                     fabric.Image.fromURL(topImageUrl, function(topImg) {
-                        // 调整图片大小以适应画布
-                        topImg.scaleToWidth(canvas.width);
-                        topImg.scaleToHeight(canvas.height);
-                        // 设置图片不可拖拽移动
-                        topImg.selectable = false;
-                        topImg.evented = false;
-                        // 添加顶层图片
+                        topOverlayImage = topImg;
+                        fitTemplateImageToFrame(topImg);
                         canvas.add(topImg);
-                        // 添加初始文字对象
                         addTextObjects();
-                        // 设置默认值
+                        relayoutCanvasElements();
                         document.getElementById('deptContent').value = '销售部';
                         document.getElementById('orderContent').value = '618活动套餐下单';
                         updateTextObject('dept');
                         updateTextObject('order');
-                        // 渲染画布
-                        canvas.renderAll();
                         updateCanvasPreviewScale();
                         console.log('两个默认图片已加载完成');
                     }, {
