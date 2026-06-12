@@ -466,7 +466,7 @@
             background: #2563eb;
         }
         /* 优化文字内容输入框 */
-        #deptContent, #nameContent, #congratsContent, #orderContent, #amountContent {
+        #inspectorContent {
             font-weight: bold;
             font-size: 14px;
         }
@@ -509,7 +509,146 @@
                 min-height: 420px;
             }
         }
-    </style><script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.js"></script></head><body><div class="container congrats-page"><header class="page-header text-center"><h1>喜报生成工具</h1><p class="page-subtitle">选择人员头像，编辑文字内容，导出喜报图片</p></header><div class="return-button" style="position: absolute; top: 20px; right: 20px;"><a href="index.html" class="btn btn-secondary btn-sm">返回导航页面</a></div><div class="card mb-4" id="uploadCard"><div class="card-header">上传图片</div><div class="card-body"><div class="upload-section"><input type="file" id="fileInput" accept="image/jpeg,image/png"><p>请上传图片，系统将自动定位需要替换的文字区域</p></div></div></div><div class="main-layout"><div class="controls-container"><h2 class="controls-panel-title">编辑面板</h2><p class="controls-panel-desc">默认展开头像管理，其他模块可按需展开</p><div class="text-editors"><div class="editor-section"><h3>1. 部门</h3><div class="control-group"><label for="deptContent">文字内容:</label><input type="text" id="deptContent" placeholder="请输入部门" value="销售部"><div style="margin-top: 8px;"><label for="deptPreset">预选部门:</label><select id="deptPreset" onchange="if(this.value){document.getElementById('deptContent').value=this.value; updateTextObject('dept'); this.value='';}"><option value="">请选择</option><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="总经理">总经理</option><option value="副总经理">副总经理</option></select></div></div><div class="control-row"><div class="control-group"><label for="deptFontFamily">字体:</label><select id="deptFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="deptFontSize">字号:</label><input type="number" id="deptFontSize" value="48" min="12" max="200"></div><div class="control-group"><label for="deptFontColor">颜色:</label><input type="color" id="deptFontColor" value="#fff2eb"></div></div></div><div class="editor-section"><h3>2. 姓名</h3><div class="control-group"><label for="nameContent">文字内容:</label><input type="text" id="nameContent" placeholder="请输入姓名" oninput="updateCongratsText()"></div><div class="control-row"><div class="control-group"><label for="nameFontFamily">字体:</label><select id="nameFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="nameFontSize">字号:</label><input type="number" id="nameFontSize" value="40" min="12" max="200"></div><div class="control-group"><label for="nameFontColor">颜色:</label><input type="color" id="nameFontColor" value="#fff2eb"></div></div></div><div class="editor-section"><h3>3. 恭喜</h3><div class="control-group"><label for="congratsContent">文字内容:</label><input type="text" id="congratsContent" placeholder="请输入恭喜语"></div><div class="control-row"><div class="control-group"><label for="congratsFontFamily">字体:</label><select id="congratsFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack">黑体</option><option value="NotoSansSCMedium" selected>中等黑体</option></select></div><div class="control-group"><label for="congratsFontSize">字号:</label><input type="number" id="congratsFontSize" value="42" min="12" max="300"></div><div class="control-group"><label for="congratsFontColor">颜色:</label><input type="color" id="congratsFontColor" value="#9f0913"></div></div></div><div class="editor-section"><h3>4. 下单</h3><div class="control-group"><label for="orderContent">文字内容:</label><input type="text" id="orderContent" placeholder="请输入下单信息" value="618活动套餐下单"><div style="margin-top: 8px;"><label for="orderPreset">预选套餐:</label><select id="orderPreset" onchange="if(this.value){document.getElementById('orderContent').value=this.value; updateTextObject('order'); this.value='';}"><option value="">请选择</option><option value="开门红套餐下单">开门红套餐下单</option><option value="618活动套餐下单">618活动套餐下单</option></select></div></div><div class="control-row"><div class="control-group"><label for="orderFontFamily">字体:</label><select id="orderFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="orderFontSize">字号:</label><input type="number" id="orderFontSize" value="48" min="12" max="200"></div><div class="control-group"><label for="orderFontColor">颜色:</label><input type="color" id="orderFontColor" value="#80090d"></div></div></div><div class="editor-section"><h3>5. 金额</h3><div class="control-group"><label for="amountContent">文字内容:</label><input type="text" id="amountContent" placeholder="请输入金额"></div><div class="control-row"><div class="control-group"><label for="amountFontFamily">字体:</label><select id="amountFontFamily"><option value="ChuangkitZongYi">创意字体</option><option value="NotoSansSCBlack" selected>黑体</option><option value="NotoSansSCMedium">中等黑体</option></select></div><div class="control-group"><label for="amountFontSize">字号:</label><input type="number" id="amountFontSize" value="170" min="12" max="300"></div><div class="control-group"><label for="amountFontColor">颜色:</label><input type="color" id="amountFontColor" value="#ffb875"></div></div></div><div class="editor-section"><h3>6. 头像管理</h3><div class="control-group"><label for="deptFilter">按部门筛选:</label><select id="deptFilter" onchange="filterNamesByDepartment()"><option value="">全部部门</option><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="副总经理">副总经理</option></select></div><div class="control-group"><label for="nameFilter">按姓名选择:</label><select id="nameFilter" onchange="if(this.value){document.getElementById('avatarNameInput').value=this.value; previewAvatar();}"><option value="">请选择姓名</option></select></div><div class="control-group avatar-name-search"><label for="avatarNameInput">或输入姓名查找:</label><div class="avatar-name-search-box"><input type="text" id="avatarNameInput" placeholder="姓名 / 拼音 / 首字母" autocomplete="off" spellcheck="false"><ul id="avatarNameSuggestions" class="avatar-name-suggestions" role="listbox" hidden></ul></div></div><div class="control-row"><div class="control-group" style="flex: 2;"><button id="previewAvatarBtn" class="btn btn-secondary" style="width: 100%;">预览头像</button></div><div class="control-group" style="flex: 2;"><button id="confirmAvatarBtn" class="btn btn-primary" style="width: 100%;" disabled>确认上传头像</button></div></div><div class="avatar-preview-wrap"><div class="avatar-preview-circle"><div id="avatarPreviewArea"><span style="color: #6c757d; font-size: 14px;">头像预览</span></div></div></div><div class="control-group"><label for="avatarFileInput">上传图片更新/添加头像:</label><input type="file" id="avatarFileInput" accept="image/jpeg,image/png"></div><div class="control-group"><label for="avatarReverseName">姓名:</label><input type="text" id="avatarReverseName" placeholder="请输入姓名"></div><div class="control-group"><label for="avatarReverseDept">部门:</label><select id="avatarReverseDept"><option value="销售部">销售部</option><option value="行政部">行政部</option><option value="医疗中心">医疗中心</option><option value="副总经理">副总经理</option></select></div><div class="control-row"><div class="control-group" style="flex: 1;"><button id="uploadImageWithNameBtn" class="btn btn-success" style="width: 100%;">上传并保存</button></div><div class="control-group" style="flex: 1;"><button id="deletePersonBtn" class="btn btn-danger" style="width: 100%;">删除人员</button></div></div><div class="control-group"><button id="viewAllPersonsBtn" class="btn btn-info" style="width: 100%; margin-top: 10px;">查看所有人员</button></div><div id="avatarTip" style="margin-top: 10px; font-size: 12px; color: #6c757d; text-align: center;"></div><div id="personListModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);"><div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; max-height: 80vh; overflow-y: auto;"><div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;"><h4>所有人员名单</h4><span class="close" style="color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span></div><div class="modal-body"><div id="personListContent"></div></div></div></div></div></div><div class="export-settings"><h3>导出设置</h3><div class="control-row"><div class="control-group"><label for="exportWidth">宽度:</label><input type="number" id="exportWidth" value="1080" min="100" max="4000"></div><div class="control-group"><label for="exportHeight">高度:</label><input type="number" id="exportHeight" value="1990" min="100" max="4000"></div></div></div><div class="button-group"><button id="exportBtn" class="btn btn-primary">导出JPG</button><button id="resetBtn" class="btn btn-danger">重置</button></div></div><div class="card preview-card"><div class="card-header"><span>预览效果</span><span class="preview-scale-label" id="previewScaleLabel">1080 × 1990</span></div><div class="card-body preview-card-body"><div class="canvas-preview-panel" id="canvasPreviewPanel"><canvas id="canvas" width="1080" height="1990"></canvas></div></div></div></div></div><script>
+
+        /* 工作区：预览全宽 + 底部操作栏 */
+        .congrats-workspace .container,
+        .container.congrats-workspace {
+            max-width: 1400px;
+        }
+        .workspace-main {
+            position: relative;
+            margin-bottom: 24px;
+        }
+        .main-layout {
+            display: block;
+        }
+        .preview-card--full {
+            min-height: calc(100vh - 160px);
+            position: relative;
+            top: 0;
+        }
+        .workspace-action-bar {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid #e2e8f0;
+            border-radius: 999px;
+            box-shadow: 0 8px 32px rgba(15, 23, 42, 0.12);
+            z-index: 1040;
+            backdrop-filter: blur(8px);
+        }
+        .workspace-action-btn {
+            border-radius: 999px;
+            padding: 8px 20px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .workspace-hint {
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            margin: 12px 0 48px;
+        }
+        .congrats-offcanvas {
+            width: min(400px, 92vw);
+        }
+        .congrats-offcanvas .offcanvas-body {
+            overflow-y: auto;
+            padding: 16px 18px 24px;
+        }
+        .inspector-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .inspector-subtitle {
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+            margin: 8px 0 4px;
+        }
+        .inspector-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 12px 0;
+        }
+        .style-preset-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        .style-preset-chip {
+            padding: 4px 10px;
+            font-size: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 999px;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .style-preset-chip:hover,
+        .style-preset-chip.is-active {
+            border-color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.08);
+            color: var(--primary-color);
+        }
+        .color-swatch-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+        .color-swatch {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 1px #cbd5e1;
+            cursor: pointer;
+        }
+        .color-swatch.is-active {
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+        .offcanvas-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin: 16px 0 8px;
+        }
+        .canvas-text-selected {
+            outline: 2px dashed rgba(59, 130, 246, 0.8);
+        }
+        @media (max-width: 768px) {
+            .workspace-action-bar {
+                bottom: 12px;
+                left: 12px;
+                right: 12px;
+                transform: none;
+                justify-content: center;
+                flex-wrap: wrap;
+                border-radius: 16px;
+            }
+            .workspace-action-btn {
+                flex: 1;
+                min-width: 90px;
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+            .congrats-offcanvas.offcanvas-start {
+                width: 100%;
+            }
+        }
+
+    </style><script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.js"></script></head><body><div class="container congrats-page congrats-workspace"><header class="page-header text-center"><h1>喜报生成工具</h1><p class="page-subtitle">画布为主视图，通过底部按钮打开编辑面板</p></header><div class="return-button" style="position: absolute; top: 20px; right: 20px;"><a href="index.html" class="btn btn-secondary btn-sm">返回导航页面</a></div><div class="workspace-main"><div class="main-layout"><div class="card preview-card preview-card--full"><div class="card-header"><span>预览效果</span><span class="preview-scale-label" id="previewScaleLabel">1080 × 1990</span></div><div class="card-body preview-card-body"><div class="canvas-preview-panel" id="canvasPreviewPanel"><canvas id="canvas" width="1080" height="1990"></canvas></div></div></div></div><div class="workspace-action-bar" role="toolbar" aria-label="编辑操作"><button type="button" class="btn btn-primary workspace-action-btn" data-bs-toggle="offcanvas" data-bs-target="#editOffcanvas" aria-controls="editOffcanvas">编辑文字</button><button type="button" class="btn btn-outline-primary workspace-action-btn" data-bs-toggle="offcanvas" data-bs-target="#avatarOffcanvas" aria-controls="avatarOffcanvas">头像</button><button type="button" class="btn btn-outline-primary workspace-action-btn" data-bs-toggle="offcanvas" data-bs-target="#exportOffcanvas" aria-controls="exportOffcanvas">导出</button></div><p class="workspace-hint">点击画布上的文字可快速打开编辑 · Esc 关闭面板</p></div><div class="offcanvas offcanvas-start congrats-offcanvas" tabindex="-1" id="editOffcanvas" aria-labelledby="editOffcanvasLabel"><div class="offcanvas-header"><h5 class="offcanvas-title" id="editOffcanvasLabel">编辑文字</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="关闭"></button></div><div class="offcanvas-body"><div class="inspector-panel"><div class="control-group"><label for="activeFieldSelect">当前编辑字段</label><select id="activeFieldSelect"></select></div><div class="control-group" id="fieldContentGroup"><label for="inspectorContent">文字内容</label><input type="text" id="inspectorContent" placeholder="请输入内容"></div><div class="control-group" id="fieldPresetGroup" hidden><label for="fieldPresetSelect">快捷预选</label><select id="fieldPresetSelect"><option value="">请选择</option></select></div><div class="inspector-divider"></div><p class="inspector-subtitle">样式检查器（共用）</p><div class="style-preset-bar" id="stylePresetBar"></div><div class="control-row"><div class="control-group"><label for="inspectorFontFamily">字体</label><select id="inspectorFontFamily"></select></div><div class="control-group"><label for="inspectorFontSize">字号</label><input type="number" id="inspectorFontSize" min="12" max="300" value="48"></div><div class="control-group"><label for="inspectorFontColor">颜色</label><input type="color" id="inspectorFontColor" value="#fff2eb"><div class="color-swatch-bar" id="colorSwatchBar"></div></div></div><button type="button" id="applyStyleToAllBtn" class="btn btn-sm btn-outline-secondary w-100 mt-2">将当前样式应用到全部文字</button></div></div></div><div class="offcanvas offcanvas-start congrats-offcanvas" tabindex="-1" id="avatarOffcanvas" aria-labelledby="avatarOffcanvasLabel"><div class="offcanvas-header"><h5 class="offcanvas-title" id="avatarOffcanvasLabel">头像管理</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="关闭"></button></div><div class="offcanvas-body"><div class="control-group"><label for="deptFilter">按部门筛选</label><select id="deptFilter" onchange="filterNamesByDepartment()"><option value="">全部部门</option></select></div><div class="control-group"><label for="nameFilter">按姓名选择</label><select id="nameFilter" onchange="if(this.value){document.getElementById('avatarNameInput').value=this.value; previewAvatar();}"><option value="">请选择姓名</option></select></div><div class="control-group avatar-name-search"><label for="avatarNameInput">或输入姓名查找</label><div class="avatar-name-search-box"><input type="text" id="avatarNameInput" placeholder="姓名 / 拼音 / 首字母" autocomplete="off" spellcheck="false"><ul id="avatarNameSuggestions" class="avatar-name-suggestions" role="listbox" hidden></ul></div></div><div class="control-row"><div class="control-group" style="flex:2"><button id="previewAvatarBtn" class="btn btn-secondary w-100">预览头像</button></div><div class="control-group" style="flex:2"><button id="confirmAvatarBtn" class="btn btn-primary w-100" disabled>确认上传头像</button></div></div><div class="avatar-preview-wrap"><div class="avatar-preview-circle"><div id="avatarPreviewArea"><span style="color:#6c757d;font-size:14px">头像预览</span></div></div></div><p class="offcanvas-section-title">维护头像库</p><div class="control-group"><label for="avatarFileInput">上传图片更新/添加头像</label><input type="file" id="avatarFileInput" accept="image/jpeg,image/png"></div><div class="control-group"><label for="avatarReverseName">姓名</label><input type="text" id="avatarReverseName" placeholder="请输入姓名"></div><div class="control-group"><label for="avatarReverseDept">部门</label><select id="avatarReverseDept"></select></div><div class="control-row"><div class="control-group" style="flex:1"><button id="uploadImageWithNameBtn" class="btn btn-success w-100">上传并保存</button></div><div class="control-group" style="flex:1"><button id="deletePersonBtn" class="btn btn-danger w-100">删除人员</button></div></div><div class="control-group"><button id="viewAllPersonsBtn" class="btn btn-info w-100">查看所有人员</button></div><div id="avatarTip" style="margin-top:10px;font-size:12px;color:#6c757d;text-align:center"></div></div></div><div class="offcanvas offcanvas-start congrats-offcanvas" tabindex="-1" id="exportOffcanvas" aria-labelledby="exportOffcanvasLabel"><div class="offcanvas-header"><h5 class="offcanvas-title" id="exportOffcanvasLabel">导出设置</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="关闭"></button></div><div class="offcanvas-body"><div class="control-row"><div class="control-group"><label for="exportWidth">宽度</label><input type="number" id="exportWidth" value="1080" min="100" max="4000"></div><div class="control-group"><label for="exportHeight">高度</label><input type="number" id="exportHeight" value="1990" min="100" max="4000"></div></div><div class="d-grid gap-2 mt-3"><button id="exportBtn" class="btn btn-primary">导出 JPG</button><button id="resetBtn" class="btn btn-outline-danger">重置画布</button></div><p class="offcanvas-section-title">高级选项</p><div class="upload-section"><input type="file" id="fileInput" accept="image/jpeg,image/png"><p>上传自定义圆形头像替换画布头像</p></div></div></div><div id="personListModal" class="modal" style="display:none;position:fixed;z-index:1100;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.4)"><div class="modal-content" style="background-color:#fefefe;margin:15% auto;padding:20px;border:1px solid #888;width:80%;max-width:600px;max-height:80vh;overflow-y:auto"><div class="modal-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px"><h4>所有人员名单</h4><span class="close" style="color:#aaa;font-size:28px;font-weight:bold;cursor:pointer">&times;</span></div><div class="modal-body"><div id="personListContent"></div></div></div></div></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
         // 设计稿基准尺寸（与底图 6.jpg / 7.png 一致）
         const DESIGN_SIZE = { width: 1080, height: 1990 };
         // 文字区域坐标（相对设计稿，非画布绝对像素）
@@ -522,6 +661,62 @@
         };
         // 头像区域（相对设计稿）
         const AVATAR_LAYOUT = { cx: 540, cy: 790, size: 391 };
+        // 共用常量
+        const DEPARTMENTS = ['销售部', '行政部', '医疗中心', '总经理', '副总经理'];
+        const AVATAR_FILTER_DEPARTMENTS = ['销售部', '行政部', '医疗中心', '副总经理'];
+        const ORDER_PRESETS = ['开门红套餐下单', '618活动套餐下单'];
+        const FONT_OPTIONS = [
+            { value: 'ChuangkitZongYi', label: '创意字体' },
+            { value: 'NotoSansSCBlack', label: '黑体' },
+            { value: 'NotoSansSCMedium', label: '中等黑体' }
+        ];
+        const COLOR_SWATCHES = ['#fff2eb', '#9f0913', '#80090d', '#ffb875', '#ffffff', '#1e293b'];
+        const STYLE_PRESETS = {
+            sidebar: { label: '侧栏竖排', fontFamily: 'NotoSansSCBlack', fontSize: 48, fontColor: '#fff2eb' },
+            name: { label: '姓名', fontFamily: 'NotoSansSCBlack', fontSize: 40, fontColor: '#fff2eb' },
+            body: { label: '正文', fontFamily: 'NotoSansSCMedium', fontSize: 42, fontColor: '#9f0913' },
+            order: { label: '下单', fontFamily: 'ChuangkitZongYi', fontSize: 48, fontColor: '#80090d' },
+            amount: { label: '金额', fontFamily: 'NotoSansSCBlack', fontSize: 170, fontColor: '#ffb875' }
+        };
+        const TEXT_FIELD_CONFIG = {
+            dept: {
+                label: '部门',
+                vertical: true,
+                stylePreset: 'sidebar',
+                defaultContent: '销售部',
+                presets: DEPARTMENTS,
+                fontSizeMax: 200
+            },
+            name: {
+                label: '姓名',
+                vertical: true,
+                stylePreset: 'name',
+                defaultContent: '',
+                fontSizeMax: 200,
+                linkedCongrats: true
+            },
+            congrats: {
+                label: '恭喜',
+                stylePreset: 'body',
+                defaultContent: '',
+                fontSizeMax: 300
+            },
+            order: {
+                label: '下单',
+                stylePreset: 'order',
+                defaultContent: '618活动套餐下单',
+                presets: ORDER_PRESETS,
+                fontSizeMax: 200
+            },
+            amount: {
+                label: '金额',
+                stylePreset: 'amount',
+                defaultContent: '',
+                fontSizeMax: 300
+            }
+        };
+        let textFieldState = {};
+        let activeFieldKey = 'dept';
         // 人员名单版本号（变更后递增，用于覆盖浏览器 localStorage 中的旧名单）
         const PERSONNEL_MAP_REVISION = '2026-06-07-v4';
         // 人员名单映射（姓名 -> 部门）
@@ -590,6 +785,7 @@
         // 头像文件名别名（名单姓名 -> 服务器旧文件名，待图片重命名后可删除对应项）
         const PHOTO_NAME_ALIASES = {};
         const updateLogs = [
+            '2026-06-07: 三期 UI 改造：三 Offcanvas 抽屉 + Inspector 共用样式检查器 + 点击画布文字编辑',
             '2026-06-07: 预览缩放改用 Fabric setZoom，多时机双 rAF 刷新，预览区 overflow 改为 auto',
             '2026-06-07: 文字、头像、顶层装饰均以底图为基准相对定位，底图位置变化时整体保持相对位置不变',
             '2026-06-07: 预览画布按视口等比缩放完整展示，修复 Fabric 容器类名冲突导致的超高显示问题',
@@ -853,6 +1049,275 @@
                 document.fonts.ready.then(schedulePreviewUpdate);
             }
         }
+
+        function initTextFieldState() {
+            textFieldState = {};
+            Object.keys(TEXT_FIELD_CONFIG).forEach(key => {
+                const cfg = TEXT_FIELD_CONFIG[key];
+                const preset = STYLE_PRESETS[cfg.stylePreset];
+                textFieldState[key] = {
+                    content: cfg.defaultContent || '',
+                    fontFamily: preset.fontFamily,
+                    fontSize: preset.fontSize,
+                    fontColor: preset.fontColor
+                };
+            });
+        }
+
+        function getFieldContent(key) {
+            return textFieldState[key]?.content ?? '';
+        }
+
+        function setFieldContent(key, value, options = {}) {
+            if (!textFieldState[key]) return;
+            textFieldState[key].content = value;
+            if (key === activeFieldKey) {
+                const input = document.getElementById('inspectorContent');
+                if (input && input.value !== value) input.value = value;
+            }
+            updateTextObject(key);
+            if (TEXT_FIELD_CONFIG[key]?.linkedCongrats) {
+                updateCongratsText();
+            }
+            if (options.openEditor) {
+                selectTextField(key, { openEditor: true });
+            }
+        }
+
+        function commitInspectorToState() {
+            if (!textFieldState[activeFieldKey]) return;
+            const state = textFieldState[activeFieldKey];
+            const contentEl = document.getElementById('inspectorContent');
+            const fontEl = document.getElementById('inspectorFontFamily');
+            const sizeEl = document.getElementById('inspectorFontSize');
+            const colorEl = document.getElementById('inspectorFontColor');
+            if (contentEl) state.content = contentEl.value;
+            if (fontEl) state.fontFamily = fontEl.value;
+            if (sizeEl) state.fontSize = parseInt(sizeEl.value, 10) || state.fontSize;
+            if (colorEl) state.fontColor = colorEl.value;
+        }
+
+        function syncInspectorUIFromState(key) {
+            activeFieldKey = key;
+            const cfg = TEXT_FIELD_CONFIG[key];
+            const state = textFieldState[key];
+            if (!cfg || !state) return;
+
+            const fieldSelect = document.getElementById('activeFieldSelect');
+            if (fieldSelect) fieldSelect.value = key;
+
+            const contentEl = document.getElementById('inspectorContent');
+            if (contentEl) {
+                contentEl.value = state.content;
+                contentEl.placeholder = `请输入${cfg.label}`;
+            }
+
+            const presetGroup = document.getElementById('fieldPresetGroup');
+            const presetSelect = document.getElementById('fieldPresetSelect');
+            if (presetGroup && presetSelect) {
+                if (cfg.presets && cfg.presets.length) {
+                    presetGroup.hidden = false;
+                    presetSelect.innerHTML = '<option value="">请选择</option>' +
+                        cfg.presets.map(p => `<option value="${p}">${p}</option>`).join('');
+                } else {
+                    presetGroup.hidden = true;
+                }
+            }
+
+            const fontEl = document.getElementById('inspectorFontFamily');
+            const sizeEl = document.getElementById('inspectorFontSize');
+            const colorEl = document.getElementById('inspectorFontColor');
+            if (fontEl) fontEl.value = state.fontFamily;
+            if (sizeEl) {
+                sizeEl.value = state.fontSize;
+                sizeEl.max = cfg.fontSizeMax || 300;
+            }
+            if (colorEl) colorEl.value = state.fontColor;
+
+            document.querySelectorAll('.style-preset-chip').forEach(chip => {
+                chip.classList.toggle('is-active', chip.dataset.preset === cfg.stylePreset);
+            });
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.classList.toggle('is-active', swatch.dataset.color === state.fontColor);
+            });
+        }
+
+        function selectTextField(key, options = {}) {
+            if (!TEXT_FIELD_CONFIG[key]) return;
+            if (key !== activeFieldKey) {
+                commitInspectorToState();
+                updateTextObject(activeFieldKey);
+            }
+            syncInspectorUIFromState(key);
+            if (options.openEditor) {
+                openOffcanvas('editOffcanvas');
+            }
+        }
+
+        function openOffcanvas(id) {
+            const el = document.getElementById(id);
+            if (!el || !window.bootstrap) return;
+            bootstrap.Offcanvas.getOrCreateInstance(el).show();
+        }
+
+        function populateSelectOptions(selectEl, items, includeEmpty, emptyLabel) {
+            if (!selectEl) return;
+            selectEl.innerHTML = includeEmpty ? `<option value="">${emptyLabel || '请选择'}</option>` : '';
+            items.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item;
+                option.textContent = item;
+                selectEl.appendChild(option);
+            });
+        }
+
+        function initInspectorUI() {
+            const fieldSelect = document.getElementById('activeFieldSelect');
+            if (fieldSelect) {
+                fieldSelect.innerHTML = Object.keys(TEXT_FIELD_CONFIG).map(key => {
+                    const cfg = TEXT_FIELD_CONFIG[key];
+                    return `<option value="${key}">${cfg.label}</option>`;
+                }).join('');
+                fieldSelect.addEventListener('change', function() {
+                    selectTextField(this.value);
+                });
+            }
+
+            const fontSelect = document.getElementById('inspectorFontFamily');
+            if (fontSelect) {
+                fontSelect.innerHTML = FONT_OPTIONS.map(opt =>
+                    `<option value="${opt.value}">${opt.label}</option>`
+                ).join('');
+            }
+
+            const presetBar = document.getElementById('stylePresetBar');
+            if (presetBar) {
+                presetBar.innerHTML = Object.entries(STYLE_PRESETS).map(([key, preset]) =>
+                    `<button type="button" class="style-preset-chip" data-preset="${key}">${preset.label}</button>`
+                ).join('');
+                presetBar.addEventListener('click', function(e) {
+                    const chip = e.target.closest('.style-preset-chip');
+                    if (!chip) return;
+                    applyStylePreset(chip.dataset.preset, { targetKey: activeFieldKey });
+                });
+            }
+
+            const swatchBar = document.getElementById('colorSwatchBar');
+            if (swatchBar) {
+                swatchBar.innerHTML = COLOR_SWATCHES.map(color =>
+                    `<button type="button" class="color-swatch" data-color="${color}" style="background:${color}" title="${color}"></button>`
+                ).join('');
+                swatchBar.addEventListener('click', function(e) {
+                    const swatch = e.target.closest('.color-swatch');
+                    if (!swatch) return;
+                    document.getElementById('inspectorFontColor').value = swatch.dataset.color;
+                    commitInspectorToState();
+                    updateTextObject(activeFieldKey);
+                    syncInspectorUIFromState(activeFieldKey);
+                });
+            }
+
+            populateSelectOptions(document.getElementById('deptFilter'), AVATAR_FILTER_DEPARTMENTS, true, '全部部门');
+            populateSelectOptions(document.getElementById('avatarReverseDept'), AVATAR_FILTER_DEPARTMENTS, false);
+
+            const contentEl = document.getElementById('inspectorContent');
+            if (contentEl) {
+                contentEl.addEventListener('input', function() {
+                    textFieldState[activeFieldKey].content = this.value;
+                    updateTextObject(activeFieldKey);
+                    if (TEXT_FIELD_CONFIG[activeFieldKey]?.linkedCongrats) {
+                        updateCongratsText();
+                    }
+                });
+            }
+
+            const presetSelect = document.getElementById('fieldPresetSelect');
+            if (presetSelect) {
+                presetSelect.addEventListener('change', function() {
+                    if (!this.value) return;
+                    setFieldContent(activeFieldKey, this.value);
+                    this.value = '';
+                });
+            }
+
+            ['inspectorFontFamily', 'inspectorFontSize', 'inspectorFontColor'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const eventName = id === 'inspectorFontFamily' ? 'change' : 'input';
+                el.addEventListener(eventName, function() {
+                    commitInspectorToState();
+                    updateTextObject(activeFieldKey);
+                });
+            });
+
+            const applyAllBtn = document.getElementById('applyStyleToAllBtn');
+            if (applyAllBtn) {
+                applyAllBtn.addEventListener('click', applyCurrentStyleToAllFields);
+            }
+
+            syncInspectorUIFromState(activeFieldKey);
+        }
+
+        function applyStylePreset(presetKey, options = {}) {
+            const preset = STYLE_PRESETS[presetKey];
+            if (!preset) return;
+            const targetKey = options.targetKey || activeFieldKey;
+            Object.assign(textFieldState[targetKey], {
+                fontFamily: preset.fontFamily,
+                fontSize: preset.fontSize,
+                fontColor: preset.fontColor
+            });
+            if (targetKey === activeFieldKey) {
+                syncInspectorUIFromState(activeFieldKey);
+            }
+            updateTextObject(targetKey);
+        }
+
+        function applyCurrentStyleToAllFields() {
+            commitInspectorToState();
+            const { fontFamily, fontSize, fontColor } = textFieldState[activeFieldKey];
+            Object.keys(textFieldState).forEach(key => {
+                Object.assign(textFieldState[key], { fontFamily, fontSize, fontColor });
+                updateTextObject(key);
+            });
+            syncInspectorUIFromState(activeFieldKey);
+        }
+
+        function getTextFieldKeyFromObject(obj) {
+            if (!obj) return null;
+            if (obj.fieldKey) return obj.fieldKey;
+            return Object.keys(textObjects).find(key => textObjects[key] === obj) || null;
+        }
+
+        function initOffcanvasPanels() {
+            ['editOffcanvas', 'avatarOffcanvas', 'exportOffcanvas'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.addEventListener('shown.bs.offcanvas', schedulePreviewUpdate);
+                el.addEventListener('hidden.bs.offcanvas', schedulePreviewUpdate);
+            });
+        }
+
+        function initCanvasTextInteraction() {
+            if (!canvas) return;
+            canvas.on('selection:created', function(e) {
+                const obj = e.selected[0];
+                const key = getTextFieldKeyFromObject(obj);
+                if (key) selectTextField(key);
+                updateCoordinateDisplay(obj);
+            });
+            canvas.on('selection:updated', function(e) {
+                const obj = e.selected[0];
+                const key = getTextFieldKeyFromObject(obj);
+                if (key) selectTextField(key);
+            });
+            canvas.on('mouse:down', function(opt) {
+                const key = getTextFieldKeyFromObject(opt.target);
+                if (key) {
+                    selectTextField(key, { openEditor: true });
+                }
+            });
+        }
         
         // 从localStorage恢复数据
         function loadFromLocalStorage() {
@@ -1115,18 +1580,11 @@
                     canvas.add(img);
                     relayoutCanvasElements();
                     setTimeout(function() {
-                        const currentName = document.getElementById('nameContent').value;
-                        const currentDept = document.getElementById('deptContent').value;
-                        document.getElementById('orderContent').value = '618活动套餐下单';
-                        if (currentName) {
-                            document.getElementById('nameContent').value = currentName;
-                        }
-                        if (currentDept) {
-                            document.getElementById('deptContent').value = currentDept;
-                        }
-                        Object.keys(TEXT_AREAS).forEach(key => {
-                            updateTextObject(key);
-                        });
+                        const currentName = getFieldContent('name');
+                        const currentDept = getFieldContent('dept');
+                        setFieldContent('order', '618活动套餐下单');
+                        if (currentName) setFieldContent('name', currentName);
+                        if (currentDept) setFieldContent('dept', currentDept);
                     }, 100);
                 });
             };
@@ -1204,6 +1662,9 @@
                 })
             }));
             Object.values(textObjects).forEach(obj => canvas.add(obj));
+            Object.entries(textObjects).forEach(([key, obj]) => {
+                obj.fieldKey = key;
+            });
             syncCanvasLayerOrder();
         }
         /**
@@ -1213,13 +1674,15 @@
         function updateTextObject(key) {
             if (!textObjects[key]) return;
             refreshBackgroundFrame();
-            let content = document.getElementById(`${key}Content`).value;
-            const fontFamily = document.getElementById(`${key}FontFamily`).value;
-            const fontSize = parseInt(document.getElementById(`${key}FontSize`).value, 10);
-            const fontColor = document.getElementById(`${key}FontColor`).value;
+            const state = textFieldState[key];
+            if (!state) return;
+            let content = state.content;
+            const fontFamily = state.fontFamily;
+            const fontSize = state.fontSize;
+            const fontColor = state.fontColor;
             const scaledFontSize = designToCanvasSize(fontSize);
             const layout = getTextObjectPosition(key);
-            if (key === 'dept' || key === 'name') {
+            if (TEXT_FIELD_CONFIG[key]?.vertical) {
                 content = content.split('').join('\n');
                 const lineHeight = (fontSize + 10) / fontSize;
                 textObjects[key].set(Object.assign({
@@ -1246,7 +1709,7 @@
          */
         function buildExportFileName() {
             const rawName = (
-                document.getElementById('nameContent')?.value ||
+                getFieldContent('name') ||
                 document.getElementById('avatarNameInput')?.value ||
                 '未命名'
             ).trim();
@@ -1301,23 +1764,30 @@
             backgroundImage = null;
             topOverlayImage = null;
             textObjects = {};
-            // 清空输入框
-            Object.keys(TEXT_AREAS).forEach(key => {
-                document.getElementById(`${key}Content`).value = '';
-            });
+            initTextFieldState();
+            activeFieldKey = 'dept';
+            syncInspectorUIFromState(activeFieldKey);
+            Object.keys(TEXT_FIELD_CONFIG).forEach(key => updateTextObject(key));
         }
         /**
          * 更新恭喜文字
          * 当姓名输入框内容变化时自动调用
          */
         function updateCongratsText() {
-            const name = document.getElementById('nameContent').value;
-            const congratsInput = document.getElementById('congratsContent');
+            const name = getFieldContent('name');
             if (name) {
-                congratsInput.value = `恭喜：${name}`;
+                textFieldState.congrats.content = `恭喜：${name}`;
+                if (activeFieldKey === 'congrats') {
+                    const contentEl = document.getElementById('inspectorContent');
+                    if (contentEl) contentEl.value = textFieldState.congrats.content;
+                }
                 updateTextObject('congrats');
             } else {
-                congratsInput.value = '';
+                textFieldState.congrats.content = '';
+                if (activeFieldKey === 'congrats') {
+                    const contentEl = document.getElementById('inspectorContent');
+                    if (contentEl) contentEl.value = '';
+                }
                 updateTextObject('congrats');
             }
         }
@@ -1395,25 +1865,12 @@
             // 按钮事件
             document.getElementById('exportBtn').addEventListener('click', exportToJPG);
             document.getElementById('resetBtn').addEventListener('click', resetCanvas);
-            // 实时更新各个文字对象
-            Object.keys(TEXT_AREAS).forEach(key => {
-                document.getElementById(`${key}Content`).addEventListener('input', () => updateTextObject(key));
-                document.getElementById(`${key}FontFamily`).addEventListener('change', () => updateTextObject(key));
-                document.getElementById(`${key}FontSize`).addEventListener('input', () => updateTextObject(key));
-                document.getElementById(`${key}FontColor`).addEventListener('input', () => updateTextObject(key));
-            });
-            // 键盘事件监听，实现方向键微调
             document.addEventListener('keydown', handleKeydown);
-            // 画布对象选择事件，更新坐标显示
-            canvas.on('selection:created', function(e) {
-                updateCoordinateDisplay(e.selected[0]);
-            });
-            // 画布对象移动事件，更新坐标显示
+            initCanvasTextInteraction();
             canvas.on('object:moving', function(e) {
                 updateCoordinateDisplay(e.target);
             });
             
-            // 初始化姓名下拉列表
             rebuildPersonnelSearchIndex();
             initNameDropdown();
             initAvatarNameSearch();
@@ -1522,11 +1979,8 @@
                         avatarTip.style.color = '#28a745';
                         
                         // 自动填充姓名和部门
-                        document.getElementById('nameContent').value = nameInput;
-                        document.getElementById('deptContent').value = PERSONNEL_MAP[nameInput];
-                        updateTextObject('name');
-                        updateTextObject('dept');
-                        updateCongratsText();
+                        setFieldContent('name', nameInput);
+                        setFieldContent('dept', PERSONNEL_MAP[nameInput]);
                     }
                 };
                 
@@ -1595,11 +2049,8 @@
                         avatarTip.style.color = '#28a745';
                         
                         // 自动填充姓名和部门
-                        document.getElementById('nameContent').value = nameInput;
-                        document.getElementById('deptContent').value = PERSONNEL_MAP[nameInput];
-                        updateTextObject('name');
-                        updateTextObject('dept');
-                        updateCongratsText();
+                        setFieldContent('name', nameInput);
+                        setFieldContent('dept', PERSONNEL_MAP[nameInput]);
                     };
                     
                     img.onerror = function() {
@@ -1778,13 +2229,8 @@
                     avatarTip.style.color = '#28a745';
                     
                     // 自动填充姓名和部门
-                    document.getElementById('nameContent').value = nameInput;
-                    document.getElementById('deptContent').value = deptInput;
-                    
-                    // 更新画布文字
-                    updateTextObject('name');
-                    updateTextObject('dept');
-                    updateCongratsText();
+                    setFieldContent('name', nameInput);
+                    setFieldContent('dept', deptInput);
                 };
                 img.onerror = function() {
                     avatarTip.textContent = '图片加载失败，请重试！';
@@ -1884,176 +2330,13 @@
             modal.style.display = 'block';
         }
         /**
-         * 初始化页面布局：折叠面板、头像模块置顶并定位
+         * 初始化页面布局：Offcanvas 工作区 + Inspector
          */
         function initPageLayout() {
-            initCollapsibleUploadCard();
-            initCollapsibleEditorSections();
-            groupTextEditorSections();
-            initCollapsibleExportSettings();
-            focusAvatarManagementSection();
+            initTextFieldState();
+            initInspectorUI();
+            initOffcanvasPanels();
             schedulePreviewUpdate();
-        }
-
-        function createCollapseToggle(title, subtitle) {
-            const toggle = document.createElement('button');
-            toggle.type = 'button';
-            toggle.innerHTML = `<span class="section-title">${title}</span>${subtitle ? `<span class="panel-group-subtitle">${subtitle}</span>` : ''}<span class="section-toggle-icon" aria-hidden="true"></span>`;
-            return toggle;
-        }
-
-        function setPanelOpen(panel, toggle, open) {
-            panel.classList.toggle('is-open', open);
-            if (toggle) {
-                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-            }
-            schedulePreviewUpdate();
-        }
-
-        function initCollapsibleUploadCard() {
-            const uploadCard = document.getElementById('uploadCard');
-            if (!uploadCard || uploadCard.dataset.layoutReady === 'true') return;
-
-            const cardBody = uploadCard.querySelector('.card-body');
-            const toggle = document.createElement('button');
-            toggle.type = 'button';
-            toggle.className = 'collapse-panel-toggle';
-            toggle.innerHTML = '<span class="collapse-panel-title">上传自定义底图</span><span class="collapse-panel-subtitle">可选</span><span class="section-toggle-icon" aria-hidden="true"></span>';
-            toggle.setAttribute('aria-expanded', 'false');
-
-            const body = document.createElement('div');
-            body.className = 'collapse-panel-body';
-            if (cardBody) {
-                body.appendChild(cardBody);
-            }
-
-            uploadCard.classList.add('collapse-panel');
-            uploadCard.insertBefore(toggle, uploadCard.firstChild);
-            uploadCard.appendChild(body);
-
-            toggle.addEventListener('click', function() {
-                setPanelOpen(uploadCard, toggle, !uploadCard.classList.contains('is-open'));
-            });
-
-            uploadCard.dataset.layoutReady = 'true';
-        }
-
-        function initCollapsibleEditorSections() {
-            const sections = document.querySelectorAll('.text-editors .editor-section');
-            sections.forEach(section => {
-                if (section.dataset.layoutReady === 'true') return;
-
-                const heading = section.querySelector('h3');
-                if (!heading) return;
-
-                const title = heading.textContent.trim();
-                const isAvatar = title.includes('头像管理');
-                const toggle = createCollapseToggle(title, isAvatar ? '默认展开' : '');
-                toggle.className = 'section-toggle';
-
-                const body = document.createElement('div');
-                body.className = 'section-body';
-                while (heading.nextSibling) {
-                    body.appendChild(heading.nextSibling);
-                }
-                heading.remove();
-
-                section.insertBefore(toggle, section.firstChild);
-                section.appendChild(body);
-
-                if (isAvatar) {
-                    section.id = 'avatarManagementSection';
-                    section.classList.add('editor-section--featured');
-                    setPanelOpen(section, toggle, true);
-                } else {
-                    setPanelOpen(section, toggle, false);
-                }
-
-                toggle.addEventListener('click', function() {
-                    setPanelOpen(section, toggle, !section.classList.contains('is-open'));
-                });
-
-                section.dataset.layoutReady = 'true';
-            });
-        }
-
-        function groupTextEditorSections() {
-            const textEditors = document.querySelector('.text-editors');
-            const avatarSection = document.getElementById('avatarManagementSection');
-            if (!textEditors || !avatarSection || textEditors.dataset.groupReady === 'true') return;
-
-            const textSections = [...textEditors.querySelectorAll('.editor-section')].filter(section => section.id !== 'avatarManagementSection');
-            if (!textSections.length) return;
-
-            textEditors.prepend(avatarSection);
-
-            const group = document.createElement('div');
-            group.className = 'editor-panel-group';
-            group.innerHTML = `
-                <button type="button" class="panel-group-toggle" aria-expanded="false">
-                    <span class="panel-group-title">文字内容 · 字体样式</span>
-                    <span class="panel-group-subtitle">部门 / 姓名 / 恭喜 / 下单 / 金额</span>
-                    <span class="section-toggle-icon" aria-hidden="true"></span>
-                </button>
-                <div class="panel-group-body"></div>
-            `;
-
-            const groupBody = group.querySelector('.panel-group-body');
-            const groupToggle = group.querySelector('.panel-group-toggle');
-            textSections.forEach(section => groupBody.appendChild(section));
-            textEditors.appendChild(group);
-
-            groupToggle.addEventListener('click', function() {
-                setPanelOpen(group, groupToggle, !group.classList.contains('is-open'));
-            });
-
-            textEditors.dataset.groupReady = 'true';
-        }
-
-        function initCollapsibleExportSettings() {
-            const exportSettings = document.querySelector('.export-settings');
-            if (!exportSettings || exportSettings.dataset.layoutReady === 'true') return;
-
-            const heading = exportSettings.querySelector('h3');
-            const title = heading ? heading.textContent.trim() : '导出设置';
-            const toggle = createCollapseToggle(title, '1080 × 1990');
-            toggle.className = 'section-toggle';
-
-            const body = document.createElement('div');
-            body.className = 'section-body';
-            [...exportSettings.children].forEach(child => {
-                if (child !== heading) {
-                    body.appendChild(child);
-                }
-            });
-            if (heading) heading.remove();
-
-            exportSettings.insertBefore(toggle, exportSettings.firstChild);
-            exportSettings.appendChild(body);
-            setPanelOpen(exportSettings, toggle, false);
-
-            toggle.addEventListener('click', function() {
-                setPanelOpen(exportSettings, toggle, !exportSettings.classList.contains('is-open'));
-            });
-
-            exportSettings.dataset.layoutReady = 'true';
-        }
-
-        function focusAvatarManagementSection() {
-            const avatarSection = document.getElementById('avatarManagementSection');
-            const controlsContainer = document.querySelector('.controls-container');
-            if (!avatarSection || !controlsContainer) return;
-
-            requestAnimationFrame(function() {
-                const offset = avatarSection.offsetTop - controlsContainer.offsetTop - 8;
-                controlsContainer.scrollTop = Math.max(0, offset);
-
-                const searchInput = document.getElementById('avatarNameInput');
-                if (searchInput) {
-                    searchInput.focus({ preventScroll: true });
-                }
-                schedulePreviewUpdate();
-            });
         }
 
         /**
@@ -2061,7 +2344,6 @@
          */
         window.addEventListener('DOMContentLoaded', function() {
             initPageLayout();
-            // 从localStorage恢复数据
             loadFromLocalStorage();
             console.log('数据恢复完成，PERSONNEL_MAP大小:', Object.keys(PERSONNEL_MAP).length);
             console.log('上传的头像数量:', Object.keys(uploadedAvatars).length);
@@ -2069,10 +2351,8 @@
             initCanvas();
             initEventListeners();
             console.log('开始加载字体...');
-            // 等待字体加载完成后再加载图片
             setTimeout(function() {
                 console.log('字体加载完成，开始加载图片...');
-                // 预加载6.jpg作为背景（底层）
                 const bgImageUrl = 'https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/6.jpg';
                 fabric.Image.fromURL(bgImageUrl, function(bgImg) {
                     backgroundImage = bgImg;
@@ -2086,10 +2366,8 @@
                         canvas.add(topImg);
                         addTextObjects();
                         relayoutCanvasElements();
-                        document.getElementById('deptContent').value = '销售部';
-                        document.getElementById('orderContent').value = '618活动套餐下单';
-                        updateTextObject('dept');
-                        updateTextObject('order');
+                        setFieldContent('dept', '销售部');
+                        setFieldContent('order', '618活动套餐下单');
                         schedulePreviewUpdate();
                         console.log('两个默认图片已加载完成');
                     }, {
@@ -2099,12 +2377,11 @@
                         }
                     });
                 }, {
-                    crossOrigin: 'anonymous', // 解决画布污染问题
+                    crossOrigin: 'anonymous',
                     onError: function(err) {
                         console.error('加载背景图片失败:', err);
                     }
                 });
-            }, 1000); // 延迟1秒，确保字体有足够时间加载
-            console.log('PPT图片文字替换工具已加载完成');
+            }, 1000);
         });
     </script></body></html>
