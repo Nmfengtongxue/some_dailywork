@@ -113,7 +113,7 @@
             top: 16px;
             border: 1px solid #e2e8f0;
             box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-            overflow: hidden;
+            overflow: auto;
         }
         .preview-card .card-header {
             background: #fff;
@@ -141,10 +141,10 @@
             flex: 1;
             min-height: 420px;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             padding: 16px;
-            overflow: hidden;
+            overflow: auto;
             box-sizing: border-box;
         }
         .canvas-preview-panel .canvas-container {
@@ -590,6 +590,7 @@
         // 头像文件名别名（名单姓名 -> 服务器旧文件名，待图片重命名后可删除对应项）
         const PHOTO_NAME_ALIASES = {};
         const updateLogs = [
+            '2026-06-07: 预览缩放改用 Fabric setZoom，多时机双 rAF 刷新，预览区 overflow 改为 auto',
             '2026-06-07: 文字、头像、顶层装饰均以底图为基准相对定位，底图位置变化时整体保持相对位置不变',
             '2026-06-07: 预览画布按视口等比缩放完整展示，修复 Fabric 容器类名冲突导致的超高显示问题',
             '2026-06-07: 优化页面排版：头像管理默认置顶展开，文字编辑/导出/上传模块改为折叠侧栏',
@@ -626,15 +627,18 @@
                 };
                 return backgroundFrame;
             }
+            const zoom = canvas.getZoom() || 1;
+            const logicalWidth = canvas.width / zoom;
+            const logicalHeight = canvas.height / zoom;
             const scale = Math.min(
-                canvas.width / DESIGN_SIZE.width,
-                canvas.height / DESIGN_SIZE.height
+                logicalWidth / DESIGN_SIZE.width,
+                logicalHeight / DESIGN_SIZE.height
             );
             const width = DESIGN_SIZE.width * scale;
             const height = DESIGN_SIZE.height * scale;
             backgroundFrame = {
-                left: (canvas.width - width) / 2,
-                top: (canvas.height - height) / 2,
+                left: (logicalWidth - width) / 2,
+                top: (logicalHeight - height) / 2,
                 width,
                 height,
                 scale
@@ -779,6 +783,7 @@
             applyLayoutToTextObjects();
             syncCanvasLayerOrder();
             canvas.requestRenderAll();
+            schedulePreviewUpdate();
         }
 
         function getCanvasDesignSize() {
@@ -786,6 +791,12 @@
                 designWidth: DESIGN_SIZE.width,
                 designHeight: DESIGN_SIZE.height
             };
+        }
+
+        function schedulePreviewUpdate() {
+            requestAnimationFrame(function() {
+                requestAnimationFrame(updateCanvasPreviewScale);
+            });
         }
 
         function updateCanvasPreviewScale() {
@@ -803,12 +814,11 @@
             const scale = Math.min(availableWidth / designWidth, availableHeight / designHeight);
 
             canvasPreviewScale = scale;
-            canvas.setZoom(1);
-            canvas.setDimensions({ width: designWidth, height: designHeight });
             canvas.setDimensions({
                 width: Math.round(designWidth * scale),
                 height: Math.round(designHeight * scale)
-            }, { cssOnly: true });
+            });
+            canvas.setZoom(scale);
             canvas.calcOffset();
             canvas.requestRenderAll();
 
@@ -821,6 +831,7 @@
 
         function initCanvasPreviewResize() {
             const panel = document.getElementById('canvasPreviewPanel');
+            const previewCard = document.querySelector('.preview-card');
             if (!panel) return;
 
             if (canvasPreviewResizeObserver) {
@@ -829,12 +840,18 @@
 
             if (typeof ResizeObserver !== 'undefined') {
                 canvasPreviewResizeObserver = new ResizeObserver(function() {
-                    updateCanvasPreviewScale();
+                    schedulePreviewUpdate();
                 });
                 canvasPreviewResizeObserver.observe(panel);
+                if (previewCard) {
+                    canvasPreviewResizeObserver.observe(previewCard);
+                }
             }
 
-            window.addEventListener('resize', updateCanvasPreviewScale);
+            window.addEventListener('resize', schedulePreviewUpdate);
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(schedulePreviewUpdate);
+            }
         }
         
         // 从localStorage恢复数据
@@ -1083,7 +1100,7 @@
             });
             refreshBackgroundFrame();
             initCanvasPreviewResize();
-            updateCanvasPreviewScale();
+            schedulePreviewUpdate();
         }
         /**
          * 处理文件上传
@@ -1246,28 +1263,34 @@
                 alert('请先上传图片');
                 return;
             }
-            // 获取导出尺寸
-            const exportWidth = parseInt(document.getElementById('exportWidth').value);
-            const exportHeight = parseInt(document.getElementById('exportHeight').value);
-            // 创建临时画布用于导出
+            const exportWidth = parseInt(document.getElementById('exportWidth').value, 10);
+            const exportHeight = parseInt(document.getElementById('exportHeight').value, 10);
+            const multiplier = exportWidth / DESIGN_SIZE.width;
+            const dataUrl = canvas.toDataURL({
+                format: 'jpeg',
+                quality: 0.9,
+                multiplier: multiplier
+            });
             const tempCanvas = document.createElement('canvas');
             tempCanvas.width = exportWidth;
             tempCanvas.height = exportHeight;
             const tempCtx = tempCanvas.getContext('2d');
-            // 绘制背景图片
-            tempCtx.drawImage(canvas.lowerCanvasEl, 0, 0, exportWidth, exportHeight);
-            // 将Canvas转换为图片并下载
-            const downloadName = buildExportFileName();
-            tempCanvas.toBlob(function(blob) {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = downloadName;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            }, 'image/jpeg', 0.9);
+            const exportImage = new Image();
+            exportImage.onload = function() {
+                tempCtx.drawImage(exportImage, 0, 0, exportWidth, exportHeight);
+                const downloadName = buildExportFileName();
+                tempCanvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = downloadName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 'image/jpeg', 0.9);
+            };
+            exportImage.src = dataUrl;
         }
         /**
          * 重置画布
@@ -1869,9 +1892,7 @@
             groupTextEditorSections();
             initCollapsibleExportSettings();
             focusAvatarManagementSection();
-            requestAnimationFrame(function() {
-                updateCanvasPreviewScale();
-            });
+            schedulePreviewUpdate();
         }
 
         function createCollapseToggle(title, subtitle) {
@@ -1886,6 +1907,7 @@
             if (toggle) {
                 toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
             }
+            schedulePreviewUpdate();
         }
 
         function initCollapsibleUploadCard() {
@@ -2030,6 +2052,7 @@
                 if (searchInput) {
                     searchInput.focus({ preventScroll: true });
                 }
+                schedulePreviewUpdate();
             });
         }
 
@@ -2067,7 +2090,7 @@
                         document.getElementById('orderContent').value = '618活动套餐下单';
                         updateTextObject('dept');
                         updateTextObject('order');
-                        updateCanvasPreviewScale();
+                        schedulePreviewUpdate();
                         console.log('两个默认图片已加载完成');
                     }, {
                         crossOrigin: 'anonymous',
