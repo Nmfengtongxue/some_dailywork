@@ -48,6 +48,7 @@ const departmentPersonLists = {
     "朱文婷",
     "张园胜",
     "曹圆圆",
+    "徐秀梅",
   ],
 };
 
@@ -89,6 +90,7 @@ const rosterTooltipOrgByListDepartment = {
 const rosterTooltipOrgExtraByPerson = {
   "张园胜": "影像科室",
   "曹圆圆": "护理部",
+  "徐秀梅": "放射科主任",
 };
 
 function parseStatDateForCompare(val) {
@@ -153,6 +155,7 @@ function shouldIncludeInAttendanceStat(personName, selectedDateStr) {
 }
 
 const updateLogs = [
+  "2026-06-16: 医疗部新增徐秀梅（放射科主任）；同步喜报工具名单与 GitHub 头像库",
   "2026-06-01: 销售部史正蓓、周东升、刘晓霞离职，名单保留，自 2026-06-01 起未打卡对比与首页全员名单不再显示，管理人员名单灰色标注",
   "2026-05-26: 医疗部新增张园胜（影像科室）、曹圆圆（护理部）；移除客服部王凯迪、销售部王佳（已从名单删除）",
   "2026-05-25: 离职人员（含原销售部王佳）不在首页「全员名单」展示；名单保留、管理人员名单灰色标注、未打卡对比按离职日排除",

@@ -718,7 +718,7 @@
         let textFieldState = {};
         let activeFieldKey = 'dept';
         // 人员名单版本号（变更后递增，用于覆盖浏览器 localStorage 中的旧名单）
-        const PERSONNEL_MAP_REVISION = '2026-06-07-v4';
+        const PERSONNEL_MAP_REVISION = '2026-06-16-v1';
         // 人员名单映射（姓名 -> 部门）
         const PERSONNEL_MAP = {
             // 销售部
@@ -780,11 +780,18 @@
             '张彩荷': '医疗中心',
             '朱文婷': '医疗中心',
             '张园胜': '医疗中心',
-            '曹圆圆': '医疗中心'
+            '曹圆圆': '医疗中心',
+            '徐秀梅': '医疗中心'
         };
         // 头像文件名别名（名单姓名 -> 服务器旧文件名，待图片重命名后可删除对应项）
         const PHOTO_NAME_ALIASES = {};
+        // 人员职务提示（鼠标悬停姓名时展示，不影响部门归属）
+        const PERSONNEL_ROLE_HINT = {
+            '徐秀梅': '放射科主任'
+        };
         const updateLogs = [
+            '2026-06-16: 医疗中心新增徐秀梅（放射科主任，悬停姓名可查看职务）；同步徐秀梅.png 至 GitHub 头像库',
+            '2026-06-12: 修复预览缩放后底图不显示：逻辑画布固定 1080×1990，预览仅用 cssOnly 缩放并重排',
             '2026-06-07: 三期 UI 改造：三 Offcanvas 抽屉 + Inspector 共用样式检查器 + 点击画布文字编辑',
             '2026-06-07: 预览缩放改用 Fabric setZoom，多时机双 rAF 刷新，预览区 overflow 改为 auto',
             '2026-06-07: 文字、头像、顶层装饰均以底图为基准相对定位，底图位置变化时整体保持相对位置不变',
@@ -813,31 +820,12 @@
         let canvasPreviewScale = 1;
 
         function refreshBackgroundFrame() {
-            if (!canvas) {
-                backgroundFrame = {
-                    left: 0,
-                    top: 0,
-                    width: DESIGN_SIZE.width,
-                    height: DESIGN_SIZE.height,
-                    scale: 1
-                };
-                return backgroundFrame;
-            }
-            const zoom = canvas.getZoom() || 1;
-            const logicalWidth = canvas.width / zoom;
-            const logicalHeight = canvas.height / zoom;
-            const scale = Math.min(
-                logicalWidth / DESIGN_SIZE.width,
-                logicalHeight / DESIGN_SIZE.height
-            );
-            const width = DESIGN_SIZE.width * scale;
-            const height = DESIGN_SIZE.height * scale;
             backgroundFrame = {
-                left: (logicalWidth - width) / 2,
-                top: (logicalHeight - height) / 2,
-                width,
-                height,
-                scale
+                left: 0,
+                top: 0,
+                width: DESIGN_SIZE.width,
+                height: DESIGN_SIZE.height,
+                scale: 1
             };
             return backgroundFrame;
         }
@@ -970,7 +958,7 @@
             });
         }
 
-        function relayoutCanvasElements() {
+        function relayoutCanvasElements(options) {
             if (!canvas) return;
             refreshBackgroundFrame();
             if (backgroundImage) fitTemplateImageToFrame(backgroundImage);
@@ -979,7 +967,9 @@
             applyLayoutToTextObjects();
             syncCanvasLayerOrder();
             canvas.requestRenderAll();
-            schedulePreviewUpdate();
+            if (!options || options.schedulePreview !== false) {
+                schedulePreviewUpdate();
+            }
         }
 
         function getCanvasDesignSize() {
@@ -1010,13 +1000,18 @@
             const scale = Math.min(availableWidth / designWidth, availableHeight / designHeight);
 
             canvasPreviewScale = scale;
+            canvas.setZoom(1);
+            canvas.setDimensions({ width: designWidth, height: designHeight });
             canvas.setDimensions({
                 width: Math.round(designWidth * scale),
                 height: Math.round(designHeight * scale)
-            });
-            canvas.setZoom(scale);
+            }, { cssOnly: true });
             canvas.calcOffset();
-            canvas.requestRenderAll();
+            if (backgroundImage) {
+                relayoutCanvasElements({ schedulePreview: false });
+            } else {
+                canvas.requestRenderAll();
+            }
 
             const label = document.getElementById('previewScaleLabel');
             if (label) {
@@ -1343,6 +1338,10 @@
             return PHOTO_NAME_ALIASES[name] || name;
         }
 
+        function getPersonRoleHint(name) {
+            return PERSONNEL_ROLE_HINT[name] || '';
+        }
+
         let personnelSearchIndex = [];
         let avatarNameSuggestionIndex = -1;
 
@@ -1477,6 +1476,8 @@
                 item.setAttribute('role', 'option');
                 item.dataset.index = String(index);
                 item.dataset.name = entry.name;
+                const roleHint = getPersonRoleHint(entry.name);
+                item.title = roleHint || `${entry.name} · ${entry.dept}`;
                 item.innerHTML = `<span>${entry.name}</span><span class="suggestion-dept">${entry.dept}</span><span class="suggestion-meta">${entry.initials ? entry.initials.toUpperCase() : ''}${entry.pinyinText ? ' · ' + entry.pinyinText : ''}</span>`;
                 item.addEventListener('mousedown', function(event) {
                     event.preventDefault();
@@ -2125,6 +2126,8 @@
                 const option = document.createElement('option');
                 option.value = name;
                 option.textContent = name;
+                const roleHint = getPersonRoleHint(name);
+                if (roleHint) option.title = roleHint;
                 nameFilter.appendChild(option);
             });
             rebuildPersonnelSearchIndex();
@@ -2154,6 +2157,8 @@
                 const option = document.createElement('option');
                 option.value = name;
                 option.textContent = name;
+                const roleHint = getPersonRoleHint(name);
+                if (roleHint) option.title = roleHint;
                 nameFilter.appendChild(option);
             });
             rebuildPersonnelSearchIndex();
@@ -2310,7 +2315,8 @@
                 html += `<h5 style="margin-top: 15px; margin-bottom: 5px; color: #007bff;">${dept}</h5>`;
                 html += '<ul style="margin: 0; padding-left: 20px;">';
                 deptGroups[dept].sort((a, b) => a.localeCompare(b, 'zh-CN')).forEach(name => {
-                    html += `<li>${name}</li>`;
+                    const roleHint = getPersonRoleHint(name);
+                    html += roleHint ? `<li title="${roleHint}">${name}</li>` : `<li>${name}</li>`;
                 });
                 html += '</ul>';
             });
@@ -2356,8 +2362,8 @@
                 const bgImageUrl = 'https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/6.jpg';
                 fabric.Image.fromURL(bgImageUrl, function(bgImg) {
                     backgroundImage = bgImg;
-                    fitTemplateImageToFrame(bgImg);
                     canvas.clear();
+                    fitTemplateImageToFrame(bgImg);
                     canvas.add(bgImg);
                     const topImageUrl = 'https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/7.png';
                     fabric.Image.fromURL(topImageUrl, function(topImg) {
@@ -2368,7 +2374,6 @@
                         relayoutCanvasElements();
                         setFieldContent('dept', '销售部');
                         setFieldContent('order', '618活动套餐下单');
-                        schedulePreviewUpdate();
                         console.log('两个默认图片已加载完成');
                     }, {
                         crossOrigin: 'anonymous',
