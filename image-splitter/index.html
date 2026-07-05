@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>AI Image Splitter - 免费在线分割图像</title>
+  <meta name="description" content="在线将图像分割为 2、3、6、9 或更多相等部分，支持 4:5、3:4、1:1 预设。可下载单个图像或 ZIP 文件。免费，无需注册。" />
+  <meta name="theme-color" content="#3b82f6" />
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="js/jszip.min.js" defer></script>
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <div style="position: fixed; top: 12px; left: 12px; z-index: 9999;">
+    <a href="../other-tools.html" class="btn btn-secondary btn-sm">返回其他工具</a>
+  </div>
+  <div class="page">
+    <div class="page-bg"></div>
+
+    <header class="header">
+      <div class="container header-inner">
+        <a href="#" class="logo" id="logoHome">
+          <img src="images/logo.png" alt="AI Image Splitter Logo" width="40" height="40" />
+          <span>AI Image Splitter</span>
+        </a>
+        <nav class="nav-desktop">
+          <button type="button" data-scroll="hero">首页</button>
+          <button type="button" data-scroll="how-it-works">使用方法</button>
+          <button type="button" data-scroll="faq">常见问题</button>
+          <button type="button" data-scroll="about-tool">关于工具</button>
+        </nav>
+        <div class="header-actions">
+          <button type="button" class="lang-btn" aria-label="切换语言">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            <span>🇨🇳 简体中文</span>
+          </button>
+          <button type="button" class="menu-toggle" id="menuToggle" aria-label="打开菜单">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+      <nav class="nav-mobile hidden" id="mobileNav">
+        <button type="button" data-scroll="hero">首页</button>
+        <button type="button" data-scroll="how-it-works">使用方法</button>
+        <button type="button" data-scroll="faq">常见问题</button>
+        <button type="button" data-scroll="about-tool">关于工具</button>
+      </nav>
+    </header>
+
+    <main>
+      <div id="landingView">
+        <section class="hero" id="hero">
+          <div class="container">
+            <h1 class="hero-title">在线图像分割器</h1>
+            <p class="hero-desc">一键将图像分割成 2、3、6、9 个或更多相等的部分。支持 3:4、4:5、1:1 等预设宽高比，操作过程实时预览每个切片，支持下载单个图像和 ZIP 打包下载。无需注册，无需安装软件，也无任何隐藏费用。</p>
+            <div class="upload-card">
+              <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon-wrap">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                </div>
+                <h3>拖拽图像到此处，或点击上传</h3>
+                <button type="button" class="btn btn-primary" id="chooseBtn">选择图片</button>
+                <p class="upload-hint">支持 JPG、PNG、WebP，最大 50 MB。</p>
+              </div>
+              <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp" hidden />
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="how-it-works">
+          <div class="container">
+            <h2 class="section-title">如何使用图像分割器</h2>
+            <div class="steps-grid">
+              <div class="step-card">
+                <div class="step-icon blue"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg></div>
+                <h3>1. 上传图像</h3>
+                <p>上传 JPG、PNG 或 WebP 图像（最大 50 MB）。所有处理都在浏览器本地完成，文件不会离开您的设备。</p>
+              </div>
+              <div class="step-card">
+                <div class="step-icon purple"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg></div>
+                <h3>2. 分割设置</h3>
+                <p>选择宽高比预设（默认、4:5、3:4、1:1）和分割模式（垂直、水平、网格），然后调整分割范围选择框以确定分割区域。</p>
+              </div>
+              <div class="step-card">
+                <div class="step-icon gradient"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div>
+                <h3>3. 下载结果</h3>
+                <p>预览分割结果后，可下载单张图像，或将全部结果导出为 ZIP 文件。支持 JPG、PNG、WebP 格式。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section about-section" id="about-tool">
+          <div class="container narrow">
+            <h2 class="section-title">什么是 AI Image Splitter？</h2>
+            <p class="about-text">AI Image Splitter 是一款浏览器端图片分割工具，可将一张图像分割为多个相等部分。它内置 3:4、4:5、1:1 等宽高比预设，以及垂直、水平、网格 3 种分割模式。无论您是用于社交媒体发布、A4 打印排版还是图像拼贴，都可以快速完成设置并立即导出。所有处理都在您的设备本地完成，图像不会上传到服务器。您可以选择宽高比预设、分割模式，设置行列，调整分割范围选择框，并将结果按单张或 ZIP 方式导出为 JPG、PNG、WebP。</p>
+          </div>
+        </section>
+
+        <section class="section" id="advantages">
+          <div class="container">
+            <h2 class="section-title">AI Image Splitter 的特点</h2>
+            <div class="feature-row">
+              <div class="feature-demo">
+                <img src="images/penguin-original.png" alt="图像网格分割示例" class="demo-small" />
+                <div class="demo-arrow">→</div>
+                <img src="images/penguin-split.png" alt="图像网格分割示例" class="demo-large" />
+              </div>
+              <div class="feature-list">
+                <div class="feature-item"><h3>免费且易用</h3><p>无需注册、无水印、无隐藏费用、无使用次数限制，打开浏览器即可使用完整功能。</p></div>
+                <div class="feature-item"><h3>分割设置灵活</h3><p>支持将图像分割为 2、3、4 或更多相等部分，并提供宽高比预设、分割模式和自定义网格设置。</p></div>
+                <div class="feature-item"><h3>覆盖常见使用场景</h3><p>适合用于 Instagram、TikTok 网格发布、轮播帖子、A4 打印排版、图像拼贴、课堂资料及日常导出场景。</p></div>
+              </div>
+            </div>
+            <div class="feature-row reverse">
+              <div class="feature-demo">
+                <img src="images/city-split.png" alt="图像轮播分割示例" class="demo-large" />
+                <div class="demo-arrow">←</div>
+                <img src="images/city-original.png" alt="图像轮播分割示例" class="demo-small" />
+              </div>
+              <div class="feature-list right">
+                <div class="feature-item"><h3>界面操作简单</h3><p>上传、设置、预览、导出流程清晰，通常在短时间内即可完成。</p></div>
+                <div class="feature-item"><h3>本地处理</h3><p>所有处理都在浏览器本地运行，图像不会上传到服务器。</p></div>
+                <div class="feature-item"><h3>导出方式高效</h3><p>支持单张下载，也可将全部结果打包为 ZIP，便于发布和整理。</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="use-cases">
+          <div class="container">
+            <h2 class="section-title">AI Image Splitter 的常见使用场景</h2>
+            <div class="cards-grid">
+              <div class="info-card"><h3>社交媒体网格与轮播发布</h3><p>将一张图像分割为多个相等的块，适用于 Instagram、TikTok、Pinterest 等平台的网格和轮播内容。</p></div>
+              <div class="info-card"><h3>店铺展示与拼贴排版</h3><p>用于商品图拼贴、视觉看板和宣传素材组合，帮助保持版面统一和视觉对齐。</p></div>
+              <div class="info-card"><h3>A4 打印与文档分割</h3><p>将大图分割为适合 A4 打印或 PDF 文档插入的部分，便于教学、汇报和线下使用。</p></div>
+              <div class="info-card"><h3>网页与多区域展示素材</h3><p>将图像拆分为多个模块，便于在网页分区或多区域展示中进行灵活排版。</p></div>
+              <div class="info-card"><h3>长图内容拆分</h3><p>将长图拆分为更易发布和阅读的多个部分，适合分步展示与连续内容呈现。</p></div>
+              <div class="info-card"><h3>教学与团队协作流程</h3><p>统一上传、设置、预览、导出流程，便于课堂演示、团队协作和日常内容生产。</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="pro-tips">
+          <div class="container narrow">
+            <h2 class="section-title">如何更高效地使用 AI Image Splitter</h2>
+            <p class="section-subtitle">提高分割质量与导出效率的实用建议</p>
+            <div class="tips-list">
+              <div class="info-card"><h3>请使用高质量的图像</h3><p>尽量使用清晰、分辨率较高的原图，可显著提升分割后每个部分的显示效果。</p></div>
+              <div class="info-card"><h3>选择合适的宽高比和分割模式</h3><p>在开始分割前，按照分割用途和原图特点，先选择合适的宽高比预设和分割模式，可减少后续重复调整。</p></div>
+              <div class="info-card"><h3>优先保证主体区域完整</h3><p>调整分割范围选择框时，确保主体内容尽量完整地保留在每个分割结果中。</p></div>
+              <div class="info-card"><h3>先预览再导出</h3><p>先检查行列设置与分割边界，然后通过实时预览确认无误后，再进行单张下载或 ZIP 打包导出，可避免返工。</p></div>
+              <div class="info-card"><h3>按用途选择输出格式</h3><p>社交平台优先考虑文件体积（比如：JPG），透明背景或细节保留场景优先选择合适格式（比如 PNG），网页优先选择 WebP。</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section faq-section" id="faq">
+          <div class="container narrow">
+            <h2 class="section-title">常见问题</h2>
+            <p class="section-subtitle">关于格式支持、隐私处理、下载方式和分割设置的常见问题解答。</p>
+            <div class="faq-list" id="faqList"></div>
+            <div class="cta-card">
+              <h3>准备开始分割图像了吗？</h3>
+              <p>上传图像，选择分割模式和网格设置，预览结果，然后下载单张文件或 ZIP 打包文件。</p>
+              <button type="button" class="btn btn-white" data-scroll="hero">开始分割</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div id="toolView" class="hidden">
+        <div class="container tool-container">
+          <div class="tool-panel">
+            <aside class="tool-sidebar">
+              <div class="control-group">
+                <p class="control-label">宽高比</p>
+                <div class="btn-grid" id="aspectRatioBtns">
+                  <button type="button" class="option-btn active" data-ratio="default">默认</button>
+                  <button type="button" class="option-btn" data-ratio="4:5">竖向 4:5</button>
+                  <button type="button" class="option-btn" data-ratio="3:4">竖向 3:4</button>
+                  <button type="button" class="option-btn" data-ratio="1:1">方形 1:1</button>
+                </div>
+              </div>
+              <div class="control-group">
+                <p class="control-label">选择分割模式</p>
+                <div class="mode-btns" id="modeBtns">
+                  <button type="button" class="option-btn" data-mode="vertical">垂直</button>
+                  <button type="button" class="option-btn" data-mode="horizontal">水平</button>
+                  <button type="button" class="option-btn active" data-mode="grid">网格</button>
+                </div>
+                <p class="control-hint">垂直适合轮播内容，水平适合横向布局，网格适合网格式排布。</p>
+              </div>
+              <div class="control-group">
+                <label class="control-label">行</label>
+                <div class="stepper">
+                  <button type="button" class="stepper-btn" id="rowsMinus">−</button>
+                  <input type="number" id="rowsInput" min="1" max="10" value="3" />
+                  <button type="button" class="stepper-btn" id="rowsPlus">+</button>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">列</label>
+                <div class="stepper">
+                  <button type="button" class="stepper-btn" id="colsMinus">−</button>
+                  <input type="number" id="colsInput" min="1" max="10" value="3" />
+                  <button type="button" class="stepper-btn" id="colsPlus">+</button>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="gridLineWidth">网格线宽度: <span id="gridLineWidthVal">2</span>px</label>
+                <input type="range" id="gridLineWidth" min="0" max="10" value="2" />
+                <p class="control-hint">调整分割图像之间的间距</p>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="outputFormat">导出格式</label>
+                <select id="outputFormat">
+                  <option value="jpg">JPG</option>
+                  <option value="png">PNG</option>
+                  <option value="webp">WebP</option>
+                </select>
+              </div>
+              <div class="tool-actions">
+                <button type="button" class="btn btn-primary btn-block" id="splitBtn">分割图像</button>
+                <button type="button" class="btn btn-success btn-block" id="downloadAllBtn" disabled>全部下载</button>
+              </div>
+            </aside>
+            <div class="tool-preview">
+              <div class="preview-area" id="previewArea">
+                <p class="preview-placeholder">请先上传图像</p>
+              </div>
+              <div class="preview-footer">
+                <button type="button" class="btn btn-secondary" id="reuploadBtn">重新上传图片</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input type="file" id="toolFileInput" accept=".jpg,.jpeg,.png,.webp" hidden />
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-left">
+          <p>© 2026 AI Image Splitter. 用 ❤️ 为全世界的内容创作者制作</p>
+          <p class="footer-note">说明："AI"仅为品牌名称。本工具未使用 AI 模型，所有图像处理均在您的浏览器本地完成。</p>
+        </div>
+        <div class="footer-links">
+          <a href="#contact">联系方式</a>
+          <a href="#privacy">隐私政策</a>
+          <a href="#terms">服务条款</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

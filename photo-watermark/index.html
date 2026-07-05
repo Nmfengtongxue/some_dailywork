@@ -1,0 +1,227 @@
+<!--
+ * @Date: 2024-12-23
+ * @LastEditors: cuijianzhuang
+ * @Description: 离线照片水印打码工具
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <title>在线图片水印工具 | 免费离线照片水印制作 | Online Watermark Tool</title>
+    <meta name="description" content="免费的离线图片水印工具，支持批量添加文字水印，保护照片隐私安全。无需上传，本地处理，适用于证件、文档等敏感图片。Free offline watermark tool for photos and documents, supports batch processing with text watermarks, ensures privacy and security." />
+    <meta name="keywords" content="图片水印,照片水印,水印工具,离线水印,在线水印,watermark tool,photo watermark,offline watermark,online watermark,image watermark" />
+
+    <!-- Open Graph Meta 标签 -->
+    <meta property="og:title" content="专业的离线图片水印工具 | Professional Offline Watermark Tool" />
+    <meta property="og:description" content="完全免费的离线图片水印工具，无需上传即可为照片添加专业水印，保护您的图片安全。Free offline watermark tool that adds professional watermarks to your photos without uploading, protecting your image security." />
+    <meta property="og:image" content="./og-image.png" />
+    <meta property="og:url" content="https://watermark.cdtools.click" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card Meta 标签 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="离线图片水印工具 | Offline Watermark Tool" />
+    <meta name="twitter:description" content="安全可靠的离线图片水印工具，支持批量处理，保护隐私。Secure offline watermark tool supporting batch processing while protecting privacy." />
+
+    <!-- 其他重要 Meta 标签 -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="CDTools" />
+    <link rel="canonical" href="https://watermark.cdtools.click" />
+
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "离线图片水印工具",
+        "alternateName": "Offline Watermark Tool",
+        "url": "https://watermark.cdtools.click",
+        "description": "一款完全免费的离线图片水印工具，支持为照片、证件、文档等添加自定义水印，确保文件安全性。所有处理均在本地完成，无需担心隐私泄露。支持批量处理、多种字体样式、自定义位置等专业功能。A completely free offline watermark tool that supports adding custom watermarks to photos, documents, and credentials while ensuring file security. All processing is done locally without privacy concerns. Supports batch processing, multiple font styles, custom positioning, and other professional features.",
+        "applicationCategory": "图片处理工具",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "CNY"
+        },
+        "featureList": ["完全离线处理，保护隐私安全", "支持批量添加水印", "多种字体和样式选择", "自定义水印位置和透明度", "适用于各类图片格式"]
+      }
+    </script>
+
+    <!-- 长篇 SEO 描述（隐藏显示）-->
+    <div style="display: none">
+      <h1>专业的离线图片水印工具 - Professional Offline Watermark Tool</h1>
+      <p>
+        欢迎使用我们的离线图片水印工具，这是一款完全免费且注重隐私保护的专业水印制作软件。我们的水印工具支持为照片、证件、文档等各类图片添加自定义水印，所有处理均在本地完成，无需担心隐私泄露问题。 我们的水印工具具有以下特点： 1. 完全离线处理：所有图片处理都在您的浏览器中完成，无需上传至服务器，确保文件安全性。 2. 批量处理功能：支持同时处理多张图片，提高工作效率。 3. 专业的水印选项：支持自定义字体、大小、颜色、透明度、旋转角度等。 4. 多种布局方式：支持平铺模式、单个水印、自定义数量等多种排列方式。 5. 便捷的模板功能：内置多种常用水印模板，一键套用。 适用场景： - 证件复印件加水印 - 文档版权保护 - 照片版权声明 - 企业资料防泄露 - 办公文件标记 Welcome to our offline watermark tool, a completely free and privacy-focused professional watermark creation software. Our tool supports adding custom watermarks to various types of images including photos, credentials, and documents. All processing is completed locally without any privacy concerns. Key Features: 1. Completely Offline Processing: All
+        image processing is done in your browser without server uploads, ensuring file security. 2. Batch Processing: Support processing multiple images simultaneously for improved efficiency. 3. Professional Watermark Options: Customize fonts, size, color, opacity, rotation angle, and more. 4. Multiple Layout Options: Support tiled mode, single watermark, custom quantity, and various arrangements. 5. Convenient Templates: Built-in templates for common watermark needs. Use Cases: - Adding watermarks to credential copies - Document copyright protection - Photo copyright declaration - Enterprise information protection - Office document marking
+      </p>
+    </div>
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="./js/script.js" defer></script>
+  </head>
+
+  <div style="position: fixed; top: 12px; left: 12px; z-index: 9999;">
+    <a href="../other-tools.html" class="btn btn-secondary btn-sm">返回其他工具</a>
+  </div>
+
+  <button class="theme-switch" onclick="toggleTheme()">
+    <span class="theme-icon">🌞</span>
+    <span class="theme-text">切换主题</span>
+  </button>
+
+  <div id="container">
+    <h1>完全离线的图片水印工具</h1>
+    <article class="description">
+      <ul>
+        <li>✓ 100% 本地运行，无网络请求</li>
+        <li>✓ 适用于证件、文档等敏感图片</li>
+        <li>✓ 使用浏览器原生 API，安全可靠</li>
+      </ul>
+    </article>
+
+    <div class="main-content">
+      <!-- 左侧水印设置 -->
+      <div class="watermark-settings">
+        <div class="align-center-box">
+          <label for="text">水印文字</label>
+          <input type="text" id="text" placeholder="请输入文字" value="版权所有 侵权必究" spellcheck="false" autocomplete="off" />
+        </div>
+        <div class="template-buttons">
+          <button class="template-btn" data-text="仅供办理XX使用，他用无效">办事模板</button>
+          <button class="template-btn" data-text="仅用于XX认证，他用无效">认证模板</button>
+          <button class="template-btn" data-text="复印件与原件相符">复印核验</button>
+          <button class="template-btn" data-text="该证件仅供XX查看，不得他用">证件模板</button>
+          <button class="template-btn" data-text="内部资料，请勿外传">内部资料</button>
+          <button class="template-btn" data-text="版权所有，严禁外传">版权声明</button>
+        </div>
+        <div class="align-center-box">
+          <div style="flex: 1; display: flex; flex-wrap: wrap; gap: 20px">
+            <div>
+              <label for="watermarkPattern">布局方式</label>
+              <select id="watermarkPattern">
+                <option value="tile">平铺模式</option>
+                <option value="single">单个水印</option>
+                <option value="custom">自定义数量</option>
+              </select>
+            </div>
+
+            <div id="customPatternControls" style="display: none">
+              <label for="watermarkCount">水印数量</label>
+              <input type="number" id="watermarkCount" min="1" max="100" value="1" />
+            </div>
+
+            <div id="positionControls" style="display: none">
+              <label for="watermarkPosition">位置</label>
+              <select id="watermarkPosition">
+                <option value="center">居中</option>
+                <option value="top-left">左上角</option>
+                <option value="top-right">右上角</option>
+                <option value="bottom-left">左下角</option>
+                <option value="bottom-right">右下角</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="align-center-box">
+          <label>字体与样式</label>
+          <div style="flex: 1; display: flex; align-items: center; gap: 10px">
+            <div class="font-select-wrapper" style="width: 200px; position: relative">
+              <select id="fontFamily">
+                <option value="黑体">黑体</option>
+                <option value="宋体">宋体</option>
+                <option value="仿宋">仿宋</option>
+                <option value="楷体">楷体</option>
+                <option value="隶书">隶书</option>
+                <option value="幼圆">幼圆</option>
+                <option value="Arial">Arial</option>
+                <option value="Helvetica">Helvetica</option>
+                <option value="Tahoma">Tahoma</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Georgia">Georgia</option>
+                <option value="TimesNewRoman">Times New Roman</option>
+              </select>
+            </div>
+
+            <div class="style-buttons">
+              <button id="boldToggle" class="style-btn" onclick="toggleFontStyle('bold')">B</button>
+              <button id="italicToggle" class="style-btn" onclick="toggleFontStyle('italic')">I</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="align-center-box">
+          <label for="color">颜色</label>
+          <input type="color" id="color" pattern="#[0-9A-Fa-f]{6}" value="#ffffff" />
+
+          <label for="alpha">不透明度</label>
+          <input type="range" id="alpha" min="0" max="1" step="0.05" value="0.3" />
+        </div>
+
+        <div class="align-center-box">
+          <label for="space">间隔</label>
+          <input type="range" id="space" min="1" max="8" step="0.2" value="1.5" />
+
+          <label for="size">字号</label>
+          <input type="range" id="size" min="0.5" max="3" step="0.05" value="0.8" />
+        </div>
+
+        <div class="align-center-box">
+          <label for="rotate">旋转角度</label>
+          <input type="range" id="rotate" min="-90" max="90" step="3" value="45" />
+          <span id="rotateValue">45°</span>
+        </div>
+      </div>
+
+      <!-- 右侧预览和下载 -->
+      <div class="preview-download">
+        <section class="upload-section">
+          <div class="upload-box">
+            <input type="file" id="image" autocomplete="off" multiple accept="image/*" aria-label="选择图片文件" />
+            <div class="upload-area" role="button" tabindex="0" aria-label="点击或拖拽图片到此处上传">
+              <div class="upload-hint">
+                <i class="upload-icon" aria-hidden="true">📁</i>
+                <p class="upload-title">点击或拖拽图片到此处上传</p>
+                <p class="upload-tip">支持 jpg、jpeg、png、gif、webp、bmp、ico 格式</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="uploadProgress" class="upload-progress" style="display: none" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="progress-bar">
+              <div class="progress-inner"></div>
+            </div>
+            <div class="progress-text">正在处理图片...</div>
+          </div>
+        </section>
+
+        <section class="preview-section">
+          <div id="graph" class="empty" role="grid" aria-label="图片预览区域">
+            <!-- 图片预览将在此动态生成 -->
+          </div>
+        </section>
+        <section class="action-section">
+          <div class="button-group" role="group" aria-label="图片操作">
+            <button class="btn btn-primary" onclick="downloadAll()" aria-label="下载全部图片">
+              <span class="btn-icon" aria-hidden="true">⬇️</span>
+              <span>下载全部</span>
+            </button>
+            <button class="btn btn-danger" onclick="deleteAll()" aria-label="删除全部图片">
+              <span class="btn-icon" aria-hidden="true">🗑️</span>
+              <span>删除全部</span>
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div id="previewModal">
+    <img id="previewImage" alt="previewImage" />
+  </div>
+  <script src="./js/link.js"></script>
+</html>
