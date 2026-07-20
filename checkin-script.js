@@ -5,7 +5,7 @@ let departments = [];
 let dates = [];
 
 const departmentPersonLists = {
-  "行政部": ["朱甦雅", "王斌斌", "杜永丽", "张巧花", "李雁程", "王晶玉"],
+  "行政部": ["朱甦雅", "王斌斌", "杜永丽", "张巧花", "李雁程", "王晶玉", "陈佩鹃"],
   "销售部": ["史正蓓", "陈炳森", "白金玉", "王莉莉", "刘倩倩", "周东升", "刘晓霞"],
   "医疗部": [
     "苏丹",
@@ -53,6 +53,9 @@ const departmentPersonLists = {
 };
 
 const leavePersons = ["朱英", "孙绿萍"];
+
+// 隐藏人员：名单保留，不参与未打卡对比、首页全员名单不显示、导出不计入
+const statHiddenPersons = ["徐秀梅"];
 
 // 试岗人员：从指定日期开始才纳入“应打卡”对比
 const trialPeriodStatStartByPerson = {
@@ -126,11 +129,17 @@ function isDepartedPerson(personName) {
   return Object.prototype.hasOwnProperty.call(departNotIncludeAfterByPerson, personName);
 }
 
+function isStatHiddenPerson(personName) {
+  return statHiddenPersons.includes(personName);
+}
+
 function filterActivePersonsForHomeRoster(persons) {
-  return persons.filter((person) => !isDepartedPerson(person));
+  return persons.filter((person) => !isDepartedPerson(person) && !isStatHiddenPerson(person));
 }
 
 function shouldIncludeInAttendanceStat(personName, selectedDateStr) {
+  if (isStatHiddenPerson(personName)) return false;
+
   const selected = parseStatDateForCompare(selectedDateStr);
   if (!selected) return true;
 
@@ -156,6 +165,8 @@ function shouldIncludeInAttendanceStat(personName, selectedDateStr) {
 }
 
 const updateLogs = [
+  "2026-07-20: 行政部新增陈佩鹃；同步喜报工具名单",
+  "2026-06-24: 医疗部徐秀梅（放射科主任）设为隐藏，名单保留，不参与未打卡对比与导出统计，首页全员名单不显示",
   "2026-06-16: 医疗部孔娟娟离职，名单保留，自 2026-06-16 起未打卡对比与首页全员名单不再显示，管理人员名单灰色标注；同步喜报工具名单",
   "2026-06-16: 医疗部新增徐秀梅（放射科主任）；同步喜报工具名单与 GitHub 头像库",
   "2026-06-01: 销售部史正蓓、周东升、刘晓霞离职，名单保留，自 2026-06-01 起未打卡对比与首页全员名单不再显示，管理人员名单灰色标注",
@@ -209,6 +220,9 @@ function buildPersonRosterTooltipText(personName) {
 
   if (leavePersons.includes(personName)) {
     lines.push("未打卡对比：请假期间已排除");
+  }
+  if (isStatHiddenPerson(personName)) {
+    lines.push("未打卡对比：隐藏，不参与统计");
   }
   if (statIncludeFromDateByPerson[personName]) {
     lines.push(`未打卡对比：孕假，${statIncludeFromDateByPerson[personName]} 起纳入应到名单`);
@@ -539,7 +553,9 @@ function comparePersonLists() {
   }
 
   targetPersonList = targetPersonList.filter((person) => shouldIncludeInAttendanceStat(person, dateFilter));
-  const missingPersons = targetPersonList.filter((person) => !excelPersonList.includes(person) && !leavePersons.includes(person));
+  const missingPersons = targetPersonList.filter(
+    (person) => !excelPersonList.includes(person) && !leavePersons.includes(person) && !isStatHiddenPerson(person),
+  );
   displayComparisonResult(missingPersons);
 }
 
@@ -655,6 +671,14 @@ function renderPersonList() {
         li.style.color = "#92400e";
         li.style.textDecoration = "line-through";
         li.textContent = `${index + 1}. ${person}${personViewNoteSuffix(person)} (请假)`;
+      } else if (isStatHiddenPerson(person)) {
+        li.style.backgroundColor = "#ede9fe";
+        li.style.color = "#5b21b6";
+        li.style.textDecoration = "none";
+        const roleExtra = rosterTooltipOrgExtraByPerson[person];
+        li.textContent = roleExtra
+          ? `${index + 1}. ${person}${personViewNoteSuffix(person)}（隐藏，${roleExtra}，不参与统计）`
+          : `${index + 1}. ${person}${personViewNoteSuffix(person)}（隐藏，不参与统计）`;
       } else if (statIncludeFromDateByPerson[person]) {
         const resumeOn = statIncludeFromDateByPerson[person];
         li.style.backgroundColor = "#fce7f3";
@@ -703,6 +727,28 @@ function renderPersonList() {
     leaveDiv.appendChild(leaveList);
 
     personListView.insertBefore(leaveDiv, personListView.firstChild);
+  }
+
+  if (statHiddenPersons.length > 0) {
+    const hiddenDiv = document.createElement("div");
+    hiddenDiv.style.marginBottom = "15px";
+    hiddenDiv.style.padding = "10px";
+    hiddenDiv.style.backgroundColor = "#ede9fe";
+    hiddenDiv.style.borderRadius = "4px";
+
+    const hiddenTitle = document.createElement("h6");
+    hiddenTitle.style.marginBottom = "8px";
+    hiddenTitle.style.color = "#5b21b6";
+    hiddenTitle.textContent = "隐藏人员（不参与统计与导出）：";
+    hiddenDiv.appendChild(hiddenTitle);
+
+    const hiddenList = document.createElement("p");
+    hiddenList.style.margin = "0";
+    hiddenList.style.color = "#5b21b6";
+    hiddenList.textContent = statHiddenPersons.join("、");
+    hiddenDiv.appendChild(hiddenList);
+
+    personListView.insertBefore(hiddenDiv, personListView.firstChild);
   }
 
   const logsDiv = document.createElement("div");

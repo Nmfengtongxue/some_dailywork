@@ -646,22 +646,127 @@
                 width: 100%;
             }
         }
+        .template-type-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 0 auto 12px;
+            max-width: 720px;
+        }
+        .template-type-bar label {
+            font-size: 14px;
+            color: #64748b;
+            margin: 0;
+        }
+        .template-type-options {
+            display: inline-flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .template-type-btn {
+            border: 1px solid #cbd5e1;
+            background: #fff;
+            color: #334155;
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .template-type-btn:hover {
+            border-color: #3b82f6;
+            color: #1d4ed8;
+        }
+        .template-type-btn.is-active {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: #fff;
+        }
+        .diet-items-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .diet-items-table-wrap {
+            overflow-x: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #fff;
+        }
+        .diet-items-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .diet-items-table th,
+        .diet-items-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+        }
+        .diet-items-table th {
+            background: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .diet-items-table input {
+            width: 100%;
+            min-width: 72px;
+            padding: 6px 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .diet-items-table .subtotal-cell {
+            color: #0f766e;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .diet-summary-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e3a8a;
+            font-size: 14px;
+        }
+        .diet-summary-bar strong {
+            font-size: 18px;
+            color: #b45309;
+        }
+        .diet-row-remove {
+            border: none;
+            background: transparent;
+            color: #dc2626;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 0;
+        }
+        .diet-row-remove:disabled {
+            color: #cbd5e1;
+            cursor: not-allowed;
+        }
 
-    </style><script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.js"></script></head><body><div class="container congrats-page congrats-workspace"><header class="page-header text-center"><h1>喜报生成工具</h1><p class="page-subtitle">画布为主视图，通过底部按钮打开编辑面板</p></header><div class="return-button" style="position: absolute; top: 20px; right: 20px;"><a href="index.html" class="btn btn-secondary btn-sm">返回导航页面</a></div><div class="workspace-main"><div class="main-layout"><div class="card preview-card preview-card--full"><div class="card-header"><span>预览效果</span><span class="preview-scale-label" id="previewScaleLabel">1080 × 1990</span></div><div class="card-body preview-card-body"><div class="canvas-preview-panel" id="canvasPreviewPanel"><canvas id="canvas" width="1080" height="1990"></canvas></div></div></div></div><div class="workspace-action-bar" role="toolbar" aria-label="编辑操作"><button type="button" class="btn btn-primary workspace-action-btn" data-bs-toggle="offcanvas" data-bs-target="#editOffcanvas" aria-controls="editOffcanvas">编辑文字</button><button type="button" class="btn btn-outline-primary workspace-action-btn" data-bs-toggle="offcanvas" data-bs-target="#avatarOffcanvas" aria-controls="avatarOffcanvas">头像</button><button type="button" class="btn btn-outline-primary workspace-action-btn" data-bs-toggle="offcanvas" data-bs-target="#exportOffcanvas" aria-controls="exportOffcanvas">导出</button></div><p class="workspace-hint">点击画布上的文字可快速打开编辑 · Esc 关闭面板</p></div><div class="offcanvas offcanvas-start congrats-offcanvas" tabindex="-1" id="editOffcanvas" aria-labelledby="editOffcanvasLabel"><div class="offcanvas-header"><h5 class="offcanvas-title" id="editOffcanvasLabel">编辑文字</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="关闭"></button></div><div class="offcanvas-body"><div class="inspector-panel"><div class="control-group"><label for="activeFieldSelect">当前编辑字段</label><select id="activeFieldSelect"></select></div><div class="control-group" id="fieldContentGroup"><label for="inspectorContent">文字内容</label><input type="text" id="inspectorContent" placeholder="请输入内容"></div><div class="control-group" id="fieldPresetGroup" hidden><label for="fieldPresetSelect">快捷预选</label><select id="fieldPresetSelect"><option value="">请选择</option></select></div><div class="inspector-divider"></div><p class="inspector-subtitle">样式检查器（共用）</p><div class="style-preset-bar" id="stylePresetBar"></div><div class="control-row"><div class="control-group"><label for="inspectorFontFamily">字体</label><select id="inspectorFontFamily"></select></div><div class="control-group"><label for="inspectorFontSize">字号</label><input type="number" id="inspectorFontSize" min="12" max="300" value="48"></div><div class="control-group"><label for="inspectorFontColor">颜色</label><input type="color" id="inspectorFontColor" value="#fff2eb"><div class="color-swatch-bar" id="colorSwatchBar"></div></div></div><button type="button" id="applyStyleToAllBtn" class="btn btn-sm btn-outline-secondary w-100 mt-2">将当前样式应用到全部文字</button></div></div></div><div class="offcanvas offcanvas-start congrats-offcanvas" tabindex="-1" id="avatarOffcanvas" aria-labelledby="avatarOffcanvasLabel"><div class="offcanvas-header"><h5 class="offcanvas-title" id="avatarOffcanvasLabel">头像管理</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="关闭"></button></div><div class="offcanvas-body"><div class="control-group"><label for="deptFilter">按部门筛选</label><select id="deptFilter" onchange="filterNamesByDepartment()"><option value="">全部部门</option></select></div><div class="control-group"><label for="nameFilter">按姓名选择</label><select id="nameFilter" onchange="if(this.value){document.getElementById('avatarNameInput').value=this.value; previewAvatar();}"><option value="">请选择姓名</option></select></div><div class="control-group avatar-name-search"><label for="avatarNameInput">或输入姓名查找</label><div class="avatar-name-search-box"><input type="text" id="avatarNameInput" placeholder="姓名 / 拼音 / 首字母" autocomplete="off" spellcheck="false"><ul id="avatarNameSuggestions" class="avatar-name-suggestions" role="listbox" hidden></ul></div></div><div class="control-row"><div class="control-group" style="flex:2"><button id="previewAvatarBtn" class="btn btn-secondary w-100">预览头像</button></div><div class="control-group" style="flex:2"><button id="confirmAvatarBtn" class="btn btn-primary w-100" disabled>确认上传头像</button></div></div><div class="avatar-preview-wrap"><div class="avatar-preview-circle"><div id="avatarPreviewArea"><span style="color:#6c757d;font-size:14px">头像预览</span></div></div></div><p class="offcanvas-section-title">维护头像库</p><div class="control-group"><label for="avatarFileInput">上传图片更新/添加头像</label><input type="file" id="avatarFileInput" accept="image/jpeg,image/png"></div><div class="control-group"><label for="avatarReverseName">姓名</label><input type="text" id="avatarReverseName" placeholder="请输入姓名"></div><div class="control-group"><label for="avatarReverseDept">部门</label><select id="avatarReverseDept"></select></div><div class="control-row"><div class="control-group" style="flex:1"><button id="uploadImageWithNameBtn" class="btn btn-success w-100">上传并保存</button></div><div class="control-group" style="flex:1"><button id="deletePersonBtn" class="btn btn-danger w-100">删除人员</button></div></div><div class="control-group"><button id="viewAllPersonsBtn" class="btn btn-info w-100">查看所有人员</button></div><div id="avatarTip" style="margin-top:10px;font-size:12px;color:#6c757d;text-align:center"></div></div></div><div class="offcanvas offcanvas-start congrats-offcanvas" tabindex="-1" id="exportOffcanvas" aria-labelledby="exportOffcanvasLabel"><div class="offcanvas-header"><h5 class="offcanvas-title" id="exportOffcanvasLabel">导出设置</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="关闭"></button></div><div class="offcanvas-body"><div class="control-row"><div class="control-group"><label for="exportWidth">宽度</label><input type="number" id="exportWidth" value="1080" min="100" max="4000"></div><div class="control-group"><label for="exportHeight">高度</label><input type="number" id="exportHeight" value="1990" min="100" max="4000"></div></div><div class="d-grid gap-2 mt-3"><button id="exportBtn" class="btn btn-primary">导出 JPG</button><button id="resetBtn" class="btn btn-outline-danger">重置画布</button></div><p class="offcanvas-section-title">高级选项</p><div class="upload-section"><input type="file" id="fileInput" accept="image/jpeg,image/png"><p>上传自定义圆形头像替换画布头像</p></div></div></div><div id="personListModal" class="modal" style="display:none;position:fixed;z-index:1100;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.4)"><div class="modal-content" style="background-color:#fefefe;margin:15% auto;padding:20px;border:1px solid #888;width:80%;max-width:600px;max-height:80vh;overflow-y:auto"><div class="modal-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px"><h4>所有人员名单</h4><span class="close" style="color:#aaa;font-size:28px;font-weight:bold;cursor:pointer">&times;</span></div><div class="modal-body"><div id="personListContent"></div></div></div></div></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </style><script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.js"></script></head><body><div class="container congrats-page congrats-workspace"><header class="page-header text-center"><h1>喜报生成工具</h1><p class="page-subtitle">画布为主视图，通过底部按钮打开编辑面板</p><div class="template-type-bar" role="group" aria-label="喜报类型"><label>喜报类型</label><div class="template-type-options"><button type="button" class="template-type-btn is-active" data-template="individual">个检业绩喜报</button><button type="button" class="template-type-btn" data-template="diet">膳食中心喜报</button></div></div></header><div class="return-button" style="position: absolute; top: 20px; right: 20px;"><a href="index.html" class="btn btn-secondary btn-sm">返回导航页面</a></div><div class="workspace-main"><div class="main-layout"><div class="card preview-card preview-card--full"><div class="card-header"><span>预览效果</span><span class="preview-scale-label" id="previewScaleLabel">1080 × 1990</span></div><div class="card-body preview-card-body"><div class="canvas-preview-panel" id="canvasPreviewPanel"><canvas id="canvas" width="1080" height="1990"></canvas></div></div></div></div><div class="workspace-action-bar" role="toolbar" aria-label="编辑操作"><button type="button" class="btn btn-primary workspace-action-btn" id="editTextBtn" data-bs-toggle="offcanvas" data-bs-target="#editOffcanvas" aria-controls="editOffcanvas">编辑文字</button><button type="button" class="btn btn-outline-primary workspace-action-btn" id="editDietBtn" data-bs-toggle="offcanvas" data-bs-target="#dietOffcanvas" aria-controls="dietOffcanvas" hidden>编辑明细</button><button type="button" class="btn btn-outline-primary workspace-action-btn" id="avatarBtn" data-bs-toggle="offcanvas" data-bs-target="#avatarOffcanvas" aria-controls="avatarOffcanvas">头像</button><button type="button" class="btn btn-outline-primary workspace-action-btn" data-bs-toggle="offcanvas" data-bs-target="#exportOffcanvas" aria-controls="exportOffcanvas">导出</button></div><p class="workspace-hint">点击画布上的文字可快速打开编辑 · Esc 关闭面板</p></div><div class="offcanvas offcanvas-start congrats-offcanvas" tabindex="-1" id="dietOffcanvas" aria-labelledby="dietOffcanvasLabel"><div class="offcanvas-header"><h5 class="offcanvas-title" id="dietOffcanvasLabel">膳食中心明细</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="关闭"></button></div><div class="offcanvas-body"><div class="diet-items-panel"><div class="control-group"><label for="dietCompanyName">公司名称</label><input type="text" id="dietCompanyName" value="定西公司" placeholder="如：定西公司"></div><div class="diet-items-table-wrap"><table class="diet-items-table"><thead><tr><th>物品名称</th><th>数量</th><th>单价（元）</th><th>小计</th><th></th></tr></thead><tbody id="dietItemsBody"></tbody></table></div><button type="button" id="addDietItemBtn" class="btn btn-sm btn-outline-primary">+ 添加一行</button><div class="diet-summary-bar"><span>合计金额</span><strong id="dietTotalDisplay">0</strong><span>元</span></div><p class="offcanvas-section-title" style="margin-top:8px">预览说明</p><p style="font-size:12px;color:#64748b;margin:0">明细区显示为「物品*数量」，合计金额自动写入画布。如需微调样式，可切换到「编辑文字」。</p></div></div></div><div class="offcanvas offcanvas-start congrats-offcanvas" tabindex="-1" id="editOffcanvas" aria-labelledby="editOffcanvasLabel"><div class="offcanvas-header"><h5 class="offcanvas-title" id="editOffcanvasLabel">编辑文字</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="关闭"></button></div><div class="offcanvas-body"><div class="inspector-panel"><div class="control-group"><label for="activeFieldSelect">当前编辑字段</label><select id="activeFieldSelect"></select></div><div class="control-group" id="fieldContentGroup"><label for="inspectorContent">文字内容</label><input type="text" id="inspectorContent" placeholder="请输入内容"></div><div class="control-group" id="fieldPresetGroup" hidden><label for="fieldPresetSelect">快捷预选</label><select id="fieldPresetSelect"><option value="">请选择</option></select></div><div class="inspector-divider"></div><p class="inspector-subtitle">样式检查器（共用）</p><div class="style-preset-bar" id="stylePresetBar"></div><div class="control-row"><div class="control-group"><label for="inspectorFontFamily">字体</label><select id="inspectorFontFamily"></select></div><div class="control-group"><label for="inspectorFontSize">字号</label><input type="number" id="inspectorFontSize" min="12" max="300" value="48"></div><div class="control-group"><label for="inspectorFontColor">颜色</label><input type="color" id="inspectorFontColor" value="#fff2eb"><div class="color-swatch-bar" id="colorSwatchBar"></div></div></div><button type="button" id="applyStyleToAllBtn" class="btn btn-sm btn-outline-secondary w-100 mt-2">将当前样式应用到全部文字</button></div></div></div><div class="offcanvas offcanvas-start congrats-offcanvas" tabindex="-1" id="avatarOffcanvas" aria-labelledby="avatarOffcanvasLabel"><div class="offcanvas-header"><h5 class="offcanvas-title" id="avatarOffcanvasLabel">头像管理</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="关闭"></button></div><div class="offcanvas-body"><div class="control-group"><label for="deptFilter">按部门筛选</label><select id="deptFilter" onchange="filterNamesByDepartment()"><option value="">全部部门</option></select></div><div class="control-group"><label for="nameFilter">按姓名选择</label><select id="nameFilter" onchange="if(this.value){document.getElementById('avatarNameInput').value=this.value; previewAvatar();}"><option value="">请选择姓名</option></select></div><div class="control-group avatar-name-search"><label for="avatarNameInput">或输入姓名查找</label><div class="avatar-name-search-box"><input type="text" id="avatarNameInput" placeholder="姓名 / 拼音 / 首字母" autocomplete="off" spellcheck="false"><ul id="avatarNameSuggestions" class="avatar-name-suggestions" role="listbox" hidden></ul></div></div><div class="control-row"><div class="control-group" style="flex:2"><button id="previewAvatarBtn" class="btn btn-secondary w-100">预览头像</button></div><div class="control-group" style="flex:2"><button id="confirmAvatarBtn" class="btn btn-primary w-100" disabled>确认上传头像</button></div></div><div class="avatar-preview-wrap"><div class="avatar-preview-circle"><div id="avatarPreviewArea"><span style="color:#6c757d;font-size:14px">头像预览</span></div></div></div><p class="offcanvas-section-title">维护头像库</p><div class="control-group"><label for="avatarFileInput">上传图片更新/添加头像</label><input type="file" id="avatarFileInput" accept="image/jpeg,image/png"></div><div class="control-group"><label for="avatarReverseName">姓名</label><input type="text" id="avatarReverseName" placeholder="请输入姓名"></div><div class="control-group"><label for="avatarReverseDept">部门</label><select id="avatarReverseDept"></select></div><div class="control-row"><div class="control-group" style="flex:1"><button id="uploadImageWithNameBtn" class="btn btn-success w-100">上传并保存</button></div><div class="control-group" style="flex:1"><button id="deletePersonBtn" class="btn btn-danger w-100">删除人员</button></div></div><div class="control-group"><button id="viewAllPersonsBtn" class="btn btn-info w-100">查看所有人员</button></div><div id="avatarTip" style="margin-top:10px;font-size:12px;color:#6c757d;text-align:center"></div></div></div><div class="offcanvas offcanvas-start congrats-offcanvas" tabindex="-1" id="exportOffcanvas" aria-labelledby="exportOffcanvasLabel"><div class="offcanvas-header"><h5 class="offcanvas-title" id="exportOffcanvasLabel">导出设置</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="关闭"></button></div><div class="offcanvas-body"><div class="control-row"><div class="control-group"><label for="exportWidth">宽度</label><input type="number" id="exportWidth" value="1080" min="100" max="4000"></div><div class="control-group"><label for="exportHeight">高度</label><input type="number" id="exportHeight" value="1990" min="100" max="4000"></div></div><div class="d-grid gap-2 mt-3"><button id="exportBtn" class="btn btn-primary">导出 JPG</button><button id="resetBtn" class="btn btn-outline-danger">重置画布</button></div><p class="offcanvas-section-title">高级选项</p><div class="upload-section"><input type="file" id="fileInput" accept="image/jpeg,image/png"><p>上传自定义圆形头像替换画布头像</p></div></div></div><div id="personListModal" class="modal" style="display:none;position:fixed;z-index:1100;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.4)"><div class="modal-content" style="background-color:#fefefe;margin:15% auto;padding:20px;border:1px solid #888;width:80%;max-width:600px;max-height:80vh;overflow-y:auto"><div class="modal-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px"><h4>所有人员名单</h4><span class="close" style="color:#aaa;font-size:28px;font-weight:bold;cursor:pointer">&times;</span></div><div class="modal-body"><div id="personListContent"></div></div></div></div></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-        // 设计稿基准尺寸（与底图 6.jpg / 7.png 一致）
-        const DESIGN_SIZE = { width: 1080, height: 1990 };
-        // 文字区域坐标（相对设计稿，非画布绝对像素）
-        const TEXT_AREAS = {
-            dept: { x: 966, y: 500, width: 80, height: 300 }, // 部门：竖排文字
-            name: { x: 898, y: 505, width: 80, height: 200 }, // 姓名：竖排文字
-            congrats: { x: 110, y: 1272, width: 880, height: 150 }, // 恭喜
-            order: { x: 100, y: 1400, width: 880, height: 100 }, // 下单
-            amount: { x: 100, y: 1550, width: 880, height: 150 } // 金额
+        // 设计稿基准尺寸与文字区域（随模板切换）
+        let DESIGN_SIZE = { width: 1080, height: 1990 };
+        let TEXT_AREAS = {
+            dept: { x: 966, y: 500, width: 80, height: 300 },
+            name: { x: 898, y: 505, width: 80, height: 200 },
+            congrats: { x: 110, y: 1272, width: 880, height: 150 },
+            order: { x: 100, y: 1400, width: 880, height: 100 },
+            amount: { x: 100, y: 1550, width: 880, height: 150 }
         };
-        // 头像区域（相对设计稿）
         const AVATAR_LAYOUT = { cx: 540, cy: 790, size: 391 };
-        // 共用常量
         const DEPARTMENTS = ['销售部', '行政部', '医疗中心', '总经理', '副总经理'];
         const AVATAR_FILTER_DEPARTMENTS = ['销售部', '行政部', '医疗中心', '副总经理'];
         const ORDER_PRESETS = ['开门红套餐下单', '618活动套餐下单'];
@@ -670,15 +775,18 @@
             { value: 'NotoSansSCBlack', label: '黑体' },
             { value: 'NotoSansSCMedium', label: '中等黑体' }
         ];
-        const COLOR_SWATCHES = ['#fff2eb', '#9f0913', '#80090d', '#ffb875', '#ffffff', '#1e293b'];
+        const COLOR_SWATCHES = ['#fff2eb', '#9f0913', '#80090d', '#ffb875', '#ffffff', '#1e293b', '#f5d882', '#8b0a0f'];
         const STYLE_PRESETS = {
             sidebar: { label: '侧栏竖排', fontFamily: 'NotoSansSCBlack', fontSize: 48, fontColor: '#fff2eb' },
             name: { label: '姓名', fontFamily: 'NotoSansSCBlack', fontSize: 40, fontColor: '#fff2eb' },
             body: { label: '正文', fontFamily: 'NotoSansSCMedium', fontSize: 42, fontColor: '#9f0913' },
             order: { label: '下单', fontFamily: 'ChuangkitZongYi', fontSize: 48, fontColor: '#80090d' },
-            amount: { label: '金额', fontFamily: 'NotoSansSCBlack', fontSize: 170, fontColor: '#ffb875' }
+            amount: { label: '金额', fontFamily: 'NotoSansSCBlack', fontSize: 170, fontColor: '#ffb875' },
+            dietHeader: { label: '膳食标题', fontFamily: 'NotoSansSCBlack', fontSize: 28, fontColor: '#f5d882' },
+            dietItems: { label: '膳食明细', fontFamily: 'NotoSansSCMedium', fontSize: 24, fontColor: '#8b0a0f' },
+            dietAmount: { label: '膳食合计', fontFamily: 'NotoSansSCBlack', fontSize: 56, fontColor: '#ffb875' }
         };
-        const TEXT_FIELD_CONFIG = {
+        const INDIVIDUAL_TEXT_FIELD_CONFIG = {
             dept: {
                 label: '部门',
                 vertical: true,
@@ -715,10 +823,69 @@
                 fontSizeMax: 300
             }
         };
+        const DIET_TEXT_FIELD_CONFIG = {
+            header: {
+                label: '祝贺标题',
+                stylePreset: 'dietHeader',
+                defaultContent: '热烈祝贺定西公司\n膳食中心今日售出',
+                fontSizeMax: 80
+            },
+            items: {
+                label: '售出明细',
+                stylePreset: 'dietItems',
+                defaultContent: '',
+                fontSizeMax: 60
+            },
+            amount: {
+                label: '合计金额',
+                stylePreset: 'dietAmount',
+                defaultContent: '',
+                fontSizeMax: 120
+            }
+        };
+        const TEMPLATES = {
+            individual: {
+                id: 'individual',
+                label: '个检业绩喜报',
+                designSize: { width: 1080, height: 1990 },
+                bgUrl: 'https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/6.jpg',
+                topOverlayUrl: 'https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/7.png',
+                hasAvatar: true,
+                textAreas: {
+                    dept: { x: 966, y: 500, width: 80, height: 300 },
+                    name: { x: 898, y: 505, width: 80, height: 200 },
+                    congrats: { x: 110, y: 1272, width: 880, height: 150 },
+                    order: { x: 100, y: 1400, width: 880, height: 100 },
+                    amount: { x: 100, y: 1550, width: 880, height: 150 }
+                },
+                textFieldConfig: INDIVIDUAL_TEXT_FIELD_CONFIG,
+                defaultActiveField: 'dept',
+                exportDefaults: { width: 1080, height: 1990 }
+            },
+            diet: {
+                id: 'diet',
+                label: '膳食中心喜报',
+                designSize: { width: 900, height: 500 },
+                bgUrl: 'congrats-assets/diet-center-template.png',
+                topOverlayUrl: null,
+                hasAvatar: false,
+                textAreas: {
+                    header: { x: 430, y: 52, width: 450, height: 96 },
+                    items: { x: 450, y: 188, width: 400, height: 72 },
+                    amount: { x: 648, y: 352, width: 96, height: 72 }
+                },
+                textFieldConfig: DIET_TEXT_FIELD_CONFIG,
+                defaultActiveField: 'items',
+                exportDefaults: { width: 900, height: 500 }
+            }
+        };
+        let TEXT_FIELD_CONFIG = INDIVIDUAL_TEXT_FIELD_CONFIG;
+        let currentTemplateId = 'individual';
+        let dietItems = [{ name: '锌硒胆碱片', quantity: 2, unitPrice: 73.5 }];
         let textFieldState = {};
         let activeFieldKey = 'dept';
         // 人员名单版本号（变更后递增，用于覆盖浏览器 localStorage 中的旧名单）
-        const PERSONNEL_MAP_REVISION = '2026-06-16-v1';
+        const PERSONNEL_MAP_REVISION = '2026-07-20-v1';
         // 人员名单映射（姓名 -> 部门）
         const PERSONNEL_MAP = {
             // 销售部
@@ -735,6 +902,7 @@
             '俞帅文': '行政部',
             '李雁程': '行政部',
             '王晶玉': '行政部',
+            '陈佩鹃': '行政部',
             // 医疗中心
             '童守义': '医疗中心',
             '张静': '医疗中心',
@@ -789,6 +957,8 @@
             '徐秀梅': '放射科主任'
         };
         const updateLogs = [
+            '2026-07-20: 行政部新增陈佩鹃；同步未打卡统计名单',
+            '2026-07-08: 新增膳食中心喜报模板，支持物品明细录入与合计金额自动计算',
             '2026-06-16: 医疗部孔娟娟离职，从喜报名单移除（未打卡统计名单保留、灰色标注）',
             '2026-06-16: 医疗中心新增徐秀梅（放射科主任，悬停姓名可查看职务）；同步徐秀梅.png 至 GitHub 头像库',
             '2026-06-12: 修复预览缩放后底图不显示：逻辑画布固定 1080×1990，预览仅用 cssOnly 缩放并重排',
@@ -818,6 +988,239 @@
         let backgroundFrame = { left: 0, top: 0, width: 1080, height: 1990, scale: 1 };
         let canvasPreviewResizeObserver = null;
         let canvasPreviewScale = 1;
+
+        function getCurrentTemplate() {
+            return TEMPLATES[currentTemplateId] || TEMPLATES.individual;
+        }
+
+        function applyTemplateRuntimeConfig(templateId) {
+            const template = TEMPLATES[templateId] || TEMPLATES.individual;
+            currentTemplateId = template.id;
+            DESIGN_SIZE = Object.assign({}, template.designSize);
+            TEXT_AREAS = JSON.parse(JSON.stringify(template.textAreas));
+            TEXT_FIELD_CONFIG = template.textFieldConfig;
+            activeFieldKey = template.defaultActiveField;
+        }
+
+        function updateTemplateActionBar() {
+            const template = getCurrentTemplate();
+            const editTextBtn = document.getElementById('editTextBtn');
+            const editDietBtn = document.getElementById('editDietBtn');
+            const avatarBtn = document.getElementById('avatarBtn');
+            if (editTextBtn) editTextBtn.hidden = false;
+            if (editDietBtn) editDietBtn.hidden = template.id !== 'diet';
+            if (avatarBtn) avatarBtn.hidden = !template.hasAvatar;
+            document.querySelectorAll('.template-type-btn').forEach(btn => {
+                btn.classList.toggle('is-active', btn.dataset.template === currentTemplateId);
+            });
+            const exportWidth = document.getElementById('exportWidth');
+            const exportHeight = document.getElementById('exportHeight');
+            if (exportWidth) exportWidth.value = template.exportDefaults.width;
+            if (exportHeight) exportHeight.value = template.exportDefaults.height;
+        }
+
+        function formatDietAmount(total) {
+            if (!Number.isFinite(total)) return '';
+            const rounded = Math.round(total * 100) / 100;
+            return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(2).replace(/\.?0+$/, '');
+        }
+
+        function getDietLineSubtotal(item) {
+            const quantity = Number(item.quantity);
+            const unitPrice = Number(item.unitPrice);
+            if (!Number.isFinite(quantity) || !Number.isFinite(unitPrice) || quantity <= 0) {
+                return 0;
+            }
+            return quantity * unitPrice;
+        }
+
+        function getDietItemsTotal() {
+            return dietItems.reduce((sum, item) => sum + getDietLineSubtotal(item), 0);
+        }
+
+        function buildDietHeaderText(companyName) {
+            const company = (companyName || '定西公司').trim() || '定西公司';
+            return `热烈祝贺${company}\n膳食中心今日售出`;
+        }
+
+        function buildDietItemsText() {
+            return dietItems
+                .filter(item => (item.name || '').trim())
+                .map(item => {
+                    const name = item.name.trim();
+                    const quantity = Number(item.quantity);
+                    if (Number.isFinite(quantity) && quantity > 0) {
+                        return `${name}*${quantity}`;
+                    }
+                    return name;
+                })
+                .join('\n');
+        }
+
+        function syncDietCanvasFromForm() {
+            if (currentTemplateId !== 'diet') return;
+            const companyInput = document.getElementById('dietCompanyName');
+            const companyName = companyInput ? companyInput.value : '定西公司';
+            setFieldContent('header', buildDietHeaderText(companyName));
+            setFieldContent('items', buildDietItemsText());
+            setFieldContent('amount', formatDietAmount(getDietItemsTotal()));
+            const totalDisplay = document.getElementById('dietTotalDisplay');
+            if (totalDisplay) totalDisplay.textContent = formatDietAmount(getDietItemsTotal()) || '0';
+        }
+
+        function refreshInspectorFieldSelect() {
+            const fieldSelect = document.getElementById('activeFieldSelect');
+            if (!fieldSelect) return;
+            fieldSelect.innerHTML = Object.keys(TEXT_FIELD_CONFIG).map(key => {
+                const cfg = TEXT_FIELD_CONFIG[key];
+                return `<option value="${key}">${cfg.label}</option>`;
+            }).join('');
+            fieldSelect.value = activeFieldKey;
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
+        function renderDietItemsTable() {
+            const tbody = document.getElementById('dietItemsBody');
+            if (!tbody) return;
+            tbody.innerHTML = dietItems.map((item, index) => {
+                const subtotal = getDietLineSubtotal(item);
+                return `<tr data-index="${index}"><td><input type="text" class="diet-item-name" value="${escapeHtml(item.name || '')}" placeholder="物品名称"></td><td><input type="number" class="diet-item-qty" min="1" step="1" value="${escapeHtml(item.quantity ?? '')}" placeholder="数量"></td><td><input type="number" class="diet-item-price" min="0" step="0.01" value="${escapeHtml(item.unitPrice ?? '')}" placeholder="单价"></td><td class="subtotal-cell">${formatDietAmount(subtotal) || '0'}</td><td><button type="button" class="diet-row-remove" data-remove-index="${index}" ${dietItems.length <= 1 ? 'disabled' : ''}>删除</button></td></tr>`;
+            }).join('');
+        }
+
+        function readDietItemsFromTable() {
+            const tbody = document.getElementById('dietItemsBody');
+            if (!tbody) return;
+            dietItems = Array.from(tbody.querySelectorAll('tr')).map(row => ({
+                name: row.querySelector('.diet-item-name')?.value.trim() || '',
+                quantity: row.querySelector('.diet-item-qty')?.value,
+                unitPrice: row.querySelector('.diet-item-price')?.value
+            }));
+            if (!dietItems.length) {
+                dietItems = [{ name: '', quantity: 1, unitPrice: '' }];
+            }
+        }
+
+        function initDietItemsPanel() {
+            renderDietItemsTable();
+            syncDietCanvasFromForm();
+
+            const companyInput = document.getElementById('dietCompanyName');
+            if (companyInput) {
+                companyInput.addEventListener('input', function() {
+                    syncDietCanvasFromForm();
+                });
+            }
+
+            const tbody = document.getElementById('dietItemsBody');
+            if (tbody) {
+                tbody.addEventListener('input', function(event) {
+                    if (!event.target.matches('input')) return;
+                    readDietItemsFromTable();
+                    renderDietItemsTable();
+                    syncDietCanvasFromForm();
+                });
+                tbody.addEventListener('click', function(event) {
+                    const removeBtn = event.target.closest('.diet-row-remove');
+                    if (!removeBtn || removeBtn.disabled) return;
+                    readDietItemsFromTable();
+                    const index = Number(removeBtn.dataset.removeIndex);
+                    dietItems.splice(index, 1);
+                    if (!dietItems.length) {
+                        dietItems.push({ name: '', quantity: 1, unitPrice: '' });
+                    }
+                    renderDietItemsTable();
+                    syncDietCanvasFromForm();
+                });
+            }
+
+            const addBtn = document.getElementById('addDietItemBtn');
+            if (addBtn) {
+                addBtn.addEventListener('click', function() {
+                    readDietItemsFromTable();
+                    dietItems.push({ name: '', quantity: 1, unitPrice: '' });
+                    renderDietItemsTable();
+                    syncDietCanvasFromForm();
+                });
+            }
+        }
+
+        function initTemplateSelector() {
+            document.querySelectorAll('.template-type-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const nextTemplate = this.dataset.template;
+                    if (!nextTemplate || nextTemplate === currentTemplateId) return;
+                    switchTemplate(nextTemplate);
+                });
+            });
+        }
+
+        function loadTemplateImages(template, callback) {
+            fabric.Image.fromURL(template.bgUrl, function(bgImg) {
+                backgroundImage = bgImg;
+                canvas.clear();
+                fitTemplateImageToFrame(bgImg);
+                canvas.add(bgImg);
+                if (!template.topOverlayUrl) {
+                    topOverlayImage = null;
+                    callback();
+                    return;
+                }
+                fabric.Image.fromURL(template.topOverlayUrl, function(topImg) {
+                    topOverlayImage = topImg;
+                    fitTemplateImageToFrame(topImg);
+                    canvas.add(topImg);
+                    callback();
+                }, {
+                    crossOrigin: 'anonymous',
+                    onError: function(err) {
+                        console.error('加载顶层图片失败:', err);
+                        topOverlayImage = null;
+                        callback();
+                    }
+                });
+            }, {
+                crossOrigin: 'anonymous',
+                onError: function(err) {
+                    console.error('加载背景图片失败:', err);
+                    alert('模板底图加载失败，请检查网络或本地资源路径。');
+                }
+            });
+        }
+
+        function switchTemplate(templateId) {
+            if (!TEMPLATES[templateId] || templateId === currentTemplateId) return;
+            applyTemplateRuntimeConfig(templateId);
+            updateTemplateActionBar();
+            initTextFieldState();
+            refreshInspectorFieldSelect();
+            syncInspectorUIFromState(activeFieldKey);
+
+            if (canvas) {
+                canvas.setWidth(DESIGN_SIZE.width);
+                canvas.setHeight(DESIGN_SIZE.height);
+            }
+
+            const template = getCurrentTemplate();
+            loadTemplateImages(template, function() {
+                addTextObjects();
+                relayoutCanvasElements();
+                if (template.id === 'individual') {
+                    setFieldContent('dept', '销售部');
+                    setFieldContent('order', '618活动套餐下单');
+                } else {
+                    syncDietCanvasFromForm();
+                }
+                schedulePreviewUpdate();
+            });
+        }
 
         function refreshBackgroundFrame() {
             backgroundFrame = {
@@ -892,16 +1295,24 @@
             const area = TEXT_AREAS[key];
             if (!area) return {};
 
-            if (key === 'dept' || key === 'name') {
+            if (TEXT_FIELD_CONFIG[key]?.vertical) {
                 const point = designToCanvas(area.x + area.width / 2, area.y);
                 return { left: point.x, top: point.y, originX: 'center', originY: 'top' };
             }
-            if (key === 'congrats') {
+            if (key === 'congrats' || key === 'header') {
                 const point = designToCanvas(area.x, area.y);
                 return { left: point.x, top: point.y, originX: 'left', originY: 'top' };
             }
-            if (key === 'order' || key === 'amount') {
+            if (key === 'items') {
+                const point = designToCanvas(area.x + area.width / 2, area.y + area.height / 2);
+                return { left: point.x, top: point.y, originX: 'center', originY: 'center' };
+            }
+            if (key === 'order') {
                 const point = designToCanvas(area.x + area.width / 2, area.y);
+                return { left: point.x, top: point.y, originX: 'center', originY: 'middle' };
+            }
+            if (key === 'amount') {
+                const point = designToCanvas(area.x + area.width / 2, area.y + area.height / 2);
                 return { left: point.x, top: point.y, originX: 'center', originY: 'middle' };
             }
             return {};
@@ -1285,7 +1696,7 @@
         }
 
         function initOffcanvasPanels() {
-            ['editOffcanvas', 'avatarOffcanvas', 'exportOffcanvas'].forEach(id => {
+            ['editOffcanvas', 'dietOffcanvas', 'avatarOffcanvas', 'exportOffcanvas'].forEach(id => {
                 const el = document.getElementById(id);
                 if (!el) return;
                 el.addEventListener('shown.bs.offcanvas', schedulePreviewUpdate);
@@ -1599,73 +2010,60 @@
             textObjects = {};
             refreshBackgroundFrame();
 
-            const textStyle = (key, defaults) => Object.assign(defaults, getTextObjectPosition(key));
+            Object.keys(TEXT_FIELD_CONFIG).forEach(key => {
+                const cfg = TEXT_FIELD_CONFIG[key];
+                const preset = STYLE_PRESETS[cfg.stylePreset] || STYLE_PRESETS.body;
+                const defaults = {
+                    fontSize: designToCanvasSize(preset.fontSize),
+                    fontFamily: preset.fontFamily,
+                    fill: preset.fontColor,
+                    fontWeight: 'bold',
+                    textAlign: cfg.vertical ? 'center' : (key === 'congrats' || key === 'header' ? 'left' : 'center')
+                };
 
-            textObjects.dept = new fabric.Text('', textStyle('dept', {
-                fontSize: designToCanvasSize(48),
-                fontFamily: 'NotoSansSCBlack',
-                fill: '#fff2eb',
-                fontWeight: 'bold',
-                textAlign: 'center',
-                lineHeight: 58 / 48
-            }));
-            textObjects.name = new fabric.Text('', textStyle('name', {
-                fontSize: designToCanvasSize(40),
-                fontFamily: 'NotoSansSCBlack',
-                fill: '#fff2eb',
-                fontWeight: 'bold',
-                textAlign: 'center',
-                lineHeight: 50 / 40,
-                shadow: new fabric.Shadow({
-                    color: 'rgba(0,0,0,0.3)',
-                    blur: designToCanvasSize(5),
-                    offsetX: designToCanvasSize(2),
-                    offsetY: designToCanvasSize(2)
-                })
-            }));
-            textObjects.congrats = new fabric.Text('', textStyle('congrats', {
-                fontSize: designToCanvasSize(42),
-                fontFamily: 'NotoSansSCMedium',
-                fill: '#9f0913',
-                fontWeight: 'bold',
-                textAlign: 'left',
-                shadow: new fabric.Shadow({
-                    color: 'rgba(0,0,0,0.3)',
-                    blur: designToCanvasSize(8),
-                    offsetX: designToCanvasSize(3),
-                    offsetY: designToCanvasSize(3)
-                })
-            }));
-            textObjects.order = new fabric.Text('', textStyle('order', {
-                fontSize: designToCanvasSize(48),
-                fontFamily: 'ChuangkitZongYi',
-                fill: '#80090d',
-                fontWeight: 'bold',
-                textAlign: 'center',
-                shadow: new fabric.Shadow({
-                    color: 'rgba(0,0,0,0.3)',
-                    blur: designToCanvasSize(5),
-                    offsetX: designToCanvasSize(2),
-                    offsetY: designToCanvasSize(2)
-                })
-            }));
-            textObjects.amount = new fabric.Text('', textStyle('amount', {
-                fontSize: designToCanvasSize(170),
-                fontFamily: 'NotoSansSCBlack',
-                fill: '#ffb875',
-                fontWeight: 'bold',
-                textAlign: 'center',
-                shadow: new fabric.Shadow({
-                    color: 'rgba(0,0,0,0.4)',
-                    blur: designToCanvasSize(10),
-                    offsetX: designToCanvasSize(4),
-                    offsetY: designToCanvasSize(4)
-                })
-            }));
-            Object.values(textObjects).forEach(obj => canvas.add(obj));
-            Object.entries(textObjects).forEach(([key, obj]) => {
-                obj.fieldKey = key;
+                if (key === 'name') {
+                    defaults.lineHeight = 50 / 40;
+                    defaults.shadow = new fabric.Shadow({
+                        color: 'rgba(0,0,0,0.3)',
+                        blur: designToCanvasSize(5),
+                        offsetX: designToCanvasSize(2),
+                        offsetY: designToCanvasSize(2)
+                    });
+                } else if (key === 'dept') {
+                    defaults.lineHeight = 58 / 48;
+                } else if (key === 'congrats') {
+                    defaults.shadow = new fabric.Shadow({
+                        color: 'rgba(0,0,0,0.3)',
+                        blur: designToCanvasSize(8),
+                        offsetX: designToCanvasSize(3),
+                        offsetY: designToCanvasSize(3)
+                    });
+                } else if (key === 'order') {
+                    defaults.shadow = new fabric.Shadow({
+                        color: 'rgba(0,0,0,0.3)',
+                        blur: designToCanvasSize(5),
+                        offsetX: designToCanvasSize(2),
+                        offsetY: designToCanvasSize(2)
+                    });
+                } else if (key === 'amount') {
+                    defaults.shadow = new fabric.Shadow({
+                        color: 'rgba(0,0,0,0.4)',
+                        blur: designToCanvasSize(10),
+                        offsetX: designToCanvasSize(4),
+                        offsetY: designToCanvasSize(4)
+                    });
+                } else if (key === 'header') {
+                    defaults.lineHeight = 1.25;
+                } else if (key === 'items') {
+                    defaults.lineHeight = 1.35;
+                }
+
+                textObjects[key] = new fabric.Text('', Object.assign(defaults, getTextObjectPosition(key)));
+                textObjects[key].fieldKey = key;
+                canvas.add(textObjects[key]);
             });
+
+            Object.keys(textFieldState).forEach(key => updateTextObject(key));
             syncCanvasLayerOrder();
         }
         /**
@@ -1709,14 +2107,24 @@
          * 生成导出文件名：喜报_人员姓名_导出日期
          */
         function buildExportFileName() {
-            const rawName = (
-                getFieldContent('name') ||
-                document.getElementById('avatarNameInput')?.value ||
-                '未命名'
-            ).trim();
+            let rawName = '未命名';
+            if (currentTemplateId === 'diet') {
+                rawName = (
+                    document.getElementById('dietCompanyName')?.value ||
+                    getFieldContent('header') ||
+                    '膳食中心'
+                ).trim();
+            } else {
+                rawName = (
+                    getFieldContent('name') ||
+                    document.getElementById('avatarNameInput')?.value ||
+                    '未命名'
+                ).trim();
+            }
             const safeName = rawName.replace(/[\\/:*?"<>|]/g, '').replace(/\s+/g, '') || '未命名';
             const exportDate = new Date().toISOString().slice(0, 10);
-            return `喜报_${safeName}_${exportDate}.jpg`;
+            const prefix = currentTemplateId === 'diet' ? '膳食喜报' : '喜报';
+            return `${prefix}_${safeName}_${exportDate}.jpg`;
         }
 
         /**
@@ -1761,14 +2169,26 @@
          * 功能：清空画布，重置背景图片和文字对象，清空输入框
          */
         function resetCanvas() {
-            canvas.clear();
-            backgroundImage = null;
-            topOverlayImage = null;
+            const template = getCurrentTemplate();
+            applyTemplateRuntimeConfig(template.id);
             textObjects = {};
             initTextFieldState();
-            activeFieldKey = 'dept';
+            refreshInspectorFieldSelect();
             syncInspectorUIFromState(activeFieldKey);
-            Object.keys(TEXT_FIELD_CONFIG).forEach(key => updateTextObject(key));
+            loadTemplateImages(template, function() {
+                addTextObjects();
+                relayoutCanvasElements();
+                if (template.id === 'individual') {
+                    setFieldContent('dept', '销售部');
+                    setFieldContent('order', '618活动套餐下单');
+                } else {
+                    dietItems = [{ name: '锌硒胆碱片', quantity: 2, unitPrice: 73.5 }];
+                    const companyInput = document.getElementById('dietCompanyName');
+                    if (companyInput) companyInput.value = '定西公司';
+                    renderDietItemsTable();
+                    syncDietCanvasFromForm();
+                }
+            });
         }
         /**
          * 更新恭喜文字
@@ -2339,8 +2759,12 @@
          * 初始化页面布局：Offcanvas 工作区 + Inspector
          */
         function initPageLayout() {
+            applyTemplateRuntimeConfig(currentTemplateId);
             initTextFieldState();
             initInspectorUI();
+            initTemplateSelector();
+            initDietItemsPanel();
+            updateTemplateActionBar();
             initOffcanvasPanels();
             schedulePreviewUpdate();
         }
@@ -2359,33 +2783,17 @@
             console.log('开始加载字体...');
             setTimeout(function() {
                 console.log('字体加载完成，开始加载图片...');
-                const bgImageUrl = 'https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/6.jpg';
-                fabric.Image.fromURL(bgImageUrl, function(bgImg) {
-                    backgroundImage = bgImg;
-                    canvas.clear();
-                    fitTemplateImageToFrame(bgImg);
-                    canvas.add(bgImg);
-                    const topImageUrl = 'https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/7.png';
-                    fabric.Image.fromURL(topImageUrl, function(topImg) {
-                        topOverlayImage = topImg;
-                        fitTemplateImageToFrame(topImg);
-                        canvas.add(topImg);
-                        addTextObjects();
-                        relayoutCanvasElements();
+                const template = getCurrentTemplate();
+                loadTemplateImages(template, function() {
+                    addTextObjects();
+                    relayoutCanvasElements();
+                    if (template.id === 'individual') {
                         setFieldContent('dept', '销售部');
                         setFieldContent('order', '618活动套餐下单');
-                        console.log('两个默认图片已加载完成');
-                    }, {
-                        crossOrigin: 'anonymous',
-                        onError: function(err) {
-                            console.error('加载顶层图片失败:', err);
-                        }
-                    });
-                }, {
-                    crossOrigin: 'anonymous',
-                    onError: function(err) {
-                        console.error('加载背景图片失败:', err);
+                    } else {
+                        syncDietCanvasFromForm();
                     }
+                    console.log('默认模板图片已加载完成');
                 });
             }, 1000);
         });
