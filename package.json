@@ -1,0 +1,13 @@
+{
+  "name": "some-dailywork",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate-project.mjs",
+    "obfuscate": "node scripts/obfuscate-project.mjs",
+    "build": "node scripts/obfuscate-project.mjs && node scripts/validate-project.mjs"
+  },
+  "devDependencies": {
+    "javascript-obfuscator": "^5.6.0"
+  }
+}

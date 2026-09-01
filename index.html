@@ -1,1 +1,85 @@
-<!doctypehtml><html lang="zh-CN"><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>公司管理工具</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"rel="stylesheet"><link rel="stylesheet"href="styles.css"><div class="container"><header class="mt-5 mb-4"><h1 class="text-center">公司管理工具</h1><p class="text-center text-muted">高效管理公司数据和人员信息</header><div class="row justify-content-center"><div class="col-md-8"><div class="card mb-4"><div class="card-header"><h4>功能导航</h4></div><div class="card-body"><div class="nav-buttons"><a href="regional-statistics.html"class="btn btn-lg btn-primary mb-3 w-100"><i class="bi bi-bar-chart-fill"></i> 区域宣发统计 </a><a href="checkin-statistics.html"class="btn btn-lg btn-success mb-3 w-100"><i class="bi bi-calendar-check-fill"></i> 未打卡人员统计 </a><a href="excel_filter.html"class="btn btn-lg btn-info mb-3 w-100"><i class="bi bi-shopping-cart-fill"></i> 每日电商报表 </a><a href="image-batch-processing.html"class="btn btn-lg btn-warning mb-3 w-100"><i class="bi bi-images"></i> 每日图片批量处理 </a><a href="congrats-generator.html"class="btn btn-lg btn-danger mb-3 w-100"><i class="bi bi-award"></i> 喜报生成 </a><a href="other-tools.html"class="btn btn-lg btn-secondary mb-3 w-100"><i class="bi bi-tools"></i> 其他工具</a></div></div></div><div class="card"><div class="card-header"><h4>工具说明</h4></div><div class="card-body"><ul class="list-group"><li class="list-group-item"><strong>区域宣发统计</strong>：用于统计各区域的宣发数据，支持Excel上传、数据筛选和导出功能。<li class="list-group-item"><strong>未打卡人员统计</strong>：用于对比公司人员打卡情况，筛选出未打卡人员，支持人员名单管理。<li class="list-group-item"><strong>每日电商报表</strong>：用于Excel动态关键词筛选分析，帮助分析电商数据。<li class="list-group-item"><strong>每日图片批量处理</strong>：用于批量处理图片，支持图片叠加、批量导出等功能。<li class="list-group-item"><strong>喜报生成</strong>：支持头像模糊/拼音搜索、折叠式编辑面板、预览区等比缩放，导出 JPG 命名格式为「喜报_人员姓名_导出日期」。<li class="list-group-item"><strong>其他工具</strong>：包含Excel跨表联合查询功能，支持不同表格之间的数据匹配和联合查询。</ul></div></div></div></div><footer class="mt-5 mb-3 text-center text-muted"><p>© 2026 公司管理工具 | 版本 1.0.0</footer></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="面向公司日常数据整理与图像处理的本地优先工具集。">
+  <title>日常工作工具</title>
+  <link rel="stylesheet" href="assets/design-system.css">
+  <script src="assets/design-system.js" defer></script>
+  <script src="assets/home-dashboard.js" defer></script>
+</head>
+<body>
+  <main class="container home-dashboard" id="mainContent">
+    <header class="home-dashboard__header">
+      <div>
+        <span class="section-kicker">WORKSPACE</span>
+        <h1 id="homeTitle">常用工具</h1>
+      </div>
+      <div class="home-dashboard__actions">
+        <button class="button button--quiet" id="resetFavorites" type="button">恢复默认</button>
+        <button class="info-button" type="button" aria-label="查看常用工具说明" data-tooltip="从下方加入或移出工具。按住拖动手柄可排序；聚焦手柄后也可使用上下方向键。顺序仅保存在当前浏览器。">i</button>
+      </div>
+    </header>
+
+    <section class="favorites-panel" aria-labelledby="homeTitle">
+      <ol class="favorite-tools" id="favoriteTools"></ol>
+      <p class="favorite-tools__empty" id="favoriteToolsEmpty" hidden>暂未设置常用工具，可从下方加入。</p>
+      <p class="visually-hidden" id="favoriteToolsStatus" aria-live="polite"></p>
+    </section>
+
+    <section class="all-tools" aria-labelledby="allToolsTitle">
+      <div class="section-heading">
+        <h2 id="allToolsTitle">全部工具</h2>
+        <span>8</span>
+      </div>
+
+      <div class="tool-directory-grid">
+        <section class="tool-directory-group" aria-labelledby="dataToolsTitle">
+          <h3 id="dataToolsTitle">数据整理</h3>
+          <ul class="home-tool-list">
+            <li class="home-tool-row" data-tool-id="regional" data-tool-name="区域宣发统计" data-tool-href="regional-statistics.html" data-tool-category="数据整理" data-tool-description="按区域和部门筛选宣发数据并导出。">
+              <a href="regional-statistics.html"><span>01</span><strong>区域宣发统计</strong></a>
+              <button type="button" data-action="toggle-favorite">加入常用</button>
+            </li>
+            <li class="home-tool-row" data-tool-id="checkin" data-tool-name="未打卡人员统计" data-tool-href="checkin-statistics.html" data-tool-category="数据整理" data-tool-description="对比人员名单与打卡记录。">
+              <a href="checkin-statistics.html"><span>02</span><strong>未打卡人员统计</strong></a>
+              <button type="button" data-action="toggle-favorite">加入常用</button>
+            </li>
+            <li class="home-tool-row" data-tool-id="excel-filter" data-tool-name="电商关键词报表" data-tool-href="excel_filter.html" data-tool-category="数据整理" data-tool-description="按关键词筛选订单并汇总金额。">
+              <a href="excel_filter.html"><span>03</span><strong>电商关键词报表</strong></a>
+              <button type="button" data-action="toggle-favorite">加入常用</button>
+            </li>
+            <li class="home-tool-row" data-tool-id="multi-table" data-tool-name="Excel 多表查询" data-tool-href="excel_query_multi_table.html" data-tool-category="数据整理" data-tool-description="连接最多十张数据表并导出结果。">
+              <a href="excel_query_multi_table.html"><span>04</span><strong>Excel 多表查询</strong></a>
+              <button type="button" data-action="toggle-favorite">加入常用</button>
+            </li>
+          </ul>
+        </section>
+
+        <section class="tool-directory-group" aria-labelledby="imageToolsTitle">
+          <h3 id="imageToolsTitle">图像处理</h3>
+          <ul class="home-tool-list">
+            <li class="home-tool-row" data-tool-id="image-batch" data-tool-name="图片批量处理" data-tool-href="image-batch-processing.html" data-tool-category="图像处理" data-tool-description="批量叠加底图并导出压缩包。">
+              <a href="image-batch-processing.html"><span>05</span><strong>图片批量处理</strong></a>
+              <button type="button" data-action="toggle-favorite">加入常用</button>
+            </li>
+            <li class="home-tool-row" data-tool-id="image-splitter" data-tool-name="图片分割" data-tool-href="image-splitter/index.html" data-tool-category="图像处理" data-tool-description="按比例和网格切分图片。">
+              <a href="image-splitter/index.html"><span>06</span><strong>图片分割</strong></a>
+              <button type="button" data-action="toggle-favorite">加入常用</button>
+            </li>
+            <li class="home-tool-row" data-tool-id="photo-watermark" data-tool-name="照片水印" data-tool-href="photo-watermark/index.html" data-tool-category="图像处理" data-tool-description="批量添加文字或磨砂水印。">
+              <a href="photo-watermark/index.html"><span>07</span><strong>照片水印</strong></a>
+              <button type="button" data-action="toggle-favorite">加入常用</button>
+            </li>
+            <li class="home-tool-row" data-tool-id="congrats" data-tool-name="喜报生成" data-tool-href="congrats-generator.html" data-tool-category="图像处理" data-tool-description="编辑文案并批量生成喜报。">
+              <a href="congrats-generator.html"><span>08</span><strong>喜报生成</strong></a>
+              <button type="button" data-action="toggle-favorite">加入常用</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

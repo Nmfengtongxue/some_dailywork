@@ -1,0 +1,31 @@
+.DS_Store
+**/.DS_Store
+
+# Local editor and temporary files
+.idea/
+.vscode/
+*.log
+*.tmp
+*.swp
+
+# Generated local archives and caches
+*.zip
+.cache/
+_tmp_*
+_tmp_form/
+.source-backup/
+node_modules/
+
+# Local-only copies and internal notes
+2026-06-05 日常小工具_副本/
+.hallmark/
+design.md
+congrats-assets/_patch_batch_layout.py
+
+# Sensitive business assets (do not publish)
+2026-04-07  新增人员/
+2026-04-07 新增人员/
+*.docx
+徐秀梅.png
+7-1.png
+默认标题__*.png

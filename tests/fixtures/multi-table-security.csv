@@ -1,0 +1,4 @@
+id,name,department
+1,"<img src=x onerror=window.__queryXss=1>",101
+2,"<script>window.__queryXss=2</script>",102
+3,"=1+1",103

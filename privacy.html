@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>隐私与数据边界｜工作工具集</title>
+  <link rel="stylesheet" href="assets/design-system.css">
+  <script src="assets/design-system.js" defer></script>
+</head>
+<body>
+  <main class="container privacy-page" id="mainContent">
+    <header class="privacy-page__intro">
+      <span class="privacy-page__status">远程统计已移除</span>
+      <h1>隐私与数据边界</h1>
+      <p>本项目以浏览器本地处理为默认原则，但“文件不上传”不等于“完全没有网络请求”。这里明确区分文件数据、第三方前端依赖和浏览器本地存储。</p>
+    </header>
+
+    <section class="privacy-grid" aria-label="数据处理概览">
+      <article class="card">
+        <h2>默认不会离开设备的数据</h2>
+        <ul>
+          <li>上传的 Excel、CSV、图片和头像文件内容。</li>
+          <li>筛选结果、统计结果、图片画布和生成中的导出数据。</li>
+          <li>多表查询的连接条件与查询结果。</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h2>可能保存在浏览器的数据</h2>
+        <ul>
+          <li>主题、视图锁定等界面偏好。</li>
+          <li>主页常用工具的选择和拖拽顺序。</li>
+          <li>祝贺图片工具中的人员配置和上传头像。</li>
+          <li>清理浏览器站点数据会删除这些本地记录。</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>外部网络依赖</h2>
+      <div class="table-wrapper">
+        <table class="privacy-table">
+          <thead>
+            <tr><th>范围</th><th>当前边界</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Excel 解析</th><td>多表查询页已经本地化 SheetJS；其他旧统计页面仍从 cdnjs 或 unpkg 获取。提供商可能看到 IP、User-Agent、时间和资源地址，但不会收到浏览器中解析的文件内容。</td></tr>
+            <tr><th>界面库</th><td>部分旧页面仍从 jsDelivr、cdnjs 获取 Bootstrap、Font Awesome、Fabric.js 等静态资源。</td></tr>
+            <tr><th>远程统计</th><td>照片水印页原有的 Umami 统计加载已移除；共享导航不发送分析事件。</td></tr>
+            <tr><th>业务接口</th><td>项目没有登录、数据库或上传接口。多表查询页通过 CSP 禁止运行时网络数据请求。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>部署要求</h2>
+      <ul>
+        <li>涉及员工名单、头像、薪资或考勤时，只部署到受控内网或受身份认证保护的环境。</li>
+        <li>高隐私环境应把 SheetJS、Bootstrap、Fabric.js 等依赖下载到本项目内，再移除对应 CDN 白名单。</li>
+        <li>不要把真实员工数据、导出文件或截图提交到公开代码仓库。</li>
+        <li>浏览器本地存储不是加密保险箱；共用电脑使用后应清理站点数据。</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

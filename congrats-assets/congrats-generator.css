@@ -52,6 +52,26 @@
             gap: 12px;
             flex-wrap: wrap;
         }
+        .preview-header-actions {
+            margin-left: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .preview-header-lock {
+            min-width: 52px;
+            padding: 4px 10px;
+            font-size: 12px;
+            line-height: 1.2;
+            border-radius: 8px;
+        }
+        .preview-header-lock.is-locked,
+        .preview-header-lock.is-active {
+            background: #0f172a;
+            border-color: #0f172a;
+            color: #fff;
+        }
         .preview-scale-label {
             font-size: 12px;
             font-weight: 500;
@@ -446,7 +466,7 @@
             font-size: 12px;
             color: #64748b;
             font-weight: 500;
-            margin-left: auto;
+            margin-left: 0;
             user-select: none;
         }
         .auto-show-toggle .switch {
@@ -814,4 +834,211 @@
         .diet-row-remove:disabled {
             color: #cbd5e1;
             cursor: not-allowed;
+        }
+
+        /* 批量面板：三栏同步布局 */
+        .editor-float-panel--batch {
+            width: min(960px, calc(100% - 110px));
+            max-height: calc(100% - 24px);
+        }
+        .editor-float-panel--batch .editor-float-body {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow: hidden;
+            min-height: 0;
+        }
+        .batch-workspace {
+            display: grid;
+            grid-template-columns: minmax(220px, 1fr) minmax(220px, 1fr) minmax(220px, 1fr);
+            gap: 12px;
+            align-items: stretch;
+            flex: 1 1 auto;
+            min-height: 0;
+            margin-bottom: 0;
+        }
+        .batch-col {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-height: 0;
+            height: 100%;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 10px 12px;
+            background: #fff;
+            min-width: 0;
+            overflow: hidden;
+        }
+        .batch-col-form {
+            overflow-y: auto;
+        }
+        .batch-col-title {
+            margin: 0;
+            font-size: 13px;
+            font-weight: 700;
+            color: #0f172a;
+            flex-shrink: 0;
+        }
+        .batch-col-sub {
+            margin: -4px 0 0;
+            font-size: 11px;
+            color: #94a3b8;
+            flex-shrink: 0;
+        }
+        .batch-col-form .control-group {
+            margin-bottom: 0;
+            flex-shrink: 0;
+        }
+        .batch-col-form .batch-form-actions {
+            margin-top: auto;
+            flex-shrink: 0;
+        }
+        .batch-chip-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+        .batch-chip {
+            border: 1px solid #cbd5e1;
+            background: #f8fafc;
+            color: #334155;
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 12px;
+            line-height: 1.3;
+            cursor: pointer;
+        }
+        .batch-chip:hover,
+        .batch-chip.is-active {
+            background: #0f172a;
+            border-color: #0f172a;
+            color: #fff;
+        }
+        .batch-form-actions {
+            gap: 8px;
+            margin-top: 2px;
+        }
+        .batch-form-actions .btn {
+            flex: 1;
+        }
+        .batch-form-hint {
+            min-height: 18px;
+            margin: 0;
+            font-size: 12px;
+            color: #64748b;
+            flex-shrink: 0;
+        }
+        .batch-form-hint.is-error { color: #b91c1c; }
+        .batch-form-hint.is-ok { color: #15803d; }
+        .batch-form-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex: 1;
+            min-height: 0;
+            overflow: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            background: #f8fafc;
+        }
+        .batch-form-list:empty::before {
+            content: '暂无条目，从左侧加入或右侧粘贴 TXT';
+            display: block;
+            padding: 12px;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+        .batch-form-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 10px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 12px;
+            color: #0f172a;
+            background: #fff;
+        }
+        .batch-form-list li:last-child { border-bottom: none; }
+        .batch-form-list li.is-editing {
+            background: #fff7ed;
+        }
+        .batch-form-list .batch-entry-main {
+            flex: 1;
+            min-width: 0;
+            line-height: 1.45;
+        }
+        .batch-form-list .batch-entry-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+        .batch-form-list .batch-entry-actions button {
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            border-radius: 6px;
+            font-size: 11px;
+            padding: 2px 8px;
+            cursor: pointer;
+            color: #475569;
+        }
+        .batch-form-list .batch-entry-actions button:hover {
+            background: #e2e8f0;
+        }
+        .batch-col-txt .batch-template-box,
+        #batchOffcanvas #batchInput.batch-template-box {
+            flex: 1;
+            min-height: 0;
+            height: auto;
+            resize: none;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 12px;
+            line-height: 1.55;
+        }
+        .batch-footer {
+            flex: 0 0 auto;
+            border-top: 1px solid #eef2f7;
+            padding-top: 10px;
+            background: rgba(255, 255, 255, 0.98);
+        }
+        .batch-footer-actions {
+            grid-template-columns: 1fr 1fr;
+        }
+        .batch-review-list {
+            max-height: 96px;
+        }
+        @media (max-width: 1100px) {
+            .editor-float-panel--batch {
+                width: min(720px, calc(100% - 100px));
+            }
+            .batch-workspace {
+                grid-template-columns: 1fr 1fr;
+            }
+            .batch-col-txt {
+                grid-column: 1 / -1;
+                min-height: 200px;
+            }
+        }
+        @media (max-width: 720px) {
+            .editor-float-panel--batch {
+                width: min(420px, calc(100% - 88px));
+                left: 76px;
+            }
+            .editor-float-panel--batch .editor-float-body {
+                overflow-y: auto;
+            }
+            .batch-workspace {
+                grid-template-columns: 1fr;
+                flex: 0 0 auto;
+            }
+            .batch-col,
+            .batch-col-txt {
+                height: auto;
+                min-height: 260px;
+            }
+            .batch-footer-actions {
+                grid-template-columns: 1fr;
+            }
         }
