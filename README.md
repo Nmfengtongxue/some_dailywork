@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | `regional-statistics.html` | 区域宣发数据筛选、转发统计和导出 | SheetJS、SortableJS |
 | `checkin-statistics.html` | 未打卡人员对比、名单维护和导出 | SheetJS、html2canvas |
-| `excel_filter.html` | 电商订单关键词筛选和金额汇总 | SheetJS |
+| `excel_filter.html` | 电商订单关键词筛选、按天汇总和金额复制 | SheetJS |
 | `image-batch-processing.html` | 早安图文、推广海报等批量图片叠加 | JSZip、FileSaver |
 | `congrats-generator.html` | 个人/膳食中心喜报编辑与批量生成 | Fabric.js、pinyin-pro |
 | `excel_query_multi_table.html` | 最多 10 个 Excel 表的联合查询 | SheetJS |

@@ -23,6 +23,7 @@ const pages = [
 const scripts = [
   'regional-script.js',
   'checkin-script.js',
+  'excel-filter.js',
   'excel_query_multi_table.js',
   'image-batch-processing/js/script.js',
   'image-splitter/js/script.js',

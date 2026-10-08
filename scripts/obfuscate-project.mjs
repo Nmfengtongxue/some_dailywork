@@ -11,6 +11,7 @@ const backupRoot = join(projectRoot, '.source-backup');
 const jsTargets = [
   'regional-script.js',
   'checkin-script.js',
+  'excel-filter.js',
   'excel_query_multi_table.js',
   'image-batch-processing/js/script.js',
   'image-splitter/js/script.js',
@@ -21,7 +22,7 @@ const jsTargets = [
   'assets/home-dashboard.js',
 ];
 
-const htmlInlineTargets = ['excel_filter.html'];
+const htmlInlineTargets = [];
 
 const obfuscatorOptions = {
   compact: true,
