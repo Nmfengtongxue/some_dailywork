@@ -32,6 +32,7 @@
           <li>主题、视图锁定等界面偏好。</li>
           <li>主页常用工具的选择和拖拽顺序。</li>
           <li>祝贺图片工具中的人员配置和上传头像。</li>
+          <li>活动业绩报表中的人员名册、填报记录和日报快照（键名 <code>618_campaign_v2</code>）。</li>
           <li>清理浏览器站点数据会删除这些本地记录。</li>
         </ul>
       </article>
@@ -46,7 +47,8 @@
           </thead>
           <tbody>
             <tr><th>Excel 解析</th><td>多表查询页已经本地化 SheetJS；其他旧统计页面仍从 cdnjs 或 unpkg 获取。提供商可能看到 IP、User-Agent、时间和资源地址，但不会收到浏览器中解析的文件内容。</td></tr>
-            <tr><th>界面库</th><td>部分旧页面仍从 jsDelivr、cdnjs 获取 Bootstrap、Font Awesome、Fabric.js 等静态资源。</td></tr>
+            <tr><th>界面库</th><td>部分旧页面仍从 jsDelivr、cdnjs 获取 Bootstrap、Font Awesome、Fabric.js 等静态资源。活动业绩报表另从 jsDelivr 加载 html2canvas 与 ExcelJS，用于导出图片和表格。</td></tr>
+            <tr><th>活动报表同步</th><td>页面内填报、修改记录和 JSON 导入导出留在浏览器。只有运行 <code>activity-report/start.py</code> 后，点「同步到 Excel」才会把数据写到本机工作簿，不上传到外部服务器。</td></tr>
             <tr><th>远程统计</th><td>照片水印页原有的 Umami 统计加载已移除；共享导航不发送分析事件。</td></tr>
             <tr><th>业务接口</th><td>项目没有登录、数据库或上传接口。多表查询页通过 CSP 禁止运行时网络数据请求。</td></tr>
           </tbody>

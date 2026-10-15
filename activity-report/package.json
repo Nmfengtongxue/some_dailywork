@@ -1,0 +1,13 @@
+{
+  "name": "618-campaign-report",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "2026年618活动业绩统计报表",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2026年618活动 · 业绩统计报表</title>
+  <link rel="stylesheet" href="css/report.css" />
+  <link rel="stylesheet" href="../assets/design-system.css" />
+  <link rel="stylesheet" href="css/shell-bridge.css" />
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+  <script src="../assets/design-system.js" defer></script>
+</head>
+<body class="activity-report-page">
+
+<header class="app-header">
+  <h1>2026年618活动 · 业绩统计</h1>
+  <div class="header-actions">
+    <span id="bjClock" class="bj-clock" title="填写、筛选和记录都按北京时间（东八区）">北京时间</span>
+    <input type="date" id="reportDate" class="btn" style="padding:6px 10px" />
+    <button class="btn btn-success" id="btnExportImage">导出 PNG</button>
+    <button class="btn btn-success" id="btnExportSvg">导出 SVG</button>
+    <button class="btn btn-success" id="btnExportExcel">导出 Excel</button>
+    <button class="btn btn-primary" id="btnSyncExcel">同步到 Excel</button>
+    <button class="btn" id="btnSaveSnapshot">保存日报快照</button>
+    <button class="btn" id="btnExportJson">导出数据</button>
+    <button class="btn" id="btnImportJson">导入数据</button>
+    <input type="file" id="importFile" accept=".json" hidden />
+    <button class="btn btn-danger" id="btnReset">重置填报</button>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tab active" data-tab="report">业绩报表</div>
+  <div class="tab" data-tab="manual">手动填表</div>
+  <div class="tab" data-tab="entry">数据填报</div>
+  <div class="tab" data-tab="log">填报记录</div>
+  <div class="tab" data-tab="stats">数据概览</div>
+</nav>
+
+<!-- ===== 业绩报表 ===== -->
+<section class="tab-panel active" id="panel-report">
+  <div class="report-toolbar no-export">
+    <input type="search" id="reportNameFilter" class="report-filter" placeholder="搜索姓名 / 拼音 / 首字母…" />
+    <button type="button" class="btn btn-primary" id="btnAddEmployee">+ 新增人员</button>
+  </div>
+  <div class="export-area" id="exportArea">
+    <div class="report-date" id="reportTitleDate"></div>
+    <div class="report-wrap">
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th style="width:40px">序号</th>
+            <th style="width:80px">总监</th>
+            <th style="width:70px">经理组</th>
+            <th style="width:90px">姓名</th>
+            <th style="width:130px">部门/个人6·18<br>已完成业绩总额</th>
+            <th style="width:120px">6·18任务已完成额度（6月）</th>
+            <th style="width:90px">任务额完成率%</th>
+            <th class="no-export col-ops" style="width:88px">操作</th>
+          </tr>
+        </thead>
+        <tbody id="reportBody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="report-hint">
+    点击「已完成额度」列填写，支持算式：<strong>+2</strong>（在当前值后加2）、<strong>1+2</strong>、<strong>618+999</strong>；记录中保存的是本次填入的增减量。
+    行末 <strong>+</strong> 可在下方插入人员，<strong>编</strong> 修改姓名/目标/基准，<strong>删</strong> 移除人员。
+  </div>
+  <div class="rate-legend">
+      <span style="color:#888;margin-right:4px">完成率图例（员工行 / 部门合计 / 总合计）：</span>
+      <span class="rate-legend-item"><span class="rate-legend-swatch" style="background:#ffcdd2"></span>0~19%</span>
+      <span class="rate-legend-item"><span class="rate-legend-swatch" style="background:#ffe0b2"></span>20~49%</span>
+      <span class="rate-legend-item"><span class="rate-legend-swatch" style="background:#fff59d"></span>50~79%</span>
+      <span class="rate-legend-item"><span class="rate-legend-swatch" style="background:#c8e6c9"></span>80~99%</span>
+      <span class="rate-legend-item"><span class="rate-legend-swatch" style="background:#66bb6a"></span>100%+</span>
+      <span style="color:#999;margin-left:8px">（合计行颜色更深、带边框）</span>
+    </div>
+</section>
+
+<!-- ===== 手动填表（独立空白表，初始累计 0） ===== -->
+<section class="tab-panel" id="panel-manual">
+  <div class="entry-panel manual-sheet-panel">
+    <div class="manual-sheet-header">
+      <div>
+        <h3>手动填报表</h3>
+        <p class="manual-sheet-desc">独立填表区：全员初始业绩为 <strong>0</strong>，在此逐行填写后点「提交」，会计入业绩报表与填报记录。</p>
+      </div>
+      <div class="manual-sheet-toolbar">
+        <button type="button" class="btn" id="btnManualAddRow">+ 添加 1 行</button>
+        <button type="button" class="btn" id="btnManualAddRows5">+ 添加 5 行</button>
+        <button type="button" class="btn" id="btnManualClearDraft">清空草稿行</button>
+        <button type="button" class="btn btn-danger" id="btnManualZeroAll">清零全部业绩</button>
+      </div>
+    </div>
+    <datalist id="manualEmployeeList"></datalist>
+    <div class="manual-table-wrap">
+      <table class="manual-table">
+        <thead>
+          <tr>
+            <th style="width:44px">#</th>
+            <th style="width:120px">姓名</th>
+            <th style="width:120px">本次金额</th>
+            <th style="width:180px">业绩时间</th>
+            <th>备注</th>
+            <th style="width:90px">当前累计</th>
+            <th style="width:120px">操作</th>
+          </tr>
+        </thead>
+        <tbody id="manualSheetBody"></tbody>
+      </table>
+    </div>
+    <p class="manual-sheet-tip">金额支持 <strong>618</strong>、<strong>+618</strong>、<strong>618+999</strong>；姓名可输入或从下拉选择。</p>
+  </div>
+</section>
+
+<!-- ===== 数据填报 ===== -->
+<section class="tab-panel" id="panel-entry">
+  <div class="entry-panel">
+    <h3>新增业绩填报</h3>
+    <p style="font-size:12px;color:#888;margin-bottom:12px">
+      每次填报会自动记录员工、金额和具体时间，累计计入报表。后续可接入网站订单监测自动同步。
+    </p>
+    <div class="form-row">
+      <div class="form-group search-select-group">
+        <label>员工</label>
+        <div id="entryEmployee"></div>
+      </div>
+      <div class="form-group">
+        <label>金额（元）</label>
+        <input type="text" id="entryAmount" placeholder="如 618、+999、-618" />
+      </div>
+      <div class="form-group">
+        <label>业绩时间</label>
+        <input type="datetime-local" id="entryDate" />
+      </div>
+      <div class="form-group">
+        <label>备注</label>
+        <input type="text" id="entryNote" placeholder="如：下单599、女神节活动等" />
+      </div>
+      <div class="form-group">
+        <label>&nbsp;</label>
+        <button class="btn btn-primary" id="btnAddRecord">提交填报</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry-panel">
+    <h3>常用金额快捷填入</h3>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" onclick="document.getElementById('entryAmount').value=618">618</button>
+      <button class="btn" onclick="document.getElementById('entryAmount').value=999">999</button>
+      <button class="btn" onclick="document.getElementById('entryAmount').value=1299">1299</button>
+      <button class="btn" onclick="document.getElementById('entryAmount').value=1999">1999</button>
+      <button class="btn" onclick="document.getElementById('entryAmount').value=599">599</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 填报记录 ===== -->
+<section class="tab-panel" id="panel-log">
+  <div class="filter-bar">
+    <div class="form-group">
+      <label>日期筛选</label>
+      <input type="date" id="logFilterDate" />
+    </div>
+    <div class="form-group">
+      <label>员工筛选</label>
+      <select id="logFilterEmployee"></select>
+    </div>
+  </div>
+  <table class="log-table">
+    <thead>
+      <tr>
+        <th>时间 <span class="th-hint">（最新在上）</span></th>
+        <th>姓名</th>
+        <th>部门</th>
+        <th>金额</th>
+        <th>备注</th>
+        <th>来源</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody id="logBody"></tbody>
+  </table>
+</section>
+
+<!-- ===== 数据概览 ===== -->
+<section class="tab-panel" id="panel-stats">
+  <div class="stats-cards">
+    <div class="stat-card">
+      <div class="label">总目标</div>
+      <div class="value" id="statGrandTarget">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">总已完成</div>
+      <div class="value" id="statGrandCompleted">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">总完成率</div>
+      <div class="value" id="statGrandRate">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">统计日新增（<span id="statReportDateLabel">—</span>）</div>
+      <div class="value" id="statTodayAmount">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">今日笔数</div>
+      <div class="value" id="statTodayCount" style="font-size:18px">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">累计填报</div>
+      <div class="value" id="statTotalRecords" style="font-size:18px">—</div>
+    </div>
+  </div>
+
+  <div class="entry-panel">
+    <h3>后续扩展说明</h3>
+    <ul style="font-size:13px;line-height:1.8;color:#555;padding-left:20px">
+      <li><strong>数据模型</strong>：累计业绩 = 基准业绩(initialCompleted) + 填报记录；重置仅清除记录，基准保留</li>
+      <li><strong>网站监测接入</strong>：`Store.syncFromAPI()` 已预留接口，后续对接订单系统自动同步业绩</li>
+      <li><strong>喜报自动生成</strong>：员工达成 100% 目标时触发 `triggerCelebration()`，待接入喜报页面</li>
+      <li><strong>数据备份</strong>：建议定期使用「导出数据」功能备份 JSON 文件</li>
+    </ul>
+  </div>
+</section>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="empModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="empModalTitle">人员</h3>
+      <button type="button" class="modal-close" onclick="EmployeeManage.closeModal()">×</button>
+    </div>
+    <form id="empForm" onsubmit="event.preventDefault(); EmployeeManage.submitForm();">
+      <input type="hidden" id="empFormMode" value="add" />
+      <input type="hidden" id="empFormId" value="" />
+      <input type="hidden" id="empFormAfter" value="" />
+      <div class="form-grid">
+        <div class="form-group">
+          <label>姓名</label>
+          <input type="text" id="empName" required placeholder="如：徐秀梅" />
+        </div>
+        <div class="form-group">
+          <label>部门</label>
+          <select id="empDept">
+            <option value="销售部">销售部</option>
+            <option value="行政部">行政部</option>
+            <option value="医疗中心">医疗中心</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>目标额度（元）</label>
+          <input type="number" id="empTarget" min="0" step="1" value="3000" />
+        </div>
+        <div class="form-group">
+          <label>基准已完成（元）</label>
+          <input type="number" id="empBaseline" min="0" step="1" value="0" />
+        </div>
+        <div class="form-group">
+          <label>总监</label>
+          <input type="text" id="empDirector" placeholder="留空则按部门默认" />
+        </div>
+        <div class="form-group">
+          <label>经理组</label>
+          <input type="text" id="empManager" placeholder="留空则按部门默认" />
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn" onclick="EmployeeManage.closeModal()">取消</button>
+        <button type="submit" class="btn btn-primary">保存</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/beijing-time.js"></script>
+<script src="js/store.js"></script>
+<script src="js/calc.js"></script>
+<script src="js/export-report.js"></script>
+<script src="js/export-excel.js"></script>
+<script src="js/export-svg.js"></script>
+<script src="js/employee-search.js"></script>
+<script src="js/employee-manage.js"></script>
+<script src="js/manual-sheet.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -17,6 +17,7 @@ const pages = [
   'excel_query_multi_table.html',
   'image-splitter/index.html',
   'photo-watermark/index.html',
+  'activity-report/index.html',
   'privacy.html',
 ];
 
@@ -30,6 +31,18 @@ const scripts = [
   'photo-watermark/js/link.js',
   'photo-watermark/js/script.js',
   'congrats-assets/congrats-app.js',
+  'congrats-assets/batch-normalize.js',
+  'activity-report/js/beijing-time.js',
+  'activity-report/js/store.js',
+  'activity-report/js/calc.js',
+  'activity-report/js/export-report.js',
+  'activity-report/js/export-excel.js',
+  'activity-report/js/export-svg.js',
+  'activity-report/js/employee-search.js',
+  'activity-report/js/employee-manage.js',
+  'activity-report/js/manual-sheet.js',
+  'activity-report/js/app.js',
+  'activity-report/server/server.js',
   'assets/design-system.js',
   'assets/home-dashboard.js',
 ];

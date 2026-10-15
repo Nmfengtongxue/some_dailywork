@@ -15,6 +15,8 @@ _tmp_*
 _tmp_form/
 .source-backup/
 node_modules/
+__pycache__/
+*.pyc
 
 # Local-only copies and internal notes
 2026-06-05 日常小工具_副本/
@@ -23,6 +25,10 @@ design.md
 congrats-assets/_patch_batch_layout.py
 
 # Sensitive business assets (do not publish)
+activity-report/*.xlsx
+activity-report/data/import_result.json
+activity-report/data/records_backup.json
+activity-report/data/baseline_by_seq.json
 2026-04-07  新增人员/
 2026-04-07 新增人员/
 *.docx

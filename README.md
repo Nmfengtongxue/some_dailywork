@@ -12,6 +12,7 @@
 | `image-batch-processing.html` | 早安图文、推广海报等批量图片叠加 | JSZip、FileSaver |
 | `congrats-generator.html` | 个人/膳食中心喜报编辑与批量生成 | Fabric.js、pinyin-pro |
 | `excel_query_multi_table.html` | 最多 10 个 Excel 表的联合查询 | SheetJS |
+| `activity-report/index.html` | 活动业绩填报、修改记录、报表导出；批量喜报仍用喜报生成 | html2canvas、ExcelJS；Excel 同步需本地 `start.py` |
 | `image-splitter/index.html` | 图片分割与打包下载 | JSZip |
 | `photo-watermark/index.html` | 离线图片水印处理 | 本地脚本、JSZip |
 | `privacy.html` | 数据处理、浏览器存储和第三方依赖边界 | 无外部依赖 |
@@ -38,7 +39,7 @@ node scripts/validate-project.mjs
 
 自检会覆盖：
 
-- 11 个入口页面和 10 个脚本是否存在；
+- 12 个入口页面和对应脚本是否存在；
 - HTML 中引用的本地资源是否缺失；
 - 单页内是否存在重复 `id`；
 - 业务 JavaScript 是否存在语法错误；
