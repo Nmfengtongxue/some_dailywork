@@ -52,6 +52,34 @@ let keywordResults = {};
 let dailySummaries = [];
 let activeKeyword = '';
 let activeDates = [];
+let xlsxLoadPromise = null;
+
+function ensureXlsxLoaded() {
+    if (window.XLSX) return Promise.resolve(window.XLSX);
+    if (xlsxLoadPromise) return xlsxLoadPromise;
+
+    xlsxLoadPromise = new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'assets/vendor/xlsx.full.min.js';
+        script.async = true;
+        script.addEventListener('load', () => {
+            if (window.XLSX) {
+                resolve(window.XLSX);
+                return;
+            }
+            xlsxLoadPromise = null;
+            reject(new Error('Excel 解析组件初始化失败，请刷新页面后重试'));
+        }, { once: true });
+        script.addEventListener('error', () => {
+            xlsxLoadPromise = null;
+            script.remove();
+            reject(new Error('Excel 解析组件加载失败，请刷新页面后重试'));
+        }, { once: true });
+        document.head.appendChild(script);
+    });
+
+    return xlsxLoadPromise;
+}
 
 function escapeHtml(value) {
     return String(value ?? '')
@@ -199,7 +227,7 @@ fileInput.addEventListener('change', (event) => {
     if (event.target.files.length) handleFileUpload(event.target.files[0]);
 });
 
-function handleFileUpload(file) {
+async function handleFileUpload(file) {
     const allowedTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
     if (!allowedTypes.includes(file.type) && !file.name.match(/\.(xls|xlsx)$/)) {
         showError('请上传有效的Excel文件 (.xls 或 .xlsx 格式)');
@@ -211,6 +239,13 @@ function handleFileUpload(file) {
     loading.style.display = 'block';
     errorMessage.style.display = 'none';
     successMessage.style.display = 'none';
+
+    try {
+        await ensureXlsxLoaded();
+    } catch (error) {
+        showError(error.message);
+        return;
+    }
 
     const reader = new FileReader();
     reader.onload = function (event) {
