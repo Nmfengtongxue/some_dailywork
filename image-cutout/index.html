@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>IMG.LY 抠图编辑器 · large</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #f4f5f7;
+        font-family: "PingFang SC", "Noto Sans SC", "Segoe UI", sans-serif;
+      }
+      #cesdk_container {
+        width: 100%;
+        height: 100%;
+      }
+      #cutoutBoot {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: grid;
+        place-items: center;
+        background: #f4f5f7;
+        color: #1f2937;
+      }
+      #cutoutBoot[hidden] {
+        display: none;
+      }
+      .cutout-boot__card {
+        width: min(420px, calc(100vw - 32px));
+        padding: 28px 24px;
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+      }
+      .cutout-boot__card h1 {
+        margin: 0 0 8px;
+        font-size: 20px;
+        font-weight: 650;
+      }
+      .cutout-boot__card p {
+        margin: 0;
+        color: #6b7280;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .cutout-boot__bar {
+        margin-top: 18px;
+        height: 6px;
+        border-radius: 99px;
+        background: #e5e7eb;
+        overflow: hidden;
+      }
+      .cutout-boot__bar > span {
+        display: block;
+        height: 100%;
+        width: 38%;
+        border-radius: inherit;
+        background: #3b4dff;
+        animation: cutoutPulse 1.4s ease-in-out infinite;
+      }
+      @keyframes cutoutPulse {
+        0% { transform: translateX(-80%); }
+        100% { transform: translateX(280%); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cutoutBoot">
+      <div class="cutout-boot__card">
+        <h1>正在加载 IMG.LY 编辑器</h1>
+        <p>首次打开会从 CDN 拉取 CE.SDK 资源，以及 large（isnet）抠图模型约 176MB。选中图片后点「去除背景」。</p>
+        <div class="cutout-boot__bar" aria-hidden="true"><span></span></div>
+      </div>
+    </div>
+    <div id="cesdk_container"></div>
+    <script>
+      (function () {
+        var port = location.port;
+        var viteReady = port === '5178' || port === '4173';
+        if (!viteReady) {
+          var boot = document.getElementById('cutoutBoot');
+          if (!boot) return;
+          boot.removeAttribute('hidden');
+          boot.innerHTML = '<div class="cutout-boot__card"><h1>先在本地启动编辑器</h1><p>这个页面依赖 Vite，不能直接用 python 静态服务打开 TypeScript。</p><p>在终端进入 <code>image-cutout</code> 后执行 <code>./start.sh</code>，浏览器会打开 <a href="http://127.0.0.1:5178/">http://127.0.0.1:5178/</a>。</p></div>';
+        }
+      })();
+    </script>
+    <script type="module" src="src/index.ts"></script>
+  </body>
+</html>

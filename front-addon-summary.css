@@ -1,0 +1,189 @@
+.front-addon-page {
+  padding-block: var(--space-lg);
+}
+
+.front-addon-page .card {
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-card);
+  background: var(--color-paper-2);
+}
+
+.front-addon-page .card-header,
+.front-addon-page .card-body {
+  padding: 0.95rem 1rem;
+}
+
+.front-addon-page .card-header {
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+
+.front-addon-lede {
+  margin: 0;
+  max-width: 46rem;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.front-addon-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+.front-addon-dropzone {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+  padding: 1.1rem 1rem;
+  border: 1px dashed var(--color-rule-2);
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+  cursor: pointer;
+}
+
+.front-addon-dropzone.is-over {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.front-addon-file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.front-addon-dropzone span,
+.front-addon-filename {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.front-addon-filename {
+  margin: 0 0 0.75rem;
+}
+
+.front-addon-page .upload-buttons,
+.front-addon-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.front-addon-note {
+  margin: 0.75rem 0 0;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.front-addon-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: var(--space-md);
+}
+
+.front-addon-stat {
+  padding: 0.9rem 1rem;
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-card);
+  background: var(--color-paper-2);
+}
+
+.front-addon-stat small {
+  display: block;
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+}
+
+.front-addon-stat strong {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: var(--text-lg);
+}
+
+.front-addon-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0 0 0.75rem;
+}
+
+.front-addon-tabs button[aria-selected="true"] {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.front-addon-table-wrap {
+  max-height: min(70vh, 720px);
+  overflow: auto;
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-card);
+}
+
+.front-addon-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.front-addon-table th,
+.front-addon-table td {
+  padding: 0.4rem 0.55rem;
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.front-addon-table th {
+  position: sticky;
+  top: 0;
+  background: var(--color-paper-2);
+}
+
+.front-addon-empty,
+.front-addon-error,
+.front-addon-ok {
+  margin: 0.5rem 0 0;
+  font-size: var(--text-sm);
+}
+
+.front-addon-error {
+  color: #8a1f1f;
+}
+
+.front-addon-ok {
+  color: #215c38;
+}
+
+.front-addon-check {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0.65rem 0 0;
+  font-size: var(--text-sm);
+}
+
+.front-addon-page select {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.4rem 0.55rem;
+  border: var(--rule-hair) solid var(--color-rule-2);
+  border-radius: var(--radius-card);
+  background: var(--color-paper);
+}
+
+.front-addon-page .card-header {
+  font-weight: 650;
+}
+
+@media (max-width: 992px) {
+  .front-addon-grid,
+  .front-addon-stats {
+    grid-template-columns: 1fr;
+  }
+}

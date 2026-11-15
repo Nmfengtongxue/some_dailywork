@@ -13,6 +13,8 @@
 | `congrats-generator.html` | 个人/膳食中心喜报编辑与批量生成 | Fabric.js、pinyin-pro |
 | `excel_query_multi_table.html` | 最多 10 个 Excel 表的联合查询 | SheetJS |
 | `activity-report/index.html` | 活动业绩填报、修改记录、报表导出；批量喜报仍用喜报生成 | html2canvas、ExcelJS；Excel 同步需本地 `start.py` |
+| `front-addon-summary.html` | 上传结账付款统计表，按日生成加项汇总和千爱登记 | SheetJS、ExcelJS |
+| `image-cutout/index.html` | IMG.LY 抠图编辑器（large 模型）；GitHub Pages 上仅说明页，完整编辑需本地 `start.sh` | Vite、CE.SDK |
 | `image-splitter/index.html` | 图片分割与打包下载 | JSZip |
 | `photo-watermark/index.html` | 离线图片水印处理 | 本地脚本、JSZip |
 | `privacy.html` | 数据处理、浏览器存储和第三方依赖边界 | 无外部依赖 |
@@ -39,7 +41,7 @@ node scripts/validate-project.mjs
 
 自检会覆盖：
 
-- 12 个入口页面和对应脚本是否存在；
+- 14 个入口页面和对应脚本是否存在；
 - HTML 中引用的本地资源是否缺失；
 - 单页内是否存在重复 `id`；
 - 业务 JavaScript 是否存在语法错误；

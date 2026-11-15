@@ -176,6 +176,37 @@
             align-items: center;
             justify-content: center;
         }
+        .avatar-preview-circle.is-cutout {
+            background-color: #f8fafc;
+            background-image:
+                linear-gradient(45deg, #e2e8f0 25%, transparent 25%),
+                linear-gradient(-45deg, #e2e8f0 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #e2e8f0 75%),
+                linear-gradient(-45deg, transparent 75%, #e2e8f0 75%);
+            background-size: 16px 16px;
+            background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+        }
+        .cutout-progress {
+            margin-top: 8px;
+        }
+        .cutout-progress-track {
+            height: 8px;
+            border-radius: 999px;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+        .cutout-progress-fill {
+            height: 100%;
+            width: 0;
+            background: #2563eb;
+            transition: width 0.2s ease;
+        }
+        .cutout-progress-text {
+            margin: 6px 0 0;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #64748b;
+        }
         /* 导出设置 */
                         /* 上传卡片折叠 */
                                                                         /* 画布样式由 JS 按视口等比缩放，不在 CSS 中写死尺寸 */
@@ -770,6 +801,16 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+        }
+        .diet-field-hint {
+            margin: 6px 0 0;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #64748b;
+        }
+        .diet-items-table .diet-item-qty,
+        .diet-items-table .diet-item-unit {
+            min-width: 52px;
         }
         .diet-items-table-wrap {
             overflow-x: auto;

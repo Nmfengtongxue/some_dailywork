@@ -1,3 +1,154 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>区域宣发统计</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"><script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="assets/design-system.css"><script src="assets/design-system.js" defer></script></head><body><div class="container"><h1>区域宣发统计</h1><div class="card"><div class="card-header">
-                上传Excel文件
-            </div><div class="card-body"><input type="file" id="fileInput" accept=".xlsx, .xls" class="form-control mb-3"><div class="upload-buttons"><button id="uploadBtn" class="btn btn-primary">上传并解析</button><button id="autoFillBtn" class="btn btn-info" disabled>一键遍历填入</button></div><div class="progress-container" id="progressContainer"><div class="progress-bar" id="progressBar"></div><div class="progress-text" id="progressText">准备开始...</div></div></div></div><div id="filterSection" class="filter-section" style="display: none;"><h5>筛选条件</h5><div class="filter-row"><div class="filter-item"><label>您所在的公司：</label><select id="companyFilter" class="form-select"><option value="">全部</option></select></div><div class="filter-item"><label>您所在的部门：</label><select id="departmentFilter" class="form-select"><option value="">全部</option></select></div><div class="filter-item"><label>打卡日期：</label><select id="dateFilter" class="form-select"><option value="">全部</option></select></div></div></div><div class="table-container"><table id="dataTable" class="table table-striped table-hover" style="display: none;"><thead></thead><tbody></tbody></table></div><div id="sumSection" class="alert alert-secondary" style="display: none;"><strong>合计:</strong><span id="sumDisplay"></span></div><div class="forward-form-section"><div class="forward-controls"><h3>转发次数统计</h3><div class="control-buttons"><button id="sortBtn" class="btn btn-primary">按宣发总量降序排序</button><button id="exportExcelBtn" class="btn btn-success">导出WPS样式表</button><button id="copyWpsBtn" class="btn btn-outline-success">复制到WPS</button><button id="exportSvgBtn" class="btn btn-info">导出SVG</button></div></div><p class="export-hint text-muted small mb-2">排序/填入完成后，可导出或复制带色阶的「甘青区域外宣发布明细表」到 WPS。</p><div class="table-container"><table id="forwardTable" class="table table-bordered forward-table"></table></div></div><div class="return-button" style="position: absolute; top: 20px; right: 20px;"><a href="index.html" class="btn btn-secondary btn-sm">返回导航页面</a></div></div><script src="regional-script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>区域宣发统计</title>
+  <link href="assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assets/design-system.css">
+  <link rel="stylesheet" href="regional-page.css">
+  <script src="assets/vendor/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+  <script src="assets/vendor/exceljs.min.js"></script>
+  <script src="assets/design-system.js" defer></script>
+</head>
+<body>
+  <div class="container regional-page">
+    <header class="tool-page-heading">
+      <div>
+        <span class="section-kicker">DATA WORKBENCH</span>
+        <h1>区域宣发统计</h1>
+        <p class="regional-lede">上传打卡表后按公司、部门汇总宣发次数，排序后可导出带公式和排名色阶的明细表。</p>
+      </div>
+      <div class="tool-page-heading__actions">
+        <button class="info-button" type="button" aria-label="查看使用说明" data-tooltip="流程：上传 Excel → 一键遍历填入 → 按宣发总量排序 → 导出。导出的表格含合计公式；改排名数字后，行颜色会按名次自动变化。">i</button>
+      </div>
+    </header>
+
+    <section class="regional-grid">
+      <article class="card regional-card">
+        <div class="card-header">
+          <div>
+            <span class="regional-step">01</span>
+            上传 Excel
+          </div>
+        </div>
+        <div class="card-body">
+          <label class="regional-dropzone" for="fileInput">
+            <strong>选择或拖入打卡表</strong>
+            <span>支持 .xlsx / .xls，处理在浏览器本地完成</span>
+          </label>
+          <input type="file" id="fileInput" accept=".xlsx, .xls" class="form-control">
+          <p class="regional-filename" id="fileNameHint">尚未选择文件</p>
+          <div class="upload-buttons">
+            <button id="uploadBtn" class="btn btn-primary" type="button">上传并解析</button>
+            <button id="autoFillBtn" class="btn btn-info" type="button" disabled>一键遍历填入</button>
+          </div>
+          <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="progress-text" id="progressText">准备开始...</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card regional-card">
+        <div class="card-header">
+          <div>
+            <span class="regional-step">02</span>
+            筛选与核对
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="regional-note">解析完成后会出现筛选项。一键填入会按公司 × 部门 × 日期遍历累计转发次数。</p>
+          <div id="filterSection" class="filter-section" style="display: none;">
+            <h5>筛选条件</h5>
+            <div class="filter-row">
+              <div class="filter-item">
+                <label for="companyFilter">您所在的公司：</label>
+                <select id="companyFilter" class="form-select"><option value="">全部</option></select>
+              </div>
+              <div class="filter-item">
+                <label for="departmentFilter">您所在的部门：</label>
+                <select id="departmentFilter" class="form-select"><option value="">全部</option></select>
+              </div>
+              <div class="filter-item">
+                <label for="dateFilter">打卡日期：</label>
+                <select id="dateFilter" class="form-select"><option value="">全部</option></select>
+              </div>
+            </div>
+          </div>
+          <div class="table-container regional-source-table">
+            <table id="dataTable" class="table table-striped table-hover" style="display: none;">
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div id="sumSection" class="alert alert-secondary" style="display: none;">
+            <strong>合计:</strong>
+            <span id="sumDisplay"></span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="forward-form-section regional-workspace">
+      <div class="forward-controls">
+        <div>
+          <span class="regional-step">03</span>
+          <h3>转发次数统计</h3>
+          <p class="export-hint">排序或手工调整后，导出的 Excel 含单元格公式；排名色按名次数字着色，把第 9 名改成第 10 名时该行颜色会跟着变。</p>
+        </div>
+        <div class="control-buttons">
+          <button id="sortBtn" class="btn btn-primary" type="button">按宣发总量降序排序</button>
+          <button id="exportExcelBtn" class="btn btn-success" type="button">导出WPS样式表</button>
+          <button id="copyWpsBtn" class="btn btn-outline-success" type="button">复制到WPS</button>
+          <button id="exportSvgBtn" class="btn btn-info" type="button">导出SVG</button>
+        </div>
+      </div>
+      <div class="table-container regional-forward-wrap">
+        <table id="forwardTable" class="table table-bordered forward-table"></table>
+      </div>
+    </section>
+
+    <div class="return-button" style="position: absolute; top: 20px; right: 20px;">
+      <a href="index.html" class="btn btn-secondary btn-sm">返回导航页面</a>
+    </div>
+  </div>
+  <script src="regional-script.js"></script>
+  <script src="regional-export.js"></script>
+  <script>
+    (function () {
+      const input = document.getElementById('fileInput');
+      const hint = document.getElementById('fileNameHint');
+      const zone = document.querySelector('.regional-dropzone');
+      if (!input || !hint || !zone) return;
+      const showName = () => {
+        hint.textContent = input.files && input.files[0] ? input.files[0].name : '尚未选择文件';
+      };
+      input.addEventListener('change', showName);
+      ;['dragenter', 'dragover'].forEach((type) => {
+        zone.addEventListener(type, (event) => {
+          event.preventDefault();
+          zone.classList.add('is-over');
+        });
+      });
+      ;['dragleave', 'drop'].forEach((type) => {
+        zone.addEventListener(type, (event) => {
+          event.preventDefault();
+          zone.classList.remove('is-over');
+        });
+      });
+      zone.addEventListener('drop', (event) => {
+        const files = event.dataTransfer && event.dataTransfer.files;
+        if (!files || !files.length) return;
+        const transfer = new DataTransfer();
+        transfer.items.add(files[0]);
+        input.files = transfer.files;
+        showName();
+      });
+    })();
+  </script>
+</body>
+</html>

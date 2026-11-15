@@ -1,1 +1,3763 @@
-const _0x4390bc=_0x210f;(function(_0x3b5144,_0x4255eb){const _0x57524b=_0x210f,_0x11771a=_0x3b5144();while(!![]){try{const _0x1f2d5f=-parseInt(_0x57524b(0x1bb))/0x1*(parseInt(_0x57524b(0x1d7))/0x2)+parseInt(_0x57524b(0x287))/0x3+-parseInt(_0x57524b(0x2cf))/0x4*(-parseInt(_0x57524b(0x23c))/0x5)+parseInt(_0x57524b(0x29b))/0x6*(parseInt(_0x57524b(0x190))/0x7)+parseInt(_0x57524b(0x2be))/0x8+-parseInt(_0x57524b(0x307))/0x9*(-parseInt(_0x57524b(0x133))/0xa)+-parseInt(_0x57524b(0x2de))/0xb;if(_0x1f2d5f===_0x4255eb)break;else _0x11771a['push'](_0x11771a['shift']());}catch(_0x38589f){_0x11771a['push'](_0x11771a['shift']());}}}(_0x696a,0xaeda3));let DESIGN_SIZE={'width':0x438,'height':0x7c6},TEXT_AREAS={'dept':{'x':0x3c6,'y':0x1f4,'width':0x50,'height':0x12c},'name':{'x':0x382,'y':0x1f9,'width':0x50,'height':0xc8},'congrats':{'x':0x6e,'y':0x4f8,'width':0x370,'height':0x96},'order':{'x':0x64,'y':0x578,'width':0x370,'height':0x64},'amount':{'x':0x64,'y':0x60e,'width':0x370,'height':0x96}};const AVATAR_LAYOUT={'cx':0x21c,'cy':0x316,'size':0x187},DEPARTMENTS=[_0x4390bc(0x275),_0x4390bc(0xe2),_0x4390bc(0x1c5),_0x4390bc(0x320),_0x4390bc(0x252)],AVATAR_FILTER_DEPARTMENTS=[_0x4390bc(0x275),_0x4390bc(0xe2),_0x4390bc(0x1c5),_0x4390bc(0x252)],ORDER_PRESETS=[_0x4390bc(0x175),_0x4390bc(0x292),_0x4390bc(0x301),_0x4390bc(0x2b1)],FONT_OPTIONS=[{'value':_0x4390bc(0xf1),'label':_0x4390bc(0x25c)},{'value':_0x4390bc(0x12b),'label':'黑体'},{'value':_0x4390bc(0x16f),'label':_0x4390bc(0x328)}],COLOR_SWATCHES=[_0x4390bc(0x271),_0x4390bc(0x1ea),_0x4390bc(0x10a),_0x4390bc(0x32f),_0x4390bc(0xe1),_0x4390bc(0x19f),'#f5d882',_0x4390bc(0x145)],STYLE_PRESETS={'sidebar':{'label':_0x4390bc(0x22d),'fontFamily':'NotoSansSCBlack','fontSize':0x30,'fontColor':_0x4390bc(0x271)},'name':{'label':'姓名','fontFamily':'NotoSansSCBlack','fontSize':0x28,'fontColor':'#fff2eb'},'body':{'label':'正文','fontFamily':'NotoSansSCMedium','fontSize':0x2a,'fontColor':_0x4390bc(0x1ea)},'order':{'label':'下单','fontFamily':_0x4390bc(0xf1),'fontSize':0x30,'fontColor':_0x4390bc(0x10a)},'amount':{'label':'金额','fontFamily':_0x4390bc(0x12b),'fontSize':0xaa,'fontColor':'#ffb875'},'dietHeader':{'label':'膳食标题','fontFamily':_0x4390bc(0x12b),'fontSize':0x1c,'fontColor':_0x4390bc(0x2db)},'dietItems':{'label':_0x4390bc(0x11a),'fontFamily':'NotoSansSCMedium','fontSize':0x18,'fontColor':'#8b0a0f'},'dietAmount':{'label':'膳食合计','fontFamily':'NotoSansSCBlack','fontSize':0x38,'fontColor':_0x4390bc(0x32f)}},INDIVIDUAL_TEXT_FIELD_CONFIG={'dept':{'label':'部门','vertical':!![],'stylePreset':_0x4390bc(0x160),'defaultContent':'销售部','presets':DEPARTMENTS,'fontSizeMax':0xc8},'name':{'label':'姓名','vertical':!![],'stylePreset':_0x4390bc(0x224),'defaultContent':'','fontSizeMax':0xc8,'linkedCongrats':!![]},'congrats':{'label':'恭喜','stylePreset':_0x4390bc(0x2d0),'defaultContent':'','fontSizeMax':0x12c},'order':{'label':'下单','stylePreset':_0x4390bc(0x2ac),'defaultContent':_0x4390bc(0x301),'presets':ORDER_PRESETS,'fontSizeMax':0xc8},'amount':{'label':'金额','stylePreset':'amount','defaultContent':'','fontSizeMax':0x12c}},DIET_TEXT_FIELD_CONFIG={'header':{'label':_0x4390bc(0x20e),'stylePreset':'dietHeader','defaultContent':_0x4390bc(0x209),'fontSizeMax':0x50},'items':{'label':_0x4390bc(0x298),'stylePreset':_0x4390bc(0x204),'defaultContent':'','fontSizeMax':0x3c},'amount':{'label':_0x4390bc(0x236),'stylePreset':_0x4390bc(0x30f),'defaultContent':'','fontSizeMax':0x78}},TEMPLATES={'individual':{'id':_0x4390bc(0x28b),'label':_0x4390bc(0x18f),'designSize':{'width':0x438,'height':0x7c6},'bgUrl':_0x4390bc(0x142),'topOverlayUrl':'https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/7.png','hasAvatar':!![],'textAreas':{'dept':{'x':0x3c6,'y':0x1f4,'width':0x50,'height':0x12c},'name':{'x':0x382,'y':0x1f9,'width':0x50,'height':0xc8},'congrats':{'x':0x6e,'y':0x4f8,'width':0x370,'height':0x96},'order':{'x':0x64,'y':0x578,'width':0x370,'height':0x64},'amount':{'x':0x64,'y':0x60e,'width':0x370,'height':0x96}},'textFieldConfig':INDIVIDUAL_TEXT_FIELD_CONFIG,'defaultActiveField':_0x4390bc(0x1df),'exportDefaults':{'width':0x438,'height':0x7c6}},'diet':{'id':'diet','label':_0x4390bc(0x2b2),'designSize':{'width':0x384,'height':0x1f4},'bgUrl':_0x4390bc(0x26a),'topOverlayUrl':null,'hasAvatar':![],'textAreas':{'header':{'x':0x1ae,'y':0x34,'width':0x1c2,'height':0x60},'items':{'x':0x1c2,'y':0xbc,'width':0x190,'height':0x48},'amount':{'x':0x288,'y':0x160,'width':0x60,'height':0x48}},'textFieldConfig':DIET_TEXT_FIELD_CONFIG,'defaultActiveField':'items','exportDefaults':{'width':0x384,'height':0x1f4}}};let TEXT_FIELD_CONFIG=INDIVIDUAL_TEXT_FIELD_CONFIG,currentTemplateId='individual',dietItems=[{'name':_0x4390bc(0x247),'quantity':0x2,'unitPrice':73.5}],textFieldState={},activeFieldKey=_0x4390bc(0x1df);const PERSONNEL_MAP_REVISION=_0x4390bc(0x305),PERSONNEL_MAP={'陈炳森':_0x4390bc(0x275),'白金玉':_0x4390bc(0x275),'王莉莉':_0x4390bc(0x275),'刘倩倩':'销售部','王伟':'销售部','范宏云':'行政部','杜永丽':_0x4390bc(0xe2),'朱甦雅':_0x4390bc(0xe2),'王斌斌':_0x4390bc(0xe2),'张巧花':_0x4390bc(0xe2),'俞帅文':'行政部','李雁程':'行政部','王晶玉':_0x4390bc(0xe2),'陈佩鹃':_0x4390bc(0xe2),'童守义':_0x4390bc(0x1c5),'张静':_0x4390bc(0x1c5),'张改霞':_0x4390bc(0x1c5),'赵改过':_0x4390bc(0x1c5),'孙悦':_0x4390bc(0x1c5),'苏丹':'医疗中心','郭锦霞':'医疗中心','王晓霞':'医疗中心','汪佑安':'医疗中心','杨晓晖':_0x4390bc(0x1c5),'张英玲':'医疗中心','刘力榕':_0x4390bc(0x1c5),'耿新民':'医疗中心','刘艳丽':_0x4390bc(0x1c5),'胡立茹':_0x4390bc(0x1c5),'胡秀娥':_0x4390bc(0x1c5),'梁晓菊':_0x4390bc(0x1c5),'王烁楠':_0x4390bc(0x1c5),'赵润蕊':_0x4390bc(0x1c5),'郑晓燕':'医疗中心','潘丽萍':_0x4390bc(0x1c5),'魏霞':_0x4390bc(0x1c5),'董凯丽':'医疗中心','姜媛媛':_0x4390bc(0x1c5),'党江娟':_0x4390bc(0x1c5),'刘沛':_0x4390bc(0x1c5),'姚建强':_0x4390bc(0x1c5),'苏巧燕':'医疗中心','杨文娟':'医疗中心','张丽娟':_0x4390bc(0x1c5),'周娜':'医疗中心','朱丹':_0x4390bc(0x1c5),'邵倩':_0x4390bc(0x1c5),'程芸':_0x4390bc(0x1c5),'王倩倩':'医疗中心','张鹤延':'医疗中心','马艳萍':_0x4390bc(0x1c5),'王敏敏':_0x4390bc(0x1c5),'张彩荷':_0x4390bc(0x1c5),'朱文婷':_0x4390bc(0x1c5),'张园胜':_0x4390bc(0x1c5),'曹圆圆':_0x4390bc(0x1c5),'徐秀梅':_0x4390bc(0x1c5),'白常蓉':_0x4390bc(0x1c5),'陈文文':_0x4390bc(0x1c5)},PHOTO_NAME_ALIASES={},PERSONNEL_ROLE_HINT={'徐秀梅':_0x4390bc(0x279),'陈文文':_0x4390bc(0x26f)},updateLogs=[_0x4390bc(0x176),_0x4390bc(0x2c2),_0x4390bc(0x32c),'2026-08-31:\x20医疗中心新增陈文文（影像技师）；销售部新增杜佳容（健康顾问）、安玉洁（健康顾问）、王伟；同步未打卡统计名单','2026-08-05:\x20医疗部李雨婷离职，从喜报名单移除（未打卡统计名单保留、灰色标注）',_0x4390bc(0x30d),_0x4390bc(0x192),_0x4390bc(0x118),_0x4390bc(0x2c1),_0x4390bc(0x32d),'2026-08-12:\x20批量生成支持表单快捷录入，并与\x20TXT\x20双向同步',_0x4390bc(0x2a1),_0x4390bc(0x2d7),_0x4390bc(0x16d),_0x4390bc(0x10d),_0x4390bc(0x1e6),'2026-08-12:\x20操作栏改到预览区左侧悬浮；选人/文字/明细合并为同一编辑抽屉，确认头像后自动切到文字编辑',_0x4390bc(0x1da),_0x4390bc(0x27f),_0x4390bc(0x18a),_0x4390bc(0x273),'2026-06-07:\x20文字、头像、顶层装饰均以底图为基准相对定位，底图位置变化时整体保持相对位置不变',_0x4390bc(0x195),_0x4390bc(0x171),'2026-06-07:\x20头像姓名查找支持模糊中文搜索与拼音首字母搜索（含搜索建议列表）','2026-06-07:\x20新增李雁程.png\x20至\x20GitHub\x20头像库',_0x4390bc(0x1c4),_0x4390bc(0x13a),_0x4390bc(0x174),'2026-06-06:\x20同步现行人员名单（共\x2057\x20人：销售部\x204、行政部\x208、医疗中心\x2045）；姓名以最新版为准：朱甦雅、童守义、李雨婷、郭锦霞、邵倩、曹圆圆等',_0x4390bc(0x156),_0x4390bc(0x186)];let currentPreviewAvatar=null,uploadedAvatars={},canvas,backgroundImage=null,topOverlayImage=null,textObjects={},backgroundFrame={'left':0x0,'top':0x0,'width':0x438,'height':0x7c6,'scale':0x1},canvasPreviewResizeObserver=null,canvasPreviewScale=0x1,previewUpdateRaf=null,viewUserZoom=0x1,viewPanX=0x0,viewPanY=0x0,spacePanKey=![],isViewPanning=![],panLastX=0x0,panLastY=0x0,autoShowEditorPanel=!![],viewLocked=!![],historyStack=[],historyIndex=-0x1,historyLock=![];const HISTORY_LIMIT=0x28,AUTO_SHOW_KEY=_0x4390bc(0x20f),VIEW_LOCK_KEY=_0x4390bc(0x2a3);let batchParsedRecords=[],batchGenerating=![],templateLoadToken=0x0,previewAvatarToken=0x0,batchFormEntries=[],batchFormEditIndex=-0x1,batchSyncLock=![],batchTxtSyncTimer=null;const AMOUNT_PRESETS=[_0x4390bc(0x251),_0x4390bc(0x246),_0x4390bc(0x2f2),_0x4390bc(0xf9)];function getCurrentTemplate(){const _0x1b73a1=_0x210f;return TEMPLATES[currentTemplateId]||TEMPLATES[_0x1b73a1(0x28b)];}function applyTemplateRuntimeConfig(_0x30038b){const _0x29f5c1=_0x210f,_0x2ee7ec=TEMPLATES[_0x30038b]||TEMPLATES[_0x29f5c1(0x28b)];currentTemplateId=_0x2ee7ec['id'],DESIGN_SIZE=Object[_0x29f5c1(0x268)]({},_0x2ee7ec[_0x29f5c1(0x1e1)]),TEXT_AREAS=JSON['parse'](JSON[_0x29f5c1(0x1cc)](_0x2ee7ec[_0x29f5c1(0x226)])),TEXT_FIELD_CONFIG=_0x2ee7ec[_0x29f5c1(0x2c5)],activeFieldKey=_0x2ee7ec[_0x29f5c1(0xdc)];}function updateTemplateActionBar(){const _0xbaef43=_0x210f,_0x2718c9=getCurrentTemplate(),_0x151d37=document[_0xbaef43(0x26b)](_0xbaef43(0x131)),_0xede6cf=document['getElementById'](_0xbaef43(0x31f)),_0x146c2c=document[_0xbaef43(0x26b)](_0xbaef43(0x315)),_0x5eb2a0=document[_0xbaef43(0x26b)]('batchBtn'),_0x16c584=document['getElementById'](_0xbaef43(0x32b)),_0x3d35de=document[_0xbaef43(0x26b)](_0xbaef43(0x168));if(_0x151d37)_0x151d37[_0xbaef43(0x316)]=![];if(_0xede6cf)_0xede6cf[_0xbaef43(0x316)]=_0x2718c9['id']!=='diet';if(_0x146c2c)_0x146c2c['hidden']=!_0x2718c9[_0xbaef43(0x17c)];if(_0x5eb2a0)_0x5eb2a0[_0xbaef43(0x316)]=_0x2718c9['id']!==_0xbaef43(0x28b);if(_0x16c584)_0x16c584['hidden']=_0x2718c9['id']!==_0xbaef43(0x14f);if(_0x3d35de)_0x3d35de[_0xbaef43(0x316)]=!_0x2718c9[_0xbaef43(0x17c)];document[_0xbaef43(0x308)](_0xbaef43(0x181))[_0xbaef43(0x2a5)](_0xde86ab=>{const _0xa2970e=_0x210f;_0xde86ab['classList'][_0xa2970e(0x161)](_0xa2970e(0x228),_0xde86ab[_0xa2970e(0x2ff)][_0xa2970e(0x1f6)]===currentTemplateId);});const _0x9484b3=document[_0xbaef43(0x26b)](_0xbaef43(0x115)),_0x37251b=document[_0xbaef43(0x26b)](_0xbaef43(0x1a6));if(_0x9484b3)_0x9484b3['value']=_0x2718c9[_0xbaef43(0x249)][_0xbaef43(0x324)];if(_0x37251b)_0x37251b[_0xbaef43(0x2ca)]=_0x2718c9[_0xbaef43(0x249)][_0xbaef43(0x259)];const _0x4f0b43=document['getElementById'](_0xbaef43(0x1bd));_0x4f0b43&&(_0x4f0b43[_0xbaef43(0x2ff)][_0xbaef43(0x1f7)]=_0x2718c9['id']==='diet'?_0xbaef43(0x2fd):'预览头像后可先查看效果；需要时再点「确认并继续改文字」');const _0x74304e=document[_0xbaef43(0x2bd)](_0xbaef43(0x2bc))?.[_0xbaef43(0x2ff)][_0xbaef43(0x2cb)];if(_0x2718c9['id']==='diet'&&(_0x74304e==='avatar'||!_0x74304e))switchEditorTab(_0xbaef43(0x14f));else _0x2718c9['id']!==_0xbaef43(0x14f)&&_0x74304e===_0xbaef43(0x14f)&&switchEditorTab(_0x2718c9['hasAvatar']?_0xbaef43(0x23a):_0xbaef43(0xdf));}function formatDietAmount(_0x5704a5){const _0x1eb0ac=_0x210f;if(!Number[_0x1eb0ac(0x270)](_0x5704a5))return'';const _0x32a317=Math['round'](_0x5704a5*0x64)/0x64;return Number['isInteger'](_0x32a317)?String(_0x32a317):_0x32a317[_0x1eb0ac(0x14e)](0x2)['replace'](/\.?0+$/,'');}function getDietLineSubtotal(_0x264d6b){const _0x37aa1e=_0x210f,_0x1a4dd2=Number(_0x264d6b[_0x37aa1e(0x187)]),_0x408798=Number(_0x264d6b[_0x37aa1e(0x326)]);if(!Number[_0x37aa1e(0x270)](_0x1a4dd2)||!Number[_0x37aa1e(0x270)](_0x408798)||_0x1a4dd2<=0x0)return 0x0;return _0x1a4dd2*_0x408798;}function getDietItemsTotal(){const _0x43c371=_0x210f;return dietItems[_0x43c371(0x1ac)]((_0x398da5,_0x5c9676)=>_0x398da5+getDietLineSubtotal(_0x5c9676),0x0);}function buildDietHeaderText(_0x556232){const _0x450fe2=_0x210f,_0x4d2537=(_0x556232||'定西公司')['trim']()||_0x450fe2(0x2b4);return _0x450fe2(0x17f)+_0x4d2537+_0x450fe2(0x300);}function buildDietItemsText(){const _0xa01ba2=_0x210f;return dietItems['filter'](_0x21451c=>(_0x21451c['name']||'')[_0xa01ba2(0x18e)]())[_0xa01ba2(0x1a9)](_0x384b5c=>{const _0x45a551=_0x210f,_0x1af3a2=_0x384b5c[_0x45a551(0x224)][_0x45a551(0x18e)](),_0x5f3478=Number(_0x384b5c[_0x45a551(0x187)]);if(Number[_0x45a551(0x270)](_0x5f3478)&&_0x5f3478>0x0)return _0x1af3a2+'*'+_0x5f3478;return _0x1af3a2;})['join']('\x0a');}function syncDietCanvasFromForm(){const _0x596bbb=_0x210f;if(currentTemplateId!==_0x596bbb(0x14f))return;const _0x5a56db=document[_0x596bbb(0x26b)](_0x596bbb(0x1c3)),_0x1a45e7=_0x5a56db?_0x5a56db[_0x596bbb(0x2ca)]:_0x596bbb(0x2b4);setFieldContent(_0x596bbb(0x105),buildDietHeaderText(_0x1a45e7)),setFieldContent(_0x596bbb(0x310),buildDietItemsText()),setFieldContent(_0x596bbb(0x2f4),formatDietAmount(getDietItemsTotal()));const _0x5d5c3b=document['getElementById'](_0x596bbb(0x33a));if(_0x5d5c3b)_0x5d5c3b[_0x596bbb(0x206)]=formatDietAmount(getDietItemsTotal())||'0';}function refreshInspectorFieldSelect(){const _0x740295=_0x210f,_0x55ab01=document[_0x740295(0x26b)](_0x740295(0xf5));if(!_0x55ab01)return;_0x55ab01[_0x740295(0x312)]=Object[_0x740295(0x22c)](TEXT_FIELD_CONFIG)[_0x740295(0x1a9)](_0x16617b=>{const _0x170551=_0x210f,_0x264f31=TEXT_FIELD_CONFIG[_0x16617b];return _0x170551(0x2ad)+_0x16617b+'\x22>'+_0x264f31[_0x170551(0xea)]+_0x170551(0x28c);})['join'](''),_0x55ab01['value']=activeFieldKey;}function escapeHtml(_0x39f9f5){const _0x43591d=_0x210f;return String(_0x39f9f5??'')[_0x43591d(0x11b)](/&/g,_0x43591d(0x339))['replace'](/"/g,_0x43591d(0x16c))[_0x43591d(0x11b)](/</g,'&lt;')['replace'](/>/g,_0x43591d(0x241));}function renderDietItemsTable(){const _0x26de6=_0x210f,_0x42fa73=document[_0x26de6(0x26b)](_0x26de6(0x222));if(!_0x42fa73)return;_0x42fa73[_0x26de6(0x312)]=dietItems[_0x26de6(0x1a9)]((_0x2c6f9c,_0x1b538f)=>{const _0x4a5553=_0x210f,_0x11db48=getDietLineSubtotal(_0x2c6f9c);return'<tr\x20data-index=\x22'+_0x1b538f+'\x22><td><input\x20type=\x22text\x22\x20class=\x22diet-item-name\x22\x20value=\x22'+escapeHtml(_0x2c6f9c['name']||'')+_0x4a5553(0x25a)+escapeHtml(_0x2c6f9c[_0x4a5553(0x187)]??'')+_0x4a5553(0x2fe)+escapeHtml(_0x2c6f9c[_0x4a5553(0x326)]??'')+_0x4a5553(0x128)+(formatDietAmount(_0x11db48)||'0')+_0x4a5553(0x24f)+_0x1b538f+'\x22\x20'+(dietItems['length']<=0x1?_0x4a5553(0x11e):'')+_0x4a5553(0x24d);})[_0x26de6(0x1e7)]('');}function readDietItemsFromTable(){const _0x352cd9=_0x210f,_0x34d124=document['getElementById'](_0x352cd9(0x222));if(!_0x34d124)return;dietItems=Array[_0x352cd9(0x335)](_0x34d124[_0x352cd9(0x308)]('tr'))[_0x352cd9(0x1a9)](_0xff8fe2=>({'name':_0xff8fe2['querySelector']('.diet-item-name')?.[_0x352cd9(0x2ca)][_0x352cd9(0x18e)]()||'','quantity':_0xff8fe2[_0x352cd9(0x2bd)](_0x352cd9(0x188))?.['value'],'unitPrice':_0xff8fe2['querySelector']('.diet-item-price')?.[_0x352cd9(0x2ca)]})),!dietItems[_0x352cd9(0x2bf)]&&(dietItems=[{'name':'','quantity':0x1,'unitPrice':''}]);}function initDietItemsPanel(){const _0xb1f87b=_0x210f;renderDietItemsTable(),syncDietCanvasFromForm();const _0x29bfe8=document[_0xb1f87b(0x26b)](_0xb1f87b(0x1c3));_0x29bfe8&&_0x29bfe8['addEventListener'](_0xb1f87b(0x263),function(){syncDietCanvasFromForm();});const _0x1e49fd=document[_0xb1f87b(0x26b)]('dietItemsBody');_0x1e49fd&&(_0x1e49fd['addEventListener'](_0xb1f87b(0x263),function(_0x1694e6){const _0x1baeee=_0x210f;if(!_0x1694e6[_0x1baeee(0x25d)][_0x1baeee(0x20c)]('input'))return;readDietItemsFromTable(),renderDietItemsTable(),syncDietCanvasFromForm();}),_0x1e49fd[_0xb1f87b(0x2df)]('click',function(_0x489410){const _0x1e7ed7=_0x210f,_0x37489b=_0x489410[_0x1e7ed7(0x25d)][_0x1e7ed7(0x2ab)](_0x1e7ed7(0x110));if(!_0x37489b||_0x37489b[_0x1e7ed7(0x11e)])return;readDietItemsFromTable();const _0x3dc0da=Number(_0x37489b[_0x1e7ed7(0x2ff)]['removeIndex']);dietItems[_0x1e7ed7(0x2af)](_0x3dc0da,0x1),!dietItems[_0x1e7ed7(0x2bf)]&&dietItems[_0x1e7ed7(0xee)]({'name':'','quantity':0x1,'unitPrice':''}),renderDietItemsTable(),syncDietCanvasFromForm();}));const _0x28eea4=document['getElementById'](_0xb1f87b(0x20a));_0x28eea4&&_0x28eea4[_0xb1f87b(0x2df)](_0xb1f87b(0x130),function(){const _0x255dd6=_0x210f;readDietItemsFromTable(),dietItems[_0x255dd6(0xee)]({'name':'','quantity':0x1,'unitPrice':''}),renderDietItemsTable(),syncDietCanvasFromForm();});}function initTemplateSelector(){const _0xf05bf5=_0x210f;document[_0xf05bf5(0x308)](_0xf05bf5(0x181))['forEach'](_0x3abcb4=>{const _0x1e2af2=_0x210f;_0x3abcb4[_0x1e2af2(0x2df)](_0x1e2af2(0x130),function(){const _0x55fcbb=_0x210f,_0x26f39f=this[_0x55fcbb(0x2ff)]['template'];if(!_0x26f39f||_0x26f39f===currentTemplateId)return;switchTemplate(_0x26f39f);});});}function loadTemplateImages(_0x5f5d2f,_0x473361){const _0xff6280=_0x210f,_0x5bb47b=++templateLoadToken;return fabric[_0xff6280(0x332)][_0xff6280(0x2aa)](_0x5f5d2f[_0xff6280(0x299)],function(_0x2988bb){const _0x3cdeec=_0x210f;if(_0x5bb47b!==templateLoadToken)return;backgroundImage=_0x2988bb,canvas[_0x3cdeec(0x158)](),fitTemplateImageToFrame(_0x2988bb),canvas[_0x3cdeec(0x286)](_0x2988bb);if(!_0x5f5d2f[_0x3cdeec(0x336)]){topOverlayImage=null,_0x473361(_0x5bb47b);return;}fabric[_0x3cdeec(0x332)]['fromURL'](_0x5f5d2f[_0x3cdeec(0x336)],function(_0x5e56c0){const _0xd8e240=_0x210f;if(_0x5bb47b!==templateLoadToken)return;topOverlayImage=_0x5e56c0,fitTemplateImageToFrame(_0x5e56c0),canvas[_0xd8e240(0x286)](_0x5e56c0),_0x473361(_0x5bb47b);},{'crossOrigin':'anonymous','onError':function(_0xeb3e03){const _0x48ba6a=_0x210f;if(_0x5bb47b!==templateLoadToken)return;console['error'](_0x48ba6a(0x2eb),_0xeb3e03),topOverlayImage=null,_0x473361(_0x5bb47b);}});},{'crossOrigin':_0xff6280(0x198),'onError':function(_0x3967a3){const _0x37c281=_0x210f;if(_0x5bb47b!==templateLoadToken)return;console[_0x37c281(0x1a8)](_0x37c281(0x321),_0x3967a3),alert('模板底图加载失败，请检查网络或本地资源路径。'),_0x473361(_0x5bb47b,_0x3967a3||new Error(_0x37c281(0x245)));}}),_0x5bb47b;}function applyTemplateDefaultContent(_0x2ce64e,_0x283b8d){const _0x1f2832=_0x210f;_0x283b8d=_0x283b8d||{};if(_0x2ce64e['id']===_0x1f2832(0x28b)){setFieldContent(_0x1f2832(0x1df),'销售部'),setFieldContent(_0x1f2832(0x2ac),_0x1f2832(0x301));return;}if(_0x283b8d[_0x1f2832(0x30b)]){dietItems=[{'name':_0x1f2832(0x247),'quantity':0x2,'unitPrice':73.5}];const _0x4de914=document[_0x1f2832(0x26b)]('dietCompanyName');if(_0x4de914)_0x4de914['value']='定西公司';renderDietItemsTable();}syncDietCanvasFromForm();}function bootstrapTemplateCanvas(_0x1c25ca){const _0x30fdf2=_0x210f;_0x1c25ca=_0x1c25ca||{};const _0x256357=_0x1c25ca[_0x30fdf2(0x1f6)]||getCurrentTemplate();return historyLock=!![],new Promise(function(_0x5254bf){loadTemplateImages(_0x256357,function(_0x1f88d9,_0x4586af){const _0x55982a=_0x210f;if(_0x1f88d9!==templateLoadToken){_0x5254bf(null);return;}if(_0x4586af){historyLock=![],_0x5254bf(null);return;}try{addTextObjects(),relayoutCanvasElements({'schedulePreview':![]}),applyTemplateDefaultContent(_0x256357,{'resetDiet':!!_0x1c25ca['resetDiet']});}finally{_0x1f88d9===templateLoadToken&&(historyLock=![],_0x1c25ca[_0x55982a(0x18d)]&&(historyStack=[],historyIndex=-0x1,pushHistory()),schedulePreviewUpdate());}_0x5254bf(_0x1f88d9===templateLoadToken?_0x256357:null);});});}function whenDocumentFontsReady(){const _0x348a08=_0x210f;if(document[_0x348a08(0x1fb)]&&document[_0x348a08(0x1fb)]['ready'])return document[_0x348a08(0x1fb)][_0x348a08(0x2a2)]['then'](function(){},function(){});return Promise[_0x348a08(0x284)]();}function switchTemplate(_0x4b5647){const _0x16f79a=_0x210f;if(!TEMPLATES[_0x4b5647]||_0x4b5647===currentTemplateId)return;applyTemplateRuntimeConfig(_0x4b5647),updateTemplateActionBar(),initTextFieldState(),refreshInspectorFieldSelect(),syncInspectorUIFromState(activeFieldKey),canvas&&(canvas['setWidth'](DESIGN_SIZE[_0x16f79a(0x324)]),canvas['setHeight'](DESIGN_SIZE[_0x16f79a(0x259)])),resetCanvasViewTransform(),bootstrapTemplateCanvas({'resetHistory':!![]});}function refreshBackgroundFrame(){const _0x176336=_0x210f;return backgroundFrame={'left':0x0,'top':0x0,'width':DESIGN_SIZE[_0x176336(0x324)],'height':DESIGN_SIZE[_0x176336(0x259)],'scale':0x1},backgroundFrame;}function designToCanvas(_0x150973,_0x1007a9){const _0x123462=_0x210f;return{'x':backgroundFrame['left']+_0x150973*backgroundFrame['scale'],'y':backgroundFrame[_0x123462(0x242)]+_0x1007a9*backgroundFrame['scale']};}function designToCanvasSize(_0xc851ed){return _0xc851ed*backgroundFrame['scale'];}function _0x210f(_0x128713,_0x5ebb21){_0x128713=_0x128713-0xd8;const _0x696ac8=_0x696a();let _0x210fc7=_0x696ac8[_0x128713];if(_0x210f['DdJdjB']===undefined){var _0x853789=function(_0x2c6cbb){const _0x404f55='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x41d286='',_0x30038b='';for(let _0x2ee7ec=0x0,_0x2718c9,_0x151d37,_0xede6cf=0x0;_0x151d37=_0x2c6cbb['charAt'](_0xede6cf++);~_0x151d37&&(_0x2718c9=_0x2ee7ec%0x4?_0x2718c9*0x40+_0x151d37:_0x151d37,_0x2ee7ec++%0x4)?_0x41d286+=String['fromCharCode'](0xff&_0x2718c9>>(-0x2*_0x2ee7ec&0x6)):0x0){_0x151d37=_0x404f55['indexOf'](_0x151d37);}for(let _0x146c2c=0x0,_0x5eb2a0=_0x41d286['length'];_0x146c2c<_0x5eb2a0;_0x146c2c++){_0x30038b+='%'+('00'+_0x41d286['charCodeAt'](_0x146c2c)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x30038b);};_0x210f['OfFOEs']=_0x853789,_0x210f['MCOQKV']={},_0x210f['DdJdjB']=!![];}const _0x3add3f=_0x696ac8[0x0];_0x210f['TGqFKd']!==_0x3add3f&&(_0x210f['MCOQKV']={},_0x210f['TGqFKd']=_0x3add3f);const _0x428bfe=_0x210f['MCOQKV'][_0x128713];return _0x428bfe===undefined?(_0x210fc7=_0x210f['OfFOEs'](_0x210fc7),_0x210f['MCOQKV'][_0x128713]=_0x210fc7):_0x210fc7=_0x428bfe,_0x210fc7;}function fitTemplateImageToFrame(_0x2714e2){const _0x56f88a=_0x210f;return refreshBackgroundFrame(),_0x2714e2[_0x56f88a(0x1a3)]({'left':backgroundFrame[_0x56f88a(0x11f)],'top':backgroundFrame[_0x56f88a(0x242)],'scaleX':backgroundFrame[_0x56f88a(0x324)]/_0x2714e2[_0x56f88a(0x324)],'scaleY':backgroundFrame['height']/_0x2714e2[_0x56f88a(0x259)],'originX':_0x56f88a(0x11f),'originY':_0x56f88a(0x242),'selectable':![],'evented':![]}),_0x2714e2[_0x56f88a(0x2a7)](),_0x2714e2;}function buildAvatarClip(_0x758987){return function(_0x12df4f){const _0x49603e=_0x210f;_0x12df4f[_0x49603e(0x2a4)](),_0x12df4f[_0x49603e(0x329)]=_0x49603e(0x221),_0x12df4f[_0x49603e(0x14c)](0x0,0x0,_0x758987,0x0,Math['PI']*0x2,![]),_0x12df4f[_0x49603e(0x2e1)](),_0x12df4f[_0x49603e(0x2fa)]();};}function configureAvatarImage(_0x994772){const _0x330cd5=_0x210f;refreshBackgroundFrame();const _0x3bccd6=designToCanvasSize(AVATAR_LAYOUT[_0x330cd5(0x127)]),_0x3475f3=Math[_0x330cd5(0x1ee)](_0x3bccd6/_0x994772[_0x330cd5(0x324)],_0x3bccd6/_0x994772[_0x330cd5(0x259)]),_0x162662=_0x3bccd6/0x2,_0x58b910=designToCanvas(AVATAR_LAYOUT['cx'],AVATAR_LAYOUT['cy']);return _0x994772['set']({'scaleX':_0x3475f3,'scaleY':_0x3475f3,'left':_0x58b910['x'],'top':_0x58b910['y'],'originX':_0x330cd5(0x1af),'originY':_0x330cd5(0x1af),'clipTo':buildAvatarClip(_0x162662),'selectable':!![],'evented':!![],'isAvatar':!![]}),_0x994772[_0x330cd5(0x2a7)](),_0x994772;}function getTextObjectPosition(_0x3ffbd8){const _0x511b92=_0x210f,_0x268200=TEXT_AREAS[_0x3ffbd8];if(!_0x268200)return{};if(TEXT_FIELD_CONFIG[_0x3ffbd8]?.[_0x511b92(0x2e5)]){const _0x3cb772=designToCanvas(_0x268200['x']+_0x268200[_0x511b92(0x324)]/0x2,_0x268200['y']);return{'left':_0x3cb772['x'],'top':_0x3cb772['y'],'originX':_0x511b92(0x1af),'originY':_0x511b92(0x242)};}if(_0x3ffbd8===_0x511b92(0x1db)||_0x3ffbd8===_0x511b92(0x105)){const _0x40bbe5=designToCanvas(_0x268200['x'],_0x268200['y']);return{'left':_0x40bbe5['x'],'top':_0x40bbe5['y'],'originX':_0x511b92(0x11f),'originY':'top'};}if(_0x3ffbd8==='items'){const _0x51d311=designToCanvas(_0x268200['x']+_0x268200[_0x511b92(0x324)]/0x2,_0x268200['y']+_0x268200[_0x511b92(0x259)]/0x2);return{'left':_0x51d311['x'],'top':_0x51d311['y'],'originX':_0x511b92(0x1af),'originY':_0x511b92(0x1af)};}if(_0x3ffbd8===_0x511b92(0x2ac)){const _0x3edebc=designToCanvas(_0x268200['x']+_0x268200[_0x511b92(0x324)]/0x2,_0x268200['y']);return{'left':_0x3edebc['x'],'top':_0x3edebc['y'],'originX':'center','originY':_0x511b92(0x261)};}if(_0x3ffbd8===_0x511b92(0x2f4)){const _0xe0c119=designToCanvas(_0x268200['x']+_0x268200['width']/0x2,_0x268200['y']+_0x268200[_0x511b92(0x259)]/0x2);return{'left':_0xe0c119['x'],'top':_0xe0c119['y'],'originX':_0x511b92(0x1af),'originY':_0x511b92(0x261)};}return{};}function applyLayoutToTextObjects(){const _0x160e13=_0x210f;Object[_0x160e13(0x22c)](textObjects)[_0x160e13(0x2a5)](_0x11b9bb=>{const _0x37002a=_0x210f;if(!textObjects[_0x11b9bb])return;textObjects[_0x11b9bb]['set'](getTextObjectPosition(_0x11b9bb)),textObjects[_0x11b9bb][_0x37002a(0x2a7)]();});}function applyLayoutToAvatarImages(){const _0x50e16c=_0x210f;if(!canvas)return;const _0xc26e5a=designToCanvasSize(AVATAR_LAYOUT['size']),_0x502ef4=_0xc26e5a/0x2,_0x2a1dec=designToCanvas(AVATAR_LAYOUT['cx'],AVATAR_LAYOUT['cy']);canvas[_0x50e16c(0x302)]()[_0x50e16c(0x2a5)](_0x158941=>{const _0x51c279=_0x210f;if(!_0x158941['clipTo'])return;const _0x45372e=Math['min'](_0xc26e5a/_0x158941[_0x51c279(0x324)],_0xc26e5a/_0x158941[_0x51c279(0x259)]);_0x158941[_0x51c279(0x1a3)]({'scaleX':_0x45372e,'scaleY':_0x45372e,'left':_0x2a1dec['x'],'top':_0x2a1dec['y'],'originX':_0x51c279(0x1af),'originY':_0x51c279(0x1af),'clipTo':buildAvatarClip(_0x502ef4)}),_0x158941[_0x51c279(0x2a7)]();});}function syncCanvasLayerOrder(){const _0x287e56=_0x210f;if(!canvas)return;let _0x4d5fbc=0x0;backgroundImage&&(backgroundImage[_0x287e56(0x1ae)](_0x4d5fbc),_0x4d5fbc+=0x1),canvas[_0x287e56(0x302)]()[_0x287e56(0xef)](_0x4e9d45=>_0x4e9d45[_0x287e56(0x114)])[_0x287e56(0x2a5)](_0x178c52=>{_0x178c52['moveTo'](_0x4d5fbc),_0x4d5fbc+=0x1;}),topOverlayImage&&(topOverlayImage[_0x287e56(0x1ae)](_0x4d5fbc),_0x4d5fbc+=0x1),Object[_0x287e56(0x191)](textObjects)['forEach'](_0x5daa3d=>{const _0x189f90=_0x210f;if(!_0x5daa3d)return;_0x5daa3d[_0x189f90(0x1ae)](_0x4d5fbc),_0x4d5fbc+=0x1;});}function relayoutCanvasElements(_0x3b3384){const _0x55a7db=_0x210f;if(!canvas)return;refreshBackgroundFrame();if(backgroundImage)fitTemplateImageToFrame(backgroundImage);if(topOverlayImage)fitTemplateImageToFrame(topOverlayImage);applyLayoutToAvatarImages(),applyLayoutToTextObjects(),syncCanvasLayerOrder(),canvas[_0x55a7db(0x2c7)](),(!_0x3b3384||_0x3b3384[_0x55a7db(0x16e)]!==![])&&schedulePreviewUpdate();}function getCanvasDesignSize(){const _0x37162f=_0x210f;return{'designWidth':DESIGN_SIZE[_0x37162f(0x324)],'designHeight':DESIGN_SIZE[_0x37162f(0x259)]};}function schedulePreviewUpdate(){if(batchGenerating)return;if(previewUpdateRaf!==null)return;previewUpdateRaf=requestAnimationFrame(function(){previewUpdateRaf=null;if(batchGenerating)return;requestAnimationFrame(updateCanvasPreviewScale);});}function updatePreviewScaleLabel(_0x2771fa,_0x4da6c0,_0x46c360){const _0x57ff8a=_0x210f,_0x3368fd=document[_0x57ff8a(0x26b)](_0x57ff8a(0x1f8));if(!_0x3368fd)return;const _0x52d500=Math[_0x57ff8a(0x1fc)](0x1,Math[_0x57ff8a(0x274)](_0x46c360*0x64)),_0x100d57=Math[_0x57ff8a(0x1fc)](0x1,Math[_0x57ff8a(0x274)](viewUserZoom*0x64));_0x3368fd['textContent']=_0x100d57===0x64?_0x2771fa+'\x20×\x20'+_0x4da6c0+_0x57ff8a(0x267)+_0x52d500+'%':_0x2771fa+_0x57ff8a(0x120)+_0x4da6c0+_0x57ff8a(0x267)+_0x52d500+_0x57ff8a(0x30e)+_0x100d57+'%';}function applyCanvasViewTransform(){const _0x464ef3=_0x210f;if(!canvas)return;const _0x25f1b5=(canvasPreviewScale||0x1)*viewUserZoom;canvas[_0x464ef3(0x2b7)]([_0x25f1b5,0x0,0x0,_0x25f1b5,viewPanX,viewPanY]),canvas[_0x464ef3(0x2c7)](),canvas[_0x464ef3(0x15d)](),updatePreviewScaleLabel(DESIGN_SIZE['width'],DESIGN_SIZE[_0x464ef3(0x259)],canvasPreviewScale);}function resetCanvasViewTransform(){viewUserZoom=0x1,viewPanX=0x0,viewPanY=0x0;if(canvas)applyCanvasViewTransform();}function updateCanvasPreviewScale(){const _0x3c1d56=_0x210f;if(!canvas)return;const _0x32b020=document[_0x3c1d56(0x26b)]('canvasPreviewPanel');if(!_0x32b020)return;const {designWidth:_0x1f3164,designHeight:_0x39985f}=getCanvasDesignSize();if(!_0x1f3164||!_0x39985f)return;const _0x43cf6f=window[_0x3c1d56(0x1f3)](_0x32b020),_0x2611dd=(parseFloat(_0x43cf6f[_0x3c1d56(0x178)])||0x0)+(parseFloat(_0x43cf6f[_0x3c1d56(0x20d)])||0x0),_0x138d80=(parseFloat(_0x43cf6f['paddingTop'])||0x0)+(parseFloat(_0x43cf6f['paddingBottom'])||0x0),_0x2fcb61=Math['max'](_0x32b020[_0x3c1d56(0x1cd)]-_0x2611dd-0x4,0xa0),_0x32cb4c=Math[_0x3c1d56(0x1fc)](_0x32b020['clientHeight']-_0x138d80-0x4,0xf0);let _0x146935=Math[_0x3c1d56(0x1ee)](_0x2fcb61/_0x1f3164,_0x32cb4c/_0x39985f);if(!Number[_0x3c1d56(0x270)](_0x146935)||_0x146935<=0x0)_0x146935=0.1;const _0x4ce7d4=Math['max'](0x1,Math[_0x3c1d56(0x274)](_0x1f3164*_0x146935)),_0x2dbd93=Math['max'](0x1,Math[_0x3c1d56(0x274)](_0x39985f*_0x146935));_0x146935=Math['min'](_0x4ce7d4/_0x1f3164,_0x2dbd93/_0x39985f),canvasPreviewScale=_0x146935;const _0x51d60a=canvas['getWidth']()===_0x4ce7d4&&canvas[_0x3c1d56(0xfb)]()===_0x2dbd93;!_0x51d60a&&canvas[_0x3c1d56(0xe8)]({'width':_0x4ce7d4,'height':_0x2dbd93}),applyCanvasViewTransform();}function withDesignCanvas(_0x64104b){const _0x5959d7=_0x210f;if(!canvas)return _0x64104b();const _0x363dd8=document[_0x5959d7(0x26b)](_0x5959d7(0x220)),_0x11f455=canvas[_0x5959d7(0x19d)],_0x1bf2fe={'panelHeight':_0x363dd8?_0x363dd8[_0x5959d7(0xda)][_0x5959d7(0x259)]:'','panelMinHeight':_0x363dd8?_0x363dd8[_0x5959d7(0xda)][_0x5959d7(0x108)]:'','panelOverflow':_0x363dd8?_0x363dd8[_0x5959d7(0xda)][_0x5959d7(0x17d)]:'','wrapperVisibility':_0x11f455?_0x11f455[_0x5959d7(0xda)][_0x5959d7(0x32e)]:''};if(_0x363dd8){const _0x547b33=_0x363dd8[_0x5959d7(0xec)]();_0x363dd8['style'][_0x5959d7(0x259)]=Math['round'](_0x547b33[_0x5959d7(0x259)])+'px',_0x363dd8[_0x5959d7(0xda)][_0x5959d7(0x108)]=Math[_0x5959d7(0x274)](_0x547b33['height'])+'px',_0x363dd8['style'][_0x5959d7(0x17d)]=_0x5959d7(0x316);}_0x11f455&&(_0x11f455[_0x5959d7(0xda)]['visibility']=_0x5959d7(0x316));canvas['setZoom'](0x1),canvas[_0x5959d7(0x2b7)]([0x1,0x0,0x0,0x1,0x0,0x0]),canvas[_0x5959d7(0xe8)]({'width':DESIGN_SIZE[_0x5959d7(0x324)],'height':DESIGN_SIZE[_0x5959d7(0x259)]}),canvas['calcOffset']();try{return _0x64104b();}finally{_0x363dd8&&(_0x363dd8[_0x5959d7(0xda)][_0x5959d7(0x259)]=_0x1bf2fe[_0x5959d7(0x2e0)],_0x363dd8[_0x5959d7(0xda)][_0x5959d7(0x108)]=_0x1bf2fe[_0x5959d7(0x233)],_0x363dd8[_0x5959d7(0xda)][_0x5959d7(0x17d)]=_0x1bf2fe[_0x5959d7(0x244)]),_0x11f455&&(_0x11f455['style'][_0x5959d7(0x32e)]=_0x1bf2fe['wrapperVisibility']),schedulePreviewUpdate();}}function initCanvasPreviewResize(){const _0x34ce29=_0x210f,_0x4edd97=document[_0x34ce29(0x26b)](_0x34ce29(0x220)),_0x533d07=document['querySelector']('.preview-card'),_0x5a97ab=document['querySelector'](_0x34ce29(0x13e));if(!_0x4edd97)return;canvasPreviewResizeObserver&&canvasPreviewResizeObserver[_0x34ce29(0x1e4)](),typeof ResizeObserver!==_0x34ce29(0x27c)&&(canvasPreviewResizeObserver=new ResizeObserver(function(){schedulePreviewUpdate();}),canvasPreviewResizeObserver['observe'](_0x4edd97),_0x533d07&&canvasPreviewResizeObserver['observe'](_0x533d07),_0x5a97ab&&canvasPreviewResizeObserver[_0x34ce29(0xf3)](_0x5a97ab)),window[_0x34ce29(0x2df)](_0x34ce29(0x32a),schedulePreviewUpdate),window['addEventListener'](_0x34ce29(0x162),schedulePreviewUpdate),document[_0x34ce29(0x2df)]('visibilitychange',function(){const _0x160e8d=_0x210f;if(!document[_0x160e8d(0x316)])schedulePreviewUpdate();}),document[_0x34ce29(0x1fb)]&&document[_0x34ce29(0x1fb)]['ready']&&document['fonts'][_0x34ce29(0x2a2)]['then'](schedulePreviewUpdate);}function initTextFieldState(){const _0x11a9b4=_0x210f;textFieldState={},Object[_0x11a9b4(0x22c)](TEXT_FIELD_CONFIG)[_0x11a9b4(0x2a5)](_0x3bab1e=>{const _0x188792=_0x210f,_0x2ae46b=TEXT_FIELD_CONFIG[_0x3bab1e],_0x3735ad=STYLE_PRESETS[_0x2ae46b[_0x188792(0x2d1)]];textFieldState[_0x3bab1e]={'content':_0x2ae46b[_0x188792(0x1d5)]||'','fontFamily':_0x3735ad['fontFamily'],'fontSize':_0x3735ad[_0x188792(0x12a)],'fontColor':_0x3735ad[_0x188792(0x1f1)]};});}function getFieldContent(_0x1957cf){const _0x3dde69=_0x210f;return textFieldState[_0x1957cf]?.[_0x3dde69(0x29c)]??'';}function setFieldContent(_0x13c2f7,_0x442282,_0xbdb6a1={}){const _0x1f432a=_0x210f;if(!textFieldState[_0x13c2f7])return;textFieldState[_0x13c2f7][_0x1f432a(0x29c)]=_0x442282;if(_0x13c2f7===activeFieldKey){const _0x3b2502=document[_0x1f432a(0x26b)](_0x1f432a(0x2f8));if(_0x3b2502&&_0x3b2502[_0x1f432a(0x2ca)]!==_0x442282)_0x3b2502[_0x1f432a(0x2ca)]=_0x442282;}updateTextObject(_0x13c2f7),TEXT_FIELD_CONFIG[_0x13c2f7]?.['linkedCongrats']&&updateCongratsText(),_0xbdb6a1[_0x1f432a(0x139)]&&selectTextField(_0x13c2f7,{'openEditor':!![]});}function commitInspectorToState(){const _0x5b4f33=_0x210f;if(!textFieldState[activeFieldKey])return;const _0x3107d2=textFieldState[activeFieldKey],_0x2b4221=document[_0x5b4f33(0x26b)]('inspectorContent'),_0x40dc36=document[_0x5b4f33(0x26b)]('inspectorFontFamily'),_0x43502e=document[_0x5b4f33(0x26b)](_0x5b4f33(0x2e2)),_0x2284a5=document[_0x5b4f33(0x26b)]('inspectorFontColor');if(_0x2b4221)_0x3107d2[_0x5b4f33(0x29c)]=_0x2b4221[_0x5b4f33(0x2ca)];if(_0x40dc36)_0x3107d2[_0x5b4f33(0x29d)]=_0x40dc36[_0x5b4f33(0x2ca)];if(_0x43502e)_0x3107d2[_0x5b4f33(0x12a)]=parseInt(_0x43502e[_0x5b4f33(0x2ca)],0xa)||_0x3107d2[_0x5b4f33(0x12a)];if(_0x2284a5)_0x3107d2[_0x5b4f33(0x1f1)]=_0x2284a5['value'];}function syncInspectorUIFromState(_0x1046fe){const _0x5010e8=_0x210f;activeFieldKey=_0x1046fe;const _0x5aed54=TEXT_FIELD_CONFIG[_0x1046fe],_0x46cd0a=textFieldState[_0x1046fe];if(!_0x5aed54||!_0x46cd0a)return;const _0xf5165e=document[_0x5010e8(0x26b)](_0x5010e8(0xf5));if(_0xf5165e)_0xf5165e[_0x5010e8(0x2ca)]=_0x1046fe;const _0x2258a8=document[_0x5010e8(0x26b)](_0x5010e8(0x2f8));_0x2258a8&&(_0x2258a8[_0x5010e8(0x2ca)]=_0x46cd0a[_0x5010e8(0x29c)],_0x2258a8[_0x5010e8(0x208)]='请输入'+_0x5aed54[_0x5010e8(0xea)]);const _0x319ef2=document['getElementById'](_0x5010e8(0x20b)),_0x31f3cb=document[_0x5010e8(0x26b)](_0x5010e8(0x21d));_0x319ef2&&_0x31f3cb&&(_0x5aed54[_0x5010e8(0x2b0)]&&_0x5aed54[_0x5010e8(0x2b0)][_0x5010e8(0x2bf)]?(_0x319ef2[_0x5010e8(0x316)]=![],_0x31f3cb[_0x5010e8(0x312)]='<option\x20value=\x22\x22>请选择</option>'+_0x5aed54[_0x5010e8(0x2b0)][_0x5010e8(0x1a9)](_0x12a339=>'<option\x20value=\x22'+_0x12a339+'\x22>'+_0x12a339+'</option>')[_0x5010e8(0x1e7)]('')):_0x319ef2[_0x5010e8(0x316)]=!![]);const _0x20a337=document[_0x5010e8(0x26b)](_0x5010e8(0x282)),_0x161e5a=document[_0x5010e8(0x26b)](_0x5010e8(0x2e2)),_0x37131f=document[_0x5010e8(0x26b)](_0x5010e8(0x1d2));if(_0x20a337)_0x20a337[_0x5010e8(0x2ca)]=_0x46cd0a[_0x5010e8(0x29d)];_0x161e5a&&(_0x161e5a['value']=_0x46cd0a[_0x5010e8(0x12a)],_0x161e5a[_0x5010e8(0x1fc)]=_0x5aed54['fontSizeMax']||0x12c);if(_0x37131f)_0x37131f[_0x5010e8(0x2ca)]=_0x46cd0a[_0x5010e8(0x1f1)];document[_0x5010e8(0x308)](_0x5010e8(0x31b))[_0x5010e8(0x2a5)](_0x1581bb=>{const _0x51e562=_0x210f;_0x1581bb['classList'][_0x51e562(0x161)](_0x51e562(0x228),_0x1581bb['dataset'][_0x51e562(0x27b)]===_0x5aed54['stylePreset']);}),document['querySelectorAll'](_0x5010e8(0x231))[_0x5010e8(0x2a5)](_0xd74b53=>{const _0xf26c3b=_0x210f;_0xd74b53[_0xf26c3b(0x1f0)][_0xf26c3b(0x161)]('is-active',_0xd74b53[_0xf26c3b(0x2ff)][_0xf26c3b(0x338)]===_0x46cd0a[_0xf26c3b(0x1f1)]);});}function selectTextField(_0x33620b,_0x2c3a07={}){const _0x4cd3b2=_0x210f;if(!TEXT_FIELD_CONFIG[_0x33620b])return;_0x33620b!==activeFieldKey&&(commitInspectorToState(),updateTextObject(activeFieldKey)),syncInspectorUIFromState(_0x33620b),_0x2c3a07[_0x4cd3b2(0x139)]&&openEditorPanel('text');}function openOffcanvas(_0x43e6d3){const _0x283ed0=_0x210f;if(_0x43e6d3===_0x283ed0(0x2fc)){openExportPanel();return;}if(_0x43e6d3===_0x283ed0(0x1a1)){openEditorPanel();return;}const _0x2e4ee8=document[_0x283ed0(0x26b)](_0x43e6d3);if(!_0x2e4ee8||!window[_0x283ed0(0x15c)])return;bootstrap[_0x283ed0(0x303)][_0x283ed0(0x2c0)](_0x2e4ee8)[_0x283ed0(0x1c8)]();}function isFloatPanelOpen(_0x1ea938){const _0x2dc12d=_0x210f,_0x125b1f=document[_0x2dc12d(0x26b)](_0x1ea938);return!!(_0x125b1f&&_0x125b1f[_0x2dc12d(0x1f0)][_0x2dc12d(0x28d)](_0x2dc12d(0x235)));}function isEditorPanelOpen(){const _0x3a6054=_0x210f;return isFloatPanelOpen(_0x3a6054(0x1a1));}function isExportPanelOpen(){const _0x498730=_0x210f;return isFloatPanelOpen(_0x498730(0x2fc));}function setFloatPanelOpen(_0x209b09,_0x54d8f8){const _0x16ec4a=_0x210f,_0x42e172=document[_0x16ec4a(0x26b)](_0x209b09);if(!_0x42e172)return;_0x42e172[_0x16ec4a(0x1f0)][_0x16ec4a(0x161)](_0x16ec4a(0x235),_0x54d8f8),_0x42e172[_0x16ec4a(0x316)]=!_0x54d8f8;}function syncPreviewBodyOpenState(){const _0x5ae2ce=_0x210f,_0xeacd06=document[_0x5ae2ce(0x2bd)](_0x5ae2ce(0xf4));if(!_0xeacd06)return;_0xeacd06[_0x5ae2ce(0x1f0)][_0x5ae2ce(0x161)](_0x5ae2ce(0x183),isEditorPanelOpen()||isExportPanelOpen()||isFloatPanelOpen(_0x5ae2ce(0x28f)));}function closeEditorPanel(){const _0x3d37fc=_0x210f;setFloatPanelOpen(_0x3d37fc(0x1a1),![]),document[_0x3d37fc(0x308)](_0x3d37fc(0x143))[_0x3d37fc(0x2a5)](_0x392fff=>{const _0x3a91e3=_0x210f;_0x392fff[_0x3a91e3(0x1f0)][_0x3a91e3(0x147)](_0x3a91e3(0x228));}),syncPreviewBodyOpenState(),schedulePreviewUpdate();}function closeExportPanel(){const _0xedea30=_0x210f;setFloatPanelOpen(_0xedea30(0x2fc),![]);const _0x5a669f=document[_0xedea30(0x26b)](_0xedea30(0x14d));if(_0x5a669f)_0x5a669f['classList'][_0xedea30(0x147)](_0xedea30(0x228));syncPreviewBodyOpenState(),schedulePreviewUpdate();}function closeBatchPanel(){const _0x3d50aa=_0x210f;setFloatPanelOpen('batchOffcanvas',![]);const _0x1fc5e3=document[_0x3d50aa(0x26b)](_0x3d50aa(0x1bc));if(_0x1fc5e3)_0x1fc5e3[_0x3d50aa(0x1f0)]['remove'](_0x3d50aa(0x228));syncPreviewBodyOpenState(),schedulePreviewUpdate();}function closeAllFloatPanels(){closeEditorPanel(),closeExportPanel(),closeBatchPanel();}function switchEditorTab(_0x3980d7){const _0x1c6bc3=_0x210f,_0x2e6916=[_0x1c6bc3(0x23a),_0x1c6bc3(0xdf),_0x1c6bc3(0x14f)];if(!_0x2e6916[_0x1c6bc3(0x1a2)](_0x3980d7))_0x3980d7=_0x1c6bc3(0xdf);const _0x7ed1f7=getCurrentTemplate();if(_0x3980d7===_0x1c6bc3(0x23a)&&!_0x7ed1f7['hasAvatar'])_0x3980d7=_0x1c6bc3(0xdf);if(_0x3980d7===_0x1c6bc3(0x14f)&&_0x7ed1f7['id']!==_0x1c6bc3(0x14f))_0x3980d7=_0x1c6bc3(0xdf);return document[_0x1c6bc3(0x308)](_0x1c6bc3(0x290))[_0x1c6bc3(0x2a5)](_0x5aef21=>{const _0x152559=_0x210f,_0x493442=_0x5aef21[_0x152559(0x2ff)]['editorTab']===_0x3980d7;_0x5aef21[_0x152559(0x1f0)][_0x152559(0x161)]('is-active',_0x493442),_0x5aef21[_0x152559(0xfe)](_0x152559(0x18b),_0x493442?_0x152559(0xe7):_0x152559(0x1c2));}),document[_0x1c6bc3(0x308)](_0x1c6bc3(0x111))[_0x1c6bc3(0x2a5)](_0x2931c2=>{const _0x294609=_0x210f;_0x2931c2[_0x294609(0x316)]=_0x2931c2[_0x294609(0x2ff)]['editorTabPanel']!==_0x3980d7;}),document[_0x1c6bc3(0x308)](_0x1c6bc3(0x143))[_0x1c6bc3(0x2a5)](_0x11d662=>{const _0x2f0525=_0x210f;_0x11d662[_0x2f0525(0x1f0)][_0x2f0525(0x161)](_0x2f0525(0x228),_0x11d662['dataset']['editorTab']===_0x3980d7&&isEditorPanelOpen());}),_0x3980d7;}function openEditorPanel(_0x5e53cb){const _0x2c67d6=_0x210f,_0x388e2f=document[_0x2c67d6(0x26b)](_0x2c67d6(0x1a1));if(!_0x388e2f)return;closeExportPanel(),closeBatchPanel();const _0xb879c3=switchEditorTab(_0x5e53cb||_0x2c67d6(0x23a));setFloatPanelOpen(_0x2c67d6(0x1a1),!![]),document[_0x2c67d6(0x308)](_0x2c67d6(0x143))[_0x2c67d6(0x2a5)](_0x3f281d=>{const _0x1e58e3=_0x210f;_0x3f281d[_0x1e58e3(0x1f0)]['toggle'](_0x1e58e3(0x228),_0x3f281d[_0x1e58e3(0x2ff)][_0x1e58e3(0x2cb)]===_0xb879c3);}),syncPreviewBodyOpenState();const _0x3a2ba2=document['getElementById'](_0x2c67d6(0x1bd));if(_0x3a2ba2){if(_0xb879c3===_0x2c67d6(0x23a))_0x3a2ba2[_0x2c67d6(0x2ff)][_0x2c67d6(0x1f7)]=_0x2c67d6(0x28a);else{if(_0xb879c3===_0x2c67d6(0xdf))_0x3a2ba2[_0x2c67d6(0x2ff)][_0x2c67d6(0x1f7)]='可改金额、下单信息与字体样式；点画布文字也可定位字段';else{if(_0xb879c3===_0x2c67d6(0x14f))_0x3a2ba2['dataset'][_0x2c67d6(0x1f7)]=_0x2c67d6(0x166);}}}schedulePreviewUpdate();}function openExportPanel(){const _0x4eea3b=_0x210f;closeEditorPanel(),closeBatchPanel(),setFloatPanelOpen(_0x4eea3b(0x2fc),!![]);const _0x301ef3=document['getElementById']('exportRailBtn');if(_0x301ef3)_0x301ef3[_0x4eea3b(0x1f0)][_0x4eea3b(0x286)](_0x4eea3b(0x228));syncPreviewBodyOpenState(),schedulePreviewUpdate();}function openBatchPanel(){const _0x31c00b=_0x210f;closeEditorPanel(),closeExportPanel(),ensureBatchTemplateFilled(),refreshBatchNameFilter(),syncTextareaToFormList(),setFloatPanelOpen(_0x31c00b(0x28f),!![]);const _0x396c2b=document['getElementById'](_0x31c00b(0x1bc));if(_0x396c2b)_0x396c2b[_0x31c00b(0x1f0)][_0x31c00b(0x286)](_0x31c00b(0x228));syncPreviewBodyOpenState(),schedulePreviewUpdate(),requestAnimationFrame(function(){const _0x8d8058=_0x210f,_0xa7eefa=document[_0x8d8058(0x26b)]('batchFormName');if(_0xa7eefa)_0xa7eefa[_0x8d8058(0x21f)]();});}function toggleBatchPanel(){const _0x58f734=_0x210f;if(isFloatPanelOpen(_0x58f734(0x28f))){closeBatchPanel();return;}openBatchPanel();}function toggleEditorPanel(_0x1f703c){const _0x124f84=_0x210f,_0x346fe4=document[_0x124f84(0x2bd)](_0x124f84(0x2bc))?.[_0x124f84(0x2ff)][_0x124f84(0x2cb)];if(isEditorPanelOpen()&&_0x346fe4===_0x1f703c){closeEditorPanel();return;}openEditorPanel(_0x1f703c);}function toggleExportPanel(){if(isExportPanelOpen()){closeExportPanel();return;}openExportPanel();}function populateSelectOptions(_0x3e10e8,_0x1108f2,_0x4de31a,_0x2a6be6){const _0x55e69e=_0x210f;if(!_0x3e10e8)return;_0x3e10e8[_0x55e69e(0x312)]=_0x4de31a?_0x55e69e(0x113)+(_0x2a6be6||'请选择')+_0x55e69e(0x28c):'',_0x1108f2['forEach'](_0x5d7be4=>{const _0x44c1da=_0x210f,_0x21327d=document[_0x44c1da(0x311)]('option');_0x21327d[_0x44c1da(0x2ca)]=_0x5d7be4,_0x21327d['textContent']=_0x5d7be4,_0x3e10e8['appendChild'](_0x21327d);});}function initInspectorUI(){const _0x2ba967=_0x210f,_0x48ad93=document[_0x2ba967(0x26b)](_0x2ba967(0xf5));_0x48ad93&&(_0x48ad93[_0x2ba967(0x312)]=Object[_0x2ba967(0x22c)](TEXT_FIELD_CONFIG)[_0x2ba967(0x1a9)](_0x31d720=>{const _0x56640c=_0x210f,_0x21a26c=TEXT_FIELD_CONFIG[_0x31d720];return _0x56640c(0x2ad)+_0x31d720+'\x22>'+_0x21a26c[_0x56640c(0xea)]+_0x56640c(0x28c);})[_0x2ba967(0x1e7)](''),_0x48ad93[_0x2ba967(0x2df)]('change',function(){const _0x59599a=_0x210f;selectTextField(this[_0x59599a(0x2ca)]);}));const _0x2eb6a7=document['getElementById'](_0x2ba967(0x282));_0x2eb6a7&&(_0x2eb6a7[_0x2ba967(0x312)]=FONT_OPTIONS[_0x2ba967(0x1a9)](_0x44b86c=>_0x2ba967(0x2ad)+_0x44b86c['value']+'\x22>'+_0x44b86c['label']+_0x2ba967(0x28c))[_0x2ba967(0x1e7)](''));const _0xa810a5=document[_0x2ba967(0x26b)](_0x2ba967(0x22b));_0xa810a5&&(_0xa810a5[_0x2ba967(0x312)]=Object['entries'](STYLE_PRESETS)['map'](([_0x418a34,_0x223f5a])=>_0x2ba967(0xdd)+_0x418a34+'\x22>'+_0x223f5a[_0x2ba967(0xea)]+'</button>')[_0x2ba967(0x1e7)](''),_0xa810a5[_0x2ba967(0x2df)](_0x2ba967(0x130),function(_0xbe25d1){const _0x1bb70d=_0x210f,_0x474884=_0xbe25d1['target'][_0x1bb70d(0x2ab)]('.style-preset-chip');if(!_0x474884)return;applyStylePreset(_0x474884[_0x1bb70d(0x2ff)][_0x1bb70d(0x27b)],{'targetKey':activeFieldKey});}));const _0x1167bf=document[_0x2ba967(0x26b)](_0x2ba967(0x262));_0x1167bf&&(_0x1167bf['innerHTML']=COLOR_SWATCHES[_0x2ba967(0x1a9)](_0x4789d0=>_0x2ba967(0x230)+_0x4789d0+_0x2ba967(0x1f9)+_0x4789d0+_0x2ba967(0x1a5)+_0x4789d0+_0x2ba967(0x12e))[_0x2ba967(0x1e7)](''),_0x1167bf[_0x2ba967(0x2df)](_0x2ba967(0x130),function(_0xda6aab){const _0x58c79b=_0x210f,_0x1927f2=_0xda6aab[_0x58c79b(0x25d)]['closest'](_0x58c79b(0x231));if(!_0x1927f2)return;document[_0x58c79b(0x26b)](_0x58c79b(0x1d2))[_0x58c79b(0x2ca)]=_0x1927f2[_0x58c79b(0x2ff)][_0x58c79b(0x338)],commitInspectorToState(),updateTextObject(activeFieldKey),syncInspectorUIFromState(activeFieldKey);}));populateSelectOptions(document[_0x2ba967(0x26b)](_0x2ba967(0x2a8)),AVATAR_FILTER_DEPARTMENTS,!![],_0x2ba967(0x1aa)),populateSelectOptions(document[_0x2ba967(0x26b)](_0x2ba967(0x258)),AVATAR_FILTER_DEPARTMENTS,![]);const _0x2bbf7c=document['getElementById'](_0x2ba967(0x2f8));_0x2bbf7c&&_0x2bbf7c['addEventListener'](_0x2ba967(0x263),function(){const _0x44da58=_0x210f;textFieldState[activeFieldKey][_0x44da58(0x29c)]=this[_0x44da58(0x2ca)],updateTextObject(activeFieldKey),TEXT_FIELD_CONFIG[activeFieldKey]?.['linkedCongrats']&&updateCongratsText();});const _0x238720=document[_0x2ba967(0x26b)](_0x2ba967(0x21d));_0x238720&&_0x238720[_0x2ba967(0x2df)](_0x2ba967(0x248),function(){const _0x2c5ce3=_0x210f;if(!this['value'])return;setFieldContent(activeFieldKey,this['value']),this[_0x2c5ce3(0x2ca)]='';});[_0x2ba967(0x282),'inspectorFontSize',_0x2ba967(0x1d2)]['forEach'](_0x15a94b=>{const _0xd0c6c1=_0x210f,_0x2cc28f=document[_0xd0c6c1(0x26b)](_0x15a94b);if(!_0x2cc28f)return;const _0x658cc5=_0x15a94b===_0xd0c6c1(0x282)?_0xd0c6c1(0x248):'input';_0x2cc28f['addEventListener'](_0x658cc5,function(){commitInspectorToState(),updateTextObject(activeFieldKey);});});const _0x562d3a=document[_0x2ba967(0x26b)]('applyStyleToAllBtn');_0x562d3a&&_0x562d3a['addEventListener'](_0x2ba967(0x130),applyCurrentStyleToAllFields),syncInspectorUIFromState(activeFieldKey);}function applyStylePreset(_0xf39c8a,_0xc4b7bb={}){const _0xa3d234=_0x210f,_0x262eab=STYLE_PRESETS[_0xf39c8a];if(!_0x262eab)return;const _0xc97ad7=_0xc4b7bb[_0xa3d234(0x1ba)]||activeFieldKey;Object[_0xa3d234(0x268)](textFieldState[_0xc97ad7],{'fontFamily':_0x262eab[_0xa3d234(0x29d)],'fontSize':_0x262eab[_0xa3d234(0x12a)],'fontColor':_0x262eab['fontColor']}),_0xc97ad7===activeFieldKey&&syncInspectorUIFromState(activeFieldKey),updateTextObject(_0xc97ad7);}function applyCurrentStyleToAllFields(){const _0x1068ae=_0x210f;commitInspectorToState();const {fontFamily:_0x24858b,fontSize:_0x37c059,fontColor:_0x2c082d}=textFieldState[activeFieldKey];Object[_0x1068ae(0x22c)](textFieldState)[_0x1068ae(0x2a5)](_0x2d5fbf=>{const _0xeb597b=_0x210f;Object[_0xeb597b(0x268)](textFieldState[_0x2d5fbf],{'fontFamily':_0x24858b,'fontSize':_0x37c059,'fontColor':_0x2c082d}),updateTextObject(_0x2d5fbf);}),syncInspectorUIFromState(activeFieldKey);}function getTextFieldKeyFromObject(_0x570a0b){const _0x1ae180=_0x210f;if(!_0x570a0b)return null;if(_0x570a0b['fieldKey'])return _0x570a0b[_0x1ae180(0x239)];return Object[_0x1ae180(0x22c)](textObjects)[_0x1ae180(0x2f5)](_0x33bc0a=>textObjects[_0x33bc0a]===_0x570a0b)||null;}function initOffcanvasPanels(){const _0xee309f=_0x210f,_0x481dae=document[_0xee309f(0x26b)](_0xee309f(0x309));_0x481dae&&_0x481dae[_0xee309f(0x2df)](_0xee309f(0x130),closeEditorPanel);const _0x4f0ff1=document['getElementById']('exportFloatCloseBtn');_0x4f0ff1&&_0x4f0ff1[_0xee309f(0x2df)](_0xee309f(0x130),closeExportPanel);const _0x57b9da=document[_0xee309f(0x26b)](_0xee309f(0x27e));_0x57b9da&&_0x57b9da['addEventListener']('click',closeBatchPanel);document[_0xee309f(0x308)](_0xee309f(0x290))[_0xee309f(0x2a5)](_0x32a7cb=>{const _0x24eb71=_0x210f;_0x32a7cb[_0x24eb71(0x2df)](_0x24eb71(0x130),function(){const _0x134b89=_0x210f;switchEditorTab(this[_0x134b89(0x2ff)][_0x134b89(0x2cb)]);});}),document[_0xee309f(0x308)](_0xee309f(0x143))[_0xee309f(0x2a5)](_0x8ce32f=>{const _0x43f835=_0x210f;_0x8ce32f[_0x43f835(0x2df)](_0x43f835(0x130),function(_0x1a77a3){const _0x466fcd=_0x210f;_0x1a77a3[_0x466fcd(0x2ee)](),toggleEditorPanel(this[_0x466fcd(0x2ff)][_0x466fcd(0x2cb)]);});});const _0x2152b1=document[_0xee309f(0x26b)](_0xee309f(0x14d));_0x2152b1&&_0x2152b1['addEventListener'](_0xee309f(0x130),function(_0x2f9a53){const _0x499f7b=_0x210f;_0x2f9a53[_0x499f7b(0x2ee)](),toggleExportPanel();});const _0x23a261=document[_0xee309f(0x26b)](_0xee309f(0x1bc));_0x23a261&&_0x23a261[_0xee309f(0x2df)]('click',function(_0x56ce02){const _0x1ebd84=_0x210f;_0x56ce02[_0x1ebd84(0x2ee)](),toggleBatchPanel();});const _0x35248c=document['getElementById']('viewLockBtn');_0x35248c&&_0x35248c[_0xee309f(0x2df)](_0xee309f(0x130),function(_0x3ae166){_0x3ae166['stopPropagation'](),toggleViewLock();});initBatchFormPanel();const _0x100bdd=document[_0xee309f(0x26b)]('batchValidateBtn');_0x100bdd&&_0x100bdd['addEventListener'](_0xee309f(0x130),validateBatchInput);const _0x48ce71=document[_0xee309f(0x26b)](_0xee309f(0x167));_0x48ce71&&_0x48ce71['addEventListener'](_0xee309f(0x130),generateBatchCongrats),document['addEventListener']('keydown',function(_0x3c87df){const _0x3a03bb=_0x210f;if(_0x3c87df[_0x3a03bb(0x13f)]!==_0x3a03bb(0x1b9))return;(isEditorPanelOpen()||isExportPanelOpen()||isFloatPanelOpen(_0x3a03bb(0x28f)))&&closeAllFloatPanels();}),document[_0xee309f(0x2df)](_0xee309f(0x277),function(_0x79db89){const _0xd903aa=_0x210f;if(!isEditorPanelOpen()&&!isExportPanelOpen()&&!isFloatPanelOpen(_0xd903aa(0x28f)))return;const _0x2b097f=_0x79db89[_0xd903aa(0x25d)];if(!(_0x2b097f instanceof Element))return;if(_0x2b097f[_0xd903aa(0x2ab)](_0xd903aa(0x10c)))return;if(_0x2b097f[_0xd903aa(0x2ab)]('.workspace-action-bar'))return;if(_0x2b097f[_0xd903aa(0x2ab)](_0xd903aa(0x136)))return;closeAllFloatPanels();});}function initHelpTips(){const _0x55f899=_0x210f;let _0x271f7f=null,_0x5630c1=null,_0x14ba24=document[_0x55f899(0x26b)]('helpTipBubble');!_0x14ba24&&(_0x14ba24=document['createElement'](_0x55f899(0x122)),_0x14ba24['id']=_0x55f899(0x297),_0x14ba24[_0x55f899(0x2e9)]='help-tip-bubble',_0x14ba24[_0x55f899(0xfe)](_0x55f899(0x1bf),_0x55f899(0x1ad)),document['body'][_0x55f899(0x28e)](_0x14ba24));function _0x550856(){const _0x35e7ce=_0x210f;_0x271f7f&&(clearTimeout(_0x271f7f),_0x271f7f=null);_0x14ba24[_0x35e7ce(0x1f0)][_0x35e7ce(0x147)](_0x35e7ce(0x21e));if(_0x5630c1)_0x5630c1[_0x35e7ce(0x1f0)][_0x35e7ce(0x147)](_0x35e7ce(0x235));_0x5630c1=null;}function _0x25c512(_0x310a1f){const _0x424ad6=_0x210f,_0x4e5d91=_0x310a1f[_0x424ad6(0x1cb)](_0x424ad6(0x2b5))||'';if(!_0x4e5d91)return;_0x5630c1=_0x310a1f,_0x310a1f['classList'][_0x424ad6(0x286)](_0x424ad6(0x235)),_0x14ba24[_0x424ad6(0x206)]=_0x4e5d91,_0x14ba24[_0x424ad6(0x1f0)][_0x424ad6(0x286)](_0x424ad6(0x21e));const _0x4063d0=_0x310a1f[_0x424ad6(0xec)](),_0x5dbfb9=_0x14ba24[_0x424ad6(0x2c9)]||0xdc,_0x50fe50=_0x14ba24[_0x424ad6(0x213)]||0x28;let _0x5358f6=_0x4063d0[_0x424ad6(0x11f)]+_0x4063d0[_0x424ad6(0x324)]/0x2-_0x5dbfb9/0x2,_0x5e3bb7=_0x4063d0[_0x424ad6(0x1e3)]+0x8;_0x5358f6=Math[_0x424ad6(0x1fc)](0x8,Math[_0x424ad6(0x1ee)](_0x5358f6,window[_0x424ad6(0x23b)]-_0x5dbfb9-0x8)),_0x5e3bb7+_0x50fe50>window[_0x424ad6(0x334)]-0x8&&(_0x5e3bb7=_0x4063d0[_0x424ad6(0x242)]-_0x50fe50-0x8),_0x14ba24['style'][_0x424ad6(0x11f)]=Math['round'](_0x5358f6)+'px',_0x14ba24[_0x424ad6(0xda)]['top']=Math['round'](_0x5e3bb7)+'px';}document['addEventListener'](_0x55f899(0x11d),function(_0x546a26){const _0x3e8227=_0x210f,_0x259be7=_0x546a26[_0x3e8227(0x25d)][_0x3e8227(0x2ab)]?.(_0x3e8227(0x1a0));if(!_0x259be7)return;if(_0x271f7f)clearTimeout(_0x271f7f);_0x271f7f=setTimeout(function(){_0x25c512(_0x259be7);},0x28a);}),document[_0x55f899(0x2df)](_0x55f899(0x1fe),function(_0x125a8b){const _0x3b49b0=_0x210f,_0x4ae3ce=_0x125a8b['target']['closest']?.(_0x3b49b0(0x1a0));if(!_0x4ae3ce)return;const _0xe47d4a=_0x125a8b[_0x3b49b0(0x27a)];if(_0xe47d4a&&_0x4ae3ce[_0x3b49b0(0x28d)](_0xe47d4a))return;_0x550856();}),document['addEventListener'](_0x55f899(0x27d),_0x550856,!![]),window[_0x55f899(0x2df)](_0x55f899(0x32a),_0x550856);}function loadAutoShowPreference(){const _0x399d9c=_0x210f,_0x10e184=localStorage['getItem'](AUTO_SHOW_KEY);autoShowEditorPanel=_0x10e184===null?!![]:_0x10e184===_0x399d9c(0xe7);const _0x82fe9c=document[_0x399d9c(0x26b)](_0x399d9c(0x1d8));if(_0x82fe9c)_0x82fe9c[_0x399d9c(0x121)]=autoShowEditorPanel;}function loadViewLockPreference(){const _0x434e69=_0x210f,_0x402ea2=localStorage[_0x434e69(0x293)](VIEW_LOCK_KEY);viewLocked=_0x402ea2===null?!![]:_0x402ea2===_0x434e69(0xe7),syncViewLockButton();}function syncViewLockButton(){const _0x34c962=_0x210f,_0x528e24=document[_0x34c962(0x26b)](_0x34c962(0x19a));if(!_0x528e24)return;_0x528e24[_0x34c962(0x1f0)]['toggle'](_0x34c962(0x1b8),viewLocked),_0x528e24[_0x34c962(0x1f0)][_0x34c962(0x161)](_0x34c962(0x228),viewLocked),_0x528e24['setAttribute'](_0x34c962(0x182),viewLocked?'true':_0x34c962(0x1c2)),_0x528e24[_0x34c962(0x206)]=viewLocked?'锁定':'解锁',_0x528e24[_0x34c962(0x2e7)]=viewLocked?_0x34c962(0x1ff):_0x34c962(0x149);const _0x29c093=document['getElementById'](_0x34c962(0x220));_0x29c093&&(_0x29c093[_0x34c962(0x1f0)][_0x34c962(0x161)](_0x34c962(0x278),!viewLocked&&spacePanKey),viewLocked&&(_0x29c093[_0x34c962(0x1f0)][_0x34c962(0x147)](_0x34c962(0x333),_0x34c962(0x278)),isViewPanning=![],spacePanKey=![]));}function _0x696a(){const _0x482baa=['mwHqquPJzq','yMf0y2HcDg4','zwrPDg9YrMXVD1rPCa','6i635y+w5As05yop5PAh5lU25AsX6lsLoG','CM9Szq','5BEY5OIq5yQF5yIG6zMK5lQ65zgy44cq','yMXVyG','zMfSC2u','zgLLDenVBxbHBNLoyw1L','mJaYnI0WnI0WnZOG5zcm5Q2LidiWmJyTmdyTmdCG5PAW5AkE5lQ65zgy5PAh5lU25As5idiYiow8OowKTowdJ+IhSYbhAxriDwlVViZMLOFKU7BLKi3KUi7LLPZMIQxLKi3LJzxKUidKUidLR7NLUPtVVjVNP7VPMAtLJ7lMRApOK5pJGihLVkdMLOFMHAFJGihMM7NLQj/JGihNJOVKVBpNRyNKUi3LNkJLKi3LJzxLHOxNMOtML6FLM74','5yY755Ax5lIT5B+d','6i635y+w5As05yop5PAh5lU25AsX6lsL77Yb','Dgv4DezPzwXKu3rHDgu','C2HVDW','C3bSAxq','rgvSzxrL','z2v0qxr0CMLIDxrL','C3rYAw5NAwz5','y2XPzw50v2LKDgG','6k+35AgR5yAz5AEt5zcn','C2HHzg93','C29YDa','yMf0y2HbBw91BNrdAgLWCW','Aw5ZCgvJDg9YrM9UDenVBg9Y','DgvZDa','yxzHDgfYtMfTzvn1z2DLC3rPB25Z','zgvMyxvSDenVBNrLBNq','y292zxi','mJG2mJK0vergvvve','yxv0B1nOB3DfzgL0B3juB2DNBgu','ioADOEATO+EHRUoaGUIVT+wfIos/RUAuUEwqJUwgJEEuN+AiKooaGG','mJaYnI0Woc0WodOG6Ake6kEi5Ps555sOiezHyNjPyYbZzxrAB29T77Yi55s75BId5PI+56s65Bc65A+4pEIUVUIUOEEOV8oxC2nHBgxVViNVViZLPjRML7BMNlRLJ4WGCKfgiowqIow5TUwiT+AwSo+8M+MIHoINIowmUIbVDMvYzMXVDZPHDxrVicSGC2nYB2XSyMfYlwD1DhrLCIdLHzZLUPxVVjVLR7ZLH7RLIy3KUltML7BLPi3KVy0GEM9VBq','y29Uz3jHDhm','iYdLP5pLKi3POBVLNkJKURRLKzJLKi3LJzxKUk3VVjVPG6JPL6GV5OgT5zAC6k+T6iEQ5yQO55sF5OIq','44cn5PEG5Pwi77Ym6k+35AgR5yAz5PwW5A2x','56s65l6l77YA546l6i6j6i6jk+ETVUE6PUwBOUAJGdhLJzuG6yEr6AkD77YAmJaWmddLHym','zgvWDa','qMfJA3nWywnL','zgvZAwDUu2L6zq','i2jHDgnOt3jKzxjdAgLWCYaUyMf0y2GTy2HPCa','yM90Dg9T','zgLZy29UBMvJDa','yMf0y2GTzw50CNKTywn0Aw9UCW','mJaYnI0Woc0XmJOG57Yw6l6r6z2I5P2/5Ps55lI66Ake6kEi5yY65BEM5l6N5OkS5RwU77Yi5A+56B2q6ycj5lQ6l+AwH+wTL+AGJ++8IE+8JoMaIEs6UUs7HEMIHoINIos4JEIhQUwkQoI3S+I9RoAwH+wTLW','AM9PBG','AxnjBNrLz2vY','Dg9ju09tDhjPBMC','iZLMmdKXmW','BwvZC2fNzq','yMf0y2HgB3jTtMfTzq','yxjYyxK','BwLU','5QIH5P2/5zcV5yQO5AsX6lsLoG','y2XHC3nmAxn0','zM9UDenVBg9Y','zhjHD0LTywDL','z2v0q29TChv0zwrtDhLSzq','5PAh5lU26k+75y+w5AsX6lsL77Ym6k+36yEn6k+v77Yb','44cr55Qe5l+H5OgV77Yi5PYS5zYW5A2y5ykO77Yj77Ym6yoO6zEO77YA','DgvTCgXHDgu','DgLW','ChjLDMLLD1nJywXLtgfIzwW','iIbZDhLSzt0IyMfJA2DYB3vUzdO','zg93BMXVywq','zM9UDhm','Bwf4','6k+35AgR5yAz5OIw6ycj5OUP5lIl5y2v5yAf5A65','Cg9PBNrLCM91Da','5BEY6zsb5A6A77YA5lIn5y+V5OUw5OU95BMZ56E755s75BId77Yi54k55yE76kEJ6zsb77Yj','qxjYB3Dmzwz0','5Q2J5zYO5yQG6l295As05yop4OcM','CMvZDwX0','z2v0t3DUuhjVCgvYDhLezxnJCMLWDg9Y','zgLLDeL0zw1Z','z2v0qwn0AxzLt2jQzwn0','Dgv4DenVBNrLBNq','ioADOEACIEIVR++8Ja','CgXHy2vOB2XKzxi','54oT54oi56wD6ls65A6A6kw/5ywS5y+4cUIgS+MJN+s4REw/G+s7IUAxPEwuRUwhUG','ywrKrgLLDeL0zw1cDg4','zMLLBgrqCMvZzxrhCM91Ca','Bwf0y2HLCW','CgfKzgLUz1jPz2H0','56wD6ls65Qch6Aky','y29Uz3jHDhnbDxrVu2HVD0vKAxrVCG','lMPWzwC','BMvHCMvZDa','y2f0y2G','B2zMC2v0sgvPz2H0','lMPWzW','CMDIysGWldaSmcWWlJmP','phnWyw4+','44cr55Qe5l+H5OgV77Ym6k+35Qoa5P+L5AEt5zcn77Yb','pgHYihn0EwXLpsjTyxjNAw46idiWChGGmdSIpG','Bg9N','5Q2J5zYO55sF5OIqia','AgfZt3DUuhjVCgvYDhK','iYdMOlZLVi/VVjRLP5pLKi0R5lIl5y2v5yAf5A65ioMhKEMINE+8MUAvSowTL+wfG++8IoA1T+AkPEMhKEMINEs8MUw4PUoaJowfG+oaJE+8Iq','zMLLBgrqCMvZzxrtzwXLy3q','AxmTDMLZAwjSzq','zM9JDxm','y2fUDMfZuhjLDMLLD1bHBMvS','zgvZDgLUyxrPB24TAw4','zgLLDeL0zw1ZqM9KEq','C3jJ','BMfTzq','5BEY5yIG6zMK5BM25zcm5Q2L5yIWifryva','Dgv4DefYzwfZ','pgXPihrPDgXLpsi','AxmTywn0AxzL','pc9IDxr0B24+','y3jLyxrLt2jQzwn0vvjm','C3r5BgvqCMvZzxrcyxi','A2v5CW','5l6N5Qcp56Uw5O6s','re9nq29UDgvUDeXVywrLza','yxv0B0DLBMvYyxrL','pgj1DhrVBIb0ExbLpsjIDxr0B24IignSyxnZpsjJB2XVCI1ZD2f0y2GIigrHDgeTy29SB3i9iG','lMnVBg9Ylxn3yxrJAa','u2HHzg93','CgfUzwXnAw5izwLNAhq','DxbSB2fKsw1Hz2vxAxrOtMfTzuj0BG','AxmTB3bLBG','5zci6k6H6yEr6AkD','D2HLzwW','Dg9vChbLCKnHC2u','zMLLBgrlzxK','yxzHDgfY','Aw5UzxjxAwr0Aa','mti1EvzXA29m','6k+35ywi6Ake6kEi5PYj5Pwi5As05yop77Yb','ioADOE+8JowpR+EuN+AiKowwNoAkPEoaGG','pgXPpG','C2vSzwn0Aw9U','jMD0oW','Dg9W','lMjHDgnOlwnOAxa','CgfUzwXpDMvYzMXVDW','yMfJA2DYB3vUzcbSB2fKigzHAwXLza','mti4mda','6zsm56gs6iog56kX54Mh','y2HHBMDL','zxHWB3j0rgvMyxvSDhm','Ahr0Chm6lY9YyxCUz2L0AhvIDxnLCMnVBNrLBNqUy29Tl05TzMvUz3rVBMD4DwuVzgfPBhLFAw1NCY9TywLUlW','5OM+5yIWia','A2v5Dxa','pUwiOoMzPdWVyNv0Dg9UpJWVDgq+pc90CJ4','Dg9cBg9I','pc90zd48Dgq+pgj1DhrVBIb0ExbLpsjIDxr0B24IignSyxnZpsjKAwv0lxjVDY1Yzw1VDMuIigrHDgeTCMvTB3zLlwLUzgv4psi','CgfKzgLUzW','otGWma','5yMV5Oc757Up55cg','yxzHDgfYvgLW','6k+36l6t5ywL6kAb5yIG6zMK55Qe5lQ65zgy5AEt5zcn77Yb','ywn0AxzL','rw50zxi','zxHWB3j0qNrU','yxzHDgfYuMv2zxjZzurLChq','AgvPz2H0','iIbWBgfJzwHVBgrLCJ0I54MP5zob5zcn56EWiJ48l3rKpJX0zd48Aw5WDxqGDhLWzt0IBNvTyMvYiIbJBgfZCZ0IzgLLDc1PDgvTlxf0EsiGBwLUpsiXiIbZDgvWpsiXiIb2ywX1zt0I','ChjLDMvUDerLzMf1Bhq','5yIB5Osp5A2x5l2t','DgfYz2v0','Aw5PDgLHBhm','CMvHzefZrgf0yvvsta','Aw1Hz2uVANbLzW','BwLKzgXL','y29SB3jtD2f0y2Hcyxi','Aw5WDxq','DxbSB2fKzwrbDMf0yxjZ','ywnJzw50','pc9ZCgfUpJXZCgfUignSyxnZpsjZDwDNzxn0Aw9Ulw1LDgeIpG','imk3ia','yxnZAwDU','pgj1DhrVBIb0ExbLpsjIDxr0B24IignSyxnZpsjIyxrJAc1JAgLWiIbKyxrHlwfTB3vUDd0I','y29Uz3jHDhmTyxnZzxrZl2rPzxqTy2vUDgvYlxrLBxbSyxrLlNbUzW','z2v0rwXLBwvUDej5swq','44cn5lIn5zYO5zcn5y2v5lIT','ioADOEoaJa','zw51BwvYywjSzq','5B2X5yop5OQa5BIi','AxngAw5PDgu','i2zMzJjLyG','5OM56yEp55sF5OIq55UU5yMn5lUf5PsV5OYb44cm5lIQ5Qoa5lIA57UP5zAC5OQL44cn77Ym6k+35ywi5yIh5O2I5QIH5P2/44cc','mJaYnI0WnI0WnZOG6Ake6kEi57YP5Ps+5Ps555sOiezHyNjPyYbZzxrAB29T77Ym5AsA5PE25PY65y+mihjbrIdLIlFMLRdVViZPOOtOP4JLJlOGB3zLCMzSB3CG5Ps55lI6igf1Dg8','CM91BMq','6zsa5zsU6yoO','5OU86z+Z57sI5BYv55sF5OIq5AsX6lsLoG','Cg9PBNrLCMrVD24','AxmTC3bHy2uTCgfU','5Ps+5Bce56Er5lI75lU7','CMvSyxrLzfrHCMDLDa','ChjLC2v0','Dw5KzwzPBMvK','C2nYB2XS','yMf0y2HgBg9HDenSB3nLqNrU','mJaYnI0WnI0XmJOG5l+U5Asn6Ake6kEi57YP5Ps+5zco5BQv5zU+5lIn5PI+56s677YA6yc76l6r55s75BId5zU65A6AideWodddLZe5otdVViZPOOtOP4JKU4xNLkGGy3nZt25SEsdNVkNMLl7LUBBPH43MJPi','DgHLBG','yMf0y2HgB3jTt3jKzxi','Aw5ZCgvJDg9YrM9UDezHBwLSEq','yMf0y2HgB3jTqw1VDw50','CMvZB2X2zq','yxzHDgfYrMLSzuLUChv0','ywrK','mJu2ntK2m1fsvKfSBq','zw50CNK','5PYQ5OM+5yIW5lQ65zgy44cq','6Ake6kEi5As05yop5zco5y+V5ywi5P+L55Yl5Pwi5P6C77YB6zYa6kAb5PE25yAn54k544cm56gU6k6K5BM257UN57UT5Ps55PAh5A2x44cn','Aw5KAxzPzhvHBa','pc9VChrPB24+','y29UDgfPBNm','yxbWzw5Kq2HPBgq','yMf0y2HpzMzJyw52yxm','lMvKAxrVCI10ywiTyNrU','i2rJmZu0nq','5BYa6zEO57QI5Awx6Asq5lIl5y2v','z2v0sxrLBq','yxzHDgfYuMv2zxjZzu5HBwu','6k+36l6t5ywL5AEt5zcn77Yb','5A6H6zIf6ycA6l+h77YA5ywXia','AgvSCfrPCej1yMjSzq','5zsU5yE65PIo57Ug','yMDvCMW','5zU+54Mh5yQG6l295AsX6lsL77Ym6k+36yEn6k+v77Yb','mtm4EuP5C0fQ','y29UDgvUDa','zM9UDezHBwLSEq','DgfNtMfTzq','C2nVCMu','44cn5lIn5zYO5lQ65zgy5zcn5y2v5lIT','mJaYnI0Woc0XmJOG6kgm5lI65lIn5y+y6yEn5P6e77YA57UF5lIa5QIH5P2/5zcV5yQO44cb5A2x5l2tl+woHUwpSUwWSEE7QUwVUEM9KooaGEwKTowdJ0npuLpNU5/KUidJGihMIBNPH4/NN63OT6/JGihMI4BLIiBOTytMUPdMLOFKU7y','CMvHzhK','y29Uz3jHDhnwAwv3tg9JA2vK','C2f2zq','zM9YrwfJAa','B25SB2fK','C2v0q29VCMrZ','zgvWDezPBhrLCG','pc9ZCgfUpG','zNjVBvvsta','y2XVC2vZDa','B3jKzxi','pg9WDgLVBIb2ywX1zt0I','D2fYBG','C3bSAwnL','ChjLC2v0CW','iUwpJdeXiUA0U+wkQowLL+MKKos4I+wnLq','6iAZ6AoF5lIT5B+d5zAC5OQL','phnWyw4GC3r5Bgu9iMnVBg9YoIaJnMm3ntDKoYbMB250lxnPEMu6ide0ChG7iJ7LPltLG4/MNkRMIB7LIla8l3nWyw4+','5A6A6kw/5ywS5y+4','zgf0ys10Axa','iYdKUkRMO4dKUjRNU6NLLPZMIQuGWRCG5OM56yEp6l6t5ywL5QIH5P2/','C2v0vMLLD3bVCNruCMfUC2zVCM0','C3rHCNrZv2L0Aa','pc9ZCgfUpJXZCgfUignSyxnZpsjZDwDNzxn0Aw9UlwrLChqIpG','zML4zwq','CgfYC2u','lMvKAxrVCI10ywiTyNrUlMLZlwfJDgL2zq','CxvLCNLtzwXLy3rVCG','odqZntq0me1mufnttq','BgvUz3rO','z2v0t3jdCMvHDgvjBNn0yw5Jzq','mJaYnI0WnI0XnJOG5yY755Ax6yoO5A2u5AIF5AIF56A76igm77Ym5lUo5zAC5OQL5zcn5y2v56E76zMK77Yi5PYQ5OMt5y2H57UF6k6H5zcn5y2v5l+D55wz44cb54gW6iMY5Qch5RoO77Yj','mJaYnI0Wos0WmZOG5zcm5Q2L5P2C5l2Z5A6544cb5A6j546j5Rsb44cb546l5lYF44cb6zMi5PAh5PAh5As05yop6iEZieDPDeH1yIdLPltLG4/LUPpVVjVNP7VPMAtMNy7PM6JLQBFJGihPN6NKUiFLV6dML6FLPltLG48','6k+36ycj5OUP6kAb5lIk5lYG55Qe5zU+54Mh77Yb','5Q2J5zYO57Yw6l6r56YSia','Dgv4DezPzwXKq29UzMLN','D2HPDgu','CMvXDwvZDfjLBMrLCKfSBa','DhLWzq','B2zMC2v0v2LKDgG','DMfSDwu','zwrPDg9YvgfI','iZi4ytC0nq','CgvYC29UtgLZDe1VzgfS','BgLUzuHLAwDODa','mtuYnJa4CgrNDhDy','yM9KEq','C3r5BgvqCMvZzxq','qxjYB3DsAwDODa','5A+85yE65AsX6lsL','B2jQzwn0oM1VDMLUzW','yMf0y2HgB3jTq2XLyxjcDg4','C2vSzwn0','mJaYnI0Woc0XmJOG5PAW5AkE6kEg5zU+6zsb5A6A77Yi6BUy6k6K6zsb5A6A5lIn5y+V5OUw5OU977Yj5lIo5OM56yEp5PAh5PYS55sF5OIq77Yi5QIH5P2/5A6H6zIf5zco6iEQ5yQO5yE65zU+77Yj','Aw5KzxHpzG','As10zxH0','yxzHDgfYtMfTzuLUChv0','i2y1zdG4mG','qxjYB3DvCa','ioADOE+8Iq','mZG2ntK2nJvTDvzuB2u','ywrKrxzLBNrmAxn0zw5LCG','CgfUzwXizwLNAhq','zMLSBa','Aw5ZCgvJDg9YrM9UDfnPEMu','5BEY5PU05PAW56YSia','Aw52ywXPzcbPBwfNzq','DMvYDgLJywW','B2jQzwn0oNjLBw92zwq','DgL0Bgu','5BEY5OM+5yIWideG5lIQ5yY56ywn77Ym6k+35lUo5BU66k6U5yIx6kgO6ycj5OUP5OIw5OYjievUDgvYioMIHoINIa','y2XHC3noyw1L','44cr55Qe5l+H5OgV77Ym6yoO6zEO77YA','5yQG6l296Ag25Bgc5zU+54Mh5AsX6lsLoG','phn0CM9UzZ4','zMLSzxm','C3rVCfbYB3bHz2f0Aw9U','CgLUEwLUuhjV','mtjWEa','5A6m5OIq77YA5OIq5yQFia','mtu4mda','y29VCMrPBMf0zurPC3bSyxK','yw1VDw50','zMLUza','BM9Uzq','5A+85yE65zU+54Mh5yQG6l295AsX6lsL','Aw5ZCgvJDg9Yq29UDgvUDa','5y+V5Ps55lI644cm','CMvZDg9Yzq','6iAZ6AoF5lIT5B+d','zxHWB3j0t2zMy2fUDMfZ','5y+V5zYO44cm5PIo57Ug44cn5B2v5ywL54MP5zob77Ym5OIw5yIW44cm5PAh5A2x44cn5B6U6lcd5Qc35BYp','iIbWBgfJzwHVBgrLCJ0I5PwW6yEpiJ48l3rKpJX0zd48Aw5WDxqGDhLWzt0IBNvTyMvYiIbJBgfZCZ0IzgLLDc1PDgvTlxbYAwnLiIbTAw49iJaIihn0zxa9iJaUmdeIihzHBhvLpsi','zgf0yxnLDa','cUIgS+MJN+s4REw/G+s7IUAxPEwuRUwhUG','nJe45Rs75yQO5Awx6Asq5lIl5y2v','z2v0t2jQzwn0CW','t2zMy2fUDMfZ','Dgv4DejHC2vSAw5L','mJaYnI0Wos0Wnc12mq','5PYQ5zg95zcn','mZC0ntG5twXcC01c','CxvLCNLtzwXLy3rVCKfSBa','zwrPDg9YrMXVyxrdBg9Zzuj0BG','y2XPzw50wq','CMvZzxreAwv0','Bw91C2u6Dxa','mJaYnI0Woc0WntOG5yY755Ax5lIT5B+d5PAW5AkE55M95BI46joj77YB5zcm5Q2L5PYQ5OMt5y2H57UF6k6H5zcn5y2v','jsdcTYdOP4BLM74G','zgLLDefTB3vUDa','AxrLBxm','y3jLyxrLrwXLBwvUDa','Aw5Uzxjive1m','AhjLzG','u3bHy2u','yxzHDgfYqNrU','AgLKzgvU','pg9WDgLVBIb2ywX1zt0IiJ7OR7FPGiNMI6NLP5pLKi08l29WDgLVBJ4','Bwf0y2G','AxmTzwrPDgLUzW','5OM+5yIW44cq','lNn0EwXLlxbYzxnLDc1JAgLW','44cr77Ym6yoO6zEOoIa','y29UzMLYBuf2yxrHCKj0BG','44cr55Qe5As05yop5zU+54Mh77Ym6k+35l2/55sOiUs4IUs8Oow5TUs/NEwTMclLIP/OG73VVie','zwrPDerPzxrcDg4','5Oc757Up55cg','5yQG6l296iom5PMV5zU+54Mh5AsX6lsLoG','yM9YzgvYuMfKAxvZ','CgLUEwLUvgv4Da','D2LKDgG','A2v5zg93BG','Dw5PDfbYAwnL','y2XPzw50wa','5lIT562j6BUr5l2t','z2XVyMfSq29TCg9ZAxrLt3bLCMf0Aw9U','CMvZAxPL','zwrPDg9YvgfIqNrUrgLLDa','mJaYnI0Woc0ZmtOG5yY755Ax6yoO6z+P5lIh5B+G56A76igm77Ym5lUo5zAC5OQL5zcn5y2v56E76zMK77Yi5PYQ5OMt5y2H57UF6k6H5zcn5y2v5l+D55wz44cb54gW6iMY5Qch5RoO77Yj','mJaYnI0WnI0XnJOG5yY755Ax5lIT5B+d5PAW5AkE5B6q56Ea5Qkf77Yi5Ps+5Bce56Er5lI75lU777Ym5OkS5ygC5AEt5zcn5y+V5P+L55Yl6igm5yQH77Yj77YB5zcm5Q2L5B6q56Ea5QkflNbUzYdOH7mGr2L0shvIiowKTowdJ+w6KW','DMLZAwjPBgL0Eq','i2zMyJG3nq','CMvUzgvYqwXS','Bg9JywXLq29TCgfYzq','sw1Hz2u','AxmTCgfUBMLUzW','Aw5UzxjizwLNAhq','zNjVBq','Dg9Wt3zLCMXHEvvYBa','mtaWjq','y29SB3i','jMfTCdS','zgLLDfrVDgfSrgLZCgXHEq','phvSihn0EwXLpsjTyxjNAw46ida7ihbHzgrPBMCTBgvMDdOGmJbWEdSGzM9UDc1ZAxPLoIaXm3b4oYbJB2XVCJOGiZq5nta1nZSIpG','C2TPCa','Bw91C2vKB3DU','CMf3','44cr5As05yop5BEY5lIk55s75BId77Ym6k+357UN57UT5Ps56yEr6AkDl+s4I+wnLq','EKLUzgv4','zMfICMLJ','C3r5Bgu','ywXWAgfIzxrPyW','zgvMyxvSDefJDgL2zuzPzwXK','pgj1DhrVBIb0ExbLpsjIDxr0B24IignSyxnZpsjZDhLSzs1WCMvZzxqTy2HPCciGzgf0ys1WCMvZzxq9iG','lNbUzW','Dgv4Da','BMfTzuzPBhrLCG','i2zMzMzMzG','6kgm5Ps/6yoO','AxmTzxjYB3i','C2XPy2u','44cn77Yi6yoO6zEO77YA','iZzJnZu3za','Dhj1zq','C2v0rgLTzw5ZAw9UCW','zgvSDgfz','BgfIzwW','pgG1ihn0EwXLpsjTyxjNAw4TDg9WoIaXnxb4oYbTyxjNAw4TyM90Dg9ToIa1ChG7ignVBg9YoIaJmda3yMzMoYi+','z2v0qM91BMrPBMDdBgLLBNrszwn0','mtaWma','ChvZAa','zMLSDgvY','B3b0Aw9U','q2H1yw5NA2L0wM9Uz1LP','yMf0y2GTzw50CNKTBwfPBG','B2jZzxj2zq','lNbYzxzPzxCTy2fYzc1IB2r5','ywn0AxzLrMLLBgrtzwXLy3q','5yIy5ycP5ycPkYlLJ4WXmslMTlVLIQJLPzFPPjdKUiVLJzuG6yEr6AkD77YAmti4mddLHym','Dg9eyxrHvvjm','C2nYB2XSsw50B1zPzxC','mJaWmda','yMf0y2Hoyw1Lu3vNz2vZDgLVBNm','z2v0sgvPz2H0','Aw1Hz2u','ioADOEwiSowiL+IHQa','C2v0qxr0CMLIDxrL','5AEt5zcn44cm','CgLUEwLU','ios4QUwmUEMfJE+8JoIVT+MaIEAlQEwfT+s9K+wNK+wqJq','y3jVC3npCMLNAw4','Cg9ZAxrPB24','y3rYBeTLEq','AgvHzgvY','yMf0y2HqCM9NCMvZCW','ChjVDg90ExbL','BwLUsgvPz2H0','EMGTq04','iZGWmdKWza','vfHuios4REACIsa','lMvKAxrVCI1MBg9HDc1Wyw5LBa','mJaYnI0Woc0XmJOG5A+85yE66k6+572U5Ps55lI65lIo57Yw6l6r6z2I5P2/5zcm5QY+5OkS5RwU77YB5y675O6j5lIo57U05OQK5As05yop5BQt6yEn5Asn55Qe6AUy57QN5lIk5lYG77YB54k55yE76z2I5P2/5Asw5Ps26lw3','pc91Bd4','y2fUDMfZ','lMrPzxqTCM93lxjLBw92zq','w2rHDgeTzwrPDg9YlxrHyI1Wyw5LBf0','qxjYB3DeB3DU','pg9WDgLVBIb2ywX1zt0IiJ4','y2XPCfrV','zxHWB3j0v2LKDgG','5PYQ5OM+5yIW44cq','CMvWzwf0','mJaYnI0WnY0WodOG5PAW5AkE6iAZ6AoF5lIT5B+d5zAC5OQL5QIH5P2/77Ym5PsV5OYb54MP5zob5PIo57Ug5B2v5ywL5lIo5zci6k6H6yEr6AkD6iEQ5yQO6k6H566x','AxmTB2S','6iAZ6AoF5PIo57Ug','CMvWBgfJzq','pc9ZDhjVBMC+imk3ia','Cg9PBNrLCM92zxi','zgLZywjSzwq','BgvMDa','imoxia','y2HLy2TLza','zgL2','yMX1CG','lNDLyNa','CMvZzxrcDg4','z2v0','C2L6zq','iIbWBgfJzwHVBgrLCJ0I5y2v5lU3iJ48l3rKpJX0zcbJBgfZCZ0IC3vIDg90ywWTy2vSBci+','6k+35Qoa5P+L6zsz5yIR5A2x77Ym5OIw5ywi5zYO44cm6ycj5lQ6iokgKIdNU7tMIQtLPltLG4/LUPpJGi3MT7VLIQdOR6xKURRLKzG','zM9UDfnPEMu','tM90B1nHBNntq0jSywnR','zgLZCgXHEq','nhb4','iJ48l2j1DhrVBJ4','zgvSzxrLugvYC29UqNrU','y2XPy2S','zwrPDfrLEhrcDg4','B2jQzwn0oM1VzgLMAwvK','otbiyNLlCNu','546l6i6j6i6jk+ETVUE6PUwBOUAJGdhLJzuG6yEr6AkD77YAmJaWmddLHym','5PQc5PEG44cq','lM1VzgfS','yMf0y2Hoyw1LrMLSDgvY','C2v0sxrLBq','B3bLBKvKAxrVCG','mJaYnI0WnI0WnZOGr2L0shvIiowKTowdJ+wqJoATPE+8MUA9MoMBQoIqJEkgKUA9Mos4VEIqJEoaGEIrO+whR+MBQokgKUIrO+whR+s4VE+8IoAwH+s7TUMhJEwrVEwqJE+8IE+8M+AwSowINUw8OoMDMs5WBMFVVjVNP7VPMAtLPltLG4/LIkVLKi3PHy3NVA4','y29UDgLUDwvuB1rLEhq','pgrPDIbZDhLSzt0IzM9UDc1ZAxPLoIaXnhb4oYi+','6zMi54kZ5QoUk+w8GoMxQoE6OUwLL+MKKos4I+wnLsdPH5hPOP3VVjOXntGWmowfGW','lNDVCMTZCgfJzs1TywLU','A2v5','B2jQzwn0rML0','x190zxH0qMfZzwXPBMvqyxrJAgvK','Ahr0Chm6lY9YyxCUz2L0AhvIDxnLCMnVBNrLBNqUy29Tl05TzMvUz3rVBMD4DwuVzgfPBhLFAw1NCY9TywLUlZyUANbN','lNDVCMTZCgfJzs1Hy3rPB24TyNrUw2rHDgeTzwrPDg9YlxrHyL0','pgXPignSyxnZpsjPCY1LCNjVCIi+5RkH5PYj5y+V6k+g5yIR55Qe5PYj5Pwi6kgm77Ym6k+35OYj5QIH5P2/5AgR5yAzpc9SAt4','iZHImgeWzG','ANbLzW','CMvTB3zL','ioMhKEMINE+8MG','5BEY6kEJ6zsb77YA5y+V5OUw5OU95BMZ56E755s75BId77Yi54k55yE76zsb5A6A77Yj','lMDPzG','C2HPzNrlzxK','yxjJ','zxHWB3j0uMfPBej0BG','Dg9gAxHLza','zgLLDa','mtbWEa','i2zMyZeWnW','Aw5KzxG','yMf0y2HjBNb1Da','C2vSzwn0Aw9UoMnYzwf0zwq','6kgmiokCKYa','mJaYnI0WnI0WnJOG5OYj5PYa5PAW5zcn5y2v5Pw05l2t5PU/5O2I5lQ65zgy5zcn5y2v77YB6iYd5A6p5lQr6lcd6iEZ6kgm5Ps/6yoO77YB5PAW5AkE5l+E5BIf5PAh44cb5RgQ5l2r5A6j44cb6ic/5PAW5Rcr44cb6lw15RAM6jwk562j77YB56E76zMK5y+Y5Q2J6jot44cb546l5l2Z44cb6jgJ5y2A44cb5BYG5PAh5OwN44cb5PYX6iUX562j','vgv4Da','y2XLyxi','AxnbDMf0yxi','pc9SAt4','B2jQzwn0oMfKzgvK','yM9VDhn0CMfW','y2fSy09MzNnLDa','phnWyw4GC3r5Bgu9iMnVBg9YoIaJnMm3ntDKoYbMB250lxnPEMu6ide0ChG7iJ7LPltLG4/POOtOP4G8l3nWyw4+','yMfJA2DYB3vUzenVBg9Y','C2LKzwjHCG','Dg9Nz2XL','B3jPzw50yxrPB25JAgfUz2u','zgvMAw5LuhjVCgvYDhK','ioIHJoACQUIdVEINO+AEKoI/M+wiL+IHQo+8JoIVT+AuUsbuwfqG5OIw55sO6kgO5y2v6yEn5B2v','yMf0y2HgB3jTqwrKqNrU','5B2v5ywL54MP5zob5PIo57Ug77Ym5zci6k6H6yEr6AkD5lYA6iEQ5yQO5yAz5ywL55s75BId','yMf0y2Hhzw5LCMf0zuj0BG','zwrPDg9YvgfIqNrUqxzHDgfY','C2vSzwn0zwq','pgjYpG','ohb4ideYChG','jNf1B3q7','mJaYnI0Woc0XmJOG6k+05PIo5Ps55lI65PEb5l6NigKG5zU+5Qch6zw/5OkS5ygC5O+q56s677YB6ycj5lIT6iEQ5yQO5BYa6z2I5P2/5y+V5BYa5ywZ77YB5PsV5OYbierLBgv0zs/IJjHA44cbq3rYBcVMU5ROVA7NVkNMLl7KUi7MI5BMI73LUBpNP7S','C2nOzwr1BgvqCMv2Awv3','tM90B1nHBNntq01LzgL1Bq','5BEY5yQG5ywL5yIx6kgO77Yi5ywXia','mJaYnI0WnI0WnZOG5lYy5yYw6Ag16z2I5O6s54Mi77YA5As05yop566H55cg6BUy6k6K572U6Ag25Bgv5BYa77Ym5PAh5A2x57Yw6l6rl+wVVowhUI/KUiRKVkdMQkhLNzFMLlNKUlRMIPJLJ6dKVQFMOi8','yNv0Dg9U','pc9Ont4','mJaYnI0WnI0WnJOG5PU55AIF5lIo5PU55zYg5zYg5lI65lIn5zcm5lQ65zgy77Ym5PU55AIF5BEY56A76igm5lIn5zYO5zcn5y2v5yAf77YB5PU55zYg5zYg5lIn5yAn5ywZ6igu5PU55AIF5As05yop44cc5R2y5lI96jcn44cb6jgJ5yEV5lI95lI657UF5lIa5Qch5yEg5AEt5zcn','562+57QM5zUI5QoamEwnLq','mJaYnI0Wos0WndOG6zsa5zsU6yoO5P2C5l2Z5A6544cb5A6j546j5Rsb56A76igm77Ym5lUo5zAC5OQL5zcn5y2v56E76zMK77Yi5PYQ5OMt5y2H57UF6k6H5zcn5y2v5l+D55wz44cb5Qch5RoO5BEY56A76igm77Yj77YBr2L0shvIiowKTowdJ+s/NEEvMq','B25LCNjVCG','CgfKzgLUz0XLzNq','ioADOE+8JoAuUEwUJoEcUEoaJowkOowfPEwiL+IHQooaJEs/NEwTMa','yMf0y2HgB3jTtgLZDa','y2fSBa','AgfZqxzHDgfY','B3zLCMzSB3C','6yEr6AkD44cm','54oT54oi56wD6ls6','CgvYC29UtgLZDenVBNrLBNq','lNrLBxbSyxrLlxr5CguTyNrU','yxjPys1WCMvZC2vK','AxmTzwrPDg9Ylw9Wzw4','CgvYC29UBMvStwfW','5yAf5A655BEY5l+U5Ps577Ym6k+36yEn5PAW5A6H6zIf','mJaYnI0WnI0WmtOG5P2O5PMt5PIT5PU05Q2J5lI65P2O5PMt5PMw','CxvHBNrPDhK','lMrPzxqTAxrLBs1XDhK','CMvTB3zLq2HPBgq','mJaYnI0WnI0WnZOG5lIj5PYFifvjioAuUEMaOo+8MUs4IsbpzMzJyw52yxmG5OQ95BgjicSGsw5ZCgvJDg9YiowfSEEuQoAGT+w8J+AJGoAFPEwzQcaRioEcUEwhU+EuU+w4G+AwH+wTL+E8LUI+Kq','yxjPys1ZzwXLy3rLza','CMDIysGWldaSmcWWlJqP','CMvZzxriAxn0B3j5','DhjPBq','5lIQ5Qoa5lIA57UP5zAC5OQL','mZq1nJuZCen0z21v','DMfSDwvZ','mJaYnI0WnY0YmdOG6kgm5Ps/6yoO5PAW5AkE6zMi5l2P6BMd77YB5zcm5Q2L5PYQ5OMt5y2H57UF6k6H5zcn5y2v','pgG1ihn0EwXLpsjJB2XVCJOGiZzJnZu3zdSGBwfYz2LUlwjVDhrVBtOGmtbWEdSIpUABToAwSoIUSow9LtWVAdu+','C2HPzNq','mJaYnI0WnI0WnZOG6Ake6kEi55s75BId5OYj6kEg5y+J562j5Q+u57YP5Ps+5A6m5Pw05Bgv56s677Ym5l+U5AsniezHyNjPyYdLRRNLMAJNSBVLKi3LHRlNQOhLR7ZOH7tNMOtOTOxPQ5JMMl7NPlRPL67POPG','5OM56yEp55sF5OIq55UU5yMn5lUf5PsV5OYb44cm5lIQ5Qoa5lIA57UP5zAC5OQL44cn','i2y4zJLMyq','yw5VBNLTB3vZ','C2nHBgvz','DMLLD0XVy2TcDg4','pgj1DhrVBIb0ExbLpsjIDxr0B24IignSyxnZpsjIyxrJAc1JAgLWiIbKyxrHlw9YzgvYpsi','C3rYAw5N','D3jHChbLCKvS','yxzHDgfYuhjLDMLLD0fYzwe','iZfLmJKZyG','lMHLBhaTDgLW','zwrPDe9MzMnHBNzHCW','Aw5JBhvKzxm','C2v0','6BUy6k6K5QIH5P2/5BEY5BcX57UQoG','iIb0AxrSzt0I','zxHWB3j0sgvPz2H0','5BQv5zU+5PYQ5yQG6l29','zxjYB3i','BwfW','5ywO6yoO6yoO6zEO','zgLZy2fYzefJDgL2zu9IAMvJDa','CMvKDwnL','Dg9VBhrPCa','Bw92zvrV','y2vUDgvY','Bwv0yuTLEq','CgvYC29UBMvStwfWuMv2AxnPB24','5OgT5zAC77YA','wdOG','6iAZ6AoF5zAC5OQL','6kgmiokCLYa','zgf0ytO','Bw91C2u6zg93BG','AxmTBg9JA2vK','rxnJyxbL','DgfYz2v0s2v5'];_0x696a=function(){return _0x482baa;};return _0x696a();}function toggleViewLock(){const _0x21d285=_0x210f;viewLocked=!viewLocked,localStorage[_0x21d285(0x138)](VIEW_LOCK_KEY,String(viewLocked)),syncViewLockButton();}function initAutoShowToggle(){const _0x47fea9=_0x210f,_0x3bb2dd=document[_0x47fea9(0x26b)](_0x47fea9(0x1d8));if(!_0x3bb2dd)return;_0x3bb2dd['addEventListener'](_0x47fea9(0x248),function(){const _0x592a7a=_0x210f;autoShowEditorPanel=!!this['checked'],localStorage[_0x592a7a(0x138)](AUTO_SHOW_KEY,String(autoShowEditorPanel));});}function isProtectedCanvasObject(_0x3ea3db){if(!_0x3ea3db||!canvas)return!![];return _0x3ea3db===backgroundImage||_0x3ea3db===topOverlayImage;}function isAvatarObject(_0x4f851c){const _0x3b516c=_0x210f;return!!(_0x4f851c&&(_0x4f851c[_0x3b516c(0x159)]||_0x4f851c[_0x3b516c(0x114)]));}function openPanelForObject(_0x220b6f,_0x5898f2){const _0x3d155d=_0x210f;if(!_0x220b6f)return;if(!_0x5898f2&&!autoShowEditorPanel)return;if(isAvatarObject(_0x220b6f)){openEditorPanel('avatar');return;}const _0x533664=getTextFieldKeyFromObject(_0x220b6f);_0x533664&&(selectTextField(_0x533664),openEditorPanel(_0x3d155d(0xdf)));}function syncTextObjectsFromCanvas(){const _0x53c4a4=_0x210f,_0x17457a={};canvas['getObjects']()[_0x53c4a4(0x2a5)](_0x244cff=>{const _0x55fa36=_0x210f;if(_0x244cff['fieldKey'])_0x17457a[_0x244cff[_0x55fa36(0x239)]]=_0x244cff;}),textObjects=_0x17457a;}function captureHistorySnapshot(){const _0x52616a=_0x210f;if(!canvas)return null;const _0x51e8df=document[_0x52616a(0x26b)](_0x52616a(0x1c3));return JSON[_0x52616a(0x1cc)]({'canvas':canvas['toJSON']([_0x52616a(0x239),_0x52616a(0x159)]),'textFieldState':textFieldState,'dietItems':dietItems,'dietCompanyName':_0x51e8df?_0x51e8df['value']:'','currentTemplateId':currentTemplateId});}function pushHistory(){const _0x522fbe=_0x210f;if(historyLock||batchGenerating||!canvas)return;const _0x558888=captureHistorySnapshot();if(!_0x558888)return;if(historyIndex>=0x0&&historyStack[historyIndex]===_0x558888)return;historyStack=historyStack[_0x522fbe(0xe4)](0x0,historyIndex+0x1),historyStack['push'](_0x558888),historyStack[_0x522fbe(0x2bf)]>HISTORY_LIMIT&&historyStack[_0x522fbe(0x194)](),historyIndex=historyStack[_0x522fbe(0x2bf)]-0x1;}function restoreHistorySnapshot(_0x5d4fb4){const _0x185052=_0x210f;if(!canvas||!_0x5d4fb4)return;let _0x399f57;try{_0x399f57=JSON['parse'](_0x5d4fb4);}catch(_0x2b3abc){return;}historyLock=!![],canvas['loadFromJSON'](_0x399f57[_0x185052(0x10f)],function(){const _0x1a4e79=_0x210f;backgroundImage=null,topOverlayImage=null,canvas[_0x1a4e79(0x302)]()['forEach'](_0x4ebd2f=>{const _0x5a9754=_0x210f;if(_0x4ebd2f['isAvatar']||_0x4ebd2f[_0x5a9754(0x114)]){const _0x1c7432=_0x4ebd2f['left'],_0x457835=_0x4ebd2f[_0x5a9754(0x242)],_0x3e621b=_0x4ebd2f['scaleX'],_0x8120b3=_0x4ebd2f[_0x5a9754(0x199)],_0x3f09d3=designToCanvasSize(AVATAR_LAYOUT['size']);_0x4ebd2f[_0x5a9754(0x1a3)]({'isAvatar':!![],'clipTo':buildAvatarClip(_0x3f09d3/0x2),'left':_0x1c7432,'top':_0x457835,'scaleX':_0x3e621b,'scaleY':_0x8120b3,'originX':_0x5a9754(0x1af),'originY':_0x5a9754(0x1af),'selectable':!![],'evented':!![]}),_0x4ebd2f[_0x5a9754(0x2a7)]();}});const _0x3dafc5=canvas[_0x1a4e79(0x302)]()['filter'](_0x538230=>_0x538230[_0x1a4e79(0x2c8)]===_0x1a4e79(0xfc)&&!_0x538230[_0x1a4e79(0x159)]&&!_0x538230['clipTo']);backgroundImage=_0x3dafc5[0x0]||null,topOverlayImage=_0x3dafc5[0x1]||null,_0x3dafc5[_0x1a4e79(0x2a5)](_0x480c93=>_0x480c93[_0x1a4e79(0x1a3)]({'selectable':![],'evented':![]}));_0x399f57['textFieldState']&&(textFieldState=_0x399f57[_0x1a4e79(0x1c7)]);Array['isArray'](_0x399f57[_0x1a4e79(0x204)])&&(dietItems=_0x399f57['dietItems'],renderDietItemsTable());if(typeof _0x399f57[_0x1a4e79(0x1c3)]===_0x1a4e79(0x19c)){const _0x2f2bba=document[_0x1a4e79(0x26b)]('dietCompanyName');if(_0x2f2bba)_0x2f2bba[_0x1a4e79(0x2ca)]=_0x399f57[_0x1a4e79(0x1c3)];}syncTextObjectsFromCanvas(),Object[_0x1a4e79(0x22c)](textObjects)[_0x1a4e79(0x2a5)](_0x4d91f8=>updateTextObject(_0x4d91f8)),syncCanvasLayerOrder(),syncInspectorUIFromState(activeFieldKey),schedulePreviewUpdate(),historyLock=![],canvas[_0x1a4e79(0x2c7)]();});}function undoCanvasChange(){if(historyIndex<=0x0)return;historyIndex-=0x1,restoreHistorySnapshot(historyStack[historyIndex]);}function deleteActiveCanvasObject(){const _0x178018=_0x210f;if(!canvas)return;const _0x3a038c=canvas['getActiveObject']();if(!_0x3a038c||isProtectedCanvasObject(_0x3a038c))return;const _0x420745=getTextFieldKeyFromObject(_0x3a038c);pushHistory(),historyLock=!![],canvas['remove'](_0x3a038c);if(_0x420745){delete textObjects[_0x420745];if(textFieldState[_0x420745])textFieldState[_0x420745][_0x178018(0x29c)]='';if(activeFieldKey===_0x420745){const _0x36873c=document[_0x178018(0x26b)](_0x178018(0x2f8));if(_0x36873c)_0x36873c[_0x178018(0x2ca)]='';}}canvas[_0x178018(0x1ab)](),canvas[_0x178018(0x2c7)](),historyLock=![],pushHistory();}function initCanvasViewControls(){const _0x5e0f0e=_0x210f,_0x5f59a5=document[_0x5e0f0e(0x26b)](_0x5e0f0e(0x220));if(!_0x5f59a5||!canvas)return;_0x5f59a5[_0x5e0f0e(0x2df)](_0x5e0f0e(0x237),function(_0x11a5f2){const _0x22d69c=_0x210f;if(!(_0x11a5f2['ctrlKey']||_0x11a5f2[_0x22d69c(0x1b0)]))return;_0x11a5f2[_0x22d69c(0x25b)]();const _0x202038=_0x11a5f2[_0x22d69c(0xe9)]>0x0?-0.08:0.08;viewUserZoom=Math[_0x22d69c(0x1ee)](0x3,Math[_0x22d69c(0x1fc)](0.25,viewUserZoom*(0x1+_0x202038))),applyCanvasViewTransform(),updatePreviewScaleLabel(DESIGN_SIZE[_0x22d69c(0x324)],DESIGN_SIZE[_0x22d69c(0x259)],canvasPreviewScale);},{'passive':![]});const _0x23f65e=function(_0x285062,_0x16c64d){const _0x555d59=_0x210f;isViewPanning=!![],panLastX=_0x285062,panLastY=_0x16c64d,_0x5f59a5[_0x555d59(0x1f0)][_0x555d59(0x286)]('is-panning');},_0x14500a=function(_0xf7c0f1,_0x5a56ad){if(!isViewPanning)return;viewPanX+=_0xf7c0f1-panLastX,viewPanY+=_0x5a56ad-panLastY,panLastX=_0xf7c0f1,panLastY=_0x5a56ad,applyCanvasViewTransform();},_0x3a09a8=function(){const _0x17593f=_0x210f;if(!isViewPanning)return;isViewPanning=![],_0x5f59a5[_0x17593f(0x1f0)][_0x17593f(0x147)](_0x17593f(0x333));};canvas['on'](_0x5e0f0e(0x1b7),function(_0x4fb112){const _0x5c9002=_0x210f,_0x2c719d=_0x4fb112['e'];if(!_0x2c719d)return;if(viewLocked)return;(_0x2c719d['button']===0x1||spacePanKey||!_0x4fb112[_0x5c9002(0x25d)]&&_0x2c719d[_0x5c9002(0x172)]===0x0)&&(_0x23f65e(_0x2c719d[_0x5c9002(0x327)],_0x2c719d[_0x5c9002(0x30a)]),canvas[_0x5c9002(0x240)]=![]);}),canvas['on']('mouse:move',function(_0x405230){const _0x6d9f41=_0x210f;if(viewLocked||!isViewPanning||!_0x405230['e'])return;_0x14500a(_0x405230['e'][_0x6d9f41(0x327)],_0x405230['e'][_0x6d9f41(0x30a)]);}),canvas['on'](_0x5e0f0e(0x30c),function(){const _0x2b06e5=_0x210f;_0x3a09a8(),canvas[_0x2b06e5(0x240)]=!![];}),document['addEventListener'](_0x5e0f0e(0x325),function(_0x2ea304){const _0xa1ec38=_0x210f;if(viewLocked)return;_0x2ea304['code']===_0xa1ec38(0x314)&&!_0x2ea304[_0xa1ec38(0x117)]&&!(_0x2ea304[_0xa1ec38(0x25d)]&&/INPUT|TEXTAREA|SELECT/[_0xa1ec38(0x1d3)](_0x2ea304['target'][_0xa1ec38(0x29e)]))&&(spacePanKey=!![],_0x5f59a5[_0xa1ec38(0x1f0)][_0xa1ec38(0x286)](_0xa1ec38(0x278)),_0x2ea304[_0xa1ec38(0x25b)]());}),document[_0x5e0f0e(0x2df)](_0x5e0f0e(0x24c),function(_0x45fa16){const _0x374bde=_0x210f;_0x45fa16['code']===_0x374bde(0x314)&&(spacePanKey=![],_0x5f59a5[_0x374bde(0x1f0)][_0x374bde(0x147)](_0x374bde(0x278)),_0x3a09a8());});}function initHistoryTracking(){const _0xcf3c1d=_0x210f;if(!canvas)return;const _0x4d28c=function(){if(historyLock||batchGenerating)return;pushHistory();};canvas['on'](_0xcf3c1d(0x132),_0x4d28c),canvas['on'](_0xcf3c1d(0x15b),function(){if(historyLock||batchGenerating)return;setTimeout(_0x4d28c,0x0);}),canvas['on'](_0xcf3c1d(0x2e6),_0x4d28c);}function initCanvasTextInteraction(){const _0x479dd8=_0x210f;if(!canvas)return;canvas['on'](_0x479dd8(0x154),function(_0x4e3636){const _0x347321=_0x210f,_0x16fb40=_0x4e3636[_0x347321(0x169)][0x0],_0xf51525=getTextFieldKeyFromObject(_0x16fb40);if(_0xf51525)selectTextField(_0xf51525);updateCoordinateDisplay(_0x16fb40),openPanelForObject(_0x16fb40);}),canvas['on']('selection:updated',function(_0x42f48a){const _0x2eafea=_0x42f48a['selected'][0x0],_0x2f21af=getTextFieldKeyFromObject(_0x2eafea);if(_0x2f21af)selectTextField(_0x2f21af);openPanelForObject(_0x2eafea);});}function loadFromLocalStorage(){const _0x44730e=_0x210f,_0x32e36a=localStorage[_0x44730e(0x293)]('personnelMapRevision'),_0x468e2f=localStorage[_0x44730e(0x293)](_0x44730e(0x184));_0x32e36a===PERSONNEL_MAP_REVISION&&_0x468e2f?(Object[_0x44730e(0x22c)](PERSONNEL_MAP)['forEach'](_0x38bb7c=>delete PERSONNEL_MAP[_0x38bb7c]),Object[_0x44730e(0x268)](PERSONNEL_MAP,JSON[_0x44730e(0x2bb)](_0x468e2f))):(localStorage[_0x44730e(0x138)](_0x44730e(0x1b1),PERSONNEL_MAP_REVISION),localStorage[_0x44730e(0x138)](_0x44730e(0x184),JSON[_0x44730e(0x1cc)](PERSONNEL_MAP)));const _0x500f02=localStorage[_0x44730e(0x293)]('uploadedAvatars');_0x500f02&&(uploadedAvatars=JSON['parse'](_0x500f02)),loadAutoShowPreference(),loadViewLockPreference();}function getPhotoLookupName(_0x1870cd){return PHOTO_NAME_ALIASES[_0x1870cd]||_0x1870cd;}function getPersonRoleHint(_0x5ddf56){return PERSONNEL_ROLE_HINT[_0x5ddf56]||'';}let personnelSearchIndex=[],avatarNameSuggestionIndex=-0x1;function rebuildPersonnelSearchIndex(){const _0x2b5a54=_0x210f;personnelSearchIndex=Object[_0x2b5a54(0x22c)](PERSONNEL_MAP)[_0x2b5a54(0x1a9)](_0x3419bf=>{const _0x213d45=_0x210f,_0x1fc520=PERSONNEL_MAP[_0x3419bf];let _0x47c68e='',_0x404895='',_0x5e9ec9='';if(window[_0x213d45(0x2ef)]&&typeof window[_0x213d45(0x2ef)]['pinyin']==='function')try{const _0x3ecf54=window[_0x213d45(0x2ef)][_0x213d45(0x100)](_0x3419bf,{'toneType':_0x213d45(0x2f6),'type':_0x213d45(0x1ed)});_0x47c68e=_0x3ecf54[_0x213d45(0x1a9)](_0x36a290=>_0x36a290&&_0x36a290[0x0]||'')[_0x213d45(0x1e7)]('')['toLowerCase'](),_0x404895=_0x3ecf54[_0x213d45(0x1e7)]('')['toLowerCase'](),_0x5e9ec9=_0x3ecf54[_0x213d45(0x1e7)]('\x20')['toLowerCase']();}catch(_0x32194f){console[_0x213d45(0x2ae)](_0x213d45(0x276),_0x3419bf,_0x32194f);}return{'name':_0x3419bf,'dept':_0x1fc520,'initials':_0x47c68e,'pinyinFull':_0x404895,'pinyinText':_0x5e9ec9};});}function normalizeSearchQuery(_0x2f4df0){const _0x12c41c=_0x210f;return _0x2f4df0[_0x12c41c(0x18e)]()['toLowerCase']()[_0x12c41c(0x11b)](/\s+/g,'');}function isChineseSubsequence(_0x1d5fb4,_0x2712e2){const _0x1ca53b=_0x210f;if(!_0x2712e2)return![];let _0x5b5408=0x0;for(const _0x5d2c3f of _0x2712e2){const _0x119ab8=_0x1d5fb4[_0x1ca53b(0x2d8)](_0x5d2c3f,_0x5b5408);if(_0x119ab8===-0x1)return![];_0x5b5408=_0x119ab8+0x1;}return!![];}function scorePersonMatch(_0x46e799,_0x45040d){const _0x19420c=_0x210f,_0x34039c=_0x45040d['trim'](),_0x323fd2=normalizeSearchQuery(_0x45040d);if(!_0x34039c)return-0x1;const {name:_0x4887de,initials:_0x137d3e,pinyinFull:_0x52dd3f,pinyinText:_0x3c2785}=_0x46e799;if(_0x4887de===_0x34039c)return 0x3e8;if(_0x4887de[_0x19420c(0x1a2)](_0x34039c))return 0x384;if(isChineseSubsequence(_0x4887de,_0x34039c))return 0x320;if(/^[a-z]+$/['test'](_0x323fd2)){if(_0x137d3e===_0x323fd2)return 0x352;if(_0x137d3e[_0x19420c(0x2b8)](_0x323fd2))return 0x30c;if(_0x137d3e[_0x19420c(0x1a2)](_0x323fd2))return 0x2d0;if(_0x52dd3f['startsWith'](_0x323fd2))return 0x2bc;if(_0x52dd3f[_0x19420c(0x1a2)](_0x323fd2))return 0x28a;}if(_0x323fd2&&(_0x3c2785['includes'](_0x323fd2)||_0x52dd3f[_0x19420c(0x1a2)](_0x323fd2)))return 0x258;return-0x1;}function getFilteredPersonnelNames(){const _0x531fc2=_0x210f,_0x59bb09=document[_0x531fc2(0x26b)](_0x531fc2(0x2a8))?.[_0x531fc2(0x2ca)]||'';return personnelSearchIndex[_0x531fc2(0xef)](_0x57910c=>!_0x59bb09||_0x57910c[_0x531fc2(0x1df)]===_0x59bb09);}function searchPersonnel(_0x4cbf08){const _0x16a6a4=_0x210f;return getFilteredPersonnelNames()[_0x16a6a4(0x1a9)](_0x122b1a=>({'entry':_0x122b1a,'score':scorePersonMatch(_0x122b1a,_0x4cbf08)}))[_0x16a6a4(0xef)](_0x124ffc=>_0x124ffc[_0x16a6a4(0x29f)]>=0x0)['sort']((_0x5961d3,_0x38b536)=>{const _0x5e1dc7=_0x210f;if(_0x38b536[_0x5e1dc7(0x29f)]!==_0x5961d3['score'])return _0x38b536['score']-_0x5961d3['score'];return _0x5961d3[_0x5e1dc7(0x288)][_0x5e1dc7(0x224)][_0x5e1dc7(0x331)](_0x38b536[_0x5e1dc7(0x288)][_0x5e1dc7(0x224)],_0x5e1dc7(0x109),{'sensitivity':_0x5e1dc7(0x265)});})['map'](_0x299708=>_0x299708[_0x16a6a4(0x288)]);}function resolveAvatarNameInput(_0x1fb3bd){const _0x43277f=_0x210f,_0x32f5b1=_0x1fb3bd[_0x43277f(0x18e)]();if(!_0x32f5b1)return null;if(Object[_0x43277f(0x107)][_0x43277f(0x21b)][_0x43277f(0x17b)](PERSONNEL_MAP,_0x32f5b1))return _0x32f5b1;const _0x1afac1=getFilteredPersonnelNames()[_0x43277f(0x1a9)](_0x39adfb=>({'entry':_0x39adfb,'score':scorePersonMatch(_0x39adfb,_0x32f5b1)}))['filter'](_0x45a622=>_0x45a622['score']>=0x0)[_0x43277f(0x1d0)]((_0x2b6f3e,_0x582ad8)=>{const _0x532ccb=_0x210f;if(_0x582ad8[_0x532ccb(0x29f)]!==_0x2b6f3e['score'])return _0x582ad8[_0x532ccb(0x29f)]-_0x2b6f3e[_0x532ccb(0x29f)];return _0x2b6f3e['entry'][_0x532ccb(0x224)]['localeCompare'](_0x582ad8[_0x532ccb(0x288)]['name'],_0x532ccb(0x109),{'sensitivity':_0x532ccb(0x265)});});if(_0x1afac1[_0x43277f(0x2bf)]===0x1)return _0x1afac1[0x0]['entry']['name'];if(_0x1afac1[_0x43277f(0x2bf)]>0x1&&_0x1afac1[0x0]['score']>=0x352&&_0x1afac1[0x0][_0x43277f(0x29f)]>_0x1afac1[0x1][_0x43277f(0x29f)])return _0x1afac1[0x0][_0x43277f(0x288)][_0x43277f(0x224)];return null;}function hideAvatarNameSuggestions(){const _0x2b94f3=_0x210f,_0x1a99de=document[_0x2b94f3(0x26b)](_0x2b94f3(0x1d4));if(!_0x1a99de)return;_0x1a99de[_0x2b94f3(0x316)]=!![],_0x1a99de['innerHTML']='',avatarNameSuggestionIndex=-0x1;}function selectAvatarNameSuggestion(_0x43075e){const _0x51ee99=_0x210f,_0x403de5=document['getElementById'](_0x51ee99(0x2da));_0x403de5[_0x51ee99(0x2ca)]=_0x43075e,hideAvatarNameSuggestions(),previewAvatar();}function renderAvatarNameSuggestions(_0x287d9f){const _0x2b1a1a=_0x210f,_0xea8b07=document['getElementById']('avatarNameSuggestions');if(!_0xea8b07)return;_0xea8b07['innerHTML']='',avatarNameSuggestionIndex=-0x1;if(!_0x287d9f[_0x2b1a1a(0x2bf)]){_0xea8b07[_0x2b1a1a(0x316)]=!![];return;}_0x287d9f[_0x2b1a1a(0xe4)](0x0,0xc)[_0x2b1a1a(0x2a5)]((_0x54646c,_0x4d7bf1)=>{const _0x601ba1=_0x210f,_0x525867=document[_0x601ba1(0x311)]('li');_0x525867[_0x601ba1(0xfe)](_0x601ba1(0x1bf),_0x601ba1(0xf0)),_0x525867[_0x601ba1(0x2ff)][_0x601ba1(0x152)]=String(_0x4d7bf1),_0x525867[_0x601ba1(0x2ff)][_0x601ba1(0x224)]=_0x54646c[_0x601ba1(0x224)];const _0x309c32=getPersonRoleHint(_0x54646c[_0x601ba1(0x224)]);_0x525867[_0x601ba1(0x2e7)]=_0x309c32||_0x54646c[_0x601ba1(0x224)]+'\x20·\x20'+_0x54646c['dept'],_0x525867['innerHTML']=_0x601ba1(0x216)+_0x54646c[_0x601ba1(0x224)]+_0x601ba1(0x2b9)+_0x54646c[_0x601ba1(0x1df)]+_0x601ba1(0x266)+(_0x54646c[_0x601ba1(0x25e)]?_0x54646c[_0x601ba1(0x25e)][_0x601ba1(0x238)]():'')+(_0x54646c[_0x601ba1(0x323)]?_0x601ba1(0x267)+_0x54646c[_0x601ba1(0x323)]:'')+'</span>',_0x525867[_0x601ba1(0x2df)](_0x601ba1(0x33d),function(_0x4e8830){const _0x53ea43=_0x210f;_0x4e8830[_0x53ea43(0x25b)](),selectAvatarNameSuggestion(_0x54646c[_0x53ea43(0x224)]);}),_0xea8b07[_0x601ba1(0x28e)](_0x525867);}),_0xea8b07[_0x2b1a1a(0x316)]=![];}function updateAvatarNameSuggestions(){const _0x3b4f22=_0x210f,_0x3d231a=document['getElementById'](_0x3b4f22(0x2da)),_0x4b7e28=_0x3d231a[_0x3b4f22(0x2ca)]['trim']();if(!_0x4b7e28){hideAvatarNameSuggestions();return;}renderAvatarNameSuggestions(searchPersonnel(_0x4b7e28));}function setActiveAvatarNameSuggestion(_0x142ed1){const _0x1684f7=_0x210f,_0xf65018=document[_0x1684f7(0x26b)](_0x1684f7(0x1d4));if(!_0xf65018||_0xf65018['hidden'])return;const _0x4a5c50=_0xf65018[_0x1684f7(0x308)]('li');if(!_0x4a5c50['length'])return;avatarNameSuggestionIndex=Math['max'](0x0,Math[_0x1684f7(0x1ee)](_0x142ed1,_0x4a5c50[_0x1684f7(0x2bf)]-0x1)),_0x4a5c50[_0x1684f7(0x2a5)]((_0x2a4317,_0x1c0b23)=>{const _0x35efac=_0x210f;_0x2a4317[_0x35efac(0x1f0)][_0x35efac(0x161)](_0x35efac(0x255),_0x1c0b23===avatarNameSuggestionIndex);}),_0x4a5c50[avatarNameSuggestionIndex][_0x1684f7(0xf8)]({'block':_0x1684f7(0x211)});}function initAvatarNameSearch(){const _0x1e832d=_0x210f,_0x5903eb=document[_0x1e832d(0x26b)](_0x1e832d(0x2da)),_0x1d11a7=document[_0x1e832d(0x26b)](_0x1e832d(0x1d4));if(!_0x5903eb||!_0x1d11a7)return;_0x5903eb[_0x1e832d(0x2df)]('input',updateAvatarNameSuggestions),_0x5903eb['addEventListener'](_0x1e832d(0x21f),updateAvatarNameSuggestions),_0x5903eb['addEventListener'](_0x1e832d(0x123),function(){setTimeout(hideAvatarNameSuggestions,0x96);}),_0x5903eb[_0x1e832d(0x2df)](_0x1e832d(0x325),function(_0x5770d4){const _0x39c371=_0x210f,_0x4cee20=_0x1d11a7[_0x39c371(0x308)]('li');if(_0x5770d4[_0x39c371(0x13f)]===_0x39c371(0x112)){!_0x1d11a7[_0x39c371(0x316)]&&_0x4cee20[_0x39c371(0x2bf)]&&(_0x5770d4[_0x39c371(0x25b)](),setActiveAvatarNameSuggestion(avatarNameSuggestionIndex+0x1));return;}if(_0x5770d4[_0x39c371(0x13f)]===_0x39c371(0x2dc)){!_0x1d11a7['hidden']&&_0x4cee20[_0x39c371(0x2bf)]&&(_0x5770d4['preventDefault'](),setActiveAvatarNameSuggestion(avatarNameSuggestionIndex<=0x0?_0x4cee20[_0x39c371(0x2bf)]-0x1:avatarNameSuggestionIndex-0x1));return;}if(_0x5770d4['key']===_0x39c371(0x256)){if(!_0x1d11a7[_0x39c371(0x316)]&&_0x4cee20[_0x39c371(0x2bf)]&&avatarNameSuggestionIndex>=0x0){_0x5770d4[_0x39c371(0x25b)](),selectAvatarNameSuggestion(_0x4cee20[avatarNameSuggestionIndex]['dataset'][_0x39c371(0x224)]);return;}previewAvatar();return;}_0x5770d4[_0x39c371(0x13f)]===_0x39c371(0x1b9)&&hideAvatarNameSuggestions();});}function initCanvas(){const _0xec60a1=_0x210f;if(window[_0xec60a1(0xd9)]&&!fabric['__textBaselinePatched']){const _0x1538b5=CanvasRenderingContext2D&&CanvasRenderingContext2D[_0xec60a1(0x107)];if(_0x1538b5){const _0x4bb488=Object[_0xec60a1(0x203)](_0x1538b5,_0xec60a1(0x304));_0x4bb488&&_0x4bb488['set']&&_0x4bb488[_0xec60a1(0x126)]&&Object[_0xec60a1(0x163)](_0x1538b5,_0xec60a1(0x304),{'configurable':!![],'enumerable':_0x4bb488[_0xec60a1(0x26e)],'get'(){return _0x4bb488['get']['call'](this);},'set'(_0x92d1f5){const _0x43f02f=_0x210f;_0x4bb488[_0x43f02f(0x1a3)]['call'](this,_0x92d1f5==='alphabetical'?_0x43f02f(0xdb):_0x92d1f5);}});}fabric[_0xec60a1(0x141)]=!![];}canvas=new fabric['Canvas']('canvas',{'width':DESIGN_SIZE[_0xec60a1(0x324)],'height':DESIGN_SIZE[_0xec60a1(0x259)],'backgroundColor':'#ffffff','preserveObjectStacking':!![]}),refreshBackgroundFrame(),resetCanvasViewTransform(),initCanvasPreviewResize(),schedulePreviewUpdate();}function handleFileUpload(_0x3caeaf){const _0xe65231=_0x210f,_0x596e55=new FileReader();_0x596e55[_0xe65231(0x2a6)]=function(_0x49c01c){const _0x178598=_0x210f;fabric['Image'][_0x178598(0x2aa)](_0x49c01c[_0x178598(0x25d)][_0x178598(0x202)],function(_0x190ba6){const _0x8c4b8c=_0x210f;canvas[_0x8c4b8c(0x302)]()[_0x8c4b8c(0xef)](_0x59e679=>_0x59e679[_0x8c4b8c(0x114)])[_0x8c4b8c(0x2a5)](_0x44a829=>canvas[_0x8c4b8c(0x147)](_0x44a829)),configureAvatarImage(_0x190ba6),canvas[_0x8c4b8c(0x286)](_0x190ba6),relayoutCanvasElements(),setTimeout(function(){const _0x353d75=_0x210f,_0x5a6908=getFieldContent(_0x353d75(0x224)),_0x101d9c=getFieldContent('dept');setFieldContent('order','618活动套餐下单');if(_0x5a6908)setFieldContent('name',_0x5a6908);if(_0x101d9c)setFieldContent('dept',_0x101d9c);},0x64);});},_0x596e55['readAsDataURL'](_0x3caeaf);}function addTextObjects(){const _0x5b77f4=_0x210f;Object[_0x5b77f4(0x191)](textObjects)[_0x5b77f4(0x2a5)](_0x45ba1f=>canvas[_0x5b77f4(0x147)](_0x45ba1f)),textObjects={},refreshBackgroundFrame(),Object[_0x5b77f4(0x22c)](TEXT_FIELD_CONFIG)[_0x5b77f4(0x2a5)](_0x557a87=>{const _0x4a1b31=_0x210f,_0x133e32=TEXT_FIELD_CONFIG[_0x557a87],_0x5af6d2=STYLE_PRESETS[_0x133e32[_0x4a1b31(0x2d1)]]||STYLE_PRESETS[_0x4a1b31(0x2d0)],_0x396785={'fontSize':designToCanvasSize(_0x5af6d2[_0x4a1b31(0x12a)]),'fontFamily':_0x5af6d2['fontFamily'],'fill':_0x5af6d2[_0x4a1b31(0x1f1)],'fontWeight':'bold','textAlign':_0x133e32['vertical']?_0x4a1b31(0x1af):_0x557a87===_0x4a1b31(0x1db)||_0x557a87===_0x4a1b31(0x105)?'left':_0x4a1b31(0x1af)};if(_0x557a87===_0x4a1b31(0x224))_0x396785['lineHeight']=0x32/0x28,_0x396785['shadow']=new fabric[(_0x4a1b31(0x232))]({'color':_0x4a1b31(0x215),'blur':designToCanvasSize(0x5),'offsetX':designToCanvasSize(0x2),'offsetY':designToCanvasSize(0x2)});else{if(_0x557a87===_0x4a1b31(0x1df))_0x396785[_0x4a1b31(0x2ce)]=0x3a/0x30;else{if(_0x557a87===_0x4a1b31(0x1db))_0x396785['shadow']=new fabric[(_0x4a1b31(0x232))]({'color':'rgba(0,0,0,0.3)','blur':designToCanvasSize(0x8),'offsetX':designToCanvasSize(0x3),'offsetY':designToCanvasSize(0x3)});else{if(_0x557a87===_0x4a1b31(0x2ac))_0x396785[_0x4a1b31(0x1cf)]=new fabric[(_0x4a1b31(0x232))]({'color':_0x4a1b31(0x215),'blur':designToCanvasSize(0x5),'offsetX':designToCanvasSize(0x2),'offsetY':designToCanvasSize(0x2)});else{if(_0x557a87===_0x4a1b31(0x2f4))_0x396785[_0x4a1b31(0x1cf)]=new fabric['Shadow']({'color':_0x4a1b31(0x18c),'blur':designToCanvasSize(0xa),'offsetX':designToCanvasSize(0x4),'offsetY':designToCanvasSize(0x4)});else{if(_0x557a87===_0x4a1b31(0x105))_0x396785[_0x4a1b31(0x2ce)]=1.25;else _0x557a87===_0x4a1b31(0x310)&&(_0x396785[_0x4a1b31(0x2ce)]=1.35);}}}}}textObjects[_0x557a87]=new fabric[(_0x4a1b31(0x157))]('',Object[_0x4a1b31(0x268)](_0x396785,getTextObjectPosition(_0x557a87))),textObjects[_0x557a87][_0x4a1b31(0x239)]=_0x557a87,canvas[_0x4a1b31(0x286)](textObjects[_0x557a87]);}),Object[_0x5b77f4(0x22c)](textFieldState)['forEach'](_0x3a66ad=>updateTextObject(_0x3a66ad)),syncCanvasLayerOrder();}function updateTextObject(_0x5ab5f1){const _0x39cb05=_0x210f;if(!textObjects[_0x5ab5f1])return;refreshBackgroundFrame();const _0x3ea069=textFieldState[_0x5ab5f1];if(!_0x3ea069)return;let _0x5aaafb=_0x3ea069[_0x39cb05(0x29c)];const _0x33dabd=_0x3ea069[_0x39cb05(0x29d)],_0x3f94f6=_0x3ea069['fontSize'],_0x58d468=_0x3ea069[_0x39cb05(0x1f1)],_0x295b70=designToCanvasSize(_0x3f94f6),_0x101c2d=getTextObjectPosition(_0x5ab5f1);if(TEXT_FIELD_CONFIG[_0x5ab5f1]?.['vertical']){_0x5aaafb=_0x5aaafb['split']('')['join']('\x0a');const _0x50c1fc=(_0x3f94f6+0xa)/_0x3f94f6;textObjects[_0x5ab5f1][_0x39cb05(0x1a3)](Object[_0x39cb05(0x268)]({'text':_0x5aaafb,'fontFamily':_0x33dabd,'fontSize':_0x295b70,'fill':_0x58d468,'textAlign':_0x39cb05(0x1af),'lineHeight':_0x50c1fc},_0x101c2d));}else textObjects[_0x5ab5f1][_0x39cb05(0x1a3)](Object[_0x39cb05(0x268)]({'text':_0x5aaafb,'fontFamily':_0x33dabd,'fontSize':_0x295b70,'fill':_0x58d468},_0x101c2d));textObjects[_0x5ab5f1][_0x39cb05(0x2a7)](),canvas[_0x39cb05(0x330)]();}function buildExportFileName(){const _0x23c8ca=_0x210f;let _0x12a2f5=_0x23c8ca(0x306);currentTemplateId===_0x23c8ca(0x14f)?_0x12a2f5=(document[_0x23c8ca(0x26b)]('dietCompanyName')?.[_0x23c8ca(0x2ca)]||getFieldContent(_0x23c8ca(0x105))||_0x23c8ca(0x2fb))[_0x23c8ca(0x18e)]():_0x12a2f5=(getFieldContent(_0x23c8ca(0x224))||document[_0x23c8ca(0x26b)](_0x23c8ca(0x2da))?.[_0x23c8ca(0x2ca)]||_0x23c8ca(0x306))[_0x23c8ca(0x18e)]();const _0x4bd6e1=_0x12a2f5[_0x23c8ca(0x11b)](/[\\/:*?"<>|]/g,'')[_0x23c8ca(0x11b)](/\s+/g,'')||'未命名',_0x59205b=new Date()['toISOString']()[_0x23c8ca(0xe4)](0x0,0xa),_0x272955=currentTemplateId===_0x23c8ca(0x14f)?_0x23c8ca(0x1b4):'喜报';return _0x272955+'_'+_0x4bd6e1+'_'+_0x59205b+'.jpg';}function formatBatchLine(_0x3c1ffd,_0x4db5c3,_0x3fc266){const _0x1ef861=_0x210f;return _0x3c1ffd+'+'+_0x4db5c3+_0x1ef861(0x148)+_0x3fc266+'元';}function invalidateBatchReview(_0x3c8428){const _0x2f62c9=_0x210f;batchParsedRecords=[];const _0x31ab0e=document[_0x2f62c9(0x26b)]('batchGenerateBtn');if(_0x31ab0e)_0x31ab0e[_0x2f62c9(0x11e)]=!![];const _0x340f71=document[_0x2f62c9(0x26b)]('batchReviewList');if(_0x340f71)_0x340f71[_0x2f62c9(0x312)]='';const _0x3c0c90=document[_0x2f62c9(0x26b)]('batchProgress');if(_0x3c0c90)_0x3c0c90[_0x2f62c9(0x206)]=_0x3c8428||_0x2f62c9(0x185);}function setBatchFormHint(_0x20d81a,_0x2c42cd){const _0x573bd8=_0x210f,_0x2852cf=document['getElementById']('batchFormHint');if(!_0x2852cf)return;_0x2852cf[_0x573bd8(0x206)]=_0x20d81a||'',_0x2852cf[_0x573bd8(0x1f0)]['remove']('is-error',_0x573bd8(0x119));if(_0x2c42cd)_0x2852cf[_0x573bd8(0x1f0)][_0x573bd8(0x286)](_0x2c42cd);}function getBatchCommentHeader(_0x3ce977){const _0x448494=_0x210f,_0x1ad281=String(_0x3ce977||'')[_0x448494(0x1c9)](/\r?\n/),_0xbe5d65=[];for(let _0xb3d2c1=0x0;_0xb3d2c1<_0x1ad281[_0x448494(0x2bf)];_0xb3d2c1++){const _0x46654c=_0x1ad281[_0xb3d2c1]['trim']();if(!_0x46654c||_0x46654c[_0x448494(0x2b8)]('#')){_0xbe5d65[_0x448494(0xee)](_0x1ad281[_0xb3d2c1]);continue;}break;}while(_0xbe5d65[_0x448494(0x2bf)]&&_0xbe5d65[_0xbe5d65[_0x448494(0x2bf)]-0x1][_0x448494(0x18e)]()===''){_0xbe5d65['pop']();}return _0xbe5d65;}function getBatchCommentOnlyTemplate(){const _0x509bba=_0x210f;return getBatchTemplateText()[_0x509bba(0x1c9)]('\x0a')[_0x509bba(0xef)](_0x242a96=>!_0x242a96[_0x509bba(0x18e)]()||_0x242a96['trim']()[_0x509bba(0x2b8)]('#'))[_0x509bba(0x1e7)]('\x0a');}let batchNameSuggestionIndex=-0x1;function refreshBatchNameFilter(){const _0xb892=_0x210f,_0x27e04f=document[_0xb892(0x26b)](_0xb892(0x137));if(!_0x27e04f)return;const _0x41721d=_0x27e04f['value'],_0xc30f5a=Object[_0xb892(0x22c)](PERSONNEL_MAP)[_0xb892(0x1d0)]((_0x31ee12,_0x133dc3)=>_0x31ee12[_0xb892(0x331)](_0x133dc3,_0xb892(0x109),{'sensitivity':'accent'}));_0x27e04f[_0xb892(0x312)]=_0xb892(0x317),_0xc30f5a[_0xb892(0x2a5)](_0x5b08b3=>{const _0x30033f=_0x210f,_0x1f047c=document[_0x30033f(0x311)](_0x30033f(0xf0));_0x1f047c[_0x30033f(0x2ca)]=_0x5b08b3,_0x1f047c[_0x30033f(0x206)]=_0x5b08b3;const _0x1660bb=getPersonRoleHint(_0x5b08b3);if(_0x1660bb)_0x1f047c['title']=_0x1660bb;_0x27e04f['appendChild'](_0x1f047c);});if(_0x41721d&&PERSONNEL_MAP[_0x41721d])_0x27e04f[_0xb892(0x2ca)]=_0x41721d;}function hideBatchNameSuggestions(){const _0x4927ea=_0x210f,_0x3ad27c=document[_0x4927ea(0x26b)]('batchNameSuggestions');if(_0x3ad27c)_0x3ad27c[_0x4927ea(0x316)]=!![];batchNameSuggestionIndex=-0x1;}function selectBatchNameSuggestion(_0x5dba5c){const _0x585d7c=_0x210f,_0x153c47=document[_0x585d7c(0x26b)](_0x585d7c(0x1ec)),_0x14d45d=document[_0x585d7c(0x26b)](_0x585d7c(0x137));if(_0x153c47)_0x153c47[_0x585d7c(0x2ca)]=_0x5dba5c;if(_0x14d45d)_0x14d45d[_0x585d7c(0x2ca)]=PERSONNEL_MAP[_0x5dba5c]?_0x5dba5c:'';hideBatchNameSuggestions();}function renderBatchNameSuggestions(_0x715323){const _0x456a3f=_0x210f,_0x5f2afe=document['getElementById'](_0x456a3f(0xfa));if(!_0x5f2afe)return;_0x5f2afe[_0x456a3f(0x312)]='',batchNameSuggestionIndex=-0x1;if(!_0x715323[_0x456a3f(0x2bf)]){_0x5f2afe[_0x456a3f(0x316)]=!![];return;}_0x715323[_0x456a3f(0xe4)](0x0,0xc)[_0x456a3f(0x2a5)]((_0x110b83,_0x4baf95)=>{const _0x1ca6d7=_0x210f,_0x4b5c5e=document[_0x1ca6d7(0x311)]('li');_0x4b5c5e['setAttribute'](_0x1ca6d7(0x1bf),'option'),_0x4b5c5e[_0x1ca6d7(0x2ff)]['index']=String(_0x4baf95),_0x4b5c5e[_0x1ca6d7(0x2ff)][_0x1ca6d7(0x224)]=_0x110b83[_0x1ca6d7(0x224)];const _0xb06c48=getPersonRoleHint(_0x110b83[_0x1ca6d7(0x224)]);_0x4b5c5e[_0x1ca6d7(0x2e7)]=_0xb06c48||_0x110b83[_0x1ca6d7(0x224)]+_0x1ca6d7(0x267)+_0x110b83[_0x1ca6d7(0x1df)],_0x4b5c5e[_0x1ca6d7(0x312)]=_0x1ca6d7(0x216)+escapeHtml(_0x110b83[_0x1ca6d7(0x224)])+'</span><span\x20class=\x22suggestion-dept\x22>'+escapeHtml(_0x110b83[_0x1ca6d7(0x1df)])+_0x1ca6d7(0x266)+(_0x110b83[_0x1ca6d7(0x25e)]?escapeHtml(_0x110b83['initials']['toUpperCase']()):'')+(_0x110b83[_0x1ca6d7(0x323)]?'\x20·\x20'+escapeHtml(_0x110b83['pinyinText']):'')+_0x1ca6d7(0x2a9),_0x4b5c5e[_0x1ca6d7(0x2df)](_0x1ca6d7(0x33d),function(_0x232d41){const _0x59aa02=_0x210f;_0x232d41['preventDefault'](),selectBatchNameSuggestion(_0x110b83[_0x59aa02(0x224)]);}),_0x5f2afe['appendChild'](_0x4b5c5e);}),_0x5f2afe[_0x456a3f(0x316)]=![];}function updateBatchNameSuggestions(){const _0x1657e6=_0x210f,_0x1a56ee=document[_0x1657e6(0x26b)](_0x1657e6(0x1ec));if(!_0x1a56ee)return;const _0x4e4d42=_0x1a56ee[_0x1657e6(0x2ca)][_0x1657e6(0x18e)]();if(!_0x4e4d42){hideBatchNameSuggestions();return;}renderBatchNameSuggestions(searchPersonnel(_0x4e4d42));}function setActiveBatchNameSuggestion(_0x489b77){const _0x1f555b=_0x210f,_0x27c691=document[_0x1f555b(0x26b)](_0x1f555b(0xfa));if(!_0x27c691||_0x27c691[_0x1f555b(0x316)])return;const _0x5db5c0=_0x27c691[_0x1f555b(0x308)]('li');if(!_0x5db5c0[_0x1f555b(0x2bf)])return;batchNameSuggestionIndex=Math[_0x1f555b(0x1fc)](0x0,Math[_0x1f555b(0x1ee)](_0x489b77,_0x5db5c0[_0x1f555b(0x2bf)]-0x1)),_0x5db5c0['forEach']((_0x679f6e,_0x4fbb27)=>{const _0xfb2611=_0x210f;_0x679f6e[_0xfb2611(0x1f0)]['toggle'](_0xfb2611(0x255),_0x4fbb27===batchNameSuggestionIndex);}),_0x5db5c0[batchNameSuggestionIndex][_0x1f555b(0xf8)]({'block':'nearest'});}function initBatchNameSearch(){const _0x31c305=_0x210f,_0x14561b=document[_0x31c305(0x26b)](_0x31c305(0x1ec)),_0x138a2b=document[_0x31c305(0x26b)](_0x31c305(0xfa)),_0x124816=document[_0x31c305(0x26b)](_0x31c305(0x137));if(!_0x14561b||!_0x138a2b)return;_0x124816&&_0x124816['addEventListener'](_0x31c305(0x248),function(){const _0x8e627a=_0x210f;if(!this['value'])return;selectBatchNameSuggestion(this[_0x8e627a(0x2ca)]);const _0x5ce753=document['getElementById']('batchFormOrder');if(_0x5ce753)_0x5ce753[_0x8e627a(0x21f)]();}),_0x14561b[_0x31c305(0x2df)](_0x31c305(0x263),function(){const _0x32c678=_0x210f,_0x6af80f=document[_0x32c678(0x26b)](_0x32c678(0x137));_0x6af80f&&_0x6af80f[_0x32c678(0x2ca)]&&_0x6af80f[_0x32c678(0x2ca)]!==this[_0x32c678(0x2ca)][_0x32c678(0x18e)]()&&(_0x6af80f[_0x32c678(0x2ca)]=''),updateBatchNameSuggestions();}),_0x14561b[_0x31c305(0x2df)](_0x31c305(0x21f),updateBatchNameSuggestions),_0x14561b[_0x31c305(0x2df)](_0x31c305(0x123),function(){setTimeout(hideBatchNameSuggestions,0x96);}),_0x14561b['addEventListener'](_0x31c305(0x325),function(_0x2d5f27){const _0xf378e0=_0x210f,_0x37e563=_0x138a2b[_0xf378e0(0x308)]('li');if(_0x2d5f27[_0xf378e0(0x13f)]===_0xf378e0(0x112)){!_0x138a2b[_0xf378e0(0x316)]&&_0x37e563[_0xf378e0(0x2bf)]&&(_0x2d5f27[_0xf378e0(0x25b)](),setActiveBatchNameSuggestion(batchNameSuggestionIndex+0x1));return;}if(_0x2d5f27[_0xf378e0(0x13f)]===_0xf378e0(0x2dc)){!_0x138a2b[_0xf378e0(0x316)]&&_0x37e563['length']&&(_0x2d5f27[_0xf378e0(0x25b)](),setActiveBatchNameSuggestion(batchNameSuggestionIndex<=0x0?_0x37e563[_0xf378e0(0x2bf)]-0x1:batchNameSuggestionIndex-0x1));return;}if(_0x2d5f27[_0xf378e0(0x13f)]===_0xf378e0(0x256)){if(!_0x138a2b[_0xf378e0(0x316)]&&_0x37e563[_0xf378e0(0x2bf)]&&batchNameSuggestionIndex>=0x0){_0x2d5f27[_0xf378e0(0x25b)](),selectBatchNameSuggestion(_0x37e563[batchNameSuggestionIndex][_0xf378e0(0x2ff)][_0xf378e0(0x224)]);return;}if(!_0x138a2b[_0xf378e0(0x316)]&&_0x37e563['length']===0x1){_0x2d5f27[_0xf378e0(0x25b)](),selectBatchNameSuggestion(_0x37e563[0x0]['dataset'][_0xf378e0(0x224)]);return;}return;}_0x2d5f27[_0xf378e0(0x13f)]==='Escape'&&hideBatchNameSuggestions();});}function renderBatchOrderChips(){const _0x39a7ac=_0x210f,_0xc0d3d2=document[_0x39a7ac(0x26b)]('batchOrderChips');if(!_0xc0d3d2)return;_0xc0d3d2[_0x39a7ac(0x312)]=ORDER_PRESETS['map'](_0x1786b6=>_0x39a7ac(0x19b)+escapeHtml(_0x1786b6)+'\x22>'+escapeHtml(_0x1786b6)+_0x39a7ac(0x229))[_0x39a7ac(0x1e7)]('');}function renderBatchAmountChips(){const _0x348e76=_0x210f,_0x5d9e65=document[_0x348e76(0x26b)]('batchAmountChips');if(!_0x5d9e65)return;_0x5d9e65[_0x348e76(0x312)]=AMOUNT_PRESETS[_0x348e76(0x1a9)](_0x4e1b67=>_0x348e76(0x269)+_0x4e1b67+'\x22>'+_0x4e1b67+_0x348e76(0x229))[_0x348e76(0x1e7)]('');}function syncChipActiveStates(){const _0x39088c=_0x210f,_0x50a842=(document[_0x39088c(0x26b)]('batchFormOrder')?.[_0x39088c(0x2ca)]||'')['trim']();document[_0x39088c(0x308)](_0x39088c(0x1e2))[_0x39088c(0x2a5)](_0xab8642=>{const _0x19a7d5=_0x210f;_0xab8642['classList']['toggle'](_0x19a7d5(0x228),_0xab8642[_0x19a7d5(0x2ff)][_0x19a7d5(0x2ac)]===_0x50a842);});const _0x1faac0=String(document[_0x39088c(0x26b)](_0x39088c(0x283))?.[_0x39088c(0x2ca)]||'')[_0x39088c(0x18e)]();document[_0x39088c(0x308)]('#batchAmountChips\x20.batch-chip')[_0x39088c(0x2a5)](_0x46e47f=>{const _0x449079=_0x210f;_0x46e47f[_0x449079(0x1f0)][_0x449079(0x161)](_0x449079(0x228),_0x46e47f['dataset'][_0x449079(0x2f4)]===_0x1faac0);});}function renderBatchFormList(){const _0x1450e9=_0x210f,_0x35eb83=document[_0x1450e9(0x26b)](_0x1450e9(0x17a));if(!_0x35eb83)return;_0x35eb83['innerHTML']='',batchFormEntries[_0x1450e9(0x2a5)]((_0x23ac70,_0x256abb)=>{const _0x4a75a6=_0x210f,_0x4a4686=document['createElement']('li');if(_0x256abb===batchFormEditIndex)_0x4a4686['classList'][_0x4a75a6(0x286)](_0x4a75a6(0x319));const _0x4b5f23=document[_0x4a75a6(0x311)]('div');_0x4b5f23[_0x4a75a6(0x2e9)]=_0x4a75a6(0xf2),_0x4b5f23['innerHTML']=_0x4a75a6(0x2ec)+escapeHtml(_0x23ac70[_0x4a75a6(0x224)])+_0x4a75a6(0x11c)+escapeHtml(_0x23ac70[_0x4a75a6(0x2ac)])+_0x4a75a6(0x267)+escapeHtml(_0x23ac70[_0x4a75a6(0x2f4)])+'元';const _0x2e00a2=document[_0x4a75a6(0x311)](_0x4a75a6(0x122));_0x2e00a2[_0x4a75a6(0x2e9)]=_0x4a75a6(0x1e5);const _0xa971a6=document[_0x4a75a6(0x311)](_0x4a75a6(0x172));_0xa971a6[_0x4a75a6(0x2c8)]=_0x4a75a6(0x172),_0xa971a6[_0x4a75a6(0x206)]='编辑',_0xa971a6[_0x4a75a6(0x2df)]('click',function(){editBatchFormEntry(_0x256abb);});const _0x32619e=document[_0x4a75a6(0x311)]('button');_0x32619e['type']=_0x4a75a6(0x172),_0x32619e[_0x4a75a6(0x206)]='删除',_0x32619e[_0x4a75a6(0x2df)](_0x4a75a6(0x130),function(){removeBatchFormEntry(_0x256abb);}),_0x2e00a2[_0x4a75a6(0x28e)](_0xa971a6),_0x2e00a2[_0x4a75a6(0x28e)](_0x32619e),_0x4a4686[_0x4a75a6(0x28e)](_0x4b5f23),_0x4a4686['appendChild'](_0x2e00a2),_0x35eb83[_0x4a75a6(0x28e)](_0x4a4686);});}function syncFormListToTextarea(){const _0x3840ae=_0x210f;if(batchSyncLock)return;const _0x3ec580=document[_0x3840ae(0x26b)](_0x3840ae(0x153));if(!_0x3ec580)return;batchSyncLock=!![];let _0x4dc545=getBatchCommentHeader(_0x3ec580[_0x3840ae(0x2ca)]);!_0x4dc545[_0x3840ae(0x2bf)]&&(_0x4dc545=getBatchCommentOnlyTemplate()[_0x3840ae(0x1c9)]('\x0a'));const _0x5a928a=batchFormEntries[_0x3840ae(0x1a9)](_0x24354d=>formatBatchLine(_0x24354d['name'],_0x24354d[_0x3840ae(0x2ac)],_0x24354d[_0x3840ae(0x2f4)])),_0xe915c6=[_0x4dc545[_0x3840ae(0x1e7)]('\x0a')];if(_0x5a928a[_0x3840ae(0x2bf)])_0xe915c6[_0x3840ae(0xee)](_0x5a928a[_0x3840ae(0x1e7)]('\x0a'));_0x3ec580[_0x3840ae(0x2ca)]=_0xe915c6[_0x3840ae(0x1e7)]('\x0a'),invalidateBatchReview(),batchSyncLock=![];}function syncTextareaToFormList(){const _0x194d4c=_0x210f;if(batchSyncLock)return;const _0x214553=document[_0x194d4c(0x26b)](_0x194d4c(0x153));if(!_0x214553)return;batchSyncLock=!![];const _0x2d3c57=parseBatchInput(_0x214553[_0x194d4c(0x2ca)]);batchFormEntries=_0x2d3c57[_0x194d4c(0xef)](_0x4133e3=>_0x4133e3['ok'])[_0x194d4c(0x1a9)](_0x38d8ef=>({'name':_0x38d8ef[_0x194d4c(0x224)],'order':_0x38d8ef[_0x194d4c(0x2ac)],'amount':_0x38d8ef['amount']}));const _0x2ff16d=_0x2d3c57['filter'](_0x4a69e9=>!_0x4a69e9['ok']);batchFormEditIndex=-0x1,renderBatchFormList();if(_0x2ff16d[_0x194d4c(0x2bf)])setBatchFormHint(_0x194d4c(0x10b)+_0x2ff16d['length']+_0x194d4c(0x164),_0x194d4c(0xe3));else batchFormEntries[_0x194d4c(0x2bf)]?setBatchFormHint('已从\x20TXT\x20同步\x20'+batchFormEntries[_0x194d4c(0x2bf)]+_0x194d4c(0xfd),_0x194d4c(0x119)):setBatchFormHint('');syncChipActiveStates(),batchSyncLock=![];}function clearBatchFormFields(){const _0x24fac9=_0x210f,_0xed40b9=document['getElementById'](_0x24fac9(0x1ec)),_0x130c10=document['getElementById'](_0x24fac9(0x137)),_0x1eb107=document[_0x24fac9(0x26b)](_0x24fac9(0x281)),_0x47d5a2=document[_0x24fac9(0x26b)](_0x24fac9(0x283));if(_0xed40b9)_0xed40b9[_0x24fac9(0x2ca)]='';if(_0x130c10)_0x130c10['value']='';if(_0x1eb107)_0x1eb107['value']='';if(_0x47d5a2)_0x47d5a2[_0x24fac9(0x2ca)]='';hideBatchNameSuggestions(),batchFormEditIndex=-0x1,syncChipActiveStates(),renderBatchFormList(),setBatchFormHint('');}function editBatchFormEntry(_0x488c07){const _0x11931c=_0x210f,_0x46689a=batchFormEntries[_0x488c07];if(!_0x46689a)return;batchFormEditIndex=_0x488c07,document[_0x11931c(0x26b)]('batchFormName')[_0x11931c(0x2ca)]=_0x46689a[_0x11931c(0x224)];const _0x75ee44=document['getElementById'](_0x11931c(0x137));if(_0x75ee44)_0x75ee44[_0x11931c(0x2ca)]=PERSONNEL_MAP[_0x46689a[_0x11931c(0x224)]]?_0x46689a[_0x11931c(0x224)]:'';document['getElementById'](_0x11931c(0x281))[_0x11931c(0x2ca)]=_0x46689a[_0x11931c(0x2ac)],document[_0x11931c(0x26b)](_0x11931c(0x283))[_0x11931c(0x2ca)]=_0x46689a['amount'],hideBatchNameSuggestions(),syncChipActiveStates(),renderBatchFormList(),setBatchFormHint(_0x11931c(0x2c4)+(_0x488c07+0x1)+_0x11931c(0x179),''),document[_0x11931c(0x26b)](_0x11931c(0x1ec))[_0x11931c(0x21f)]();}function removeBatchFormEntry(_0x5ecf9f){const _0x515e52=_0x210f;batchFormEntries[_0x515e52(0x2af)](_0x5ecf9f,0x1);if(batchFormEditIndex===_0x5ecf9f)batchFormEditIndex=-0x1,clearBatchFormFields();else batchFormEditIndex>_0x5ecf9f&&(batchFormEditIndex-=0x1);renderBatchFormList(),syncFormListToTextarea(),setBatchFormHint(_0x515e52(0x225),_0x515e52(0x119));}function addOrUpdateBatchFormEntry(){const _0x524a6d=_0x210f,_0x273f81=(document[_0x524a6d(0x26b)]('batchFormName')?.[_0x524a6d(0x2ca)]||'')['trim'](),_0x13e7d6=(document[_0x524a6d(0x26b)]('batchFormOrder')?.[_0x524a6d(0x2ca)]||'')['trim'](),_0x31e299=(document[_0x524a6d(0x26b)](_0x524a6d(0x283))?.[_0x524a6d(0x2ca)]||'')[_0x524a6d(0x18e)]();if(!_0x273f81){setBatchFormHint(_0x524a6d(0x1ce),_0x524a6d(0xe3));return;}const _0x5c5647=suggestPersonnelName(_0x273f81)||(PERSONNEL_MAP[_0x273f81]?_0x273f81:null);if(!_0x5c5647||!PERSONNEL_MAP[_0x5c5647]){setBatchFormHint(_0x524a6d(0xff)+_0x273f81+_0x524a6d(0x2a0),_0x524a6d(0xe3));return;}const _0x37a012=normalizeOrderText(_0x13e7d6);if(!_0x37a012){setBatchFormHint(_0x524a6d(0x1fd),_0x524a6d(0xe3));return;}const _0x528976=normalizeAmountText(_0x31e299);if(_0x528976===null){setBatchFormHint('请填写有效金额数字',_0x524a6d(0xe3));return;}const _0x878b04={'name':_0x5c5647,'order':_0x37a012,'amount':_0x528976};batchFormEditIndex>=0x0&&batchFormEditIndex<batchFormEntries[_0x524a6d(0x2bf)]?(batchFormEntries[batchFormEditIndex]=_0x878b04,setBatchFormHint(_0x524a6d(0x2e3)+(batchFormEditIndex+0x1)+'\x20条',_0x524a6d(0x119))):(batchFormEntries['push'](_0x878b04),setBatchFormHint(_0x524a6d(0x170)+batchFormEntries['length']+_0x524a6d(0x2dd),_0x524a6d(0x119)));batchFormEditIndex=-0x1,renderBatchFormList(),syncFormListToTextarea(),document['getElementById'](_0x524a6d(0x1ec))[_0x524a6d(0x2ca)]='';const _0x104e00=document[_0x524a6d(0x26b)](_0x524a6d(0x137));if(_0x104e00)_0x104e00[_0x524a6d(0x2ca)]='';document[_0x524a6d(0x26b)](_0x524a6d(0x283))[_0x524a6d(0x2ca)]='',hideBatchNameSuggestions(),syncChipActiveStates(),document[_0x524a6d(0x26b)](_0x524a6d(0x1ec))[_0x524a6d(0x21f)]();}function scheduleTextareaToFormSync(){if(batchSyncLock)return;invalidateBatchReview();if(batchTxtSyncTimer)clearTimeout(batchTxtSyncTimer);batchTxtSyncTimer=setTimeout(function(){batchTxtSyncTimer=null,syncTextareaToFormList();},0x118);}function initBatchFormPanel(){const _0x27b22f=_0x210f;refreshBatchNameFilter(),initBatchNameSearch(),renderBatchOrderChips(),renderBatchAmountChips();const _0x1574f6=document[_0x27b22f(0x26b)]('batchOrderChips');_0x1574f6&&_0x1574f6[_0x27b22f(0x2df)]('click',function(_0x55c9f7){const _0x538734=_0x210f,_0x94457a=_0x55c9f7['target'][_0x538734(0x2ab)]('.batch-chip');if(!_0x94457a)return;const _0x12114e=document[_0x538734(0x26b)]('batchFormOrder');if(_0x12114e)_0x12114e[_0x538734(0x2ca)]=_0x94457a[_0x538734(0x2ff)][_0x538734(0x2ac)]||'';syncChipActiveStates();});const _0x112b61=document[_0x27b22f(0x26b)](_0x27b22f(0x1d1));_0x112b61&&_0x112b61[_0x27b22f(0x2df)]('click',function(_0x854c07){const _0x40a3f3=_0x210f,_0x3a49dc=_0x854c07['target'][_0x40a3f3(0x2ab)](_0x40a3f3(0x243));if(!_0x3a49dc)return;const _0x367a74=document[_0x40a3f3(0x26b)]('batchFormAmount');if(_0x367a74)_0x367a74[_0x40a3f3(0x2ca)]=_0x3a49dc['dataset']['amount']||'';syncChipActiveStates();});const _0x5a442c=document[_0x27b22f(0x26b)](_0x27b22f(0x281));if(_0x5a442c)_0x5a442c[_0x27b22f(0x2df)](_0x27b22f(0x263),syncChipActiveStates);const _0x2e3226=document['getElementById'](_0x27b22f(0x283));if(_0x2e3226)_0x2e3226[_0x27b22f(0x2df)]('input',syncChipActiveStates);const _0x5e18f2=document[_0x27b22f(0x26b)](_0x27b22f(0x165));if(_0x5e18f2)_0x5e18f2[_0x27b22f(0x2df)]('click',addOrUpdateBatchFormEntry);const _0x1aaf41=document[_0x27b22f(0x26b)](_0x27b22f(0x2d5));if(_0x1aaf41)_0x1aaf41[_0x27b22f(0x2df)](_0x27b22f(0x130),clearBatchFormFields);[_0x27b22f(0x281),_0x27b22f(0x283)]['forEach'](_0x16de2c=>{const _0x4fe116=_0x210f,_0x566e49=document['getElementById'](_0x16de2c);if(!_0x566e49)return;_0x566e49['addEventListener'](_0x4fe116(0x325),function(_0x13b7eb){const _0x5ba7d2=_0x210f;_0x13b7eb[_0x5ba7d2(0x13f)]===_0x5ba7d2(0x256)&&(_0x13b7eb[_0x5ba7d2(0x25b)](),addOrUpdateBatchFormEntry());});});const _0xb306a8=document[_0x27b22f(0x26b)](_0x27b22f(0x1ec));_0xb306a8&&_0xb306a8[_0x27b22f(0x2df)]('keydown',function(_0xa8fa12){const _0x3f409a=_0x210f;if(_0xa8fa12[_0x3f409a(0x13f)]!=='Enter')return;const _0x2de53d=document[_0x3f409a(0x26b)](_0x3f409a(0xfa));if(_0x2de53d&&!_0x2de53d[_0x3f409a(0x316)])return;_0xa8fa12['preventDefault'](),addOrUpdateBatchFormEntry();});const _0xf44a0e=document['getElementById'](_0x27b22f(0x153));_0xf44a0e&&_0xf44a0e[_0x27b22f(0x2df)](_0x27b22f(0x263),scheduleTextareaToFormSync);}function getBatchTemplateText(){const _0x1d1194=_0x210f;return[_0x1d1194(0x2b6),'#\x20每行一条；空行与\x20#\x20开头行忽略',_0x1d1194(0x21c),_0x1d1194(0x1dc),'#\x20下单内容示例：签约团检1单\x20/\x20开门红套餐下单\x20/\x20618活动套餐下单\x20/\x20\x22双11\x22活动套餐下单','#',_0x1d1194(0x134),_0x1d1194(0x13d),'白金玉+618活动套餐下单\x20金额：9800元',_0x1d1194(0xf6)][_0x1d1194(0x1e7)]('\x0a');}function ensureBatchTemplateFilled(){const _0x27a628=_0x210f,_0x31c9de=document['getElementById'](_0x27a628(0x153));if(!_0x31c9de)return;!_0x31c9de['value'][_0x27a628(0x18e)]()&&(_0x31c9de['value']=getBatchTemplateText());}function suggestPersonnelName(_0x13f1d4){const _0x3a0c0a=_0x210f,_0x2f5063=(_0x13f1d4||'')[_0x3a0c0a(0x18e)]();if(!_0x2f5063)return null;if(PERSONNEL_MAP[_0x2f5063])return _0x2f5063;const _0x545172=resolveAvatarNameInput(_0x2f5063);if(_0x545172)return _0x545172;const _0x330eeb=searchPersonnel(_0x2f5063);if(_0x330eeb['length'])return _0x330eeb[0x0][_0x3a0c0a(0x224)];return null;}function normalizeOrderText(_0x118fc0){const _0x293de3=_0x210f;let _0x3a9e75=(_0x118fc0||'')[_0x293de3(0x18e)]()['replace'](/\s+/g,'');if(!_0x3a9e75)return'';return _0x3a9e75;}function normalizeAmountText(_0x5b3b1f){const _0x1e0718=_0x210f,_0x3b958c=String(_0x5b3b1f||'')[_0x1e0718(0x18e)]()['replace'](/,/g,''),_0x5f10f3=Number(_0x3b958c);if(!Number[_0x1e0718(0x270)](_0x5f10f3)||_0x5f10f3<0x0)return null;return Number[_0x1e0718(0x1e8)](_0x5f10f3)?String(_0x5f10f3):String(Math[_0x1e0718(0x274)](_0x5f10f3*0x64)/0x64);}function formatAmountForCanvas(_0x5eb336){const _0x52f027=_0x210f,_0x19bcfb=String(_0x5eb336||'')['trim']();if(!_0x19bcfb)return'';return/元\s*$/[_0x52f027(0x1d3)](_0x19bcfb)?_0x19bcfb:_0x19bcfb+'元';}function parseBatchLine(_0x3fc01a,_0x57e4a0){const _0x23b283=_0x210f,_0xe16759=_0x3fc01a['trim']();if(!_0xe16759||_0xe16759[_0x23b283(0x2b8)]('#'))return{'skip':!![],'lineNo':_0x57e4a0,'raw':_0xe16759};let _0x3fe6c4=_0xe16759['match'](/^(.+?)\+(.+?)\s*金额\s*[：:]\s*([0-9]+(?:\.[0-9]+)?)\s*元?\s*$/);!_0x3fe6c4&&(_0x3fe6c4=_0xe16759[_0x23b283(0x318)](/^(.+?)[\s,，]+(.+?)\s*金额\s*[：:]\s*([0-9]+(?:\.[0-9]+)?)\s*元?\s*$/));if(!_0x3fe6c4)return{'ok':![],'lineNo':_0x57e4a0,'raw':_0xe16759,'errors':['格式不正确。应为：姓名+下单内容\x20金额：数字元'],'hints':[_0x23b283(0x1de)]};const _0x64ca2b=_0x3fe6c4[0x1][_0x23b283(0x18e)](),_0x4e1804=_0x3fe6c4[0x2][_0x23b283(0x18e)](),_0x4cc71e=_0x3fe6c4[0x3][_0x23b283(0x18e)](),_0x2d8477=[],_0x190a5d=[];let _0x3c7b67=_0x64ca2b;if(!PERSONNEL_MAP[_0x3c7b67]){const _0x2956a0=suggestPersonnelName(_0x64ca2b);if(_0x2956a0&&_0x2956a0!==_0x64ca2b)_0x2d8477[_0x23b283(0xee)](_0x23b283(0xff)+_0x64ca2b+_0x23b283(0x26c)),_0x190a5d[_0x23b283(0xee)](_0x23b283(0x2f9)+_0x2956a0+_0x23b283(0xe5)+PERSONNEL_MAP[_0x2956a0]+'）');else _0x2956a0?_0x3c7b67=_0x2956a0:(_0x2d8477[_0x23b283(0xee)](_0x23b283(0xff)+_0x64ca2b+_0x23b283(0x2a0)),_0x190a5d['push'](_0x23b283(0x129)));}const _0x4e5471=normalizeOrderText(_0x4e1804);!_0x4e5471&&_0x2d8477['push']('下单内容不能为空');const _0x5a2425=normalizeAmountText(_0x4cc71e);_0x5a2425===null&&_0x2d8477[_0x23b283(0xee)](_0x23b283(0x17e)+_0x4cc71e+_0x23b283(0x1dd));if(_0x2d8477[_0x23b283(0x2bf)])return{'ok':![],'lineNo':_0x57e4a0,'raw':_0xe16759,'name':_0x64ca2b,'order':_0x4e5471,'amount':_0x4cc71e,'errors':_0x2d8477,'hints':_0x190a5d};return{'ok':!![],'lineNo':_0x57e4a0,'raw':_0xe16759,'name':_0x3c7b67,'dept':PERSONNEL_MAP[_0x3c7b67],'order':_0x4e5471,'amount':_0x5a2425,'congrats':_0x23b283(0x1b2)+_0x3c7b67};}function parseBatchInput(_0x5a9e9e){const _0xd3a28a=_0x210f,_0x458109=String(_0x5a9e9e||'')[_0xd3a28a(0x1c9)](/\r?\n/),_0x38ef95=[];return _0x458109[_0xd3a28a(0x2a5)]((_0x18bb31,_0xd9b334)=>{const _0x2fd0df=_0x210f,_0x109eb8=parseBatchLine(_0x18bb31,_0xd9b334+0x1);if(_0x109eb8[_0x2fd0df(0x33c)])return;_0x38ef95[_0x2fd0df(0xee)](_0x109eb8);}),_0x38ef95;}function renderBatchReview(_0x5bbfc1){const _0x56c9b1=_0x210f,_0x3bb50a=document[_0x56c9b1(0x26b)]('batchReviewList'),_0x50b524=document[_0x56c9b1(0x26b)](_0x56c9b1(0x106)),_0x53d0eb=document[_0x56c9b1(0x26b)](_0x56c9b1(0x167));if(!_0x3bb50a)return;_0x3bb50a['innerHTML']='';const _0x3c33af=_0x5bbfc1[_0x56c9b1(0xef)](_0x4dd935=>_0x4dd935['ok']),_0x278df6=_0x5bbfc1[_0x56c9b1(0xef)](_0x53bfcb=>!_0x53bfcb['ok']);if(!_0x5bbfc1[_0x56c9b1(0x2bf)]){_0x3bb50a[_0x56c9b1(0x312)]=_0x56c9b1(0x144);if(_0x50b524)_0x50b524[_0x56c9b1(0x206)]='';if(_0x53d0eb)_0x53d0eb[_0x56c9b1(0x11e)]=!![];batchParsedRecords=[];return;}_0x5bbfc1[_0x56c9b1(0x2a5)](_0xc0f86e=>{const _0x396c8f=_0x210f,_0x464c3a=document[_0x396c8f(0x311)]('li');_0x464c3a[_0x396c8f(0x2e9)]=_0xc0f86e['ok']?'is-ok':'is-error';if(_0xc0f86e['ok'])_0x464c3a[_0x396c8f(0x206)]='第'+_0xc0f86e['lineNo']+_0x396c8f(0x155)+_0xc0f86e['name']+'｜'+_0xc0f86e[_0x396c8f(0x1df)]+'｜'+_0xc0f86e[_0x396c8f(0x2ac)]+'｜'+_0xc0f86e['amount']+'元';else{const _0x3d0ce8=(_0xc0f86e['hints']||[])['join']('；');_0x464c3a['innerHTML']='第'+_0xc0f86e['lineNo']+_0x396c8f(0x1b5)+escapeHtml(_0xc0f86e[_0x396c8f(0x33e)])+_0x396c8f(0x16a)+escapeHtml((_0xc0f86e['errors']||[])[_0x396c8f(0x1e7)]('；'))+(_0x3d0ce8?'<br>建议：'+escapeHtml(_0x3d0ce8):'');}_0x3bb50a['appendChild'](_0x464c3a);});if(_0x278df6[_0x56c9b1(0x2bf)]){if(_0x50b524)_0x50b524[_0x56c9b1(0x206)]='审阅未通过：'+_0x278df6[_0x56c9b1(0x2bf)]+_0x56c9b1(0x207)+_0x3c33af[_0x56c9b1(0x2bf)]+_0x56c9b1(0x1d9);if(_0x53d0eb)_0x53d0eb[_0x56c9b1(0x11e)]=!![];batchParsedRecords=[];}else{if(_0x50b524)_0x50b524[_0x56c9b1(0x206)]=_0x56c9b1(0x296)+_0x3c33af['length']+_0x56c9b1(0x23e);if(_0x53d0eb)_0x53d0eb[_0x56c9b1(0x11e)]=![];batchParsedRecords=_0x3c33af;}}function validateBatchInput(_0x1992d3={}){const _0x36f2e1=_0x210f;if(currentTemplateId!==_0x36f2e1(0x28b))return alert(_0x36f2e1(0x272)),![];const _0x3d4a61=document[_0x36f2e1(0x26b)](_0x36f2e1(0x153)),_0x1e96ee=parseBatchInput(_0x3d4a61?_0x3d4a61['value']:'');renderBatchReview(_0x1e96ee);const _0x2c3e7e=_0x1992d3[_0x36f2e1(0x22f)]!==![];if(_0x2c3e7e&&batchParsedRecords[_0x36f2e1(0x2bf)])return generateBatchCongrats(),!![];return batchParsedRecords[_0x36f2e1(0x2bf)]>0x0;}function loadAvatarImageForName(_0x2d4f2d){return new Promise(function(_0x209ba8){const _0x21501c=_0x210f;if(uploadedAvatars[_0x2d4f2d]){const _0x17d451=new Image(),_0x3fe4e9=uploadedAvatars[_0x2d4f2d];_0x17d451['onload']=function(){_0x209ba8(_0x17d451);},_0x17d451[_0x21501c(0x177)]=function(){_0x209ba8(null);};_0x3fe4e9&&!String(_0x3fe4e9)[_0x21501c(0x2b8)](_0x21501c(0x1b6))&&(_0x17d451[_0x21501c(0x102)]=_0x21501c(0x198));_0x17d451[_0x21501c(0x223)]=_0x3fe4e9;return;}const _0xc4ec41=[_0x21501c(0xde),_0x21501c(0x214),_0x21501c(0x210),_0x21501c(0x14a),_0x21501c(0x124)],_0x5e34c4=getPhotoLookupName(_0x2d4f2d);let _0x5dbc10=0x0;function _0x11a79b(){const _0x54b5b1=_0x210f;if(_0x5dbc10>=_0xc4ec41[_0x54b5b1(0x2bf)]){_0x209ba8(null);return;}const _0x2358fd=_0x54b5b1(0x24a)+_0x5e34c4+_0xc4ec41[_0x5dbc10++],_0x4f8d56=new Image();_0x4f8d56['crossOrigin']=_0x54b5b1(0x198),_0x4f8d56[_0x54b5b1(0x2a6)]=function(){const _0x22598a=_0x210f;if(_0x4f8d56[_0x22598a(0x324)]===0x0||_0x4f8d56[_0x22598a(0x259)]===0x0)_0x11a79b();else _0x209ba8(_0x4f8d56);},_0x4f8d56['onerror']=_0x11a79b,_0x4f8d56['src']=_0x2358fd;}_0x11a79b();});}function waitFrames(_0x3490cd){return new Promise(function(_0x334c19){let _0x4624e5=_0x3490cd||0x2;function _0x1b2a76(){_0x4624e5-=0x1;if(_0x4624e5<=0x0)_0x334c19();else requestAnimationFrame(_0x1b2a76);}requestAnimationFrame(_0x1b2a76);});}function applyBatchRecordToCanvas(_0x238820){const _0x4ce38e=_0x210f;return loadAvatarImageForName(_0x238820[_0x4ce38e(0x224)])[_0x4ce38e(0x280)](function(_0x5116f8){const _0x442d44=_0x210f;setFieldContent(_0x442d44(0x224),_0x238820[_0x442d44(0x224)]),setFieldContent(_0x442d44(0x1df),_0x238820['dept']),setFieldContent(_0x442d44(0x2ac),_0x238820['order']),setFieldContent(_0x442d44(0x2f4),formatAmountForCanvas(_0x238820[_0x442d44(0x2f4)])),updateCongratsText(),canvas['getObjects']()[_0x442d44(0xef)](_0x19113e=>_0x19113e['clipTo']||_0x19113e[_0x442d44(0x159)])[_0x442d44(0x2a5)](_0x105fc5=>canvas[_0x442d44(0x147)](_0x105fc5));if(_0x5116f8)return new Promise(function(_0x28385d){const _0x23203f=_0x210f;fabric[_0x23203f(0x332)]['fromURL'](_0x5116f8[_0x23203f(0x223)],function(_0x57e40c){const _0x504020=_0x210f;configureAvatarImage(_0x57e40c),canvas[_0x504020(0x286)](_0x57e40c),relayoutCanvasElements({'schedulePreview':![]}),_0x28385d(!![]);},{'crossOrigin':_0x23203f(0x198)});});return relayoutCanvasElements({'schedulePreview':![]}),![];});}function exportToJPGAsync(_0x34845a={}){return new Promise(function(_0x51a857,_0x3e3a47){const _0x544d38=_0x210f;if(!backgroundImage){_0x3e3a47(new Error(_0x544d38(0x1a7)));return;}const _0xb7f981=parseInt(document[_0x544d38(0x26b)]('exportWidth')['value'],0xa)||DESIGN_SIZE['width'],_0x583cd3=parseInt(document[_0x544d38(0x26b)](_0x544d38(0x1a6))[_0x544d38(0x2ca)],0xa)||DESIGN_SIZE[_0x544d38(0x259)],_0x36e0cf=_0xb7f981/DESIGN_SIZE[_0x544d38(0x324)];let _0x5b0bd9;try{_0x5b0bd9=withDesignCanvas(function(){const _0x982076=_0x210f;return canvas[_0x982076(0xf7)]({'format':_0x982076(0x146),'quality':0.9,'multiplier':_0x36e0cf});});}catch(_0x3ad616){_0x3e3a47(_0x3ad616);return;}const _0x4d451d=document[_0x544d38(0x311)]('canvas');_0x4d451d[_0x544d38(0x324)]=_0xb7f981,_0x4d451d[_0x544d38(0x259)]=_0x583cd3;const _0x25a2af=_0x4d451d['getContext']('2d'),_0x5c5c44=new Image();_0x5c5c44[_0x544d38(0x2a6)]=function(){const _0x93550d=_0x210f;_0x25a2af[_0x93550d(0x1f2)](_0x5c5c44,0x0,0x0,_0xb7f981,_0x583cd3);const _0x37083d=_0x34845a['fileName']||buildExportFileName();_0x4d451d[_0x93550d(0x24e)](function(_0x9c5a0c){const _0x564977=_0x210f;if(!_0x9c5a0c){_0x3e3a47(new Error('导出失败'));return;}const _0x420fce=URL[_0x564977(0x22a)](_0x9c5a0c),_0xb91412=document[_0x564977(0x311)]('a');_0xb91412[_0x564977(0x313)]=_0x420fce,_0xb91412[_0x564977(0x1fa)]=_0x37083d,document[_0x564977(0x2d0)]['appendChild'](_0xb91412),_0xb91412['click'](),document[_0x564977(0x2d0)][_0x564977(0x189)](_0xb91412),URL['revokeObjectURL'](_0x420fce),_0x51a857(_0x37083d);},_0x93550d(0x260),0.9);},_0x5c5c44[_0x544d38(0x177)]=function(){const _0xf6a6c7=_0x210f;_0x3e3a47(new Error(_0xf6a6c7(0x2f7)));},_0x5c5c44[_0x544d38(0x223)]=_0x5b0bd9;});}async function generateBatchCongrats(){const _0x4c3cf9=_0x210f;if(batchGenerating)return;if(currentTemplateId!==_0x4c3cf9(0x28b)){alert(_0x4c3cf9(0x196));return;}if(!batchParsedRecords['length']){validateBatchInput();if(!batchParsedRecords[_0x4c3cf9(0x2bf)])return;}batchGenerating=!![],historyLock=!![];const _0x1d2118=document[_0x4c3cf9(0x26b)](_0x4c3cf9(0x167)),_0x2642d6=document['getElementById']('batchValidateBtn'),_0xc8d9cf=document[_0x4c3cf9(0x26b)]('batchProgress');if(_0x1d2118)_0x1d2118['disabled']=!![];if(_0x2642d6)_0x2642d6['disabled']=!![];let _0x117b0c=0x0,_0x15c94e=0x0;try{for(let _0x4edf8a=0x0;_0x4edf8a<batchParsedRecords[_0x4c3cf9(0x2bf)];_0x4edf8a++){const _0x105761=batchParsedRecords[_0x4edf8a];_0xc8d9cf&&(_0xc8d9cf[_0x4c3cf9(0x206)]=_0x4c3cf9(0x21a)+(_0x4edf8a+0x1)+'/'+batchParsedRecords[_0x4c3cf9(0x2bf)]+'：'+_0x105761[_0x4c3cf9(0x224)]+'…');try{const _0x34fc09=await applyBatchRecordToCanvas(_0x105761);await waitFrames(0x3);const _0x574758='喜报_'+_0x105761[_0x4c3cf9(0x224)]+'_'+_0x105761['amount']+'_'+new Date()[_0x4c3cf9(0x1e9)]()['slice'](0x0,0xa)+'.jpg';await exportToJPGAsync({'fileName':_0x574758}),_0x117b0c+=0x1,!_0x34fc09&&_0xc8d9cf?(_0xc8d9cf[_0x4c3cf9(0x206)]='第\x20'+(_0x4edf8a+0x1)+_0x4c3cf9(0x26d)+_0x105761[_0x4c3cf9(0x224)]+'」已导出（未找到头像，仅文字）',await new Promise(_0x1dd8f5=>setTimeout(_0x1dd8f5,0x15e))):await new Promise(_0xc271a5=>setTimeout(_0xc271a5,0xfa));}catch(_0x3ffe75){console[_0x4c3cf9(0x1a8)](_0x3ffe75),_0x15c94e+=0x1;}}}finally{batchGenerating=![],historyLock=![],schedulePreviewUpdate(),pushHistory();if(_0x2642d6)_0x2642d6[_0x4c3cf9(0x11e)]=![];if(_0x1d2118)_0x1d2118[_0x4c3cf9(0x11e)]=![];_0xc8d9cf&&(_0xc8d9cf[_0x4c3cf9(0x206)]=_0x4c3cf9(0x2f1)+_0x117b0c+'\x20条'+(_0x15c94e?'，失败\x20'+_0x15c94e+'\x20条':'')+'。');}}function exportToJPG(){const _0x18f50d=_0x210f;exportToJPGAsync()[_0x18f50d(0x212)](function(_0x1a6c72){const _0x24622d=_0x210f;alert(_0x1a6c72[_0x24622d(0x1eb)]||_0x24622d(0x2d3));});}function resetCanvas(){const _0x8a4c3e=_0x210f,_0x59d159=getCurrentTemplate();applyTemplateRuntimeConfig(_0x59d159['id']),textObjects={},initTextFieldState(),refreshInspectorFieldSelect(),syncInspectorUIFromState(activeFieldKey),bootstrapTemplateCanvas({'template':_0x59d159,'resetHistory':!![],'resetDiet':_0x59d159['id']===_0x8a4c3e(0x14f)});}function updateCongratsText(){const _0x114197=_0x210f,_0x12be97=getFieldContent(_0x114197(0x224));if(_0x12be97){textFieldState[_0x114197(0x1db)][_0x114197(0x29c)]=_0x114197(0x1b2)+_0x12be97;if(activeFieldKey===_0x114197(0x1db)){const _0x47d924=document[_0x114197(0x26b)](_0x114197(0x2f8));if(_0x47d924)_0x47d924[_0x114197(0x2ca)]=textFieldState[_0x114197(0x1db)][_0x114197(0x29c)];}updateTextObject(_0x114197(0x1db));}else{textFieldState[_0x114197(0x1db)][_0x114197(0x29c)]='';if(activeFieldKey===_0x114197(0x1db)){const _0x3f6b34=document[_0x114197(0x26b)](_0x114197(0x2f8));if(_0x3f6b34)_0x3f6b34['value']='';}updateTextObject('congrats');}}function handleKeydown(_0x4fa5e7){const _0x50d8fd=_0x210f,_0x152ff5=_0x4fa5e7['target']&&_0x4fa5e7[_0x50d8fd(0x25d)][_0x50d8fd(0x29e)]||'',_0x4630f2=/INPUT|TEXTAREA|SELECT/[_0x50d8fd(0x1d3)](_0x152ff5)||_0x4fa5e7[_0x50d8fd(0x25d)]?.['isContentEditable'];if(_0x4630f2)return;const _0xe4a92b=_0x4fa5e7[_0x50d8fd(0x1b0)]||_0x4fa5e7[_0x50d8fd(0x104)];if(_0xe4a92b&&(_0x4fa5e7[_0x50d8fd(0x13f)]==='z'||_0x4fa5e7[_0x50d8fd(0x13f)]==='Z')&&!_0x4fa5e7[_0x50d8fd(0x14b)]){_0x4fa5e7[_0x50d8fd(0x25b)](),undoCanvasChange();return;}if(_0x4fa5e7[_0x50d8fd(0x13f)]===_0x50d8fd(0x1ca)||_0x4fa5e7[_0x50d8fd(0x13f)]===_0x50d8fd(0x1e0)){if(!canvas?.[_0x50d8fd(0x205)]())return;_0x4fa5e7[_0x50d8fd(0x25b)](),deleteActiveCanvasObject();return;}const _0x2e91ee=canvas?.[_0x50d8fd(0x205)]();if(!_0x2e91ee)return;if(_0x2e91ee['type']!==_0x50d8fd(0x2d9)&&_0x2e91ee['type']!==_0x50d8fd(0xdf))return;const _0x1a23c6=0x5;let _0x5bd9d4=![];switch(_0x4fa5e7[_0x50d8fd(0x13f)]){case _0x50d8fd(0x2dc):_0x2e91ee['set'](_0x50d8fd(0x242),_0x2e91ee[_0x50d8fd(0x242)]-_0x1a23c6),_0x5bd9d4=!![];break;case _0x50d8fd(0x112):_0x2e91ee[_0x50d8fd(0x1a3)](_0x50d8fd(0x242),_0x2e91ee['top']+_0x1a23c6),_0x5bd9d4=!![];break;case _0x50d8fd(0x200):_0x2e91ee[_0x50d8fd(0x1a3)](_0x50d8fd(0x11f),_0x2e91ee[_0x50d8fd(0x11f)]-_0x1a23c6),_0x5bd9d4=!![];break;case _0x50d8fd(0x2d2):_0x2e91ee[_0x50d8fd(0x1a3)](_0x50d8fd(0x11f),_0x2e91ee[_0x50d8fd(0x11f)]+_0x1a23c6),_0x5bd9d4=!![];break;default:return;}if(!_0x5bd9d4)return;_0x4fa5e7[_0x50d8fd(0x25b)](),_0x2e91ee[_0x50d8fd(0x2a7)](),canvas[_0x50d8fd(0x330)](),updateCoordinateDisplay(_0x2e91ee),pushHistory();}function updateCoordinateDisplay(_0x159cbc){const _0x4d7178=_0x210f;let _0x20870a=document[_0x4d7178(0x26b)](_0x4d7178(0x2f3));!_0x20870a&&(_0x20870a=document[_0x4d7178(0x311)](_0x4d7178(0x122)),_0x20870a['id']='coordinateDisplay',_0x20870a[_0x4d7178(0xda)][_0x4d7178(0x103)]=_0x4d7178(0x2ba),_0x20870a['style']['bottom']=_0x4d7178(0x150),_0x20870a[_0x4d7178(0xda)][_0x4d7178(0x11f)]=_0x4d7178(0x150),_0x20870a[_0x4d7178(0xda)]['backgroundColor']='rgba(0,\x200,\x200,\x200.7)',_0x20870a['style'][_0x4d7178(0x338)]=_0x4d7178(0x2c6),_0x20870a[_0x4d7178(0xda)][_0x4d7178(0x250)]=_0x4d7178(0x16b),_0x20870a['style'][_0x4d7178(0x322)]=_0x4d7178(0x12d),_0x20870a[_0x4d7178(0xda)][_0x4d7178(0x12a)]=_0x4d7178(0x2f0),_0x20870a[_0x4d7178(0xda)][_0x4d7178(0xd8)]=_0x4d7178(0xed),document['body'][_0x4d7178(0x28e)](_0x20870a)),_0x20870a[_0x4d7178(0x206)]=_0x4d7178(0x1b3)+Math[_0x4d7178(0x274)](_0x159cbc['left'])+',\x20Y:\x20'+Math[_0x4d7178(0x274)](_0x159cbc[_0x4d7178(0x242)]);}function initEventListeners(){const _0x51b7a6=_0x210f;document['getElementById'](_0x51b7a6(0x257))[_0x51b7a6(0x2df)](_0x51b7a6(0x130),exportToJPG),document[_0x51b7a6(0x26b)](_0x51b7a6(0x125))[_0x51b7a6(0x2df)]('click',resetCanvas),document[_0x51b7a6(0x2df)](_0x51b7a6(0x325),handleKeydown),initCanvasTextInteraction(),initCanvasViewControls(),initHistoryTracking(),initAutoShowToggle(),canvas['on'](_0x51b7a6(0x2d4),function(_0x1cdae3){const _0x2dae0f=_0x210f;updateCoordinateDisplay(_0x1cdae3[_0x2dae0f(0x25d)]);}),canvas['on'](_0x51b7a6(0x132),function(){}),rebuildPersonnelSearchIndex(),initNameDropdown(),initAvatarNameSearch(),document[_0x51b7a6(0x26b)]('previewAvatarBtn')[_0x51b7a6(0x2df)](_0x51b7a6(0x130),previewAvatar),document[_0x51b7a6(0x26b)](_0x51b7a6(0x31d))['addEventListener'](_0x51b7a6(0x130),uploadAvatarToCanvas),document['getElementById'](_0x51b7a6(0x234))[_0x51b7a6(0x2df)]('click',uploadImageWithName),document[_0x51b7a6(0x26b)](_0x51b7a6(0x12f))['addEventListener'](_0x51b7a6(0x130),deletePerson),document['getElementById']('viewAllPersonsBtn')['addEventListener'](_0x51b7a6(0x130),viewAllPersons),document[_0x51b7a6(0x2bd)]('.close')[_0x51b7a6(0x2df)]('click',function(){const _0x805132=_0x210f;document[_0x805132(0x26b)](_0x805132(0x2cd))[_0x805132(0xda)][_0x805132(0x12c)]=_0x805132(0x2f6);}),window[_0x51b7a6(0x2df)](_0x51b7a6(0x130),function(_0x534c72){const _0x284fcf=_0x210f,_0x328db1=document[_0x284fcf(0x26b)](_0x284fcf(0x2cd));_0x534c72[_0x284fcf(0x25d)]==_0x328db1&&(_0x328db1[_0x284fcf(0xda)][_0x284fcf(0x12c)]='none');});}function continueToTextAfterAvatar(){const _0x49a993=_0x210f,_0x57168e=TEXT_FIELD_CONFIG[_0x49a993(0x2f4)]?_0x49a993(0x2f4):TEXT_FIELD_CONFIG[_0x49a993(0x2ac)]?'order':Object[_0x49a993(0x22c)](TEXT_FIELD_CONFIG)[0x0];if(_0x57168e)selectTextField(_0x57168e);openEditorPanel(_0x49a993(0xdf)),requestAnimationFrame(function(){const _0xd0c319=_0x210f,_0x1496e7=document[_0xd0c319(0x26b)](_0xd0c319(0x2f8));_0x1496e7&&(_0x1496e7[_0xd0c319(0x21f)](),_0x1496e7[_0xd0c319(0x2d6)]());});}function applyCurrentAvatarAndContinue(_0x1b4f56={}){const _0x1b2f9b=_0x210f;if(!currentPreviewAvatar)return Promise['reject'](new Error('no\x20preview'));const {name:_0x379e4c,image:_0x48cc09}=currentPreviewAvatar;if(!_0x48cc09||_0x48cc09[_0x1b2f9b(0x324)]===0x0||_0x48cc09[_0x1b2f9b(0x259)]===0x0)return Promise['reject'](new Error(_0x1b2f9b(0x2e4)));return fetch(_0x48cc09[_0x1b2f9b(0x223)])[_0x1b2f9b(0x280)](_0x2acd17=>_0x2acd17[_0x1b2f9b(0x1c1)]())[_0x1b2f9b(0x280)](_0x484b64=>{const _0x4de239=_0x210f,_0x5c3dc9=new File([_0x484b64],_0x379e4c+_0x4de239(0xde),{'type':_0x484b64[_0x4de239(0x2c8)]});handleFileUpload(_0x5c3dc9);const _0x1b925d=document[_0x4de239(0x26b)](_0x4de239(0x253));_0x1b925d&&(_0x1b925d[_0x4de239(0x206)]='【'+_0x379e4c+_0x4de239(0x33f),_0x1b925d[_0x4de239(0xda)][_0x4de239(0x338)]='#28a745'),_0x1b4f56[_0x4de239(0x13b)]!==![]&&continueToTextAfterAvatar();});}function previewAvatar(){const _0x29963c=_0x210f,_0x30ee5f=document[_0x29963c(0x26b)](_0x29963c(0x2da));let _0x8a57a6=_0x30ee5f[_0x29963c(0x2ca)][_0x29963c(0x18e)]();const _0x40c216=document[_0x29963c(0x26b)]('avatarPreviewArea'),_0x53f4ba=document[_0x29963c(0x26b)](_0x29963c(0x31d)),_0x117e9a=document[_0x29963c(0x26b)]('avatarTip');_0x40c216[_0x29963c(0x312)]='',_0x53f4ba['disabled']=!![],_0x117e9a[_0x29963c(0x206)]='',currentPreviewAvatar=null;if(!_0x8a57a6){_0x117e9a[_0x29963c(0x206)]=_0x29963c(0x295);return;}const _0x53d7f7=resolveAvatarNameInput(_0x8a57a6);if(!_0x53d7f7){const _0x3dcb4d=searchPersonnel(_0x8a57a6);if(_0x3dcb4d[_0x29963c(0x2bf)]>0x0){renderAvatarNameSuggestions(_0x3dcb4d),_0x117e9a[_0x29963c(0x206)]=_0x3dcb4d[_0x29963c(0x2bf)]===0x1?_0x29963c(0x2e8):_0x29963c(0x24b)+_0x3dcb4d[_0x29963c(0x2bf)]+_0x29963c(0x101),_0x117e9a[_0x29963c(0xda)][_0x29963c(0x338)]=_0x29963c(0x151);return;}_0x117e9a[_0x29963c(0x206)]='暂无【'+_0x8a57a6+_0x29963c(0x217);return;}_0x53d7f7!==_0x8a57a6&&(_0x30ee5f['value']=_0x53d7f7);_0x8a57a6=_0x53d7f7,hideAvatarNameSuggestions();if(!PERSONNEL_MAP['hasOwnProperty'](_0x8a57a6)){_0x117e9a[_0x29963c(0x206)]=_0x29963c(0x135)+_0x8a57a6+_0x29963c(0x217);return;}const _0x3568c8=++previewAvatarToken;_0x117e9a[_0x29963c(0x206)]=_0x29963c(0x201),_0x117e9a[_0x29963c(0xda)][_0x29963c(0x338)]=_0x29963c(0xe6),loadAvatarImageForName(_0x8a57a6)[_0x29963c(0x280)](function(_0x2e2822){const _0x7d4a70=_0x210f;if(_0x3568c8!==previewAvatarToken)return;if(!_0x2e2822||_0x2e2822['width']===0x0||_0x2e2822[_0x7d4a70(0x259)]===0x0){_0x40c216[_0x7d4a70(0x312)]=_0x7d4a70(0x2b3),_0x117e9a[_0x7d4a70(0x206)]=_0x7d4a70(0x116)+_0x8a57a6+_0x7d4a70(0x31e),_0x117e9a[_0x7d4a70(0xda)][_0x7d4a70(0x338)]=_0x7d4a70(0x151),_0x53f4ba[_0x7d4a70(0x11e)]=!![],currentPreviewAvatar=null;return;}_0x40c216[_0x7d4a70(0x312)]='',_0x40c216['appendChild'](_0x2e2822),_0x2e2822[_0x7d4a70(0xda)]['width']=_0x7d4a70(0x337),_0x2e2822[_0x7d4a70(0xda)][_0x7d4a70(0x259)]=_0x7d4a70(0x337),_0x2e2822[_0x7d4a70(0xda)][_0x7d4a70(0x140)]=_0x7d4a70(0x1d6),_0x53f4ba[_0x7d4a70(0x11e)]=![],currentPreviewAvatar={'name':_0x8a57a6,'dept':PERSONNEL_MAP[_0x8a57a6],'image':_0x2e2822};const _0x2dc528=!!uploadedAvatars[_0x8a57a6];_0x117e9a[_0x7d4a70(0x206)]=_0x2dc528?_0x7d4a70(0x31a)+_0x8a57a6+_0x7d4a70(0x1f5)+PERSONNEL_MAP[_0x8a57a6]:'找到【'+_0x8a57a6+_0x7d4a70(0x2ea)+PERSONNEL_MAP[_0x8a57a6],_0x117e9a[_0x7d4a70(0xda)][_0x7d4a70(0x338)]=_0x7d4a70(0x2cc),setFieldContent(_0x7d4a70(0x224),_0x8a57a6),setFieldContent(_0x7d4a70(0x1df),PERSONNEL_MAP[_0x8a57a6]);});}function uploadAvatarToCanvas(){const _0x5e1828=_0x210f;if(!currentPreviewAvatar){document['getElementById'](_0x5e1828(0x253))['textContent']=_0x5e1828(0x23d),document[_0x5e1828(0x26b)](_0x5e1828(0x253))[_0x5e1828(0xda)][_0x5e1828(0x338)]='#dc3545';return;}applyCurrentAvatarAndContinue()['catch'](function(_0x1f2a7a){const _0x298b76=_0x210f;console[_0x298b76(0x1a8)](_0x298b76(0x1be),_0x1f2a7a),document[_0x298b76(0x26b)](_0x298b76(0x253))[_0x298b76(0x206)]=_0x298b76(0x1c6),document['getElementById'](_0x298b76(0x253))[_0x298b76(0xda)]['color']=_0x298b76(0x291);});}function initNameDropdown(){const _0x4f4e7c=_0x210f,_0x28fe47=document[_0x4f4e7c(0x26b)](_0x4f4e7c(0xe0)),_0x3d9a83=Object['keys'](PERSONNEL_MAP)[_0x4f4e7c(0x1d0)]((_0x5096df,_0x1fe01e)=>{const _0x8e41fd=_0x210f;return _0x5096df[_0x8e41fd(0x331)](_0x1fe01e,'zh-CN',{'sensitivity':_0x8e41fd(0x265)});});_0x28fe47['innerHTML']=_0x4f4e7c(0x317),_0x3d9a83[_0x4f4e7c(0x2a5)](_0x2b9987=>{const _0x47dbd8=_0x210f,_0x3076f4=document[_0x47dbd8(0x311)](_0x47dbd8(0xf0));_0x3076f4['value']=_0x2b9987,_0x3076f4[_0x47dbd8(0x206)]=_0x2b9987;const _0x36ab38=getPersonRoleHint(_0x2b9987);if(_0x36ab38)_0x3076f4[_0x47dbd8(0x2e7)]=_0x36ab38;_0x28fe47[_0x47dbd8(0x28e)](_0x3076f4);}),rebuildPersonnelSearchIndex();}function filterNamesByDepartment(){const _0x3b54a1=_0x210f,_0x1c89b4=document[_0x3b54a1(0x26b)](_0x3b54a1(0x2a8)),_0x54495c=document[_0x3b54a1(0x26b)](_0x3b54a1(0xe0)),_0x1c1910=_0x1c89b4[_0x3b54a1(0x2ca)];_0x54495c[_0x3b54a1(0x312)]=_0x3b54a1(0x317);const _0x17a002=Object[_0x3b54a1(0x22c)](PERSONNEL_MAP)[_0x3b54a1(0xef)](_0x332246=>{return!_0x1c1910||PERSONNEL_MAP[_0x332246]===_0x1c1910;})['sort']((_0x32eb19,_0x32feac)=>{const _0x441c0d=_0x210f;return _0x32eb19['localeCompare'](_0x32feac,'zh-CN',{'sensitivity':_0x441c0d(0x265)});});_0x17a002['forEach'](_0x38a908=>{const _0x4daed5=_0x210f,_0x3dcdc0=document['createElement'](_0x4daed5(0xf0));_0x3dcdc0['value']=_0x38a908,_0x3dcdc0['textContent']=_0x38a908;const _0x4d3ffe=getPersonRoleHint(_0x38a908);if(_0x4d3ffe)_0x3dcdc0[_0x4daed5(0x2e7)]=_0x4d3ffe;_0x54495c[_0x4daed5(0x28e)](_0x3dcdc0);}),rebuildPersonnelSearchIndex();}function uploadImageWithName(){const _0x55cc83=_0x210f,_0x4ab07b=document[_0x55cc83(0x26b)](_0x55cc83(0x285)),_0x4e6480=document['getElementById'](_0x55cc83(0x294))[_0x55cc83(0x2ca)][_0x55cc83(0x18e)](),_0x582f1d=document[_0x55cc83(0x26b)](_0x55cc83(0x258))[_0x55cc83(0x2ca)],_0x441e44=document[_0x55cc83(0x26b)](_0x55cc83(0x253));if(!_0x4ab07b[_0x55cc83(0x2ed)]||_0x4ab07b[_0x55cc83(0x2ed)][_0x55cc83(0x2bf)]===0x0){_0x441e44[_0x55cc83(0x206)]=_0x55cc83(0x2c3),_0x441e44[_0x55cc83(0xda)][_0x55cc83(0x338)]=_0x55cc83(0x291);return;}if(!_0x4e6480){_0x441e44[_0x55cc83(0x206)]=_0x55cc83(0x295),_0x441e44[_0x55cc83(0xda)][_0x55cc83(0x338)]=_0x55cc83(0x291);return;}PERSONNEL_MAP[_0x4e6480]=_0x582f1d,initNameDropdown(),localStorage[_0x55cc83(0x138)](_0x55cc83(0x1b1),PERSONNEL_MAP_REVISION),localStorage[_0x55cc83(0x138)](_0x55cc83(0x184),JSON[_0x55cc83(0x1cc)](PERSONNEL_MAP));const _0x2a0f9a=_0x4ab07b[_0x55cc83(0x2ed)][0x0],_0x5cbc9e=new FileReader();_0x5cbc9e[_0x55cc83(0x2a6)]=function(_0x48f1ed){const _0x200708=_0x210f,_0x174d24=new Image();_0x174d24['onload']=function(){const _0x5cb138=_0x210f,_0xe4392d=document[_0x5cb138(0x26b)](_0x5cb138(0x19e));_0xe4392d['innerHTML']='',_0xe4392d[_0x5cb138(0xda)][_0x5cb138(0x15f)]=_0x5cb138(0x197);const _0x398152=document[_0x5cb138(0x311)]('img');_0x398152[_0x5cb138(0x223)]=_0x48f1ed[_0x5cb138(0x25d)][_0x5cb138(0x202)],_0x398152['style'][_0x5cb138(0x324)]=_0x5cb138(0x337),_0x398152[_0x5cb138(0xda)][_0x5cb138(0x259)]=_0x5cb138(0x337),_0x398152[_0x5cb138(0xda)]['objectFit']=_0x5cb138(0x1d6),_0xe4392d['appendChild'](_0x398152),document[_0x5cb138(0x26b)](_0x5cb138(0x31d))['disabled']=![],currentPreviewAvatar={'name':_0x4e6480,'url':_0x48f1ed[_0x5cb138(0x25d)][_0x5cb138(0x202)]},uploadedAvatars[_0x4e6480]=_0x48f1ed[_0x5cb138(0x25d)][_0x5cb138(0x202)],localStorage[_0x5cb138(0x138)](_0x5cb138(0x264),JSON[_0x5cb138(0x1cc)](uploadedAvatars)),_0x441e44['textContent']='已上传图片并保存姓名【'+_0x4e6480+_0x5cb138(0x31c)+_0x582f1d,_0x441e44[_0x5cb138(0xda)][_0x5cb138(0x338)]=_0x5cb138(0x2cc),setFieldContent(_0x5cb138(0x224),_0x4e6480),setFieldContent('dept',_0x582f1d);},_0x174d24[_0x200708(0x177)]=function(){const _0x48ebf1=_0x210f;_0x441e44[_0x48ebf1(0x206)]=_0x48ebf1(0x29a),_0x441e44[_0x48ebf1(0xda)][_0x48ebf1(0x338)]=_0x48ebf1(0x291);},_0x174d24[_0x200708(0x223)]=_0x48f1ed[_0x200708(0x25d)][_0x200708(0x202)];},_0x5cbc9e['onerror']=function(){const _0x5588bb=_0x210f;_0x441e44[_0x5588bb(0x206)]=_0x5588bb(0x1f4),_0x441e44[_0x5588bb(0xda)][_0x5588bb(0x338)]=_0x5588bb(0x291);},_0x5cbc9e[_0x55cc83(0x25f)](_0x2a0f9a);}function deletePerson(){const _0x4a1a5a=_0x210f,_0x176f47=document[_0x4a1a5a(0x26b)](_0x4a1a5a(0x2da))[_0x4a1a5a(0x2ca)][_0x4a1a5a(0x18e)](),_0x284e59=document[_0x4a1a5a(0x26b)]('avatarTip');if(!_0x176f47){_0x284e59['textContent']=_0x4a1a5a(0x254),_0x284e59[_0x4a1a5a(0xda)][_0x4a1a5a(0x338)]=_0x4a1a5a(0x291);return;}PERSONNEL_MAP['hasOwnProperty'](_0x176f47)?(delete PERSONNEL_MAP[_0x176f47],uploadedAvatars[_0x4a1a5a(0x21b)](_0x176f47)&&(delete uploadedAvatars[_0x176f47],localStorage['setItem'](_0x4a1a5a(0x264),JSON[_0x4a1a5a(0x1cc)](uploadedAvatars))),localStorage[_0x4a1a5a(0x138)](_0x4a1a5a(0x1b1),PERSONNEL_MAP_REVISION),localStorage[_0x4a1a5a(0x138)](_0x4a1a5a(0x184),JSON[_0x4a1a5a(0x1cc)](PERSONNEL_MAP)),initNameDropdown(),document[_0x4a1a5a(0x26b)]('avatarNameInput')['value']='',document['getElementById'](_0x4a1a5a(0x19e))[_0x4a1a5a(0x312)]=_0x4a1a5a(0x15e),document[_0x4a1a5a(0x26b)](_0x4a1a5a(0x31d))[_0x4a1a5a(0x11e)]=!![],currentPreviewAvatar=null,_0x284e59[_0x4a1a5a(0x206)]=_0x4a1a5a(0x1c0)+_0x176f47+'】',_0x284e59[_0x4a1a5a(0xda)][_0x4a1a5a(0x338)]=_0x4a1a5a(0x2cc)):(_0x284e59[_0x4a1a5a(0x206)]=_0x4a1a5a(0x289)+_0x176f47+'】',_0x284e59[_0x4a1a5a(0xda)][_0x4a1a5a(0x338)]=_0x4a1a5a(0x291));}function viewAllPersons(){const _0x4f6eed=_0x210f,_0x151fd9=document['getElementById']('personListModal'),_0x47e1b5=document[_0x4f6eed(0x26b)](_0x4f6eed(0x180)),_0x4f25ff={};Object['keys'](PERSONNEL_MAP)[_0x4f6eed(0x2a5)](_0x542d2d=>{const _0x156313=_0x210f,_0xb235c0=PERSONNEL_MAP[_0x542d2d];!_0x4f25ff[_0xb235c0]&&(_0x4f25ff[_0xb235c0]=[]),_0x4f25ff[_0xb235c0][_0x156313(0xee)](_0x542d2d);});let _0x96394c=_0x4f6eed(0x13c);Object[_0x4f6eed(0x22c)](_0x4f25ff)[_0x4f6eed(0x1d0)]()[_0x4f6eed(0x2a5)](_0x29d81f=>{const _0x14c5eb=_0x210f;_0x96394c+=_0x14c5eb(0xeb)+_0x29d81f+_0x14c5eb(0x173),_0x96394c+='<ul\x20style=\x22margin:\x200;\x20padding-left:\x2020px;\x22>',_0x4f25ff[_0x29d81f][_0x14c5eb(0x1d0)]((_0x3d5133,_0x1290bc)=>_0x3d5133['localeCompare'](_0x1290bc,'zh-CN'))[_0x14c5eb(0x2a5)](_0x4d73b2=>{const _0x5f13b3=_0x210f,_0x515eb0=getPersonRoleHint(_0x4d73b2),_0x236855=escapeHtml(_0x4d73b2),_0x4c278d=escapeHtml(_0x515eb0);_0x96394c+=_0x515eb0?_0x5f13b3(0x227)+_0x4c278d+'\x22>'+_0x236855+_0x5f13b3(0x15a):_0x5f13b3(0x23f)+_0x236855+'</li>';}),_0x96394c+=_0x14c5eb(0x10e);}),_0x96394c+='</div>',updateLogs['length']>0x0&&(_0x96394c+=_0x4f6eed(0x218),_0x96394c+=_0x4f6eed(0x193),_0x96394c+=_0x4f6eed(0x33b),updateLogs[_0x4f6eed(0x2a5)](_0xd64a8f=>{const _0x27447a=_0x210f;_0x96394c+='<li\x20style=\x22margin-bottom:\x208px;\x22>'+_0xd64a8f+_0x27447a(0x15a);}),_0x96394c+=_0x4f6eed(0x10e)),_0x47e1b5[_0x4f6eed(0x312)]=_0x96394c,_0x151fd9['style'][_0x4f6eed(0x12c)]='block';}function initPageLayout(){applyTemplateRuntimeConfig(currentTemplateId),initTextFieldState(),initInspectorUI(),initTemplateSelector(),initDietItemsPanel(),updateTemplateActionBar(),initOffcanvasPanels(),initHelpTips(),schedulePreviewUpdate();}window[_0x4390bc(0x2df)](_0x4390bc(0x22e),function(){const _0x456d5f=_0x210f;initPageLayout(),loadFromLocalStorage(),initCanvas(),initEventListeners(),whenDocumentFontsReady()[_0x456d5f(0x280)](function(){return bootstrapTemplateCanvas({'resetHistory':!![]});})['then'](function(_0x594192){const _0x4220a1=_0x210f;_0x594192&&console[_0x4220a1(0x219)](_0x4220a1(0x1a4),_0x594192['id']);})[_0x456d5f(0x212)](function(_0x543672){const _0x23b3fd=_0x210f;console[_0x23b3fd(0x1a8)](_0x23b3fd(0x1ef),_0x543672);});});
+/* congrats-generator app — behavior-preserving refactor */
+// 设计稿基准尺寸与文字区域（随模板切换）
+        let DESIGN_SIZE = { width: 1080, height: 1990 };
+        let TEXT_AREAS = {
+            dept: { x: 966, y: 500, width: 80, height: 300 },
+            name: { x: 898, y: 505, width: 80, height: 200 },
+            congrats: { x: 110, y: 1272, width: 880, height: 150 },
+            order: { x: 100, y: 1400, width: 880, height: 100 },
+            amount: { x: 100, y: 1550, width: 880, height: 150 }
+        };
+        const AVATAR_LAYOUT = { cx: 540, cy: 790, size: 391 };
+        const DEPARTMENTS = ['销售部', '行政部', '医疗中心', '总经理', '副总经理'];
+        const AVATAR_FILTER_DEPARTMENTS = ['销售部', '行政部', '医疗中心', '副总经理'];
+        const ORDER_PRESETS = ['签约团检1单', '开门红套餐下单', '618活动套餐下单', '"双11"活动套餐下单'];
+        const FONT_OPTIONS = [
+            { value: 'ChuangkitZongYi', label: '创意字体' },
+            { value: 'NotoSansSCBlack', label: '黑体' },
+            { value: 'NotoSansSCMedium', label: '中等黑体' }
+        ];
+        const COLOR_SWATCHES = ['#fff2eb', '#9f0913', '#80090d', '#ffb875', '#ffffff', '#1e293b', '#f5d882', '#8b0a0f'];
+        const STYLE_PRESETS = {
+            sidebar: { label: '侧栏竖排', fontFamily: 'NotoSansSCBlack', fontSize: 48, fontColor: '#fff2eb' },
+            name: { label: '姓名', fontFamily: 'NotoSansSCBlack', fontSize: 40, fontColor: '#fff2eb' },
+            body: { label: '正文', fontFamily: 'NotoSansSCMedium', fontSize: 42, fontColor: '#9f0913' },
+            order: { label: '下单', fontFamily: 'ChuangkitZongYi', fontSize: 48, fontColor: '#80090d' },
+            amount: { label: '金额', fontFamily: 'NotoSansSCBlack', fontSize: 170, fontColor: '#ffb875' },
+            dietHeader: { label: '膳食标题', fontFamily: 'NotoSansSCBlack', fontSize: 28, fontColor: '#f5d882' },
+            dietItems: { label: '膳食明细', fontFamily: 'NotoSansSCMedium', fontSize: 32, fontColor: '#8b0a0f' },
+            dietAmount: { label: '膳食合计', fontFamily: 'NotoSansSCBlack', fontSize: 68, fontColor: '#ffb875' }
+        };
+        const INDIVIDUAL_TEXT_FIELD_CONFIG = {
+            dept: {
+                label: '部门',
+                vertical: true,
+                stylePreset: 'sidebar',
+                defaultContent: '销售部',
+                presets: DEPARTMENTS,
+                fontSizeMax: 200
+            },
+            name: {
+                label: '姓名',
+                vertical: true,
+                stylePreset: 'name',
+                defaultContent: '',
+                fontSizeMax: 200,
+                linkedCongrats: true
+            },
+            congrats: {
+                label: '恭喜',
+                stylePreset: 'body',
+                defaultContent: '',
+                fontSizeMax: 300
+            },
+            order: {
+                label: '下单',
+                stylePreset: 'order',
+                defaultContent: '618活动套餐下单',
+                presets: ORDER_PRESETS,
+                fontSizeMax: 200
+            },
+            amount: {
+                label: '金额',
+                stylePreset: 'amount',
+                defaultContent: '',
+                fontSizeMax: 300
+            }
+        };
+        const DIET_TEXT_FIELD_CONFIG = {
+            header: {
+                label: '祝贺标题',
+                stylePreset: 'dietHeader',
+                defaultContent: '',
+                fontSizeMax: 80,
+                skipCanvas: true
+            },
+            items: {
+                label: '售出明细',
+                stylePreset: 'dietItems',
+                defaultContent: '',
+                fontSizeMax: 60
+            },
+            amount: {
+                label: '合计金额',
+                stylePreset: 'dietAmount',
+                defaultContent: '',
+                fontSizeMax: 120
+            }
+        };
+        const DIET_ITEM_PRESETS = ['锌硒胆碱片'];
+        const DIET_UNIT_PRESETS = ['盒', '瓶', '袋', '罐', '份', '箱'];
+        const EMPTY_DIET_ITEM = { name: '', quantity: 1, unitPrice: '', unit: '盒' };
+        const DAILY_IMG_REMOTE_BASE = 'https://raw.githubusercontent.com/Nmfengtongxue/daily_imgs/main/';
+        const DAILY_IMG_BASE = (typeof window !== 'undefined' && window.D11_DAILY_IMG_BASE) || DAILY_IMG_REMOTE_BASE;
+        const TEMPLATE_BG_URL = (typeof window !== 'undefined' && window.D11_TEMPLATE_BG) || `${DAILY_IMG_REMOTE_BASE}6.jpg`;
+        const TEMPLATE_TOP_URL = (typeof window !== 'undefined' && window.D11_TEMPLATE_TOP) || `${DAILY_IMG_REMOTE_BASE}7.png`;
+        const TEMPLATE_DIET_URL = (typeof window !== 'undefined' && window.D11_TEMPLATE_DIET) || 'congrats-assets/diet-center-template.png';
+        function getDailyImageUrl(fileName) {
+            const base = String(DAILY_IMG_BASE || DAILY_IMG_REMOTE_BASE).replace(/\/?$/, '/');
+            return `${base}${fileName}`;
+        }
+        const TEMPLATES = {
+            individual: {
+                id: 'individual',
+                label: '个检业绩喜报',
+                designSize: { width: 1080, height: 1990 },
+                bgUrl: TEMPLATE_BG_URL,
+                topOverlayUrl: TEMPLATE_TOP_URL,
+                hasAvatar: true,
+                textAreas: {
+                    dept: { x: 966, y: 500, width: 80, height: 300 },
+                    name: { x: 898, y: 505, width: 80, height: 200 },
+                    congrats: { x: 110, y: 1272, width: 880, height: 150 },
+                    order: { x: 100, y: 1400, width: 880, height: 100 },
+                    amount: { x: 100, y: 1550, width: 880, height: 150 }
+                },
+                textFieldConfig: INDIVIDUAL_TEXT_FIELD_CONFIG,
+                defaultActiveField: 'dept',
+                exportDefaults: { width: 1080, height: 1990 }
+            },
+            diet: {
+                id: 'diet',
+                label: '膳食中心喜报',
+                designSize: { width: 900, height: 500 },
+                bgUrl: TEMPLATE_DIET_URL,
+                topOverlayUrl: null,
+                hasAvatar: false,
+                textAreas: {
+                    header: { x: 430, y: 52, width: 450, height: 96 },
+                    items: { x: 488, y: 166, width: 328, height: 142 },
+                    amount: { x: 618, y: 348, width: 176, height: 88 }
+                },
+                textFieldConfig: DIET_TEXT_FIELD_CONFIG,
+                defaultActiveField: 'items',
+                exportDefaults: { width: 900, height: 500 }
+            }
+        };
+        let TEXT_FIELD_CONFIG = INDIVIDUAL_TEXT_FIELD_CONFIG;
+        let currentTemplateId = 'individual';
+        let dietItems = [{ name: '锌硒胆碱片', quantity: 2, unitPrice: 73.5, unit: '盒' }];
+        let textFieldState = {};
+        let activeFieldKey = 'dept';
+        // 人员名单版本号（变更后递增，用于覆盖浏览器 localStorage 中的旧名单）
+        const PERSONNEL_MAP_REVISION = '2026-09-04-v1';
+        // 人员名单映射（姓名 -> 部门）
+        const PERSONNEL_MAP = {
+            // 销售部
+            '陈炳森': '销售部',
+            '白金玉': '销售部',
+            '王莉莉': '销售部',
+            '刘倩倩': '销售部',
+            '王伟': '销售部',
+            // 行政部
+            '范宏云': '行政部',
+            '杜永丽': '行政部',
+            '朱甦雅': '行政部',
+            '王斌斌': '行政部',
+            '张巧花': '行政部',
+            '俞帅文': '行政部',
+            '李雁程': '行政部',
+            '王晶玉': '行政部',
+            '陈佩鹃': '行政部',
+            // 医疗中心
+            '童守义': '医疗中心',
+            '张静': '医疗中心',
+            '张改霞': '医疗中心',
+            '赵改过': '医疗中心',
+            '孙悦': '医疗中心',
+            '苏丹': '医疗中心',
+            '郭锦霞': '医疗中心',
+            '王晓霞': '医疗中心',
+            '汪佑安': '医疗中心',
+            '杨晓晖': '医疗中心',
+            '张英玲': '医疗中心',
+            '刘力榕': '医疗中心',
+            '耿新民': '医疗中心',
+            '刘艳丽': '医疗中心',
+            '胡立茹': '医疗中心',
+            '胡秀娥': '医疗中心',
+            '梁晓菊': '医疗中心',
+            '王烁楠': '医疗中心',
+            '赵润蕊': '医疗中心',
+            '郑晓燕': '医疗中心',
+            '潘丽萍': '医疗中心',
+            '魏霞': '医疗中心',
+            '董凯丽': '医疗中心',
+            '姜媛媛': '医疗中心',
+            '党江娟': '医疗中心',
+            '刘沛': '医疗中心',
+            '姚建强': '医疗中心',
+            '苏巧燕': '医疗中心',
+            '杨文娟': '医疗中心',
+            '张丽娟': '医疗中心',
+            '周娜': '医疗中心',
+            '朱丹': '医疗中心',
+            '邵倩': '医疗中心',
+            '程芸': '医疗中心',
+            '王倩倩': '医疗中心',
+            '张鹤延': '医疗中心',
+            '马艳萍': '医疗中心',
+            '王敏敏': '医疗中心',
+            '张彩荷': '医疗中心',
+            '朱文婷': '医疗中心',
+            '张园胜': '医疗中心',
+            '曹圆圆': '医疗中心',
+            '徐秀梅': '医疗中心',
+            '白常蓉': '医疗中心',
+            '陈文文': '医疗中心'
+        };
+        // 头像文件名别名（名单姓名 -> 服务器旧文件名，待图片重命名后可删除对应项）
+        const PHOTO_NAME_ALIASES = {};
+        // 人员职务提示（鼠标悬停姓名时展示，不影响部门归属）
+        const PERSONNEL_ROLE_HINT = {
+            '徐秀梅': '放射科主任',
+            '陈文文': '影像技师'
+        };
+        const updateLogs = [
+            '2026-11-09: 头像上传支持一键抠图（imgly medium 模型，首次下载约 80MB）',
+            '2026-11-07: 膳食中心喜报去掉与底图重复的祝贺语叠加；金框按常规显示「物品 × 数量单位」，合计数字对齐「合计／元」',
+            '2026-09-04: 销售部杜佳容、安玉洁离职，从喜报名单移除（未打卡统计名单保留、标注已离职）；GitHub 头像保留',
+            '2026-09-03: 同步杜佳容、安玉洁、王伟、陈文文头像至 GitHub 头像库；移除李雨婷、韩万忠旧头像',
+            '2026-08-31: 医疗部韩万忠离职，从喜报名单移除（未打卡统计名单保留、灰色标注）',
+            '2026-08-31: 医疗中心新增陈文文（影像技师）；销售部新增杜佳容（健康顾问）、安玉洁（健康顾问）、王伟；同步未打卡统计名单',
+            '2026-08-05: 医疗部李雨婷离职，从喜报名单移除（未打卡统计名单保留、灰色标注）',
+            '2026-08-05: 医疗中心新增白常蓉；同步未打卡统计名单',
+            '2026-07-20: 行政部新增陈佩鹃；同步未打卡统计名单',
+            '2026-07-08: 新增膳食中心喜报模板，支持物品明细录入与合计金额自动计算',
+            '2026-06-16: 医疗部孔娟娟离职，从喜报名单移除（未打卡统计名单保留、灰色标注）',
+            '2026-06-16: 医疗中心新增徐秀梅（放射科主任，悬停姓名可查看职务）；同步徐秀梅.png 至 GitHub 头像库',
+            '2026-08-12: 批量生成支持表单快捷录入，并与 TXT 双向同步',
+            '2026-08-12: 行为不变重构：统一模板启动、字体/历史就绪对齐、头像CORS统一、批量短路、拆分资源文件',
+            '2026-08-12: 新增视图锁定（默认锁定不可拖拽）与批量文本生成（模板审阅后自动出图）',
+            '2026-08-12: 说明改为旁侧 i 图标长悬停提示；选中自动开面板可开关；支持 Delete/⌘Z、Ctrl+滚轮缩放与拖拽平移',
+            '2026-08-12: 导出设置改为与编辑面板同款悬浮；去掉与维护头像库重复的高级上传；点击面板外收起',
+            '2026-08-12: 编辑面板改为预览区左侧悬浮（对齐选人/文字栏），选人仅预览不自动跳转文字',
+            '2026-08-12: 操作栏改到预览区左侧悬浮；选人/文字/明细合并为同一编辑抽屉，确认头像后自动切到文字编辑',
+            '2026-08-08: 预览改用 Fabric setZoom（画布显示尺寸=设计稿×scale），多时机双 rAF 合并刷新；预览区 overflow:auto + scrollbar-gutter 兜底；导出前临时复位 zoom',
+            '2026-06-12: 修复预览缩放后底图不显示：逻辑画布固定 1080×1990，预览仅用 cssOnly 缩放并重排',
+            '2026-06-07: 三期 UI 改造：三 Offcanvas 抽屉 + Inspector 共用样式检查器 + 点击画布文字编辑',
+            '2026-06-07: 预览缩放改用 Fabric setZoom，多时机双 rAF 刷新，预览区 overflow 改为 auto',
+            '2026-06-07: 文字、头像、顶层装饰均以底图为基准相对定位，底图位置变化时整体保持相对位置不变',
+            '2026-06-07: 预览画布按视口等比缩放完整展示，修复 Fabric 容器类名冲突导致的超高显示问题',
+            '2026-06-07: 优化页面排版：头像管理默认置顶展开，文字编辑/导出/上传模块改为折叠侧栏',
+            '2026-06-07: 头像姓名查找支持模糊中文搜索与拼音首字母搜索（含搜索建议列表）',
+            '2026-06-07: 新增李雁程.png 至 GitHub 头像库',
+            '2026-06-07: 同步 2026-06-07 新增人员文件夹 22 张头像至 GitHub，文件名与喜报名单一一对应；移除史正蓓、张文慧、曹娟、王佳等不在名单内的旧图',
+            '2026-06-07: GitHub 头像同步：潘雨萍→潘丽萍、董凯雨→董凯丽（文件重命名）；新增张静.png；移除头像别名配置',
+            '2026-06-06: 曹娟与曹圆圆为不同人员，曹娟已离职不在名单内；曹圆圆不再关联曹娟头像。潘丽萍、董凯丽为统一标准姓名',
+            '2026-06-06: 同步现行人员名单（共 57 人：销售部 4、行政部 8、医疗中心 45）；姓名以最新版为准：朱甦雅、童守义、李雨婷、郭锦霞、邵倩、曹圆圆等',
+            '2026-06-06: 按最新名单整体替换人员名单；范宏云调至行政部；新增俞帅文、汪佑安、耿新民、赵润蕊等；移除史正蓓、王佳、董博、张文慧、朱英等',
+            '2026-06-01: 杨晓昭更正为杨晓晖'
+        ];
+        // 存储当前预览的头像信息
+        let currentPreviewAvatar = null;
+        // 存储上传的头像数据（姓名 -> 头像DataURL）
+        let uploadedAvatars = {};
+        let pendingCutoutBlob = null;
+        let cutoutBusy = false;
+        // 全局变量
+        let canvas; // Fabric.js画布实例
+        let backgroundImage = null; // 背景图片对象
+        let topOverlayImage = null; // 顶层装饰图 7.png
+        let textObjects = {}; // 文字对象集合
+        let backgroundFrame = { left: 0, top: 0, width: 1080, height: 1990, scale: 1 };
+        let canvasPreviewResizeObserver = null;
+        let canvasPreviewScale = 1;
+        let previewUpdateRaf = null;
+        let viewUserZoom = 1;
+        let viewPanX = 0;
+        let viewPanY = 0;
+        let spacePanKey = false;
+        let isViewPanning = false;
+        let panLastX = 0;
+        let panLastY = 0;
+        let autoShowEditorPanel = true;
+        let viewLocked = true;
+        let historyStack = [];
+        let historyIndex = -1;
+        let historyLock = false;
+        const HISTORY_LIMIT = 40;
+        const AUTO_SHOW_KEY = 'congratsAutoShowEditor';
+        const VIEW_LOCK_KEY = 'congratsViewLocked';
+        let batchParsedRecords = [];
+        let batchGenerating = false;
+        let templateLoadToken = 0;
+        let previewAvatarToken = 0;
+        let batchFormEntries = [];
+        let batchFormEditIndex = -1;
+        let batchSyncLock = false;
+        let batchTxtSyncTimer = null;
+        const AMOUNT_PRESETS = ['9800', '12800', '15800', '20000'];
+
+        function getCurrentTemplate() {
+            return TEMPLATES[currentTemplateId] || TEMPLATES.individual;
+        }
+
+        function applyTemplateRuntimeConfig(templateId) {
+            const template = TEMPLATES[templateId] || TEMPLATES.individual;
+            currentTemplateId = template.id;
+            DESIGN_SIZE = Object.assign({}, template.designSize);
+            TEXT_AREAS = JSON.parse(JSON.stringify(template.textAreas));
+            TEXT_FIELD_CONFIG = template.textFieldConfig;
+            activeFieldKey = template.defaultActiveField;
+        }
+
+        function updateTemplateActionBar() {
+            const template = getCurrentTemplate();
+            const editTextBtn = document.getElementById('editTextBtn');
+            const editDietBtn = document.getElementById('editDietBtn');
+            const avatarBtn = document.getElementById('avatarBtn');
+            const batchBtn = document.getElementById('batchBtn');
+            const dietTabBtn = document.getElementById('editorTabBtnDiet');
+            const avatarTabBtn = document.getElementById('editorTabBtnAvatar');
+            if (editTextBtn) editTextBtn.hidden = false;
+            if (editDietBtn) editDietBtn.hidden = template.id !== 'diet';
+            if (avatarBtn) avatarBtn.hidden = !template.hasAvatar;
+            if (batchBtn) batchBtn.hidden = template.id !== 'individual';
+            if (dietTabBtn) dietTabBtn.hidden = template.id !== 'diet';
+            if (avatarTabBtn) avatarTabBtn.hidden = !template.hasAvatar;
+            document.querySelectorAll('.template-type-btn').forEach(btn => {
+                btn.classList.toggle('is-active', btn.dataset.template === currentTemplateId);
+            });
+            const exportWidth = document.getElementById('exportWidth');
+            const exportHeight = document.getElementById('exportHeight');
+            if (exportWidth) exportWidth.value = template.exportDefaults.width;
+            if (exportHeight) exportHeight.value = template.exportDefaults.height;
+            const tip = document.getElementById('editorFlowTip');
+            if (tip) {
+                tip.dataset.tip = template.id === 'diet'
+                    ? '可在「明细」录入物品，或到「文字」微调样式'
+                    : '预览头像后可先查看效果；需要时再点「确认并继续改文字」';
+            }
+            // 切换模板时若当前 tab 不可用，回落到合适分区
+            const activeTab = document.querySelector('.editor-tab-btn.is-active')?.dataset.editorTab;
+            if (template.id === 'diet' && (activeTab === 'avatar' || !activeTab)) {
+                switchEditorTab('diet');
+            } else if (template.id !== 'diet' && activeTab === 'diet') {
+                switchEditorTab(template.hasAvatar ? 'avatar' : 'text');
+            }
+        }
+
+        function formatDietAmount(total) {
+            if (!Number.isFinite(total)) return '';
+            const rounded = Math.round(total * 100) / 100;
+            return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(2).replace(/\.?0+$/, '');
+        }
+
+        function formatDietQuantity(quantity) {
+            const value = Number(quantity);
+            if (!Number.isFinite(value) || value <= 0) return '';
+            return Number.isInteger(value) ? String(value) : String(Math.round(value * 100) / 100);
+        }
+
+        function createEmptyDietItem() {
+            return Object.assign({}, EMPTY_DIET_ITEM);
+        }
+
+        function getDietLineSubtotal(item) {
+            const quantity = Number(item.quantity);
+            const unitPrice = Number(item.unitPrice);
+            if (!Number.isFinite(quantity) || !Number.isFinite(unitPrice) || quantity <= 0) {
+                return 0;
+            }
+            return quantity * unitPrice;
+        }
+
+        function getDietItemsTotal() {
+            return dietItems.reduce((sum, item) => sum + getDietLineSubtotal(item), 0);
+        }
+
+        function buildDietItemsText() {
+            return dietItems
+                .filter(item => (item.name || '').trim())
+                .map(item => {
+                    const name = item.name.trim();
+                    const quantity = formatDietQuantity(item.quantity);
+                    const unit = (item.unit || '').trim();
+                    if (!quantity) return name;
+                    return unit ? `${name} × ${quantity}${unit}` : `${name} × ${quantity}`;
+                })
+                .join('\n');
+        }
+
+        function applyDietItemsAutoFont() {
+            if (!textFieldState.items) return;
+            const lineCount = buildDietItemsText().split('\n').filter(Boolean).length;
+            textFieldState.items.fontSize = lineCount <= 1 ? 32 : lineCount === 2 ? 28 : lineCount === 3 ? 24 : 20;
+        }
+
+        function syncDietCanvasFromForm() {
+            if (currentTemplateId !== 'diet') return;
+            applyDietItemsAutoFont();
+            setFieldContent('items', buildDietItemsText());
+            setFieldContent('amount', formatDietAmount(getDietItemsTotal()));
+            const totalDisplay = document.getElementById('dietTotalDisplay');
+            if (totalDisplay) totalDisplay.textContent = formatDietAmount(getDietItemsTotal()) || '0';
+        }
+
+        function refreshInspectorFieldSelect() {
+            const fieldSelect = document.getElementById('activeFieldSelect');
+            if (!fieldSelect) return;
+            const keys = Object.keys(TEXT_FIELD_CONFIG).filter(key => !TEXT_FIELD_CONFIG[key].skipCanvas);
+            fieldSelect.innerHTML = keys.map(key => {
+                const cfg = TEXT_FIELD_CONFIG[key];
+                return `<option value="${key}">${cfg.label}</option>`;
+            }).join('');
+            if (!keys.includes(activeFieldKey) && keys.length) {
+                activeFieldKey = keys[0];
+            }
+            fieldSelect.value = activeFieldKey;
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
+        function renderDietItemsTable() {
+            const tbody = document.getElementById('dietItemsBody');
+            if (!tbody) return;
+            tbody.innerHTML = dietItems.map((item, index) => {
+                const subtotal = getDietLineSubtotal(item);
+                return `<tr data-index="${index}"><td><input type="text" class="diet-item-name" value="${escapeHtml(item.name || '')}" placeholder="物品名称" list="dietItemPresetList"></td><td><input type="number" class="diet-item-qty" min="1" step="1" value="${escapeHtml(item.quantity ?? '')}" placeholder="数量"></td><td><input type="text" class="diet-item-unit" value="${escapeHtml(item.unit || '')}" placeholder="盒" list="dietUnitPresetList"></td><td><input type="number" class="diet-item-price" min="0" step="0.01" value="${escapeHtml(item.unitPrice ?? '')}" placeholder="单价"></td><td class="subtotal-cell">${formatDietAmount(subtotal) || '0'}</td><td><button type="button" class="diet-row-remove" data-remove-index="${index}" ${dietItems.length <= 1 ? 'disabled' : ''}>删除</button></td></tr>`;
+            }).join('');
+        }
+
+        function readDietItemsFromTable() {
+            const tbody = document.getElementById('dietItemsBody');
+            if (!tbody) return;
+            dietItems = Array.from(tbody.querySelectorAll('tr')).map(row => ({
+                name: row.querySelector('.diet-item-name')?.value.trim() || '',
+                quantity: row.querySelector('.diet-item-qty')?.value,
+                unit: row.querySelector('.diet-item-unit')?.value.trim() || '',
+                unitPrice: row.querySelector('.diet-item-price')?.value
+            }));
+            if (!dietItems.length) {
+                dietItems = [createEmptyDietItem()];
+            }
+        }
+
+        function applyDietItemPreset(name) {
+            readDietItemsFromTable();
+            const emptyIndex = dietItems.findIndex(item => !(item.name || '').trim());
+            if (emptyIndex >= 0) {
+                dietItems[emptyIndex].name = name;
+                if (!dietItems[emptyIndex].unit) dietItems[emptyIndex].unit = '盒';
+            } else {
+                dietItems.push(Object.assign(createEmptyDietItem(), { name }));
+            }
+            renderDietItemsTable();
+            syncDietCanvasFromForm();
+        }
+
+        function renderDietItemChips() {
+            const bar = document.getElementById('dietItemChips');
+            if (!bar) return;
+            bar.innerHTML = DIET_ITEM_PRESETS.map(name => (
+                `<button type="button" class="batch-chip" data-diet-preset="${escapeHtml(name)}">${escapeHtml(name)}</button>`
+            )).join('');
+        }
+
+        function initDietItemsPanel() {
+            renderDietItemsTable();
+            renderDietItemChips();
+            syncDietCanvasFromForm();
+
+            const companyInput = document.getElementById('dietCompanyName');
+            if (companyInput) {
+                companyInput.addEventListener('input', function() {
+                    syncDietCanvasFromForm();
+                });
+            }
+
+            const chipBar = document.getElementById('dietItemChips');
+            if (chipBar) {
+                chipBar.addEventListener('click', function(event) {
+                    const chip = event.target.closest('[data-diet-preset]');
+                    if (!chip) return;
+                    applyDietItemPreset(chip.dataset.dietPreset);
+                });
+            }
+
+            const tbody = document.getElementById('dietItemsBody');
+            if (tbody) {
+                tbody.addEventListener('input', function(event) {
+                    if (!event.target.matches('input')) return;
+                    readDietItemsFromTable();
+                    renderDietItemsTable();
+                    syncDietCanvasFromForm();
+                });
+                tbody.addEventListener('click', function(event) {
+                    const removeBtn = event.target.closest('.diet-row-remove');
+                    if (!removeBtn || removeBtn.disabled) return;
+                    readDietItemsFromTable();
+                    const index = Number(removeBtn.dataset.removeIndex);
+                    dietItems.splice(index, 1);
+                    if (!dietItems.length) {
+                        dietItems.push(createEmptyDietItem());
+                    }
+                    renderDietItemsTable();
+                    syncDietCanvasFromForm();
+                });
+            }
+
+            const addBtn = document.getElementById('addDietItemBtn');
+            if (addBtn) {
+                addBtn.addEventListener('click', function() {
+                    readDietItemsFromTable();
+                    dietItems.push(createEmptyDietItem());
+                    renderDietItemsTable();
+                    syncDietCanvasFromForm();
+                });
+            }
+        }
+
+        function initTemplateSelector() {
+            document.querySelectorAll('.template-type-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const nextTemplate = this.dataset.template;
+                    if (!nextTemplate || nextTemplate === currentTemplateId) return;
+                    switchTemplate(nextTemplate);
+                });
+            });
+        }
+
+        function shouldUseCors(url) {
+            const text = String(url || '');
+            if (!text || text.startsWith('data:') || text.startsWith('blob:')) return false;
+            try {
+                const resolved = new URL(text, (typeof location !== 'undefined' && location.href) || 'http://localhost/');
+                if (typeof location !== 'undefined' && resolved.origin === location.origin) return false;
+                return resolved.protocol === 'http:' || resolved.protocol === 'https:';
+            } catch (e) {
+                return false;
+            }
+        }
+
+        function getFabricImageLoadOptions(url, onError) {
+            const options = { onError };
+            if (shouldUseCors(url)) {
+                options.crossOrigin = 'anonymous';
+            }
+            return options;
+        }
+
+        function loadTemplateImages(template, callback) {
+            const token = ++templateLoadToken;
+            fabric.Image.fromURL(template.bgUrl, function(bgImg) {
+                if (token !== templateLoadToken) return;
+                backgroundImage = bgImg;
+                canvas.clear();
+                fitTemplateImageToFrame(bgImg);
+                canvas.add(bgImg);
+                if (!template.topOverlayUrl) {
+                    topOverlayImage = null;
+                    callback(token);
+                    return;
+                }
+                fabric.Image.fromURL(template.topOverlayUrl, function(topImg) {
+                    if (token !== templateLoadToken) return;
+                    topOverlayImage = topImg;
+                    fitTemplateImageToFrame(topImg);
+                    canvas.add(topImg);
+                    callback(token);
+                }, getFabricImageLoadOptions(template.topOverlayUrl, function(err) {
+                    if (token !== templateLoadToken) return;
+                    console.error('加载顶层图片失败:', err);
+                    topOverlayImage = null;
+                    callback(token);
+                }));
+            }, getFabricImageLoadOptions(template.bgUrl, function(err) {
+                if (token !== templateLoadToken) return;
+                console.error('加载背景图片失败:', err);
+                alert('模板底图加载失败，请检查网络或本地资源路径。');
+                callback(token, err || new Error('background load failed'));
+            }));
+            return token;
+        }
+
+        function applyTemplateDefaultContent(template, options) {
+            options = options || {};
+            if (template.id === 'individual') {
+                setFieldContent('dept', '销售部');
+                setFieldContent('order', '618活动套餐下单');
+                return;
+            }
+            if (options.resetDiet) {
+                dietItems = [{ name: '锌硒胆碱片', quantity: 2, unitPrice: 73.5, unit: '盒' }];
+                const companyInput = document.getElementById('dietCompanyName');
+                if (companyInput) companyInput.value = '定西公司';
+                renderDietItemsTable();
+            }
+            syncDietCanvasFromForm();
+        }
+
+        function bootstrapTemplateCanvas(options) {
+            options = options || {};
+            const template = options.template || getCurrentTemplate();
+            historyLock = true;
+            return new Promise(function(resolve) {
+                loadTemplateImages(template, function(token, err) {
+                    if (token !== templateLoadToken) {
+                        resolve(null);
+                        return;
+                    }
+                    if (err) {
+                        historyLock = false;
+                        resolve(null);
+                        return;
+                    }
+                    try {
+                        addTextObjects();
+                        relayoutCanvasElements({ schedulePreview: false });
+                        applyTemplateDefaultContent(template, { resetDiet: !!options.resetDiet });
+                    } finally {
+                        if (token === templateLoadToken) {
+                            historyLock = false;
+                            if (options.resetHistory) {
+                                historyStack = [];
+                                historyIndex = -1;
+                                pushHistory();
+                            }
+                            schedulePreviewUpdate();
+                        }
+                    }
+                    resolve(token === templateLoadToken ? template : null);
+                });
+            });
+        }
+
+        function whenDocumentFontsReady() {
+            if (document.fonts && document.fonts.ready) {
+                return document.fonts.ready.then(function() {}, function() {});
+            }
+            return Promise.resolve();
+        }
+
+        function switchTemplate(templateId) {
+            if (!TEMPLATES[templateId] || templateId === currentTemplateId) return;
+            applyTemplateRuntimeConfig(templateId);
+            updateTemplateActionBar();
+            initTextFieldState();
+            refreshInspectorFieldSelect();
+            syncInspectorUIFromState(activeFieldKey);
+
+            if (canvas) {
+                canvas.setWidth(DESIGN_SIZE.width);
+                canvas.setHeight(DESIGN_SIZE.height);
+            }
+            resetCanvasViewTransform();
+            bootstrapTemplateCanvas({ resetHistory: true });
+        }
+
+        function refreshBackgroundFrame() {
+            backgroundFrame = {
+                left: 0,
+                top: 0,
+                width: DESIGN_SIZE.width,
+                height: DESIGN_SIZE.height,
+                scale: 1
+            };
+            return backgroundFrame;
+        }
+
+        function designToCanvas(x, y) {
+            return {
+                x: backgroundFrame.left + x * backgroundFrame.scale,
+                y: backgroundFrame.top + y * backgroundFrame.scale
+            };
+        }
+
+        function designToCanvasSize(value) {
+            return value * backgroundFrame.scale;
+        }
+
+        function fitTemplateImageToFrame(img) {
+            refreshBackgroundFrame();
+            img.set({
+                left: backgroundFrame.left,
+                top: backgroundFrame.top,
+                scaleX: backgroundFrame.width / img.width,
+                scaleY: backgroundFrame.height / img.height,
+                originX: 'left',
+                originY: 'top',
+                selectable: false,
+                evented: false
+            });
+            img.setCoords();
+            return img;
+        }
+
+        function buildAvatarClip(radius) {
+            return function(ctx) {
+                ctx.save();
+                ctx.globalCompositeOperation = 'destination-in';
+                ctx.arc(0, 0, radius, 0, Math.PI * 2, false);
+                ctx.fill();
+                ctx.restore();
+            };
+        }
+
+        function configureAvatarImage(img) {
+            refreshBackgroundFrame();
+            const maxSize = designToCanvasSize(AVATAR_LAYOUT.size);
+            const scale = Math.min(maxSize / img.width, maxSize / img.height);
+            const radius = maxSize / 2;
+            const center = designToCanvas(AVATAR_LAYOUT.cx, AVATAR_LAYOUT.cy);
+            img.set({
+                scaleX: scale,
+                scaleY: scale,
+                left: center.x,
+                top: center.y,
+                originX: 'center',
+                originY: 'center',
+                clipTo: buildAvatarClip(radius),
+                selectable: true,
+                evented: true,
+                isAvatar: true
+            });
+            img.setCoords();
+            return img;
+        }
+
+        function getTextObjectPosition(key) {
+            const area = TEXT_AREAS[key];
+            if (!area) return {};
+
+            if (TEXT_FIELD_CONFIG[key]?.vertical) {
+                const point = designToCanvas(area.x + area.width / 2, area.y);
+                return { left: point.x, top: point.y, originX: 'center', originY: 'top' };
+            }
+            if (key === 'congrats' || key === 'header') {
+                const point = designToCanvas(area.x, area.y);
+                return { left: point.x, top: point.y, originX: 'left', originY: 'top' };
+            }
+            if (key === 'items') {
+                const point = designToCanvas(area.x + area.width / 2, area.y + area.height / 2);
+                return { left: point.x, top: point.y, originX: 'center', originY: 'center' };
+            }
+            if (key === 'order') {
+                const point = designToCanvas(area.x + area.width / 2, area.y);
+                return { left: point.x, top: point.y, originX: 'center', originY: 'middle' };
+            }
+            if (key === 'amount') {
+                const point = designToCanvas(area.x + area.width / 2, area.y + area.height / 2);
+                return { left: point.x, top: point.y, originX: 'center', originY: 'middle' };
+            }
+            return {};
+        }
+
+        function applyLayoutToTextObjects() {
+            Object.keys(textObjects).forEach(key => {
+                if (!textObjects[key]) return;
+                textObjects[key].set(getTextObjectPosition(key));
+                textObjects[key].setCoords();
+            });
+        }
+
+        function applyLayoutToAvatarImages() {
+            if (!canvas) return;
+            const maxSize = designToCanvasSize(AVATAR_LAYOUT.size);
+            const radius = maxSize / 2;
+            const center = designToCanvas(AVATAR_LAYOUT.cx, AVATAR_LAYOUT.cy);
+            canvas.getObjects().forEach(obj => {
+                if (!obj.clipTo) return;
+                const scale = Math.min(maxSize / obj.width, maxSize / obj.height);
+                obj.set({
+                    scaleX: scale,
+                    scaleY: scale,
+                    left: center.x,
+                    top: center.y,
+                    originX: 'center',
+                    originY: 'center',
+                    clipTo: buildAvatarClip(radius)
+                });
+                obj.setCoords();
+            });
+        }
+
+        function syncCanvasLayerOrder() {
+            if (!canvas) return;
+            let index = 0;
+            if (backgroundImage) {
+                backgroundImage.moveTo(index);
+                index += 1;
+            }
+            canvas.getObjects().filter(obj => obj.clipTo).forEach(obj => {
+                obj.moveTo(index);
+                index += 1;
+            });
+            if (topOverlayImage) {
+                topOverlayImage.moveTo(index);
+                index += 1;
+            }
+            Object.values(textObjects).forEach(obj => {
+                if (!obj) return;
+                obj.moveTo(index);
+                index += 1;
+            });
+        }
+
+        function relayoutCanvasElements(options) {
+            if (!canvas) return;
+            refreshBackgroundFrame();
+            if (backgroundImage) fitTemplateImageToFrame(backgroundImage);
+            if (topOverlayImage) fitTemplateImageToFrame(topOverlayImage);
+            applyLayoutToAvatarImages();
+            applyLayoutToTextObjects();
+            syncCanvasLayerOrder();
+            canvas.requestRenderAll();
+            if (!options || options.schedulePreview !== false) {
+                schedulePreviewUpdate();
+            }
+        }
+
+        function getCanvasDesignSize() {
+            return {
+                designWidth: DESIGN_SIZE.width,
+                designHeight: DESIGN_SIZE.height
+            };
+        }
+
+        function schedulePreviewUpdate() {
+            if (batchGenerating) return;
+            if (previewUpdateRaf !== null) return;
+            previewUpdateRaf = requestAnimationFrame(function() {
+                previewUpdateRaf = null;
+                if (batchGenerating) return;
+                requestAnimationFrame(updateCanvasPreviewScale);
+            });
+        }
+
+        function updatePreviewScaleLabel(designWidth, designHeight, scale) {
+            const label = document.getElementById('previewScaleLabel');
+            if (!label) return;
+            const fitPercent = Math.max(1, Math.round(scale * 100));
+            const viewPercent = Math.max(1, Math.round(viewUserZoom * 100));
+            label.textContent = viewPercent === 100
+                ? `${designWidth} × ${designHeight} · ${fitPercent}%`
+                : `${designWidth} × ${designHeight} · ${fitPercent}% · 视图 ${viewPercent}%`;
+        }
+
+        function applyCanvasViewTransform() {
+            if (!canvas) return;
+            const z = (canvasPreviewScale || 1) * viewUserZoom;
+            canvas.setViewportTransform([z, 0, 0, z, viewPanX, viewPanY]);
+            canvas.requestRenderAll();
+            canvas.calcOffset();
+            updatePreviewScaleLabel(DESIGN_SIZE.width, DESIGN_SIZE.height, canvasPreviewScale);
+        }
+
+        function resetCanvasViewTransform() {
+            viewUserZoom = 1;
+            viewPanX = 0;
+            viewPanY = 0;
+            if (canvas) applyCanvasViewTransform();
+        }
+
+        /**
+         * 预览缩放：画布元素按视口适配；用户缩放/平移走 viewportTransform（创客贴式）。
+         */
+        function updateCanvasPreviewScale() {
+            if (!canvas) return;
+
+            const panel = document.getElementById('canvasPreviewPanel');
+            if (!panel) return;
+
+            const { designWidth, designHeight } = getCanvasDesignSize();
+            if (!designWidth || !designHeight) return;
+
+            const styles = window.getComputedStyle(panel);
+            const paddingX = (parseFloat(styles.paddingLeft) || 0) + (parseFloat(styles.paddingRight) || 0);
+            const paddingY = (parseFloat(styles.paddingTop) || 0) + (parseFloat(styles.paddingBottom) || 0);
+            const availableWidth = Math.max(panel.clientWidth - paddingX - 4, 160);
+            const availableHeight = Math.max(panel.clientHeight - paddingY - 4, 240);
+            let fitScale = Math.min(availableWidth / designWidth, availableHeight / designHeight);
+            if (!Number.isFinite(fitScale) || fitScale <= 0) fitScale = 0.1;
+
+            const displayWidth = Math.max(1, Math.round(designWidth * fitScale));
+            const displayHeight = Math.max(1, Math.round(designHeight * fitScale));
+            fitScale = Math.min(displayWidth / designWidth, displayHeight / designHeight);
+            canvasPreviewScale = fitScale;
+
+            const sizeUnchanged = canvas.getWidth() === displayWidth && canvas.getHeight() === displayHeight;
+            if (!sizeUnchanged) {
+                canvas.setDimensions({ width: displayWidth, height: displayHeight });
+            }
+            applyCanvasViewTransform();
+        }
+
+        /**
+         * 导出/测量时临时回到设计稿 1:1 分辨率，执行完后恢复预览缩放。
+         * 导出期间锁定预览区尺寸并隐藏画布，避免大尺寸画布撑开布局导致 scale 算错。
+         */
+        function withDesignCanvas(fn) {
+            if (!canvas) return fn();
+
+            const panel = document.getElementById('canvasPreviewPanel');
+            const wrapper = canvas.wrapperEl;
+            const prev = {
+                panelHeight: panel ? panel.style.height : '',
+                panelMinHeight: panel ? panel.style.minHeight : '',
+                panelOverflow: panel ? panel.style.overflow : '',
+                wrapperVisibility: wrapper ? wrapper.style.visibility : ''
+            };
+
+            if (panel) {
+                const rect = panel.getBoundingClientRect();
+                panel.style.height = `${Math.round(rect.height)}px`;
+                panel.style.minHeight = `${Math.round(rect.height)}px`;
+                panel.style.overflow = 'hidden';
+            }
+            if (wrapper) {
+                wrapper.style.visibility = 'hidden';
+            }
+
+            canvas.setZoom(1);
+            canvas.setViewportTransform([1, 0, 0, 1, 0, 0]);
+            canvas.setDimensions({
+                width: DESIGN_SIZE.width,
+                height: DESIGN_SIZE.height
+            });
+            canvas.calcOffset();
+            try {
+                return fn();
+            } finally {
+                if (panel) {
+                    panel.style.height = prev.panelHeight;
+                    panel.style.minHeight = prev.panelMinHeight;
+                    panel.style.overflow = prev.panelOverflow;
+                }
+                if (wrapper) {
+                    wrapper.style.visibility = prev.wrapperVisibility;
+                }
+                schedulePreviewUpdate();
+            }
+        }
+
+        function initCanvasPreviewResize() {
+            const panel = document.getElementById('canvasPreviewPanel');
+            const previewCard = document.querySelector('.preview-card');
+            const workspaceMain = document.querySelector('.workspace-main');
+            if (!panel) return;
+
+            if (canvasPreviewResizeObserver) {
+                canvasPreviewResizeObserver.disconnect();
+            }
+
+            if (typeof ResizeObserver !== 'undefined') {
+                canvasPreviewResizeObserver = new ResizeObserver(function() {
+                    schedulePreviewUpdate();
+                });
+                canvasPreviewResizeObserver.observe(panel);
+                if (previewCard) {
+                    canvasPreviewResizeObserver.observe(previewCard);
+                }
+                if (workspaceMain) {
+                    canvasPreviewResizeObserver.observe(workspaceMain);
+                }
+            }
+
+            window.addEventListener('resize', schedulePreviewUpdate);
+            window.addEventListener('orientationchange', schedulePreviewUpdate);
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden) schedulePreviewUpdate();
+            });
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(schedulePreviewUpdate);
+            }
+        }
+
+        function initTextFieldState() {
+            textFieldState = {};
+            Object.keys(TEXT_FIELD_CONFIG).forEach(key => {
+                const cfg = TEXT_FIELD_CONFIG[key];
+                const preset = STYLE_PRESETS[cfg.stylePreset];
+                textFieldState[key] = {
+                    content: cfg.defaultContent || '',
+                    fontFamily: preset.fontFamily,
+                    fontSize: preset.fontSize,
+                    fontColor: preset.fontColor
+                };
+            });
+        }
+
+        function getFieldContent(key) {
+            return textFieldState[key]?.content ?? '';
+        }
+
+        function setFieldContent(key, value, options = {}) {
+            if (!textFieldState[key]) return;
+            textFieldState[key].content = value;
+            if (key === activeFieldKey) {
+                const input = document.getElementById('inspectorContent');
+                if (input && input.value !== value) input.value = value;
+            }
+            updateTextObject(key);
+            if (TEXT_FIELD_CONFIG[key]?.linkedCongrats) {
+                updateCongratsText();
+            }
+            if (options.openEditor) {
+                selectTextField(key, { openEditor: true });
+            }
+        }
+
+        function commitInspectorToState() {
+            if (!textFieldState[activeFieldKey]) return;
+            const state = textFieldState[activeFieldKey];
+            const contentEl = document.getElementById('inspectorContent');
+            const fontEl = document.getElementById('inspectorFontFamily');
+            const sizeEl = document.getElementById('inspectorFontSize');
+            const colorEl = document.getElementById('inspectorFontColor');
+            if (contentEl) state.content = contentEl.value;
+            if (fontEl) state.fontFamily = fontEl.value;
+            if (sizeEl) state.fontSize = parseInt(sizeEl.value, 10) || state.fontSize;
+            if (colorEl) state.fontColor = colorEl.value;
+        }
+
+        function syncInspectorUIFromState(key) {
+            activeFieldKey = key;
+            const cfg = TEXT_FIELD_CONFIG[key];
+            const state = textFieldState[key];
+            if (!cfg || !state) return;
+
+            const fieldSelect = document.getElementById('activeFieldSelect');
+            if (fieldSelect) fieldSelect.value = key;
+
+            const contentEl = document.getElementById('inspectorContent');
+            if (contentEl) {
+                contentEl.value = state.content;
+                contentEl.placeholder = `请输入${cfg.label}`;
+            }
+
+            const presetGroup = document.getElementById('fieldPresetGroup');
+            const presetSelect = document.getElementById('fieldPresetSelect');
+            if (presetGroup && presetSelect) {
+                if (cfg.presets && cfg.presets.length) {
+                    presetGroup.hidden = false;
+                    presetSelect.innerHTML = '<option value="">请选择</option>' +
+                        cfg.presets.map(p => `<option value="${p}">${p}</option>`).join('');
+                } else {
+                    presetGroup.hidden = true;
+                }
+            }
+
+            const fontEl = document.getElementById('inspectorFontFamily');
+            const sizeEl = document.getElementById('inspectorFontSize');
+            const colorEl = document.getElementById('inspectorFontColor');
+            if (fontEl) fontEl.value = state.fontFamily;
+            if (sizeEl) {
+                sizeEl.value = state.fontSize;
+                sizeEl.max = cfg.fontSizeMax || 300;
+            }
+            if (colorEl) colorEl.value = state.fontColor;
+
+            document.querySelectorAll('.style-preset-chip').forEach(chip => {
+                chip.classList.toggle('is-active', chip.dataset.preset === cfg.stylePreset);
+            });
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.classList.toggle('is-active', swatch.dataset.color === state.fontColor);
+            });
+        }
+
+        function selectTextField(key, options = {}) {
+            if (!TEXT_FIELD_CONFIG[key]) return;
+            if (key !== activeFieldKey) {
+                commitInspectorToState();
+                updateTextObject(activeFieldKey);
+            }
+            syncInspectorUIFromState(key);
+            if (options.openEditor) {
+                openEditorPanel('text');
+            }
+        }
+
+        function openOffcanvas(id) {
+            // 兼容旧调用：导出已改为悬浮面板
+            if (id === 'exportOffcanvas') {
+                openExportPanel();
+                return;
+            }
+            if (id === 'editOffcanvas') {
+                openEditorPanel();
+                return;
+            }
+            const el = document.getElementById(id);
+            if (!el || !window.bootstrap) return;
+            bootstrap.Offcanvas.getOrCreateInstance(el).show();
+        }
+
+        function isFloatPanelOpen(id) {
+            const panel = document.getElementById(id);
+            return !!(panel && panel.classList.contains('is-open'));
+        }
+
+        function isEditorPanelOpen() {
+            return isFloatPanelOpen('editOffcanvas');
+        }
+
+        function isExportPanelOpen() {
+            return isFloatPanelOpen('exportOffcanvas');
+        }
+
+        function setFloatPanelOpen(id, open) {
+            const panel = document.getElementById(id);
+            if (!panel) return;
+            panel.classList.toggle('is-open', open);
+            panel.hidden = !open;
+        }
+
+        function syncPreviewBodyOpenState() {
+            const body = document.querySelector('.preview-card-body');
+            if (!body) return;
+            body.classList.toggle(
+                'is-editor-open',
+                isEditorPanelOpen() || isExportPanelOpen() || isFloatPanelOpen('batchOffcanvas')
+            );
+        }
+
+        function closeEditorPanel() {
+            setFloatPanelOpen('editOffcanvas', false);
+            document.querySelectorAll('.workspace-action-btn[data-editor-tab]').forEach(btn => {
+                btn.classList.remove('is-active');
+            });
+            syncPreviewBodyOpenState();
+            schedulePreviewUpdate();
+        }
+
+        function closeExportPanel() {
+            setFloatPanelOpen('exportOffcanvas', false);
+            const exportBtn = document.getElementById('exportRailBtn');
+            if (exportBtn) exportBtn.classList.remove('is-active');
+            syncPreviewBodyOpenState();
+            schedulePreviewUpdate();
+        }
+
+        function closeBatchPanel() {
+            setFloatPanelOpen('batchOffcanvas', false);
+            const batchBtn = document.getElementById('batchBtn');
+            if (batchBtn) batchBtn.classList.remove('is-active');
+            syncPreviewBodyOpenState();
+            schedulePreviewUpdate();
+        }
+
+        function closeAllFloatPanels() {
+            closeEditorPanel();
+            closeExportPanel();
+            closeBatchPanel();
+        }
+
+        function switchEditorTab(tab) {
+            const allowed = ['avatar', 'text', 'diet'];
+            if (!allowed.includes(tab)) tab = 'text';
+            const template = getCurrentTemplate();
+            if (tab === 'avatar' && !template.hasAvatar) tab = 'text';
+            if (tab === 'diet' && template.id !== 'diet') tab = 'text';
+
+            document.querySelectorAll('.editor-tab-btn').forEach(btn => {
+                const on = btn.dataset.editorTab === tab;
+                btn.classList.toggle('is-active', on);
+                btn.setAttribute('aria-selected', on ? 'true' : 'false');
+            });
+            document.querySelectorAll('[data-editor-tab-panel]').forEach(panel => {
+                panel.hidden = panel.dataset.editorTabPanel !== tab;
+            });
+            document.querySelectorAll('.workspace-action-btn[data-editor-tab]').forEach(btn => {
+                btn.classList.toggle('is-active', btn.dataset.editorTab === tab && isEditorPanelOpen());
+            });
+            return tab;
+        }
+
+        function openEditorPanel(tab) {
+            const panel = document.getElementById('editOffcanvas');
+            if (!panel) return;
+
+            closeExportPanel();
+            closeBatchPanel();
+            const nextTab = switchEditorTab(tab || 'avatar');
+            setFloatPanelOpen('editOffcanvas', true);
+            document.querySelectorAll('.workspace-action-btn[data-editor-tab]').forEach(btn => {
+                btn.classList.toggle('is-active', btn.dataset.editorTab === nextTab);
+            });
+            syncPreviewBodyOpenState();
+
+            const tip = document.getElementById('editorFlowTip');
+            if (tip) {
+                if (nextTab === 'avatar') tip.dataset.tip = '预览头像后可先查看效果；需要时再点「确认并继续改文字」';
+                else if (nextTab === 'text') tip.dataset.tip = '可改金额、下单信息与字体样式；点画布文字也可定位字段';
+                else if (nextTab === 'diet') tip.dataset.tip = '录入物品明细，合计金额会自动写入画布';
+            }
+            schedulePreviewUpdate();
+        }
+
+        function openExportPanel() {
+            closeEditorPanel();
+            closeBatchPanel();
+            setFloatPanelOpen('exportOffcanvas', true);
+            const exportBtn = document.getElementById('exportRailBtn');
+            if (exportBtn) exportBtn.classList.add('is-active');
+            syncPreviewBodyOpenState();
+            schedulePreviewUpdate();
+        }
+
+        function openBatchPanel() {
+            closeEditorPanel();
+            closeExportPanel();
+            ensureBatchTemplateFilled();
+            refreshBatchNameFilter();
+            syncTextareaToFormList();
+            setFloatPanelOpen('batchOffcanvas', true);
+            const batchBtn = document.getElementById('batchBtn');
+            if (batchBtn) batchBtn.classList.add('is-active');
+            syncPreviewBodyOpenState();
+            schedulePreviewUpdate();
+            requestAnimationFrame(function() {
+                const nameInput = document.getElementById('batchFormName');
+                if (nameInput) nameInput.focus();
+            });
+        }
+
+        function toggleBatchPanel() {
+            if (isFloatPanelOpen('batchOffcanvas')) {
+                closeBatchPanel();
+                return;
+            }
+            openBatchPanel();
+        }
+
+        function toggleEditorPanel(tab) {
+            const activeTab = document.querySelector('.editor-tab-btn.is-active')?.dataset.editorTab;
+            if (isEditorPanelOpen() && activeTab === tab) {
+                closeEditorPanel();
+                return;
+            }
+            openEditorPanel(tab);
+        }
+
+        function toggleExportPanel() {
+            if (isExportPanelOpen()) {
+                closeExportPanel();
+                return;
+            }
+            openExportPanel();
+        }
+
+        function populateSelectOptions(selectEl, items, includeEmpty, emptyLabel) {
+            if (!selectEl) return;
+            selectEl.innerHTML = includeEmpty ? `<option value="">${emptyLabel || '请选择'}</option>` : '';
+            items.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item;
+                option.textContent = item;
+                selectEl.appendChild(option);
+            });
+        }
+
+        function initInspectorUI() {
+            const fieldSelect = document.getElementById('activeFieldSelect');
+            if (fieldSelect) {
+                fieldSelect.innerHTML = Object.keys(TEXT_FIELD_CONFIG).map(key => {
+                    const cfg = TEXT_FIELD_CONFIG[key];
+                    return `<option value="${key}">${cfg.label}</option>`;
+                }).join('');
+                fieldSelect.addEventListener('change', function() {
+                    selectTextField(this.value);
+                });
+            }
+
+            const fontSelect = document.getElementById('inspectorFontFamily');
+            if (fontSelect) {
+                fontSelect.innerHTML = FONT_OPTIONS.map(opt =>
+                    `<option value="${opt.value}">${opt.label}</option>`
+                ).join('');
+            }
+
+            const presetBar = document.getElementById('stylePresetBar');
+            if (presetBar) {
+                presetBar.innerHTML = Object.entries(STYLE_PRESETS).map(([key, preset]) =>
+                    `<button type="button" class="style-preset-chip" data-preset="${key}">${preset.label}</button>`
+                ).join('');
+                presetBar.addEventListener('click', function(e) {
+                    const chip = e.target.closest('.style-preset-chip');
+                    if (!chip) return;
+                    applyStylePreset(chip.dataset.preset, { targetKey: activeFieldKey });
+                });
+            }
+
+            const swatchBar = document.getElementById('colorSwatchBar');
+            if (swatchBar) {
+                swatchBar.innerHTML = COLOR_SWATCHES.map(color =>
+                    `<button type="button" class="color-swatch" data-color="${color}" style="background:${color}" title="${color}"></button>`
+                ).join('');
+                swatchBar.addEventListener('click', function(e) {
+                    const swatch = e.target.closest('.color-swatch');
+                    if (!swatch) return;
+                    document.getElementById('inspectorFontColor').value = swatch.dataset.color;
+                    commitInspectorToState();
+                    updateTextObject(activeFieldKey);
+                    syncInspectorUIFromState(activeFieldKey);
+                });
+            }
+
+            populateSelectOptions(document.getElementById('deptFilter'), AVATAR_FILTER_DEPARTMENTS, true, '全部部门');
+            populateSelectOptions(document.getElementById('avatarReverseDept'), AVATAR_FILTER_DEPARTMENTS, false);
+
+            const contentEl = document.getElementById('inspectorContent');
+            if (contentEl) {
+                contentEl.addEventListener('input', function() {
+                    textFieldState[activeFieldKey].content = this.value;
+                    updateTextObject(activeFieldKey);
+                    if (TEXT_FIELD_CONFIG[activeFieldKey]?.linkedCongrats) {
+                        updateCongratsText();
+                    }
+                });
+            }
+
+            const presetSelect = document.getElementById('fieldPresetSelect');
+            if (presetSelect) {
+                presetSelect.addEventListener('change', function() {
+                    if (!this.value) return;
+                    setFieldContent(activeFieldKey, this.value);
+                    this.value = '';
+                });
+            }
+
+            ['inspectorFontFamily', 'inspectorFontSize', 'inspectorFontColor'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const eventName = id === 'inspectorFontFamily' ? 'change' : 'input';
+                el.addEventListener(eventName, function() {
+                    commitInspectorToState();
+                    updateTextObject(activeFieldKey);
+                });
+            });
+
+            const applyAllBtn = document.getElementById('applyStyleToAllBtn');
+            if (applyAllBtn) {
+                applyAllBtn.addEventListener('click', applyCurrentStyleToAllFields);
+            }
+
+            syncInspectorUIFromState(activeFieldKey);
+        }
+
+        function applyStylePreset(presetKey, options = {}) {
+            const preset = STYLE_PRESETS[presetKey];
+            if (!preset) return;
+            const targetKey = options.targetKey || activeFieldKey;
+            Object.assign(textFieldState[targetKey], {
+                fontFamily: preset.fontFamily,
+                fontSize: preset.fontSize,
+                fontColor: preset.fontColor
+            });
+            if (targetKey === activeFieldKey) {
+                syncInspectorUIFromState(activeFieldKey);
+            }
+            updateTextObject(targetKey);
+        }
+
+        function applyCurrentStyleToAllFields() {
+            commitInspectorToState();
+            const { fontFamily, fontSize, fontColor } = textFieldState[activeFieldKey];
+            Object.keys(textFieldState).forEach(key => {
+                Object.assign(textFieldState[key], { fontFamily, fontSize, fontColor });
+                updateTextObject(key);
+            });
+            syncInspectorUIFromState(activeFieldKey);
+        }
+
+        function getTextFieldKeyFromObject(obj) {
+            if (!obj) return null;
+            if (obj.fieldKey) return obj.fieldKey;
+            return Object.keys(textObjects).find(key => textObjects[key] === obj) || null;
+        }
+
+        function initOffcanvasPanels() {
+            const editorCloseBtn = document.getElementById('editorFloatCloseBtn');
+            if (editorCloseBtn) {
+                editorCloseBtn.addEventListener('click', closeEditorPanel);
+            }
+            const exportCloseBtn = document.getElementById('exportFloatCloseBtn');
+            if (exportCloseBtn) {
+                exportCloseBtn.addEventListener('click', closeExportPanel);
+            }
+            const batchCloseBtn = document.getElementById('batchFloatCloseBtn');
+            if (batchCloseBtn) {
+                batchCloseBtn.addEventListener('click', closeBatchPanel);
+            }
+
+            document.querySelectorAll('.editor-tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    switchEditorTab(this.dataset.editorTab);
+                });
+            });
+
+            document.querySelectorAll('.workspace-action-btn[data-editor-tab]').forEach(btn => {
+                btn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    toggleEditorPanel(this.dataset.editorTab);
+                });
+            });
+
+            const exportRailBtn = document.getElementById('exportRailBtn');
+            if (exportRailBtn) {
+                exportRailBtn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    toggleExportPanel();
+                });
+            }
+
+            const batchBtn = document.getElementById('batchBtn');
+            if (batchBtn) {
+                batchBtn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    toggleBatchPanel();
+                });
+            }
+
+            const viewLockBtn = document.getElementById('viewLockBtn');
+            if (viewLockBtn) {
+                viewLockBtn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    toggleViewLock();
+                });
+            }
+
+            initBatchFormPanel();
+            const batchValidateBtn = document.getElementById('batchValidateBtn');
+            if (batchValidateBtn) {
+                batchValidateBtn.addEventListener('click', validateBatchInput);
+            }
+            const batchGenerateBtn = document.getElementById('batchGenerateBtn');
+            if (batchGenerateBtn) {
+                batchGenerateBtn.addEventListener('click', generateBatchCongrats);
+            }
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key !== 'Escape') return;
+                if (isEditorPanelOpen() || isExportPanelOpen() || isFloatPanelOpen('batchOffcanvas')) {
+                    closeAllFloatPanels();
+                }
+            });
+
+            document.addEventListener('pointerdown', function(event) {
+                if (!isEditorPanelOpen() && !isExportPanelOpen() && !isFloatPanelOpen('batchOffcanvas')) return;
+                const target = event.target;
+                if (!(target instanceof Element)) return;
+                if (target.closest('.editor-float-panel')) return;
+                if (target.closest('.workspace-action-bar')) return;
+                if (target.closest('.modal')) return;
+                closeAllFloatPanels();
+            });
+        }
+
+        function initHelpTips() {
+            let tipTimer = null;
+            let activeTip = null;
+            let bubble = document.getElementById('helpTipBubble');
+            if (!bubble) {
+                bubble = document.createElement('div');
+                bubble.id = 'helpTipBubble';
+                bubble.className = 'help-tip-bubble';
+                bubble.setAttribute('role', 'tooltip');
+                document.body.appendChild(bubble);
+            }
+
+            function hideTip() {
+                if (tipTimer) {
+                    clearTimeout(tipTimer);
+                    tipTimer = null;
+                }
+                bubble.classList.remove('is-visible');
+                if (activeTip) activeTip.classList.remove('is-open');
+                activeTip = null;
+            }
+
+            function showTip(icon) {
+                const text = icon.getAttribute('data-tip') || '';
+                if (!text) return;
+                activeTip = icon;
+                icon.classList.add('is-open');
+                bubble.textContent = text;
+                bubble.classList.add('is-visible');
+                const rect = icon.getBoundingClientRect();
+                const bw = bubble.offsetWidth || 220;
+                const bh = bubble.offsetHeight || 40;
+                let left = rect.left + rect.width / 2 - bw / 2;
+                let top = rect.bottom + 8;
+                left = Math.max(8, Math.min(left, window.innerWidth - bw - 8));
+                if (top + bh > window.innerHeight - 8) {
+                    top = rect.top - bh - 8;
+                }
+                bubble.style.left = `${Math.round(left)}px`;
+                bubble.style.top = `${Math.round(top)}px`;
+            }
+
+            document.addEventListener('pointerover', function(event) {
+                const icon = event.target.closest?.('.help-tip');
+                if (!icon) return;
+                if (tipTimer) clearTimeout(tipTimer);
+                tipTimer = setTimeout(function() {
+                    showTip(icon);
+                }, 650);
+            });
+            document.addEventListener('pointerout', function(event) {
+                const icon = event.target.closest?.('.help-tip');
+                if (!icon) return;
+                const related = event.relatedTarget;
+                if (related && icon.contains(related)) return;
+                hideTip();
+            });
+            document.addEventListener('scroll', hideTip, true);
+            window.addEventListener('resize', hideTip);
+        }
+
+        function loadAutoShowPreference() {
+            const saved = localStorage.getItem(AUTO_SHOW_KEY);
+            autoShowEditorPanel = saved === null ? true : saved === 'true';
+            const toggle = document.getElementById('autoShowEditorToggle');
+            if (toggle) toggle.checked = autoShowEditorPanel;
+        }
+
+        function loadViewLockPreference() {
+            const saved = localStorage.getItem(VIEW_LOCK_KEY);
+            viewLocked = saved === null ? true : saved === 'true';
+            syncViewLockButton();
+        }
+
+        function syncViewLockButton() {
+            const btn = document.getElementById('viewLockBtn');
+            if (!btn) return;
+            btn.classList.toggle('is-locked', viewLocked);
+            btn.classList.toggle('is-active', viewLocked);
+            btn.setAttribute('aria-pressed', viewLocked ? 'true' : 'false');
+            btn.textContent = viewLocked ? '锁定' : '解锁';
+            btn.title = viewLocked ? '已锁定：不可拖拽平移画布（点击解锁）' : '已解锁：可拖拽平移画布（点击锁定）';
+            const panel = document.getElementById('canvasPreviewPanel');
+            if (panel) {
+                panel.classList.toggle('is-space-pan', !viewLocked && spacePanKey);
+                if (viewLocked) {
+                    panel.classList.remove('is-panning', 'is-space-pan');
+                    isViewPanning = false;
+                    spacePanKey = false;
+                }
+            }
+        }
+
+        function toggleViewLock() {
+            viewLocked = !viewLocked;
+            localStorage.setItem(VIEW_LOCK_KEY, String(viewLocked));
+            syncViewLockButton();
+        }
+
+        function initAutoShowToggle() {
+            const toggle = document.getElementById('autoShowEditorToggle');
+            if (!toggle) return;
+            toggle.addEventListener('change', function() {
+                autoShowEditorPanel = !!this.checked;
+                localStorage.setItem(AUTO_SHOW_KEY, String(autoShowEditorPanel));
+            });
+        }
+
+        function isProtectedCanvasObject(obj) {
+            if (!obj || !canvas) return true;
+            return obj === backgroundImage || obj === topOverlayImage;
+        }
+
+        function isAvatarObject(obj) {
+            return !!(obj && (obj.isAvatar || obj.clipTo));
+        }
+
+        function openPanelForObject(obj, force) {
+            if (!obj) return;
+            if (!force && !autoShowEditorPanel) return;
+            if (isAvatarObject(obj)) {
+                openEditorPanel('avatar');
+                return;
+            }
+            const key = getTextFieldKeyFromObject(obj);
+            if (key) {
+                selectTextField(key);
+                openEditorPanel('text');
+            }
+        }
+
+        function syncTextObjectsFromCanvas() {
+            const next = {};
+            canvas.getObjects().forEach(obj => {
+                if (obj.fieldKey) next[obj.fieldKey] = obj;
+            });
+            textObjects = next;
+        }
+
+        function captureHistorySnapshot() {
+            if (!canvas) return null;
+            const companyInput = document.getElementById('dietCompanyName');
+            return JSON.stringify({
+                canvas: canvas.toJSON(['fieldKey', 'isAvatar']),
+                textFieldState: textFieldState,
+                dietItems: dietItems,
+                dietCompanyName: companyInput ? companyInput.value : '',
+                currentTemplateId: currentTemplateId
+            });
+        }
+
+        function pushHistory() {
+            if (historyLock || batchGenerating || !canvas) return;
+            const snap = captureHistorySnapshot();
+            if (!snap) return;
+            if (historyIndex >= 0 && historyStack[historyIndex] === snap) return;
+            historyStack = historyStack.slice(0, historyIndex + 1);
+            historyStack.push(snap);
+            if (historyStack.length > HISTORY_LIMIT) {
+                historyStack.shift();
+            }
+            historyIndex = historyStack.length - 1;
+        }
+
+        function restoreHistorySnapshot(snap) {
+            if (!canvas || !snap) return;
+            let data;
+            try {
+                data = JSON.parse(snap);
+            } catch (e) {
+                return;
+            }
+            historyLock = true;
+            canvas.loadFromJSON(data.canvas, function() {
+                backgroundImage = null;
+                topOverlayImage = null;
+                canvas.getObjects().forEach(obj => {
+                    if (obj.isAvatar || obj.clipTo) {
+                        const left = obj.left;
+                        const top = obj.top;
+                        const scaleX = obj.scaleX;
+                        const scaleY = obj.scaleY;
+                        const maxSize = designToCanvasSize(AVATAR_LAYOUT.size);
+                        obj.set({
+                            isAvatar: true,
+                            clipTo: buildAvatarClip(maxSize / 2),
+                            left,
+                            top,
+                            scaleX,
+                            scaleY,
+                            originX: 'center',
+                            originY: 'center',
+                            selectable: true,
+                            evented: true
+                        });
+                        obj.setCoords();
+                    }
+                });
+                // 重新识别底图 / 顶层装饰
+                const images = canvas.getObjects().filter(o => o.type === 'image' && !o.isAvatar && !o.clipTo);
+                backgroundImage = images[0] || null;
+                topOverlayImage = images[1] || null;
+                images.forEach(img => img.set({ selectable: false, evented: false }));
+                if (data.textFieldState) {
+                    textFieldState = data.textFieldState;
+                }
+                if (Array.isArray(data.dietItems)) {
+                    dietItems = data.dietItems.map(item => Object.assign(createEmptyDietItem(), item || {}));
+                    if (!dietItems.length) dietItems = [createEmptyDietItem()];
+                    renderDietItemsTable();
+                }
+                canvas.getObjects().slice().forEach(obj => {
+                    if (obj.fieldKey && TEXT_FIELD_CONFIG[obj.fieldKey]?.skipCanvas) {
+                        canvas.remove(obj);
+                    }
+                });
+                if (typeof data.dietCompanyName === 'string') {
+                    const companyInput = document.getElementById('dietCompanyName');
+                    if (companyInput) companyInput.value = data.dietCompanyName;
+                }
+                syncTextObjectsFromCanvas();
+                Object.keys(textObjects).forEach(key => updateTextObject(key));
+                syncCanvasLayerOrder();
+                syncInspectorUIFromState(activeFieldKey);
+                schedulePreviewUpdate();
+                historyLock = false;
+                canvas.requestRenderAll();
+            });
+        }
+
+        function undoCanvasChange() {
+            if (historyIndex <= 0) return;
+            historyIndex -= 1;
+            restoreHistorySnapshot(historyStack[historyIndex]);
+        }
+
+        function deleteActiveCanvasObject() {
+            if (!canvas) return;
+            const active = canvas.getActiveObject();
+            if (!active || isProtectedCanvasObject(active)) return;
+            const key = getTextFieldKeyFromObject(active);
+            pushHistory();
+            historyLock = true;
+            canvas.remove(active);
+            if (key) {
+                delete textObjects[key];
+                if (textFieldState[key]) textFieldState[key].content = '';
+                if (activeFieldKey === key) {
+                    const contentEl = document.getElementById('inspectorContent');
+                    if (contentEl) contentEl.value = '';
+                }
+            }
+            canvas.discardActiveObject();
+            canvas.requestRenderAll();
+            historyLock = false;
+            pushHistory();
+        }
+
+        function initCanvasViewControls() {
+            const panel = document.getElementById('canvasPreviewPanel');
+            if (!panel || !canvas) return;
+
+            panel.addEventListener('wheel', function(event) {
+                if (!(event.ctrlKey || event.metaKey)) return;
+                event.preventDefault();
+                const delta = event.deltaY > 0 ? -0.08 : 0.08;
+                viewUserZoom = Math.min(3, Math.max(0.25, viewUserZoom * (1 + delta)));
+                applyCanvasViewTransform();
+                updatePreviewScaleLabel(DESIGN_SIZE.width, DESIGN_SIZE.height, canvasPreviewScale);
+            }, { passive: false });
+
+            const startPan = function(x, y) {
+                isViewPanning = true;
+                panLastX = x;
+                panLastY = y;
+                panel.classList.add('is-panning');
+            };
+            const movePan = function(x, y) {
+                if (!isViewPanning) return;
+                viewPanX += x - panLastX;
+                viewPanY += y - panLastY;
+                panLastX = x;
+                panLastY = y;
+                applyCanvasViewTransform();
+            };
+            const endPan = function() {
+                if (!isViewPanning) return;
+                isViewPanning = false;
+                panel.classList.remove('is-panning');
+            };
+
+            canvas.on('mouse:down', function(opt) {
+                const evt = opt.e;
+                if (!evt) return;
+                if (viewLocked) return;
+                if (evt.button === 1 || spacePanKey || (!opt.target && evt.button === 0)) {
+                    startPan(evt.clientX, evt.clientY);
+                    canvas.selection = false;
+                }
+            });
+            canvas.on('mouse:move', function(opt) {
+                if (viewLocked || !isViewPanning || !opt.e) return;
+                movePan(opt.e.clientX, opt.e.clientY);
+            });
+            canvas.on('mouse:up', function() {
+                endPan();
+                canvas.selection = true;
+            });
+
+            document.addEventListener('keydown', function(event) {
+                if (viewLocked) return;
+                if (event.code === 'Space' && !event.repeat && !(event.target && /INPUT|TEXTAREA|SELECT/.test(event.target.tagName))) {
+                    spacePanKey = true;
+                    panel.classList.add('is-space-pan');
+                    event.preventDefault();
+                }
+            });
+            document.addEventListener('keyup', function(event) {
+                if (event.code === 'Space') {
+                    spacePanKey = false;
+                    panel.classList.remove('is-space-pan');
+                    endPan();
+                }
+            });
+        }
+
+        function initHistoryTracking() {
+            if (!canvas) return;
+            const mark = function() {
+                if (historyLock || batchGenerating) return;
+                pushHistory();
+            };
+            canvas.on('object:modified', mark);
+            canvas.on('object:added', function() {
+                if (historyLock || batchGenerating) return;
+                // 延迟一拍，避免初始化连环写入
+                setTimeout(mark, 0);
+            });
+            canvas.on('object:removed', mark);
+            // 首快照由 bootstrapTemplateCanvas({ resetHistory: true }) 在模板就绪后写入
+        }
+
+        function initCanvasTextInteraction() {
+            if (!canvas) return;
+            canvas.on('selection:created', function(e) {
+                const obj = e.selected[0];
+                const key = getTextFieldKeyFromObject(obj);
+                if (key) selectTextField(key);
+                updateCoordinateDisplay(obj);
+                openPanelForObject(obj);
+            });
+            canvas.on('selection:updated', function(e) {
+                const obj = e.selected[0];
+                const key = getTextFieldKeyFromObject(obj);
+                if (key) selectTextField(key);
+                openPanelForObject(obj);
+            });
+        }
+        
+        // 从localStorage恢复数据
+        function loadFromLocalStorage() {
+            const savedRevision = localStorage.getItem('personnelMapRevision');
+            const savedPersonnelMap = localStorage.getItem('personnelMap');
+
+            if (savedRevision === PERSONNEL_MAP_REVISION && savedPersonnelMap) {
+                Object.keys(PERSONNEL_MAP).forEach(key => delete PERSONNEL_MAP[key]);
+                Object.assign(PERSONNEL_MAP, JSON.parse(savedPersonnelMap));
+            } else {
+                localStorage.setItem('personnelMapRevision', PERSONNEL_MAP_REVISION);
+                localStorage.setItem('personnelMap', JSON.stringify(PERSONNEL_MAP));
+            }
+
+            // 恢复uploadedAvatars
+            const savedAvatars = localStorage.getItem('uploadedAvatars');
+            if (savedAvatars) {
+                uploadedAvatars = JSON.parse(savedAvatars);
+            }
+            loadAutoShowPreference();
+            loadViewLockPreference();
+        }
+
+        function getPhotoLookupName(name) {
+            return PHOTO_NAME_ALIASES[name] || name;
+        }
+
+        function getPersonRoleHint(name) {
+            return PERSONNEL_ROLE_HINT[name] || '';
+        }
+
+        let personnelSearchIndex = [];
+        let avatarNameSuggestionIndex = -1;
+
+        function rebuildPersonnelSearchIndex() {
+            personnelSearchIndex = Object.keys(PERSONNEL_MAP).map(name => {
+                const dept = PERSONNEL_MAP[name];
+                let initials = '';
+                let pinyinFull = '';
+                let pinyinText = '';
+
+                if (window.pinyinPro && typeof window.pinyinPro.pinyin === 'function') {
+                    try {
+                        const pinyinArr = window.pinyinPro.pinyin(name, { toneType: 'none', type: 'array' });
+                        initials = pinyinArr.map(part => (part && part[0]) || '').join('').toLowerCase();
+                        pinyinFull = pinyinArr.join('').toLowerCase();
+                        pinyinText = pinyinArr.join(' ').toLowerCase();
+                    } catch (error) {
+                        console.warn('拼音索引生成失败:', name, error);
+                    }
+                }
+
+                return { name, dept, initials, pinyinFull, pinyinText };
+            });
+        }
+
+        function normalizeSearchQuery(query) {
+            return query.trim().toLowerCase().replace(/\s+/g, '');
+        }
+
+        function isChineseSubsequence(text, query) {
+            if (!query) return false;
+            let index = 0;
+            for (const ch of query) {
+                const found = text.indexOf(ch, index);
+                if (found === -1) return false;
+                index = found + 1;
+            }
+            return true;
+        }
+
+        function scorePersonMatch(entry, queryRaw) {
+            const trimmed = queryRaw.trim();
+            const query = normalizeSearchQuery(queryRaw);
+            if (!trimmed) return -1;
+
+            const { name, initials, pinyinFull, pinyinText } = entry;
+
+            if (name === trimmed) return 1000;
+            if (name.includes(trimmed)) return 900;
+            if (isChineseSubsequence(name, trimmed)) return 800;
+
+            if (/^[a-z]+$/.test(query)) {
+                if (initials === query) return 850;
+                if (initials.startsWith(query)) return 780;
+                if (initials.includes(query)) return 720;
+                if (pinyinFull.startsWith(query)) return 700;
+                if (pinyinFull.includes(query)) return 650;
+            }
+
+            if (query && (pinyinText.includes(query) || pinyinFull.includes(query))) {
+                return 600;
+            }
+
+            return -1;
+        }
+
+        function getFilteredPersonnelNames() {
+            const selectedDept = document.getElementById('deptFilter')?.value || '';
+            return personnelSearchIndex.filter(entry => !selectedDept || entry.dept === selectedDept);
+        }
+
+        function searchPersonnel(query) {
+            return getFilteredPersonnelNames()
+                .map(entry => ({ entry, score: scorePersonMatch(entry, query) }))
+                .filter(item => item.score >= 0)
+                .sort((a, b) => {
+                    if (b.score !== a.score) return b.score - a.score;
+                    return a.entry.name.localeCompare(b.entry.name, 'zh-CN', { sensitivity: 'accent' });
+                })
+                .map(item => item.entry);
+        }
+
+        function resolveAvatarNameInput(rawInput) {
+            const trimmed = rawInput.trim();
+            if (!trimmed) return null;
+            if (Object.prototype.hasOwnProperty.call(PERSONNEL_MAP, trimmed)) return trimmed;
+
+            const matched = getFilteredPersonnelNames()
+                .map(entry => ({ entry, score: scorePersonMatch(entry, trimmed) }))
+                .filter(item => item.score >= 0)
+                .sort((a, b) => {
+                    if (b.score !== a.score) return b.score - a.score;
+                    return a.entry.name.localeCompare(b.entry.name, 'zh-CN', { sensitivity: 'accent' });
+                });
+
+            if (matched.length === 1) return matched[0].entry.name;
+            if (matched.length > 1 && matched[0].score >= 850 && matched[0].score > matched[1].score) {
+                return matched[0].entry.name;
+            }
+            return null;
+        }
+
+        function hideAvatarNameSuggestions() {
+            const list = document.getElementById('avatarNameSuggestions');
+            if (!list) return;
+            list.hidden = true;
+            list.innerHTML = '';
+            avatarNameSuggestionIndex = -1;
+        }
+
+        function selectAvatarNameSuggestion(name) {
+            const input = document.getElementById('avatarNameInput');
+            input.value = name;
+            hideAvatarNameSuggestions();
+            previewAvatar();
+        }
+
+        function renderAvatarNameSuggestions(results) {
+            const list = document.getElementById('avatarNameSuggestions');
+            if (!list) return;
+
+            list.innerHTML = '';
+            avatarNameSuggestionIndex = -1;
+
+            if (!results.length) {
+                list.hidden = true;
+                return;
+            }
+
+            results.slice(0, 12).forEach((entry, index) => {
+                const item = document.createElement('li');
+                item.setAttribute('role', 'option');
+                item.dataset.index = String(index);
+                item.dataset.name = entry.name;
+                const roleHint = getPersonRoleHint(entry.name);
+                item.title = roleHint || `${entry.name} · ${entry.dept}`;
+                item.innerHTML = `<span>${entry.name}</span><span class="suggestion-dept">${entry.dept}</span><span class="suggestion-meta">${entry.initials ? entry.initials.toUpperCase() : ''}${entry.pinyinText ? ' · ' + entry.pinyinText : ''}</span>`;
+                item.addEventListener('mousedown', function(event) {
+                    event.preventDefault();
+                    selectAvatarNameSuggestion(entry.name);
+                });
+                list.appendChild(item);
+            });
+
+            list.hidden = false;
+        }
+
+        function updateAvatarNameSuggestions() {
+            const input = document.getElementById('avatarNameInput');
+            const query = input.value.trim();
+            if (!query) {
+                hideAvatarNameSuggestions();
+                return;
+            }
+            renderAvatarNameSuggestions(searchPersonnel(query));
+        }
+
+        function setActiveAvatarNameSuggestion(index) {
+            const list = document.getElementById('avatarNameSuggestions');
+            if (!list || list.hidden) return;
+
+            const items = list.querySelectorAll('li');
+            if (!items.length) return;
+
+            avatarNameSuggestionIndex = Math.max(0, Math.min(index, items.length - 1));
+            items.forEach((item, itemIndex) => {
+                item.classList.toggle('active', itemIndex === avatarNameSuggestionIndex);
+            });
+            items[avatarNameSuggestionIndex].scrollIntoView({ block: 'nearest' });
+        }
+
+        function initAvatarNameSearch() {
+            const input = document.getElementById('avatarNameInput');
+            const list = document.getElementById('avatarNameSuggestions');
+            if (!input || !list) return;
+
+            input.addEventListener('input', updateAvatarNameSuggestions);
+            input.addEventListener('focus', updateAvatarNameSuggestions);
+            input.addEventListener('blur', function() {
+                setTimeout(hideAvatarNameSuggestions, 150);
+            });
+            input.addEventListener('keydown', function(event) {
+                const items = list.querySelectorAll('li');
+                if (event.key === 'ArrowDown') {
+                    if (!list.hidden && items.length) {
+                        event.preventDefault();
+                        setActiveAvatarNameSuggestion(avatarNameSuggestionIndex + 1);
+                    }
+                    return;
+                }
+                if (event.key === 'ArrowUp') {
+                    if (!list.hidden && items.length) {
+                        event.preventDefault();
+                        setActiveAvatarNameSuggestion(avatarNameSuggestionIndex <= 0 ? items.length - 1 : avatarNameSuggestionIndex - 1);
+                    }
+                    return;
+                }
+                if (event.key === 'Enter') {
+                    if (!list.hidden && items.length && avatarNameSuggestionIndex >= 0) {
+                        event.preventDefault();
+                        selectAvatarNameSuggestion(items[avatarNameSuggestionIndex].dataset.name);
+                        return;
+                    }
+                    previewAvatar();
+                    return;
+                }
+                if (event.key === 'Escape') {
+                    hideAvatarNameSuggestions();
+                }
+            });
+        }
+
+        /**
+         * 初始化Fabric.js画布
+         */
+        function initCanvas() {
+            // Fabric 5.x 会写入非法值 alphabetical，导致控制台警告；统一纠正为 alphabetic
+            if (window.fabric && !fabric.__textBaselinePatched) {
+                const proto = CanvasRenderingContext2D && CanvasRenderingContext2D.prototype;
+                if (proto) {
+                    const desc = Object.getOwnPropertyDescriptor(proto, 'textBaseline');
+                    if (desc && desc.set && desc.get) {
+                        Object.defineProperty(proto, 'textBaseline', {
+                            configurable: true,
+                            enumerable: desc.enumerable,
+                            get() { return desc.get.call(this); },
+                            set(value) {
+                                desc.set.call(this, value === 'alphabetical' ? 'alphabetic' : value);
+                            }
+                        });
+                    }
+                }
+                fabric.__textBaselinePatched = true;
+            }
+            canvas = new fabric.Canvas('canvas', {
+                width: DESIGN_SIZE.width,
+                height: DESIGN_SIZE.height,
+                backgroundColor: '#ffffff',
+                preserveObjectStacking: true
+            });
+            refreshBackgroundFrame();
+            resetCanvasViewTransform();
+            initCanvasPreviewResize();
+            schedulePreviewUpdate();
+        }
+        /**
+         * 处理文件上传
+         * @param {File} file - 上传的图片文件
+         */
+        function handleFileUpload(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                fabric.Image.fromURL(e.target.result, function(img) {
+                    canvas.getObjects().filter(obj => obj.clipTo).forEach(obj => canvas.remove(obj));
+                    configureAvatarImage(img);
+                    canvas.add(img);
+                    relayoutCanvasElements();
+                    setTimeout(function() {
+                        const currentName = getFieldContent('name');
+                        const currentDept = getFieldContent('dept');
+                        setFieldContent('order', '618活动套餐下单');
+                        if (currentName) setFieldContent('name', currentName);
+                        if (currentDept) setFieldContent('dept', currentDept);
+                    }, 100);
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+        /**
+         * 添加所有文字对象到画布
+         */
+        function addTextObjects() {
+            Object.values(textObjects).forEach(obj => canvas.remove(obj));
+            textObjects = {};
+            refreshBackgroundFrame();
+
+            Object.keys(TEXT_FIELD_CONFIG).forEach(key => {
+                const cfg = TEXT_FIELD_CONFIG[key];
+                if (cfg.skipCanvas) return;
+                const preset = STYLE_PRESETS[cfg.stylePreset] || STYLE_PRESETS.body;
+                const defaults = {
+                    fontSize: designToCanvasSize(preset.fontSize),
+                    fontFamily: preset.fontFamily,
+                    fill: preset.fontColor,
+                    fontWeight: 'bold',
+                    textAlign: cfg.vertical ? 'center' : (key === 'congrats' || key === 'header' ? 'left' : 'center')
+                };
+
+                if (key === 'name') {
+                    defaults.lineHeight = 50 / 40;
+                    defaults.shadow = new fabric.Shadow({
+                        color: 'rgba(0,0,0,0.3)',
+                        blur: designToCanvasSize(5),
+                        offsetX: designToCanvasSize(2),
+                        offsetY: designToCanvasSize(2)
+                    });
+                } else if (key === 'dept') {
+                    defaults.lineHeight = 58 / 48;
+                } else if (key === 'congrats') {
+                    defaults.shadow = new fabric.Shadow({
+                        color: 'rgba(0,0,0,0.3)',
+                        blur: designToCanvasSize(8),
+                        offsetX: designToCanvasSize(3),
+                        offsetY: designToCanvasSize(3)
+                    });
+                } else if (key === 'order') {
+                    defaults.shadow = new fabric.Shadow({
+                        color: 'rgba(0,0,0,0.3)',
+                        blur: designToCanvasSize(5),
+                        offsetX: designToCanvasSize(2),
+                        offsetY: designToCanvasSize(2)
+                    });
+                } else if (key === 'amount') {
+                    defaults.shadow = new fabric.Shadow({
+                        color: 'rgba(0,0,0,0.4)',
+                        blur: designToCanvasSize(10),
+                        offsetX: designToCanvasSize(4),
+                        offsetY: designToCanvasSize(4)
+                    });
+                } else if (key === 'items') {
+                    defaults.lineHeight = 1.28;
+                }
+
+                textObjects[key] = new fabric.Text('', Object.assign(defaults, getTextObjectPosition(key)));
+                textObjects[key].fieldKey = key;
+                canvas.add(textObjects[key]);
+            });
+
+            Object.keys(textFieldState).forEach(key => updateTextObject(key));
+            syncCanvasLayerOrder();
+        }
+        /**
+         * 更新指定的文字对象
+         * @param {string} key - 文字对象的键名
+         */
+        function updateTextObject(key) {
+            if (!textObjects[key]) return;
+            refreshBackgroundFrame();
+            const state = textFieldState[key];
+            if (!state) return;
+            let content = state.content;
+            const fontFamily = state.fontFamily;
+            const fontSize = state.fontSize;
+            const fontColor = state.fontColor;
+            const scaledFontSize = designToCanvasSize(fontSize);
+            const layout = getTextObjectPosition(key);
+            if (TEXT_FIELD_CONFIG[key]?.vertical) {
+                content = content.split('').join('\n');
+                const lineHeight = (fontSize + 10) / fontSize;
+                textObjects[key].set(Object.assign({
+                    text: content,
+                    fontFamily: fontFamily,
+                    fontSize: scaledFontSize,
+                    fill: fontColor,
+                    textAlign: 'center',
+                    lineHeight: lineHeight
+                }, layout));
+            } else {
+                textObjects[key].set(Object.assign({
+                    text: content,
+                    fontFamily: fontFamily,
+                    fontSize: scaledFontSize,
+                    fill: fontColor
+                }, layout));
+            }
+            textObjects[key].setCoords();
+            canvas.renderAll();
+        }
+        /**
+         * 生成导出文件名：喜报_人员姓名_导出日期
+         */
+        function buildExportFileName() {
+            let rawName = '未命名';
+            if (currentTemplateId === 'diet') {
+                rawName = (
+                    document.getElementById('dietCompanyName')?.value ||
+                    '定西公司'
+                ).trim();
+            } else {
+                rawName = (
+                    getFieldContent('name') ||
+                    document.getElementById('avatarNameInput')?.value ||
+                    '未命名'
+                ).trim();
+            }
+            const safeName = rawName.replace(/[\\/:*?"<>|]/g, '').replace(/\s+/g, '') || '未命名';
+            const exportDate = new Date().toISOString().slice(0, 10);
+            const prefix = currentTemplateId === 'diet' ? '膳食喜报' : '喜报';
+            return `${prefix}_${safeName}_${exportDate}.jpg`;
+        }
+
+
+        function formatBatchLine(name, order, amount) {
+            return `${name}+${order} 金额：${amount}元`;
+        }
+
+        function invalidateBatchReview(message) {
+            batchParsedRecords = [];
+            const genBtn = document.getElementById('batchGenerateBtn');
+            if (genBtn) genBtn.disabled = true;
+            const list = document.getElementById('batchReviewList');
+            if (list) list.innerHTML = '';
+            const progress = document.getElementById('batchProgress');
+            if (progress) progress.textContent = message || '内容已修改，请重新审阅';
+        }
+
+        function setBatchFormHint(text, tone) {
+            const hint = document.getElementById('batchFormHint');
+            if (!hint) return;
+            hint.textContent = text || '';
+            hint.classList.remove('is-error', 'is-ok');
+            if (tone) hint.classList.add(tone);
+        }
+
+        function getBatchCommentHeader(text) {
+            const lines = String(text || '').split(/\r?\n/);
+            const header = [];
+            for (let i = 0; i < lines.length; i++) {
+                const trimmed = lines[i].trim();
+                if (!trimmed || trimmed.startsWith('#')) {
+                    header.push(lines[i]);
+                    continue;
+                }
+                break;
+            }
+            while (header.length && header[header.length - 1].trim() === '') {
+                header.pop();
+            }
+            return header;
+        }
+
+        function getBatchCommentOnlyTemplate() {
+            return getBatchTemplateText()
+                .split('\n')
+                .filter(line => !line.trim() || line.trim().startsWith('#'))
+                .join('\n');
+        }
+
+        let batchNameSuggestionIndex = -1;
+
+        function refreshBatchNameFilter() {
+            const select = document.getElementById('batchNameFilter');
+            if (!select) return;
+            const current = select.value;
+            const names = Object.keys(PERSONNEL_MAP).sort((a, b) =>
+                a.localeCompare(b, 'zh-CN', { sensitivity: 'accent' })
+            );
+            select.innerHTML = '<option value="">请选择姓名</option>';
+            names.forEach(name => {
+                const option = document.createElement('option');
+                option.value = name;
+                option.textContent = name;
+                const roleHint = getPersonRoleHint(name);
+                if (roleHint) option.title = roleHint;
+                select.appendChild(option);
+            });
+            if (current && PERSONNEL_MAP[current]) select.value = current;
+        }
+
+        function hideBatchNameSuggestions() {
+            const list = document.getElementById('batchNameSuggestions');
+            if (list) list.hidden = true;
+            batchNameSuggestionIndex = -1;
+        }
+
+        function selectBatchNameSuggestion(name) {
+            const input = document.getElementById('batchFormName');
+            const select = document.getElementById('batchNameFilter');
+            if (input) input.value = name;
+            if (select) select.value = PERSONNEL_MAP[name] ? name : '';
+            hideBatchNameSuggestions();
+        }
+
+        function renderBatchNameSuggestions(results) {
+            const list = document.getElementById('batchNameSuggestions');
+            if (!list) return;
+            list.innerHTML = '';
+            batchNameSuggestionIndex = -1;
+            if (!results.length) {
+                list.hidden = true;
+                return;
+            }
+            results.slice(0, 12).forEach((entry, index) => {
+                const item = document.createElement('li');
+                item.setAttribute('role', 'option');
+                item.dataset.index = String(index);
+                item.dataset.name = entry.name;
+                const roleHint = getPersonRoleHint(entry.name);
+                item.title = roleHint || (entry.name + ' · ' + entry.dept);
+                item.innerHTML = '<span>' + escapeHtml(entry.name) + '</span><span class="suggestion-dept">' + escapeHtml(entry.dept) + '</span><span class="suggestion-meta">' + (entry.initials ? escapeHtml(entry.initials.toUpperCase()) : '') + (entry.pinyinText ? ' · ' + escapeHtml(entry.pinyinText) : '') + '</span>';
+                item.addEventListener('mousedown', function(event) {
+                    event.preventDefault();
+                    selectBatchNameSuggestion(entry.name);
+                });
+                list.appendChild(item);
+            });
+            list.hidden = false;
+        }
+
+        function updateBatchNameSuggestions() {
+            const input = document.getElementById('batchFormName');
+            if (!input) return;
+            const query = input.value.trim();
+            if (!query) {
+                hideBatchNameSuggestions();
+                return;
+            }
+            renderBatchNameSuggestions(searchPersonnel(query));
+        }
+
+        function setActiveBatchNameSuggestion(index) {
+            const list = document.getElementById('batchNameSuggestions');
+            if (!list || list.hidden) return;
+            const items = list.querySelectorAll('li');
+            if (!items.length) return;
+            batchNameSuggestionIndex = Math.max(0, Math.min(index, items.length - 1));
+            items.forEach((item, itemIndex) => {
+                item.classList.toggle('active', itemIndex === batchNameSuggestionIndex);
+            });
+            items[batchNameSuggestionIndex].scrollIntoView({ block: 'nearest' });
+        }
+
+        function initBatchNameSearch() {
+            const input = document.getElementById('batchFormName');
+            const list = document.getElementById('batchNameSuggestions');
+            const select = document.getElementById('batchNameFilter');
+            if (!input || !list) return;
+
+            if (select) {
+                select.addEventListener('change', function() {
+                    if (!this.value) return;
+                    selectBatchNameSuggestion(this.value);
+                    const orderInput = document.getElementById('batchFormOrder');
+                    if (orderInput) orderInput.focus();
+                });
+            }
+
+            input.addEventListener('input', function() {
+                const selectEl = document.getElementById('batchNameFilter');
+                if (selectEl && selectEl.value && selectEl.value !== this.value.trim()) {
+                    selectEl.value = '';
+                }
+                updateBatchNameSuggestions();
+            });
+            input.addEventListener('focus', updateBatchNameSuggestions);
+            input.addEventListener('blur', function() {
+                setTimeout(hideBatchNameSuggestions, 150);
+            });
+            input.addEventListener('keydown', function(event) {
+                const items = list.querySelectorAll('li');
+                if (event.key === 'ArrowDown') {
+                    if (!list.hidden && items.length) {
+                        event.preventDefault();
+                        setActiveBatchNameSuggestion(batchNameSuggestionIndex + 1);
+                    }
+                    return;
+                }
+                if (event.key === 'ArrowUp') {
+                    if (!list.hidden && items.length) {
+                        event.preventDefault();
+                        setActiveBatchNameSuggestion(batchNameSuggestionIndex <= 0 ? items.length - 1 : batchNameSuggestionIndex - 1);
+                    }
+                    return;
+                }
+                if (event.key === 'Enter') {
+                    if (!list.hidden && items.length && batchNameSuggestionIndex >= 0) {
+                        event.preventDefault();
+                        selectBatchNameSuggestion(items[batchNameSuggestionIndex].dataset.name);
+                        return;
+                    }
+                    if (!list.hidden && items.length === 1) {
+                        event.preventDefault();
+                        selectBatchNameSuggestion(items[0].dataset.name);
+                        return;
+                    }
+                    return;
+                }
+                if (event.key === 'Escape') {
+                    hideBatchNameSuggestions();
+                }
+            });
+        }
+
+
+        function renderBatchOrderChips() {
+            const bar = document.getElementById('batchOrderChips');
+            if (!bar) return;
+            bar.innerHTML = ORDER_PRESETS.map(order =>
+                `<button type="button" class="batch-chip" data-order="${escapeHtml(order)}">${escapeHtml(order)}</button>`
+            ).join('');
+        }
+
+        function renderBatchAmountChips() {
+            const bar = document.getElementById('batchAmountChips');
+            if (!bar) return;
+            bar.innerHTML = AMOUNT_PRESETS.map(amount =>
+                `<button type="button" class="batch-chip" data-amount="${amount}">${amount}</button>`
+            ).join('');
+        }
+
+        function syncChipActiveStates() {
+            const orderVal = (document.getElementById('batchFormOrder')?.value || '').trim();
+            document.querySelectorAll('#batchOrderChips .batch-chip').forEach(chip => {
+                chip.classList.toggle('is-active', chip.dataset.order === orderVal);
+            });
+            const amountVal = String(document.getElementById('batchFormAmount')?.value || '').trim();
+            document.querySelectorAll('#batchAmountChips .batch-chip').forEach(chip => {
+                chip.classList.toggle('is-active', chip.dataset.amount === amountVal);
+            });
+        }
+
+        function renderBatchFormList() {
+            const list = document.getElementById('batchFormList');
+            if (!list) return;
+            list.innerHTML = '';
+            batchFormEntries.forEach((entry, index) => {
+                const li = document.createElement('li');
+                if (index === batchFormEditIndex) li.classList.add('is-editing');
+                const main = document.createElement('div');
+                main.className = 'batch-entry-main';
+                main.innerHTML = `<strong>${escapeHtml(entry.name)}</strong> · ${escapeHtml(entry.order)} · ${escapeHtml(entry.amount)}元`;
+                const actions = document.createElement('div');
+                actions.className = 'batch-entry-actions';
+                const editBtn = document.createElement('button');
+                editBtn.type = 'button';
+                editBtn.textContent = '编辑';
+                editBtn.addEventListener('click', function() { editBatchFormEntry(index); });
+                const delBtn = document.createElement('button');
+                delBtn.type = 'button';
+                delBtn.textContent = '删除';
+                delBtn.addEventListener('click', function() { removeBatchFormEntry(index); });
+                actions.appendChild(editBtn);
+                actions.appendChild(delBtn);
+                li.appendChild(main);
+                li.appendChild(actions);
+                list.appendChild(li);
+            });
+        }
+
+        function syncFormListToTextarea() {
+            if (batchSyncLock) return;
+            const input = document.getElementById('batchInput');
+            if (!input) return;
+            batchSyncLock = true;
+            let header = getBatchCommentHeader(input.value);
+            if (!header.length) {
+                header = getBatchCommentOnlyTemplate().split('\n');
+            }
+            const dataLines = batchFormEntries.map(entry =>
+                formatBatchLine(entry.name, entry.order, entry.amount)
+            );
+            const chunks = [header.join('\n')];
+            if (dataLines.length) chunks.push(dataLines.join('\n'));
+            input.value = chunks.join('\n');
+            invalidateBatchReview();
+            batchSyncLock = false;
+        }
+
+        function syncTextareaToFormList() {
+            if (batchSyncLock) return;
+            const input = document.getElementById('batchInput');
+            if (!input) return;
+            batchSyncLock = true;
+            const records = parseBatchInput(input.value);
+            batchFormEntries = records
+                .filter(rec => rec.ok)
+                .map(rec => ({ name: rec.name, order: rec.order, amount: rec.amount }));
+            // 保留无法解析的行在 TXT 中，但不进表单；表单仅展示可识别成功行
+            // 若存在错误行，提示用户
+            const bad = records.filter(rec => !rec.ok);
+            batchFormEditIndex = -1;
+            renderBatchFormList();
+            if (bad.length) {
+                setBatchFormHint(`TXT 中有 ${bad.length} 行未能解析进列表，请改 TXT 或用表单重录`, 'is-error');
+            } else if (batchFormEntries.length) {
+                setBatchFormHint(`已从 TXT 同步 ${batchFormEntries.length} 条到列表`, 'is-ok');
+            } else {
+                setBatchFormHint('');
+            }
+            syncChipActiveStates();
+            batchSyncLock = false;
+        }
+
+        function clearBatchFormFields() {
+            const nameInput = document.getElementById('batchFormName');
+            const nameFilter = document.getElementById('batchNameFilter');
+            const orderInput = document.getElementById('batchFormOrder');
+            const amountInput = document.getElementById('batchFormAmount');
+            if (nameInput) nameInput.value = '';
+            if (nameFilter) nameFilter.value = '';
+            if (orderInput) orderInput.value = '';
+            if (amountInput) amountInput.value = '';
+            hideBatchNameSuggestions();
+            batchFormEditIndex = -1;
+            syncChipActiveStates();
+            renderBatchFormList();
+            setBatchFormHint('');
+        }
+
+        function editBatchFormEntry(index) {
+            const entry = batchFormEntries[index];
+            if (!entry) return;
+            batchFormEditIndex = index;
+            document.getElementById('batchFormName').value = entry.name;
+            const nameFilter = document.getElementById('batchNameFilter');
+            if (nameFilter) nameFilter.value = PERSONNEL_MAP[entry.name] ? entry.name : '';
+            document.getElementById('batchFormOrder').value = entry.order;
+            document.getElementById('batchFormAmount').value = entry.amount;
+            hideBatchNameSuggestions();
+            syncChipActiveStates();
+            renderBatchFormList();
+            setBatchFormHint(`正在编辑第 ${index + 1} 条，改完点「加入列表」保存`, '');
+            document.getElementById('batchFormName').focus();
+        }
+
+        function removeBatchFormEntry(index) {
+            batchFormEntries.splice(index, 1);
+            if (batchFormEditIndex === index) {
+                batchFormEditIndex = -1;
+                clearBatchFormFields();
+            } else if (batchFormEditIndex > index) {
+                batchFormEditIndex -= 1;
+            }
+            renderBatchFormList();
+            syncFormListToTextarea();
+            setBatchFormHint('已删除并同步到 TXT', 'is-ok');
+        }
+
+        function addOrUpdateBatchFormEntry() {
+            const nameRaw = (document.getElementById('batchFormName')?.value || '').trim();
+            const orderRaw = (document.getElementById('batchFormOrder')?.value || '').trim();
+            const amountRaw = (document.getElementById('batchFormAmount')?.value || '').trim();
+
+            if (!nameRaw) {
+                setBatchFormHint('请填写姓名', 'is-error');
+                return;
+            }
+            const resolved = suggestPersonnelName(nameRaw) || (PERSONNEL_MAP[nameRaw] ? nameRaw : null);
+            if (!resolved || !PERSONNEL_MAP[resolved]) {
+                setBatchFormHint(`姓名「${nameRaw}」不在人员名单中`, 'is-error');
+                return;
+            }
+            const order = normalizeOrderText(orderRaw);
+            if (!order) {
+                setBatchFormHint('请填写或选择下单内容', 'is-error');
+                return;
+            }
+            const amount = normalizeAmountText(amountRaw);
+            if (amount === null) {
+                setBatchFormHint('请填写有效金额数字', 'is-error');
+                return;
+            }
+
+            const entry = { name: resolved, order, amount };
+            if (batchFormEditIndex >= 0 && batchFormEditIndex < batchFormEntries.length) {
+                batchFormEntries[batchFormEditIndex] = entry;
+                setBatchFormHint(`已更新第 ${batchFormEditIndex + 1} 条`, 'is-ok');
+            } else {
+                batchFormEntries.push(entry);
+                setBatchFormHint(`已加入列表（共 ${batchFormEntries.length} 条）`, 'is-ok');
+            }
+            batchFormEditIndex = -1;
+            renderBatchFormList();
+            syncFormListToTextarea();
+            // 方便连续录入：清空姓名与金额，保留下单
+            document.getElementById('batchFormName').value = '';
+            const nameFilter = document.getElementById('batchNameFilter');
+            if (nameFilter) nameFilter.value = '';
+            document.getElementById('batchFormAmount').value = '';
+            hideBatchNameSuggestions();
+            syncChipActiveStates();
+            document.getElementById('batchFormName').focus();
+        }
+
+        function scheduleTextareaToFormSync() {
+            if (batchSyncLock) return;
+            invalidateBatchReview();
+            if (batchTxtSyncTimer) clearTimeout(batchTxtSyncTimer);
+            batchTxtSyncTimer = setTimeout(function() {
+                batchTxtSyncTimer = null;
+                syncTextareaToFormList();
+            }, 280);
+        }
+
+        function initBatchFormPanel() {
+            refreshBatchNameFilter();
+            initBatchNameSearch();
+            renderBatchOrderChips();
+            renderBatchAmountChips();
+
+            const orderChips = document.getElementById('batchOrderChips');
+            if (orderChips) {
+                orderChips.addEventListener('click', function(event) {
+                    const chip = event.target.closest('.batch-chip');
+                    if (!chip) return;
+                    const orderInput = document.getElementById('batchFormOrder');
+                    if (orderInput) orderInput.value = chip.dataset.order || '';
+                    syncChipActiveStates();
+                });
+            }
+            const amountChips = document.getElementById('batchAmountChips');
+            if (amountChips) {
+                amountChips.addEventListener('click', function(event) {
+                    const chip = event.target.closest('.batch-chip');
+                    if (!chip) return;
+                    const amountInput = document.getElementById('batchFormAmount');
+                    if (amountInput) amountInput.value = chip.dataset.amount || '';
+                    syncChipActiveStates();
+                });
+            }
+
+            const orderInput = document.getElementById('batchFormOrder');
+            if (orderInput) orderInput.addEventListener('input', syncChipActiveStates);
+            const amountInput = document.getElementById('batchFormAmount');
+            if (amountInput) amountInput.addEventListener('input', syncChipActiveStates);
+
+            const addBtn = document.getElementById('batchFormAddBtn');
+            if (addBtn) addBtn.addEventListener('click', addOrUpdateBatchFormEntry);
+            const clearBtn = document.getElementById('batchFormClearBtn');
+            if (clearBtn) clearBtn.addEventListener('click', clearBatchFormFields);
+
+            ['batchFormOrder', 'batchFormAmount'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        addOrUpdateBatchFormEntry();
+                    }
+                });
+            });
+            const nameInput = document.getElementById('batchFormName');
+            if (nameInput) {
+                nameInput.addEventListener('keydown', function(event) {
+                    if (event.key !== 'Enter') return;
+                    const list = document.getElementById('batchNameSuggestions');
+                    if (list && !list.hidden) return;
+                    event.preventDefault();
+                    addOrUpdateBatchFormEntry();
+                });
+            }
+
+            const batchInput = document.getElementById('batchInput');
+            if (batchInput) {
+                batchInput.addEventListener('input', scheduleTextareaToFormSync);
+            }
+        }
+
+        function getBatchTemplateText() {
+            return [
+                '# 个检业绩喜报 · 批量输入模板',
+                '# 每行一条；空行与 # 开头行忽略',
+                '# 格式：姓名+下单内容 金额：数字元（海报金额会带「元」）',
+                '# 姓名须在人员名单中；部门/恭喜语自动生成',
+                '# 下单内容示例：签约团检1单 / 开门红套餐下单 / 618活动套餐下单 / "双11"活动套餐下单',
+                '#',
+                '王莉莉+签约团检1单 金额：20000元',
+                '陈炳森+开门红套餐下单 金额：15800元',
+                '白金玉+618活动套餐下单 金额：9800元',
+                '刘倩倩+"双11"活动套餐下单 金额：12800元'
+            ].join('\n');
+        }
+
+        function ensureBatchTemplateFilled() {
+            const input = document.getElementById('batchInput');
+            if (!input) return;
+            if (!input.value.trim()) {
+                input.value = getBatchTemplateText();
+            }
+        }
+
+        function suggestPersonnelName(rawName) {
+            const trimmed = (rawName || '').trim();
+            if (!trimmed) return null;
+            if (PERSONNEL_MAP[trimmed]) return trimmed;
+            const resolved = resolveAvatarNameInput(trimmed);
+            if (resolved) return resolved;
+            const fuzzy = searchPersonnel(trimmed);
+            if (fuzzy.length) return fuzzy[0].name;
+            return null;
+        }
+
+        function normalizeOrderText(orderText) {
+            let order = (orderText || '').trim().replace(/\s+/g, '');
+            if (!order) return '';
+            return order;
+        }
+
+        function normalizeAmountText(amountText) {
+            const raw = String(amountText || '').trim().replace(/,/g, '');
+            const num = Number(raw);
+            if (!Number.isFinite(num) || num < 0) return null;
+            return Number.isInteger(num) ? String(num) : String(Math.round(num * 100) / 100);
+        }
+
+        function formatAmountForCanvas(amount) {
+            const s = String(amount || '').trim();
+            if (!s) return '';
+            return /元\s*$/.test(s) ? s : `${s}元`;
+        }
+
+        function parseBatchLine(line, lineNo) {
+            const raw = line.trim();
+            if (!raw || raw.startsWith('#')) {
+                return { skip: true, lineNo, raw };
+            }
+
+            // 姓名+下单 金额：20000元
+            let match = raw.match(/^(.+?)\+(.+?)\s*金额\s*[：:]\s*([0-9]+(?:\.[0-9]+)?)\s*元?\s*$/);
+            // 兼容：姓名 下单 金额：xxx
+            if (!match) {
+                match = raw.match(/^(.+?)[\s,，]+(.+?)\s*金额\s*[：:]\s*([0-9]+(?:\.[0-9]+)?)\s*元?\s*$/);
+            }
+            if (!match) {
+                return {
+                    ok: false,
+                    lineNo,
+                    raw,
+                    errors: ['格式不正确。应为：姓名+下单内容 金额：数字元'],
+                    hints: ['示例：王莉莉+签约团检1单 金额：20000元']
+                };
+            }
+
+            const nameRaw = match[1].trim();
+            const orderRaw = match[2].trim();
+            const amountRaw = match[3].trim();
+            const errors = [];
+            const hints = [];
+
+            let name = nameRaw;
+            if (!PERSONNEL_MAP[name]) {
+                const suggested = suggestPersonnelName(nameRaw);
+                if (suggested && suggested !== nameRaw) {
+                    errors.push(`姓名「${nameRaw}」不在名单中`);
+                    hints.push(`可改为「${suggested}」（部门：${PERSONNEL_MAP[suggested]}）`);
+                } else if (suggested) {
+                    name = suggested;
+                } else {
+                    errors.push(`姓名「${nameRaw}」不在人员名单中`);
+                    hints.push('请检查错别字，或先在「选人 → 维护头像库」添加该人员');
+                }
+            }
+
+            const order = normalizeOrderText(orderRaw);
+            if (!order) {
+                errors.push('下单内容不能为空');
+            }
+
+            const amount = normalizeAmountText(amountRaw);
+            if (amount === null) {
+                errors.push(`金额「${amountRaw}」无效，请填写数字`);
+            }
+
+            if (errors.length) {
+                return { ok: false, lineNo, raw, name: nameRaw, order, amount: amountRaw, errors, hints };
+            }
+
+            return {
+                ok: true,
+                lineNo,
+                raw,
+                name,
+                dept: PERSONNEL_MAP[name],
+                order,
+                amount,
+                congrats: `恭喜：${name}`
+            };
+        }
+
+        function parseBatchInput(text) {
+            const lines = String(text || '').split(/\r?\n/);
+            const records = [];
+            lines.forEach((line, index) => {
+                const parsed = parseBatchLine(line, index + 1);
+                if (parsed.skip) return;
+                records.push(parsed);
+            });
+            return records;
+        }
+
+        function renderBatchReview(records) {
+            const list = document.getElementById('batchReviewList');
+            const progress = document.getElementById('batchProgress');
+            const genBtn = document.getElementById('batchGenerateBtn');
+            if (!list) return;
+
+            list.innerHTML = '';
+            const okRecords = records.filter(r => r.ok);
+            const badRecords = records.filter(r => !r.ok);
+
+            if (!records.length) {
+                list.innerHTML = '<li class="is-error">没有可识别的有效行，请按模板填写</li>';
+                if (progress) progress.textContent = '';
+                if (genBtn) genBtn.disabled = true;
+                batchParsedRecords = [];
+                return;
+            }
+
+            records.forEach(rec => {
+                const li = document.createElement('li');
+                li.className = rec.ok ? 'is-ok' : 'is-error';
+                if (rec.ok) {
+                    li.textContent = `第${rec.lineNo}行 ✓ ${rec.name}｜${rec.dept}｜${rec.order}｜${rec.amount}元`;
+                } else {
+                    const hintText = (rec.hints || []).join('；');
+                    li.innerHTML = `第${rec.lineNo}行 ✗ ${escapeHtml(rec.raw)}<br>${escapeHtml((rec.errors || []).join('；'))}${hintText ? `<br>建议：${escapeHtml(hintText)}` : ''}`;
+                }
+                list.appendChild(li);
+            });
+
+            if (badRecords.length) {
+                if (progress) progress.textContent = `审阅未通过：${badRecords.length} 条有误，${okRecords.length} 条正确。请先修改后再生成。`;
+                if (genBtn) genBtn.disabled = true;
+                batchParsedRecords = [];
+            } else {
+                if (progress) progress.textContent = `审阅通过：共 ${okRecords.length} 条，可生成喜报。`;
+                if (genBtn) genBtn.disabled = false;
+                batchParsedRecords = okRecords;
+            }
+        }
+
+        function validateBatchInput(options = {}) {
+            if (currentTemplateId !== 'individual') {
+                alert('批量生成目前仅支持「个检业绩喜报」，请先切换模板。');
+                return false;
+            }
+            const input = document.getElementById('batchInput');
+            const records = parseBatchInput(input ? input.value : '');
+            renderBatchReview(records);
+            const autoGenerate = options.autoGenerate !== false;
+            if (autoGenerate && batchParsedRecords.length) {
+                generateBatchCongrats();
+                return true;
+            }
+            return batchParsedRecords.length > 0;
+        }
+
+        function loadAvatarImageForName(name) {
+            return new Promise(function(resolve) {
+                if (uploadedAvatars[name]) {
+                    const img = new Image();
+                    const src = uploadedAvatars[name];
+                    img.onload = function() { resolve(img); };
+                    img.onerror = function() { resolve(null); };
+                    if (shouldUseCors(src)) {
+                        img.crossOrigin = 'anonymous';
+                    }
+                    img.src = src;
+                    return;
+                }
+                const extensions = ['.png', '.jpg', '.jpeg', '.gif', '.webp'];
+                const photoName = getPhotoLookupName(name);
+                let index = 0;
+                function tryNext() {
+                    if (index >= extensions.length) {
+                        resolve(null);
+                        return;
+                    }
+                    const url = getDailyImageUrl(`${photoName}${extensions[index++]}`);
+                    const img = new Image();
+                    if (shouldUseCors(url)) {
+                        img.crossOrigin = 'anonymous';
+                    }
+                    img.onload = function() {
+                        if (img.width === 0 || img.height === 0) tryNext();
+                        else resolve(img);
+                    };
+                    img.onerror = tryNext;
+                    img.src = url;
+                }
+                tryNext();
+            });
+        }
+
+        function waitFrames(count) {
+            return new Promise(function(resolve) {
+                let left = count || 2;
+                function tick() {
+                    left -= 1;
+                    if (left <= 0) resolve();
+                    else requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            });
+        }
+
+        function applyBatchRecordToCanvas(record) {
+            return loadAvatarImageForName(record.name).then(function(imgEl) {
+                setFieldContent('name', record.name);
+                setFieldContent('dept', record.dept);
+                setFieldContent('order', record.order);
+                setFieldContent('amount', formatAmountForCanvas(record.amount));
+                updateCongratsText();
+
+                canvas.getObjects().filter(obj => obj.clipTo || obj.isAvatar).forEach(obj => canvas.remove(obj));
+                if (imgEl) {
+                    return new Promise(function(resolve) {
+                        fabric.Image.fromURL(imgEl.src, function(img) {
+                            configureAvatarImage(img);
+                            canvas.add(img);
+                            relayoutCanvasElements({ schedulePreview: false });
+                            resolve(true);
+                        }, getFabricImageLoadOptions(imgEl.src));
+                    });
+                }
+                relayoutCanvasElements({ schedulePreview: false });
+                return false;
+            });
+        }
+
+        function exportToJPGAsync(options = {}) {
+            return new Promise(function(resolve, reject) {
+                if (!backgroundImage) {
+                    reject(new Error('底图未加载'));
+                    return;
+                }
+                const exportWidth = parseInt(document.getElementById('exportWidth').value, 10) || DESIGN_SIZE.width;
+                const exportHeight = parseInt(document.getElementById('exportHeight').value, 10) || DESIGN_SIZE.height;
+                const multiplier = exportWidth / DESIGN_SIZE.width;
+                let dataUrl;
+                try {
+                    dataUrl = withDesignCanvas(function() {
+                        return canvas.toDataURL({
+                            format: 'jpeg',
+                            quality: 0.9,
+                            multiplier: multiplier
+                        });
+                    });
+                } catch (err) {
+                    reject(err);
+                    return;
+                }
+
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = exportWidth;
+                tempCanvas.height = exportHeight;
+                const tempCtx = tempCanvas.getContext('2d');
+                const exportImage = new Image();
+                exportImage.onload = function() {
+                    tempCtx.drawImage(exportImage, 0, 0, exportWidth, exportHeight);
+                    const downloadName = options.fileName || buildExportFileName();
+                    tempCanvas.toBlob(function(blob) {
+                        if (!blob) {
+                            reject(new Error('导出失败'));
+                            return;
+                        }
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = downloadName;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                        resolve(downloadName);
+                    }, 'image/jpeg', 0.9);
+                };
+                exportImage.onerror = function() {
+                    reject(new Error('导出图片加载失败'));
+                };
+                exportImage.src = dataUrl;
+            });
+        }
+
+        async function generateBatchCongrats() {
+            if (batchGenerating) return;
+            if (currentTemplateId !== 'individual') {
+                alert('批量生成目前仅支持「个检业绩喜报」');
+                return;
+            }
+            if (!batchParsedRecords.length) {
+                validateBatchInput();
+                if (!batchParsedRecords.length) return;
+            }
+
+            batchGenerating = true;
+            historyLock = true;
+            const genBtn = document.getElementById('batchGenerateBtn');
+            const validateBtn = document.getElementById('batchValidateBtn');
+            const progress = document.getElementById('batchProgress');
+            if (genBtn) genBtn.disabled = true;
+            if (validateBtn) validateBtn.disabled = true;
+
+            let success = 0;
+            let failed = 0;
+            try {
+                for (let i = 0; i < batchParsedRecords.length; i++) {
+                    const rec = batchParsedRecords[i];
+                    if (progress) {
+                        progress.textContent = `正在生成 ${i + 1}/${batchParsedRecords.length}：${rec.name}…`;
+                    }
+                    try {
+                        const hasAvatar = await applyBatchRecordToCanvas(rec);
+                        await waitFrames(3);
+                        const fileName = `喜报_${rec.name}_${rec.amount}_${new Date().toISOString().slice(0, 10)}.jpg`;
+                        await exportToJPGAsync({ fileName });
+                        success += 1;
+                        if (!hasAvatar && progress) {
+                            progress.textContent = `第 ${i + 1} 条「${rec.name}」已导出（未找到头像，仅文字）`;
+                            await new Promise(r => setTimeout(r, 350));
+                        } else {
+                            await new Promise(r => setTimeout(r, 250));
+                        }
+                    } catch (err) {
+                        console.error(err);
+                        failed += 1;
+                    }
+                }
+            } finally {
+                batchGenerating = false;
+                historyLock = false;
+                schedulePreviewUpdate();
+                pushHistory();
+                if (validateBtn) validateBtn.disabled = false;
+                if (genBtn) genBtn.disabled = false;
+                if (progress) {
+                    progress.textContent = `完成：成功 ${success} 条${failed ? `，失败 ${failed} 条` : ''}。`;
+                }
+            }
+        }
+
+        /**
+         * 导出为JPG图片
+         */
+        function exportToJPG() {
+            exportToJPGAsync().catch(function(err) {
+                alert(err.message || '导出失败');
+            });
+        }
+        /**
+         * 重置画布
+         * 功能：清空画布，重置背景图片和文字对象，清空输入框
+         */
+        function resetCanvas() {
+            const template = getCurrentTemplate();
+            applyTemplateRuntimeConfig(template.id);
+            textObjects = {};
+            initTextFieldState();
+            refreshInspectorFieldSelect();
+            syncInspectorUIFromState(activeFieldKey);
+            bootstrapTemplateCanvas({
+                template: template,
+                resetHistory: true,
+                resetDiet: template.id === 'diet'
+            });
+        }
+        /**
+         * 更新恭喜文字
+         * 当姓名输入框内容变化时自动调用
+         */
+        function updateCongratsText() {
+            const name = getFieldContent('name');
+            if (name) {
+                textFieldState.congrats.content = `恭喜：${name}`;
+                if (activeFieldKey === 'congrats') {
+                    const contentEl = document.getElementById('inspectorContent');
+                    if (contentEl) contentEl.value = textFieldState.congrats.content;
+                }
+                updateTextObject('congrats');
+            } else {
+                textFieldState.congrats.content = '';
+                if (activeFieldKey === 'congrats') {
+                    const contentEl = document.getElementById('inspectorContent');
+                    if (contentEl) contentEl.value = '';
+                }
+                updateTextObject('congrats');
+            }
+        }
+        /**
+         * 键盘：方向键微调文字；Delete 删除；⌘/Ctrl+Z 撤销
+         */
+        function handleKeydown(e) {
+            const tag = (e.target && e.target.tagName) || '';
+            const typing = /INPUT|TEXTAREA|SELECT/.test(tag) || e.target?.isContentEditable;
+            if (typing) return;
+
+            const meta = e.metaKey || e.ctrlKey;
+            if (meta && (e.key === 'z' || e.key === 'Z') && !e.shiftKey) {
+                e.preventDefault();
+                undoCanvasChange();
+                return;
+            }
+            if (e.key === 'Delete' || e.key === 'Backspace') {
+                if (!canvas?.getActiveObject()) return;
+                e.preventDefault();
+                deleteActiveCanvasObject();
+                return;
+            }
+
+            const activeObject = canvas?.getActiveObject();
+            if (!activeObject) return;
+            if (activeObject.type !== 'i-text' && activeObject.type !== 'text') return;
+            const step = 5;
+            let moved = false;
+            switch (e.key) {
+                case 'ArrowUp':
+                    activeObject.set('top', activeObject.top - step);
+                    moved = true;
+                    break;
+                case 'ArrowDown':
+                    activeObject.set('top', activeObject.top + step);
+                    moved = true;
+                    break;
+                case 'ArrowLeft':
+                    activeObject.set('left', activeObject.left - step);
+                    moved = true;
+                    break;
+                case 'ArrowRight':
+                    activeObject.set('left', activeObject.left + step);
+                    moved = true;
+                    break;
+                default:
+                    return;
+            }
+            if (!moved) return;
+            e.preventDefault();
+            activeObject.setCoords();
+            canvas.renderAll();
+            updateCoordinateDisplay(activeObject);
+            pushHistory();
+        }
+        /**
+         * 更新坐标显示
+         * @param {Object} obj - 选中的对象
+         */
+        function updateCoordinateDisplay(obj) {
+            // 创建或更新坐标显示元素
+            let coordDisplay = document.getElementById('coordinateDisplay');
+            if (!coordDisplay) {
+                coordDisplay = document.createElement('div');
+                coordDisplay.id = 'coordinateDisplay';
+                coordDisplay.style.position = 'fixed';
+                coordDisplay.style.bottom = '10px';
+                coordDisplay.style.left = '10px';
+                coordDisplay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                coordDisplay.style.color = 'white';
+                coordDisplay.style.padding = '8px 12px';
+                coordDisplay.style.borderRadius = '4px';
+                coordDisplay.style.fontSize = '12px';
+                coordDisplay.style.zIndex = '1000';
+                document.body.appendChild(coordDisplay);
+            }
+            // 更新坐标信息
+            coordDisplay.textContent = `X: ${Math.round(obj.left)}, Y: ${Math.round(obj.top)}`;
+        }
+        /**
+         * 初始化事件监听
+         */
+        function initEventListeners() {
+            // 按钮事件
+            document.getElementById('exportBtn').addEventListener('click', exportToJPG);
+            document.getElementById('resetBtn').addEventListener('click', resetCanvas);
+            document.addEventListener('keydown', handleKeydown);
+            initCanvasTextInteraction();
+            initCanvasViewControls();
+            initHistoryTracking();
+            initAutoShowToggle();
+            canvas.on('object:moving', function(e) {
+                updateCoordinateDisplay(e.target);
+            });
+            canvas.on('object:modified', function() {
+                // history 已在 initHistoryTracking 统一记录
+            });
+            
+            rebuildPersonnelSearchIndex();
+            initNameDropdown();
+            initAvatarNameSearch();
+            // 头像管理功能事件监听
+            // 预览头像按钮
+            document.getElementById('previewAvatarBtn').addEventListener('click', previewAvatar);
+            // 确认并继续改文字按钮
+            document.getElementById('confirmAvatarBtn').addEventListener('click', uploadAvatarToCanvas);
+            // 上传图片并设置姓名按钮
+            document.getElementById('uploadImageWithNameBtn').addEventListener('click', uploadImageWithName);
+            const cutoutBtn = document.getElementById('cutoutAvatarBtn');
+            if (cutoutBtn) cutoutBtn.addEventListener('click', cutoutSelectedAvatar);
+            const fileInput = document.getElementById('avatarFileInput');
+            if (fileInput) {
+                fileInput.addEventListener('change', function() {
+                    pendingCutoutBlob = null;
+                    document.querySelector('.avatar-preview-circle')?.classList.remove('is-cutout');
+                });
+            }
+            // 删除人员按钮
+            document.getElementById('deletePersonBtn').addEventListener('click', deletePerson);
+            // 查看所有人员按钮
+            document.getElementById('viewAllPersonsBtn').addEventListener('click', viewAllPersons);
+            // 关闭模态框按钮
+            document.querySelector('.close').addEventListener('click', function() {
+                document.getElementById('personListModal').style.display = 'none';
+            });
+            // 点击模态框外部关闭
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('personListModal');
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+        
+
+        function continueToTextAfterAvatar() {
+            const nextField = TEXT_FIELD_CONFIG.amount ? 'amount' : (TEXT_FIELD_CONFIG.order ? 'order' : Object.keys(TEXT_FIELD_CONFIG)[0]);
+            if (nextField) selectTextField(nextField);
+            openEditorPanel('text');
+            requestAnimationFrame(function() {
+                const contentInput = document.getElementById('inspectorContent');
+                if (contentInput) {
+                    contentInput.focus();
+                    contentInput.select();
+                }
+            });
+        }
+
+        function applyCurrentAvatarAndContinue(options = {}) {
+            if (!currentPreviewAvatar) return Promise.reject(new Error('no preview'));
+            const { name, image } = currentPreviewAvatar;
+            if (!image || image.width === 0 || image.height === 0) {
+                return Promise.reject(new Error('invalid image'));
+            }
+            return fetch(image.src)
+                .then(response => response.blob())
+                .then(blob => {
+                    const file = new File([blob], `${name}.png`, { type: blob.type });
+                    handleFileUpload(file);
+                    const tip = document.getElementById('avatarTip');
+                    if (tip) {
+                        tip.textContent = `【${name}】头像已上画布，请继续改金额/下单`;
+                        tip.style.color = '#28a745';
+                    }
+                    if (options.continueToText !== false) {
+                        continueToTextAfterAvatar();
+                    }
+                });
+        }
+
+        /**
+         * 预览头像（统一走 loadAvatarImageForName，保证 CORS）
+         */
+        function previewAvatar() {
+            const inputEl = document.getElementById('avatarNameInput');
+            let nameInput = inputEl.value.trim();
+            const previewArea = document.getElementById('avatarPreviewArea');
+            const confirmBtn = document.getElementById('confirmAvatarBtn');
+            const avatarTip = document.getElementById('avatarTip');
+
+            previewArea.innerHTML = '';
+            confirmBtn.disabled = true;
+            avatarTip.textContent = '';
+            currentPreviewAvatar = null;
+
+            if (!nameInput) {
+                avatarTip.textContent = '请输入姓名！';
+                return;
+            }
+
+            const resolvedName = resolveAvatarNameInput(nameInput);
+            if (!resolvedName) {
+                const results = searchPersonnel(nameInput);
+                if (results.length > 0) {
+                    renderAvatarNameSuggestions(results);
+                    avatarTip.textContent = results.length === 1
+                        ? '已找到 1 个匹配，请从建议列表选择或按 Enter 预览'
+                        : `找到 ${results.length} 个匹配，请选择具体姓名`;
+                    avatarTip.style.color = '#ffc107';
+                    return;
+                }
+                avatarTip.textContent = `暂无【${nameInput}】的信息，请检查姓名！`;
+                return;
+            }
+
+            if (resolvedName !== nameInput) {
+                inputEl.value = resolvedName;
+            }
+            nameInput = resolvedName;
+            hideAvatarNameSuggestions();
+
+            if (!PERSONNEL_MAP.hasOwnProperty(nameInput)) {
+                avatarTip.textContent = `暂无【${nameInput}】的信息，请检查姓名！`;
+                return;
+            }
+
+            const token = ++previewAvatarToken;
+            avatarTip.textContent = '正在加载头像…';
+            avatarTip.style.color = '#6c757d';
+
+            loadAvatarImageForName(nameInput).then(function(img) {
+                if (token !== previewAvatarToken) return;
+                if (!img || img.width === 0 || img.height === 0) {
+                    previewArea.innerHTML = '<span style="color: #6c757d; font-size: 14px;">头像未找到</span>';
+                    avatarTip.textContent = `未找到【${nameInput}】的头像图片，请使用"上传并保存"功能！`;
+                    avatarTip.style.color = '#ffc107';
+                    confirmBtn.disabled = true;
+                    currentPreviewAvatar = null;
+                    return;
+                }
+
+                previewArea.innerHTML = '';
+                previewArea.appendChild(img);
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+                confirmBtn.disabled = false;
+                currentPreviewAvatar = {
+                    name: nameInput,
+                    dept: PERSONNEL_MAP[nameInput],
+                    image: img
+                };
+                const fromLocal = !!uploadedAvatars[nameInput];
+                avatarTip.textContent = fromLocal
+                    ? `找到【${nameInput}】的信息（本地存储），部门：${PERSONNEL_MAP[nameInput]}`
+                    : `找到【${nameInput}】的信息，部门：${PERSONNEL_MAP[nameInput]}`;
+                avatarTip.style.color = '#28a745';
+                setFieldContent('name', nameInput);
+                setFieldContent('dept', PERSONNEL_MAP[nameInput]);
+            });
+        }
+        
+        /**
+         * 上传头像到画布
+         */
+        function uploadAvatarToCanvas() {
+            if (!currentPreviewAvatar) {
+                document.getElementById('avatarTip').textContent = '请先预览有效头像！';
+                document.getElementById('avatarTip').style.color = '#dc3545';
+                return;
+            }
+            applyCurrentAvatarAndContinue().catch(function(error) {
+                console.error('获取头像文件失败:', error);
+                document.getElementById('avatarTip').textContent = '获取头像文件失败！';
+                document.getElementById('avatarTip').style.color = '#dc3545';
+            });
+        }
+        
+        /**
+         * 初始化姓名下拉列表
+         */
+        function initNameDropdown() {
+            const nameFilter = document.getElementById('nameFilter');
+            const names = Object.keys(PERSONNEL_MAP).sort((a, b) => {
+                // 按拼音首字母排序
+                return a.localeCompare(b, 'zh-CN', { sensitivity: 'accent' });
+            });
+            
+            // 清空现有选项
+            nameFilter.innerHTML = '<option value="">请选择姓名</option>';
+            
+            // 添加排序后的姓名选项
+            names.forEach(name => {
+                const option = document.createElement('option');
+                option.value = name;
+                option.textContent = name;
+                const roleHint = getPersonRoleHint(name);
+                if (roleHint) option.title = roleHint;
+                nameFilter.appendChild(option);
+            });
+            rebuildPersonnelSearchIndex();
+        }
+        
+        /**
+         * 按部门筛选姓名
+         */
+        function filterNamesByDepartment() {
+            const deptFilter = document.getElementById('deptFilter');
+            const nameFilter = document.getElementById('nameFilter');
+            const selectedDept = deptFilter.value;
+            
+            // 清空现有选项
+            nameFilter.innerHTML = '<option value="">请选择姓名</option>';
+            
+            // 筛选并排序姓名
+            const filteredNames = Object.keys(PERSONNEL_MAP).filter(name => {
+                return !selectedDept || PERSONNEL_MAP[name] === selectedDept;
+            }).sort((a, b) => {
+                // 按拼音首字母排序
+                return a.localeCompare(b, 'zh-CN', { sensitivity: 'accent' });
+            });
+            
+            // 添加筛选后的姓名选项
+            filteredNames.forEach(name => {
+                const option = document.createElement('option');
+                option.value = name;
+                option.textContent = name;
+                const roleHint = getPersonRoleHint(name);
+                if (roleHint) option.title = roleHint;
+                nameFilter.appendChild(option);
+            });
+            rebuildPersonnelSearchIndex();
+        }
+        
+        function setCutoutProgress(percent, text) {
+            const wrap = document.getElementById('cutoutProgress');
+            const fill = document.getElementById('cutoutProgressFill');
+            const label = document.getElementById('cutoutProgressText');
+            if (wrap) wrap.hidden = false;
+            if (fill) fill.style.width = `${Math.max(0, Math.min(100, percent))}%`;
+            if (label) label.textContent = text;
+        }
+
+        function hideCutoutProgress() {
+            const wrap = document.getElementById('cutoutProgress');
+            if (wrap) wrap.hidden = true;
+        }
+
+        function formatCutoutBytes(bytes) {
+            if (!Number.isFinite(bytes) || bytes <= 0) return '0 MB';
+            return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+        }
+
+        function applyCutoutPreview(dataUrl) {
+            const previewArea = document.getElementById('avatarPreviewArea');
+            const circle = document.querySelector('.avatar-preview-circle');
+            if (circle) circle.classList.add('is-cutout');
+            if (!previewArea) return;
+            previewArea.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = dataUrl;
+            img.alt = '抠图预览';
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            previewArea.appendChild(img);
+        }
+
+        async function blobToDataUrl(blob) {
+            return new Promise(function(resolve, reject) {
+                const reader = new FileReader();
+                reader.onload = function() { resolve(reader.result); };
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
+        }
+
+        async function runCutout(source, onProgress) {
+            if (!window.CongratsCutout || typeof window.CongratsCutout.run !== 'function') {
+                throw new Error('抠图组件未加载');
+            }
+            try {
+                return await window.CongratsCutout.run(source, onProgress, 'gpu');
+            } catch (error) {
+                console.warn('GPU 抠图失败，改用 CPU', error);
+                return window.CongratsCutout.run(source, onProgress, 'cpu');
+            }
+        }
+
+        async function cutoutSelectedAvatar() {
+            const fileInput = document.getElementById('avatarFileInput');
+            const avatarTip = document.getElementById('avatarTip');
+            const cutoutBtn = document.getElementById('cutoutAvatarBtn');
+            if (cutoutBusy) return;
+            const file = fileInput && fileInput.files && fileInput.files[0];
+            if (!file) {
+                avatarTip.textContent = '请先选择要抠图的照片！';
+                avatarTip.style.color = '#dc3545';
+                return;
+            }
+
+            cutoutBusy = true;
+            if (cutoutBtn) cutoutBtn.disabled = true;
+            setCutoutProgress(1, '首次使用需下载约 80MB 抠图模型，请稍候…');
+            avatarTip.textContent = '正在抠图，首次会下载模型…';
+            avatarTip.style.color = '#6c757d';
+
+            const totals = {};
+            const loaded = {};
+            const onProgress = function(key, current, total) {
+                if (total > 0) {
+                    totals[key] = total;
+                    loaded[key] = current;
+                }
+                const allTotal = Object.values(totals).reduce((sum, value) => sum + value, 0);
+                const allLoaded = Object.values(loaded).reduce((sum, value) => sum + value, 0);
+                const percent = allTotal ? Math.round((allLoaded / allTotal) * 88) : 8;
+                const label = String(key || '');
+                const stage = /model|isnet/i.test(label)
+                    ? '正在下载抠图模型'
+                    : /wasm|ort/i.test(label)
+                        ? '正在下载运行时'
+                        : '正在准备模型';
+                setCutoutProgress(percent, `${stage} ${formatCutoutBytes(allLoaded)} / ${formatCutoutBytes(allTotal)}`);
+            };
+
+            try {
+                const blob = await runCutout(file, onProgress);
+                setCutoutProgress(96, '正在生成透明底预览…');
+                const dataUrl = await blobToDataUrl(blob);
+                pendingCutoutBlob = blob;
+                applyCutoutPreview(dataUrl);
+                try {
+                    const dt = new DataTransfer();
+                    const baseName = (file.name || 'avatar').replace(/\.[^.]+$/, '');
+                    dt.items.add(new File([blob], `${baseName}_cutout.png`, { type: 'image/png' }));
+                    fileInput.files = dt.files;
+                } catch (assignError) {
+                    console.warn('无法写回文件选择框，将在保存时使用抠图结果', assignError);
+                }
+                setCutoutProgress(100, '抠图完成，可点「上传并保存」');
+                avatarTip.textContent = '抠图完成。格子底表示透明，确认姓名部门后点「上传并保存」。';
+                avatarTip.style.color = '#28a745';
+            } catch (error) {
+                console.error('抠图失败:', error);
+                setCutoutProgress(0, '抠图失败');
+                avatarTip.textContent = `抠图失败：${error && error.message ? error.message : '请换一张照片重试'}`;
+                avatarTip.style.color = '#dc3545';
+            } finally {
+                cutoutBusy = false;
+                if (cutoutBtn) cutoutBtn.disabled = false;
+            }
+        }
+
+        /**
+         * 上传图片并保存人员信息
+         */
+        function uploadImageWithName() {
+            const fileInput = document.getElementById('avatarFileInput');
+            const nameInput = document.getElementById('avatarReverseName').value.trim();
+            const deptInput = document.getElementById('avatarReverseDept').value;
+            const avatarTip = document.getElementById('avatarTip');
+            
+            // 校验
+            if (!fileInput.files || fileInput.files.length === 0) {
+                avatarTip.textContent = '请选择要上传的图片！';
+                avatarTip.style.color = '#dc3545';
+                return;
+            }
+            
+            if (!nameInput) {
+                avatarTip.textContent = '请输入姓名！';
+                avatarTip.style.color = '#dc3545';
+                return;
+            }
+            
+            // 保存到PERSONNEL_MAP
+            PERSONNEL_MAP[nameInput] = deptInput;
+            
+            // 重新初始化姓名下拉列表
+            initNameDropdown();
+            
+            // 保存PERSONNEL_MAP到localStorage
+            localStorage.setItem('personnelMapRevision', PERSONNEL_MAP_REVISION);
+            localStorage.setItem('personnelMap', JSON.stringify(PERSONNEL_MAP));
+            
+            // 处理文件上传（仅用于预览，实际保存需要服务器支持）
+            const file = pendingCutoutBlob
+                ? new File([pendingCutoutBlob], `${nameInput}_cutout.png`, { type: 'image/png' })
+                : fileInput.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    // 显示预览
+                    const previewArea = document.getElementById('avatarPreviewArea');
+                    previewArea.innerHTML = '';
+                    previewArea.style.backgroundColor = '#f8f9fa';
+                    
+                    const imgElement = document.createElement('img');
+                    imgElement.src = e.target.result;
+                    imgElement.style.width = '100%';
+                    imgElement.style.height = '100%';
+                    imgElement.style.objectFit = 'cover';
+                    previewArea.appendChild(imgElement);
+                    
+                    // 启用确认按钮
+                    document.getElementById('confirmAvatarBtn').disabled = false;
+                    
+                    // 存储当前预览的头像信息
+                    currentPreviewAvatar = {
+                        name: nameInput,
+                        url: e.target.result
+                    };
+                    
+                    // 保存头像数据到uploadedAvatars
+                    uploadedAvatars[nameInput] = e.target.result;
+                    // 保存uploadedAvatars到localStorage
+                    localStorage.setItem('uploadedAvatars', JSON.stringify(uploadedAvatars));
+                    pendingCutoutBlob = null;
+                    
+                    // 更新提示
+                    avatarTip.textContent = `已上传图片并保存姓名【${nameInput}】，部门: ${deptInput}`;
+                    avatarTip.style.color = '#28a745';
+                    
+                    // 自动填充姓名和部门
+                    setFieldContent('name', nameInput);
+                    setFieldContent('dept', deptInput);
+                };
+                img.onerror = function() {
+                    avatarTip.textContent = '图片加载失败，请重试！';
+                    avatarTip.style.color = '#dc3545';
+                };
+                img.src = e.target.result;
+            };
+            
+            reader.onerror = function() {
+                avatarTip.textContent = '文件读取失败，请重试！';
+                avatarTip.style.color = '#dc3545';
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        /**
+         * 删除人员
+         */
+        function deletePerson() {
+            const nameInput = document.getElementById('avatarNameInput').value.trim();
+            const avatarTip = document.getElementById('avatarTip');
+            
+            if (!nameInput) {
+                avatarTip.textContent = '请输入要删除的人员姓名！';
+                avatarTip.style.color = '#dc3545';
+                return;
+            }
+            
+            if (PERSONNEL_MAP.hasOwnProperty(nameInput)) {
+                delete PERSONNEL_MAP[nameInput];
+                // 同时从uploadedAvatars中删除
+                if (uploadedAvatars.hasOwnProperty(nameInput)) {
+                    delete uploadedAvatars[nameInput];
+                    // 更新localStorage中的uploadedAvatars
+                    localStorage.setItem('uploadedAvatars', JSON.stringify(uploadedAvatars));
+                }
+                // 更新localStorage中的PERSONNEL_MAP
+                localStorage.setItem('personnelMapRevision', PERSONNEL_MAP_REVISION);
+                localStorage.setItem('personnelMap', JSON.stringify(PERSONNEL_MAP));
+                // 重新初始化姓名下拉列表
+                initNameDropdown();
+                // 清空输入
+                document.getElementById('avatarNameInput').value = '';
+                document.getElementById('avatarPreviewArea').innerHTML = '<span style="color: #6c757d; font-size: 14px;">头像预览</span>';
+                document.getElementById('confirmAvatarBtn').disabled = true;
+                currentPreviewAvatar = null;
+                // 更新提示
+                avatarTip.textContent = `已成功删除人员【${nameInput}】`;
+                avatarTip.style.color = '#28a745';
+            } else {
+                avatarTip.textContent = `未找到人员【${nameInput}】`;
+                avatarTip.style.color = '#dc3545';
+            }
+        }
+        
+        /**
+         * 查看所有人员
+         */
+        function viewAllPersons() {
+            const modal = document.getElementById('personListModal');
+            const content = document.getElementById('personListContent');
+            
+            // 按部门分组
+            const deptGroups = {};
+            Object.keys(PERSONNEL_MAP).forEach(name => {
+                const dept = PERSONNEL_MAP[name];
+                if (!deptGroups[dept]) {
+                    deptGroups[dept] = [];
+                }
+                deptGroups[dept].push(name);
+            });
+            
+            // 生成HTML内容
+            let html = '<div style="font-size: 14px;">';
+            Object.keys(deptGroups).sort().forEach(dept => {
+                html += `<h5 style="margin-top: 15px; margin-bottom: 5px; color: #007bff;">${dept}</h5>`;
+                html += '<ul style="margin: 0; padding-left: 20px;">';
+                deptGroups[dept].sort((a, b) => a.localeCompare(b, 'zh-CN')).forEach(name => {
+                    const roleHint = getPersonRoleHint(name);
+                    const safeName = escapeHtml(name);
+                    const safeHint = escapeHtml(roleHint);
+                    html += roleHint ? `<li title="${safeHint}">${safeName}</li>` : `<li>${safeName}</li>`;
+                });
+                html += '</ul>';
+            });
+            html += '</div>';
+
+            if (updateLogs.length > 0) {
+                html += '<hr style="margin: 20px 0;">';
+                html += '<h5 style="color: #6c757d; margin-bottom: 10px;">更新记录</h5>';
+                html += '<ul style="margin: 0; padding-left: 20px; font-size: 13px; color: #495057;">';
+                updateLogs.forEach(log => {
+                    html += `<li style="margin-bottom: 8px;">${log}</li>`;
+                });
+                html += '</ul>';
+            }
+            
+            content.innerHTML = html;
+            modal.style.display = 'block';
+        }
+        /**
+         * 初始化页面布局：Offcanvas 工作区 + Inspector
+         */
+        function initPageLayout() {
+            applyTemplateRuntimeConfig(currentTemplateId);
+            initTextFieldState();
+            initInspectorUI();
+            initTemplateSelector();
+            initDietItemsPanel();
+            updateTemplateActionBar();
+            initOffcanvasPanels();
+            initHelpTips();
+            schedulePreviewUpdate();
+        }
+
+        /**
+         * 页面加载完成后初始化
+         */
+        window.addEventListener('DOMContentLoaded', function() {
+            initPageLayout();
+            loadFromLocalStorage();
+            initCanvas();
+            initEventListeners();
+            whenDocumentFontsReady().then(function() {
+                return bootstrapTemplateCanvas({ resetHistory: true });
+            }).then(function(template) {
+                if (template) {
+                    console.log('默认模板已就绪:', template.id);
+                }
+            }).catch(function(err) {
+                console.error('模板启动失败:', err);
+            });
+        });

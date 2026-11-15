@@ -19,6 +19,7 @@ const pages = [
   'photo-watermark/index.html',
   'activity-report/index.html',
   'privacy.html',
+  'front-addon-summary.html',
 ];
 
 const scripts = [
@@ -45,6 +46,9 @@ const scripts = [
   'activity-report/server/server.js',
   'assets/design-system.js',
   'assets/home-dashboard.js',
+  'assets/extra-nav.js',
+  'front-addon-summary.js',
+  'regional-export.js',
 ];
 
 const errors = [];

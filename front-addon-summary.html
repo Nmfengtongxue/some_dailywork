@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>前台加项汇总</title>
+  <link rel="stylesheet" href="assets/design-system.css">
+  <link rel="stylesheet" href="front-addon-summary.css">
+  <script src="assets/vendor/xlsx.full.min.js"></script>
+  <script src="assets/vendor/exceljs.min.js"></script>
+  <script src="assets/design-system.js" defer></script>
+  <script src="assets/extra-nav.js" defer></script>
+  <script src="front-addon-summary.js" defer></script>
+</head>
+<body>
+  <main class="container front-addon-page" id="mainContent">
+    <header class="tool-page-heading">
+      <div>
+        <span class="section-kicker">DATA WORKBENCH</span>
+        <h1>前台加项汇总</h1>
+        <p class="front-addon-lede">上传当日「结账付款统计表」，在浏览器里拆出店内加项、外检加项和千爱登记。可选再上传现有加项汇总表、千爱体检登记表，下载时把当天数据写进去。文件不上传服务器。</p>
+      </div>
+      <button class="info-button" type="button" aria-label="查看说明" data-tooltip="结账表没有加项医生。店内加项按收费项目里的检查项拆分，套餐/加项包/专项/外检套餐不进加项汇总。千爱按单位或订单名称含「千爱」识别。">i</button>
+    </header>
+
+    <section class="front-addon-grid">
+      <article class="card">
+        <div class="card-header">01 上传结账表</div>
+        <div class="card-body">
+          <label class="front-addon-dropzone" id="checkoutZone" for="checkoutInput">
+            <strong>选择或拖入结账付款统计表</strong>
+            <span>支持 .xlsx / .xls（实际为 xlsx 的也行）</span>
+          </label>
+          <input id="checkoutInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传结账付款统计表">
+          <p class="front-addon-filename" id="checkoutName">尚未选择文件</p>
+          <label>
+            更新日期
+            <select id="dateSelect" class="form-select"></select>
+          </label>
+          <label class="front-addon-check">
+            <input id="includeHealthCert" type="checkbox">
+            健康证也记入千爱登记（含美团等非千爱单位）
+          </label>
+          <p class="front-addon-note" id="statusMessage"></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">02 可选：现有两本底稿</div>
+        <div class="card-body">
+          <label class="front-addon-dropzone" id="addonZone" for="addonInput">
+            <strong>加项汇总表</strong>
+            <span>有则覆盖/新增当日工作表，并重算当月累计</span>
+          </label>
+          <input id="addonInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传加项汇总表">
+          <p class="front-addon-filename" id="addonName">尚未选择文件</p>
+          <label class="front-addon-dropzone" id="qianaiZone" for="qianaiInput">
+            <strong>千爱体检登记表</strong>
+            <span>有则替换当日行，并改写加项统计</span>
+          </label>
+          <input id="qianaiInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传千爱体检登记表">
+          <p class="front-addon-filename" id="qianaiName">尚未选择文件</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="card" id="previewSection" hidden>
+      <div class="card-header">03 当日汇总</div>
+      <div class="card-body">
+        <div class="front-addon-stats">
+          <div class="front-addon-stat">
+            <small>店内加项</small>
+            <strong id="statInhouse">¥0</strong>
+            <small id="countInhouse">0 条</small>
+          </div>
+          <div class="front-addon-stat">
+            <small>外检加项</small>
+            <strong id="statOutdoor">¥0</strong>
+            <small id="countOutdoor">0 条</small>
+          </div>
+          <div class="front-addon-stat">
+            <small>千爱登记金额</small>
+            <strong id="statQianai">¥0</strong>
+            <small id="countQianai">0 条</small>
+          </div>
+          <div class="front-addon-stat">
+            <small>今日加项合计（千爱加项+店内+外检）</small>
+            <strong id="statToday">¥0</strong>
+          </div>
+        </div>
+        <div class="front-addon-tabs">
+          <button type="button" id="tab-inhouse" aria-selected="true">店内加项</button>
+          <button type="button" id="tab-outdoor" aria-selected="false">外检加项</button>
+          <button type="button" id="tab-qianai" aria-selected="false">千爱登记</button>
+        </div>
+        <div id="panel-inhouse"></div>
+        <div id="panel-outdoor" hidden></div>
+        <div id="panel-qianai" hidden></div>
+        <div class="front-addon-actions" style="margin-top:1rem">
+          <button type="button" class="button" id="downloadAddonBtn" disabled>下载加项汇总</button>
+          <button type="button" class="button" id="downloadQianaiBtn" disabled>下载千爱登记</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
