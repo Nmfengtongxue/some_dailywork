@@ -34,7 +34,7 @@
           <input id="checkoutInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传结账付款统计表">
           <p class="front-addon-filename" id="checkoutName">尚未选择文件</p>
           <label>
-            更新日期
+            只出这一天（按结账操作时间，不会把几天加总）
             <select id="dateSelect" class="form-select"></select>
           </label>
           <label class="front-addon-check">
@@ -65,8 +65,9 @@
     </section>
 
     <section class="card" id="previewSection" hidden>
-      <div class="card-header">03 当日汇总</div>
+      <div class="card-header">03 当日明细</div>
       <div class="card-body">
+        <p class="front-addon-note" id="dayBanner">请先上传结账表并选择日期。</p>
         <div class="front-addon-stats">
           <div class="front-addon-stat">
             <small>店内加项</small>
@@ -89,7 +90,7 @@
           </div>
         </div>
         <div class="front-addon-tabs">
-          <button type="button" id="tab-inhouse" aria-selected="true">店内加项</button>
+          <button type="button" id="tab-inhouse" aria-selected="true">店内加项明细</button>
           <button type="button" id="tab-outdoor" aria-selected="false">外检加项</button>
           <button type="button" id="tab-qianai" aria-selected="false">千爱登记</button>
         </div>
