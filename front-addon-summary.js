@@ -39,6 +39,7 @@ const state = {
   existingAddonName: '',
   existingQianai: null,
   existingQianaiName: '',
+  doctorByItem: new Map(),
   preview: null
 };
 
@@ -259,9 +260,73 @@ function salesmanOf(row) {
   return personNameLike(cashier) ? cashier : (manager || advisor || cashier);
 }
 
+function doctorNameOnly(value) {
+  return String(value || '').trim().replace(/-\d{8,}$/, '');
+}
+
+function rememberDoctor(item, doctor) {
+  const key = String(item || '').trim();
+  const name = doctorNameOnly(doctor);
+  if (!key || !personNameLike(name)) return;
+  if (!state.doctorByItem.has(key)) state.doctorByItem.set(key, new Map());
+  const counts = state.doctorByItem.get(key);
+  counts.set(name, (counts.get(name) || 0) + 1);
+}
+
+function lookupDoctor(item) {
+  const text = String(item || '').trim();
+  if (!text || !state.doctorByItem.size) return '';
+  const exact = state.doctorByItem.get(text);
+  const pool = exact || [...state.doctorByItem.entries()]
+    .filter(([key]) => text.includes(key) || key.includes(text))
+    .sort((a, b) => b[0].length - a[0].length)[0]?.[1];
+  if (!pool || !pool.size) return '';
+  return [...pool.entries()].sort((a, b) => b[1] - a[1])[0][0];
+}
+
+function parseDoctorMapFromXlsx(workbook) {
+  state.doctorByItem = new Map();
+  workbook.SheetNames.forEach((name) => {
+    if (!/^\d+\.\d+$/.test(name)) return;
+    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[name], { header: 1, raw: false, defval: '' });
+    let headerIndex = -1;
+    let itemCol = 6;
+    let doctorCol = 7;
+    const limit = Math.min(rows.length, 5);
+    for (let index = 0; index < limit; index += 1) {
+      const row = rows[index].map((cell) => String(cell || ''));
+      const itemAt = row.findIndex((cell) => cell.includes('所加项目'));
+      const doctorAt = row.findIndex((cell) => cell.includes('加项医生'));
+      if (itemAt >= 0 && doctorAt >= 0) {
+        headerIndex = index;
+        itemCol = itemAt;
+        doctorCol = doctorAt;
+        break;
+      }
+    }
+    if (headerIndex < 0) return;
+    for (let index = headerIndex + 1; index < rows.length; index += 1) {
+      const label = String(rows[index][0] || '');
+      if (label.includes('合计') || label.includes('累计')) break;
+      rememberDoctor(rows[index][itemCol], rows[index][doctorCol]);
+    }
+  });
+}
+
+function parseDoctorMapFromExceljs(workbook) {
+  dateSheetList(workbook).forEach((sheet) => {
+    const stop = findRowByLabel(sheet, '合计') || sheet.rowCount;
+    for (let row = 3; row < stop; row += 1) {
+      rememberDoctor(sheet.getRow(row).getCell(7).value, sheet.getRow(row).getCell(8).value);
+    }
+  });
+}
+
 function addonDoctorOf(row, item) {
+  const mapped = lookupDoctor(item);
+  if (mapped) return mapped;
   if (/报告费|总检|工本|血型/.test(item) || String(row['体检人'] || '') === '报告费') {
-    return String(row['结账人'] || '').trim();
+    return doctorNameOnly(row['结账人']);
   }
   return '';
 }
@@ -682,7 +747,7 @@ function fillAddonSheet(workbook, preview) {
       row.id,
       row.datetime,
       row.item,
-      row.doctor || '',
+      row.doctor || lookupDoctor(row.item) || '',
       row.amount
     ], dataStyle, 9);
   });
@@ -801,7 +866,10 @@ async function downloadWorkbook(kind) {
   }
   const workbook = new ExcelJS.Workbook();
   if (kind === 'addon') {
-    if (state.existingAddon) await workbook.xlsx.load(state.existingAddon.slice(0));
+    if (state.existingAddon) {
+      await workbook.xlsx.load(state.existingAddon.slice(0));
+      if (!state.doctorByItem.size) parseDoctorMapFromExceljs(workbook);
+    }
     fillAddonSheet(workbook, state.preview);
     const buffer = await workbook.xlsx.writeBuffer();
     triggerDownload(
@@ -873,10 +941,13 @@ function init() {
     }
   });
   bindDropzone('addonZone', 'addonInput', async (file) => {
-    state.existingAddon = await file.arrayBuffer();
+    const buffer = await file.arrayBuffer();
+    state.existingAddon = buffer;
     state.existingAddonName = file.name;
+    parseDoctorMapFromXlsx(XLSX.read(buffer.slice(0), { type: 'array' }));
     setFilename('addonName', file);
-    setStatus('已载入加项汇总底稿，导出时按这本的格式只填入当天。', true);
+    if (state.checkoutRows.length) refreshPreview();
+    setStatus(`已载入加项汇总底稿。加项医生按底稿里同类项目补了 ${state.doctorByItem.size} 种。`, true);
   });
   bindDropzone('qianaiZone', 'qianaiInput', async (file) => {
     state.existingQianai = await file.arrayBuffer();
