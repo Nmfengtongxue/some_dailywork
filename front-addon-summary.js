@@ -10,7 +10,7 @@ const CLINICAL_HINTS = [
   '支原体', '衣原体', '胸部', '血流', '转氨酶', '肌酐', '尿素', '尿酸', 'HCY',
   '定量', '酶谱', '半胱', '胃蛋白酶', '呼吸', '肺功能', '眼底', '人体成分',
   '总检', '淀粉酶', '离子', '免疫', '腋窝', '阴式', '淋巴结', '血型', '报告费',
-  '工本', '隐血', '胶囊'
+  '工本', '隐血', '胶囊', '肺癌'
 ];
 
 const STABLE_PRICES = [
@@ -36,7 +36,9 @@ const state = {
   selectedDate: '',
   includeHealthCert: true,
   existingAddon: null,
+  existingAddonName: '',
   existingQianai: null,
+  existingQianaiName: '',
   preview: null
 };
 
@@ -104,7 +106,7 @@ function money(value) {
 function isPackageToken(name) {
   const text = String(name || '');
   if (!text) return true;
-  if (/加项包|专项体检|健康证|电力外检|普惠基础|营养小屋/.test(text)) return true;
+  if (/加项包|专项体检|健康证|电力外检|电力退休|普惠基础|营养小屋/.test(text)) return true;
   if (/套餐/.test(text)) return true;
   if (/职工体检方案|胶囊胃镜/.test(text)) return true;
   if (/^\d{2}.+-/.test(text)) return true;
@@ -134,7 +136,10 @@ function shouldKeepAsAddon(items, amount) {
   const packageCount = items.filter(isPackageToken).length;
   if (!clinical.length || !(amount > 0)) return false;
   if (isPackagePriced(items, amount)) return false;
-  if (packageCount) return amount < 500;
+  if (packageCount) {
+    if (clinical.length >= 3) return false;
+    return amount < 500;
+  }
   if (clinical.length >= 4 && amount >= 400) return false;
   return true;
 }
@@ -537,7 +542,15 @@ function refreshPreview() {
   $('downloadAddonBtn').disabled = false;
   $('downloadQianaiBtn').disabled = false;
   $('downloadBothBtn').disabled = false;
-  setStatus(`已按 ${displayDate(preview.dateKey)} 拆好上报两表。建议同时放上昨天的加项汇总和千爱底稿，下载会接在后面并重算累计。`, true);
+  const missing = [];
+  if (!state.existingAddon) missing.push('加项汇总底稿');
+  if (!state.existingQianai) missing.push('千爱登记底稿');
+  setStatus(
+    missing.length
+      ? `已筛出 ${displayDate(preview.dateKey)}。还差：${missing.join('、')}。底稿当模板，导出时不改原来的 Excel 格式。`
+      : `已筛出 ${displayDate(preview.dateKey)}，会按底稿原格式填入当天后导出。`,
+    true
+  );
 }
 
 async function readWorkbookFile(file) {
@@ -558,49 +571,110 @@ async function handleCheckout(file) {
   refreshPreview();
 }
 
-function applyBorder(cell) {
-  cell.border = {
-    top: { style: 'thin', color: { argb: 'FF000000' } },
-    left: { style: 'thin', color: { argb: 'FF000000' } },
-    bottom: { style: 'thin', color: { argb: 'FF000000' } },
-    right: { style: 'thin', color: { argb: 'FF000000' } }
-  };
+function copyCellLook(src, dst) {
+  if (!src || !dst) return;
+  dst.style = src.style;
+  if (src.numFmt) dst.numFmt = src.numFmt;
 }
 
-function styleCenter(cell, bold) {
-  cell.font = { name: '宋体', size: 11, bold: Boolean(bold) };
-  cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+function copyRowLook(srcRow, dstRow, columns) {
+  dstRow.height = srcRow.height;
+  for (let col = 1; col <= columns; col += 1) {
+    copyCellLook(srcRow.getCell(col), dstRow.getCell(col));
+  }
 }
 
-function monthSheetTotal(sheet) {
-  for (let row = sheet.rowCount; row >= 2; row -= 1) {
-    const label = String(sheet.getRow(row).getCell(1).value || '');
-    if (label.includes('累计')) continue;
-    if (label.includes('合计')) return money(sheet.getRow(row).getCell(9).value);
+function writeRowValues(sheet, rowNumber, values, styleRow, columns) {
+  const row = sheet.getRow(rowNumber);
+  if (styleRow) copyRowLook(styleRow, row, columns);
+  values.forEach((value, index) => {
+    row.getCell(index + 1).value = value;
+  });
+}
+
+function dateSheetList(workbook) {
+  return workbook.worksheets.filter((sheet) => /^\d+\.\d+$/.test(sheet.name));
+}
+
+function latestDateSheet(workbook, exceptName) {
+  const sheets = dateSheetList(workbook)
+    .filter((sheet) => sheet.name !== exceptName)
+    .sort((a, b) => {
+      const [am, ad] = a.name.split('.').map(Number);
+      const [bm, bd] = b.name.split('.').map(Number);
+      return am - bm || ad - bd;
+    });
+  return sheets[sheets.length - 1];
+}
+
+function findRowByLabel(sheet, keyword) {
+  for (let row = 2; row <= sheet.rowCount; row += 1) {
+    if (String(sheet.getRow(row).getCell(1).value || '').includes(keyword)) return row;
   }
   return 0;
 }
 
-function writeAddonSheet(workbook, preview) {
-  const sheetName = sheetNameForDate(preview.dateKey);
-  const old = workbook.getWorksheet(sheetName);
-  if (old) workbook.removeWorksheet(old.id);
-  const ws = workbook.addWorksheet(sheetName);
-  const title = `定西美年大健康${sheetName}加项汇总表`;
-  ws.mergeCells('A1:I1');
-  ws.getCell('A1').value = title;
-  ws.getCell('A1').font = { name: '宋体', size: 20, bold: true };
-  ws.getCell('A1').alignment = { vertical: 'middle', horizontal: 'center' };
-  ws.getCell('A1').fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF3E8D8' } };
-  const headers = ['序号', '姓名', '性别', '单位', 'ID号', '加项日期', '所加项目', '加项医生', '最终价'];
-  const headerRow = ws.getRow(2);
-  headers.forEach((label, index) => {
-    headerRow.getCell(index + 1).value = label;
-    styleCenter(headerRow.getCell(index + 1), true);
+function cellAmount(sheet, row, col) {
+  return parseMoneyCell(sheet.getRow(row).getCell(col).value);
+}
+
+function unmergeFrom(sheet, minRow) {
+  const merges = [...(sheet.model?.merges || [])];
+  merges.forEach((range) => {
+    const start = String(range).split(':')[0];
+    const row = Number(String(start).replace(/[A-Z]/gi, ''));
+    if (row >= minRow) {
+      try { sheet.unMergeCells(range); } catch (error) { /* ignore */ }
+    }
   });
+}
+
+function copySheetChrome(from, to) {
+  try { to.pageSetup = from.pageSetup; } catch (error) { /* ignore */ }
+  try { to.views = from.views; } catch (error) { /* ignore */ }
+  from.columns.forEach((col, index) => {
+    const target = to.getColumn(index + 1);
+    if (col.width) target.width = col.width;
+    target.hidden = col.hidden;
+  });
+}
+
+function fillAddonSheet(workbook, preview) {
+  const sheetName = sheetNameForDate(preview.dateKey);
+  const template = latestDateSheet(workbook, sheetName);
+  const title = `定西美年大健康${sheetName}加项汇总表`;
+  const month = Number(preview.dateKey.slice(5, 7));
+  const priorMonthRow = template ? findRowByLabel(template, '累计') : 0;
+  const priorMonth = priorMonthRow ? cellAmount(template, priorMonthRow, 9) : 0;
+  const existing = workbook.getWorksheet(sheetName);
+  if (existing) workbook.removeWorksheet(existing.id);
+  const ws = workbook.addWorksheet(sheetName);
+
+  if (template) {
+    copySheetChrome(template, ws);
+    for (let row = 1; row <= 2; row += 1) {
+      copyRowLook(template.getRow(row), ws.getRow(row), 9);
+      for (let col = 1; col <= 9; col += 1) {
+        ws.getRow(row).getCell(col).value = template.getRow(row).getCell(col).value;
+      }
+    }
+    safeMerge(ws, 'A1:I1');
+  } else {
+    ws.mergeCells('A1:I1');
+    ws.getRow(2).values = ['序号', '姓名', '性别', '单位', 'ID号', '加项日期', '所加项目', '加项医生', '最终价'];
+    ws.columns = [
+      { width: 9 }, { width: 12 }, { width: 8 }, { width: 22 }, { width: 22 },
+      { width: 22 }, { width: 28 }, { width: 12 }, { width: 10 }
+    ];
+  }
+  ws.getCell('A1').value = title;
+
+  const dataStyle = template ? template.getRow(3) : ws.getRow(2);
+  const totalStyleRow = template ? template.getRow(findRowByLabel(template, '合计') || 3) : dataStyle;
+  const monthStyleRow = template ? template.getRow(findRowByLabel(template, '累计') || 3) : dataStyle;
+
   preview.addon.forEach((row, index) => {
-    const excelRow = ws.getRow(index + 3);
-    const values = [
+    writeRowValues(ws, index + 3, [
       String(index + 1),
       row.name,
       row.gender,
@@ -608,48 +682,17 @@ function writeAddonSheet(workbook, preview) {
       row.id,
       row.datetime,
       row.item,
-      row.doctor,
+      row.doctor || '',
       row.amount
-    ];
-    values.forEach((value, col) => {
-      const cell = excelRow.getCell(col + 1);
-      cell.value = value;
-      styleCenter(cell, false);
-      if (col === 8) cell.numFmt = '0.##';
-      if (col === 7 && !row.doctor) {
-        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFFF99' } };
-      }
-    });
+    ], dataStyle, 9);
   });
-  const totalRowIndex = preview.addon.length + 3;
-  ws.mergeCells(`A${totalRowIndex}:H${totalRowIndex}`);
-  ws.getCell(`A${totalRowIndex}`).value = '合计';
-  ws.getCell(`I${totalRowIndex}`).value = preview.addonTotal;
-  styleCenter(ws.getCell(`A${totalRowIndex}`), true);
-  styleCenter(ws.getCell(`I${totalRowIndex}`), true);
-  ws.getCell(`I${totalRowIndex}`).numFmt = '0.##';
 
-  const month = Number(preview.dateKey.slice(5, 7));
-  const monthRe = new RegExp(`^${month}\\.\\d+$`);
-  const prior = workbook.worksheets
-    .filter((sheet) => monthRe.test(sheet.name) && sheet.name !== sheetName)
-    .reduce((sum, sheet) => sum + monthSheetTotal(sheet), 0);
-  const monthRowIndex = totalRowIndex + 1;
-  ws.mergeCells(`A${monthRowIndex}:H${monthRowIndex}`);
-  ws.getCell(`A${monthRowIndex}`).value = `${month}月累计`;
-  ws.getCell(`I${monthRowIndex}`).value = money(prior + preview.addonTotal);
-  styleCenter(ws.getCell(`A${monthRowIndex}`), true);
-  styleCenter(ws.getCell(`I${monthRowIndex}`), true);
-  ws.getCell(`I${monthRowIndex}`).numFmt = '0.##';
-
-  for (let row = 1; row <= monthRowIndex; row += 1) {
-    for (let col = 1; col <= 9; col += 1) applyBorder(ws.getRow(row).getCell(col));
-  }
-  ws.columns = [
-    { width: 9 }, { width: 12 }, { width: 8 }, { width: 28 }, { width: 22 },
-    { width: 22 }, { width: 28 }, { width: 12 }, { width: 10 }
-  ];
-  ws.getRow(1).height = 28;
+  const totalRow = preview.addon.length + 3;
+  const monthRow = totalRow + 1;
+  writeRowValues(ws, totalRow, ['合计', '', '', '', '', '', '', '', preview.addonTotal], totalStyleRow, 9);
+  writeRowValues(ws, monthRow, [`${month}月累计`, '', '', '', '', '', '', '', money(priorMonth + preview.addonTotal)], monthStyleRow, 9);
+  safeMerge(ws, `A${totalRow}:H${totalRow}`);
+  safeMerge(ws, `A${monthRow}:H${monthRow}`);
 }
 
 function parseMoneyCell(value) {
@@ -664,48 +707,49 @@ function parseMoneyCell(value) {
   return money(nums.reduce((sum, num) => sum + num, 0));
 }
 
+function qianaiDateOf(cell) {
+  return String(cell.value || '').replace(/\.0(\d)/g, '.$1');
+}
+
+function lastFilledRow(sheet, col) {
+  for (let row = sheet.rowCount; row >= 3; row -= 1) {
+    if (String(sheet.getRow(row).getCell(col).value || '').trim()) return row;
+  }
+  return 2;
+}
+
 function writeQianaiSheets(workbook, preview) {
   let ws = workbook.getWorksheet('千爱');
   if (!ws) {
     ws = workbook.addWorksheet('千爱');
     safeMerge(ws, 'A1:I1');
     ws.getCell('A1').value = '2026年千爱客服部体检登记明细';
-    ws.getCell('A1').font = { name: '宋体', size: 14, bold: true };
-    ws.getCell('A1').alignment = { vertical: 'middle', horizontal: 'center' };
-    const headers = ['序号', '体检日期', '姓名', '订单编号', '数量', '体检套餐', '金额', '业务员', '备注'];
-    headers.forEach((label, index) => {
-      ws.getRow(2).getCell(index + 1).value = label;
-      styleCenter(ws.getRow(2).getCell(index + 1), true);
-    });
-    ws.columns = [
-      { width: 9 }, { width: 14 }, { width: 12 }, { width: 28 }, { width: 8 },
-      { width: 48 }, { width: 10 }, { width: 14 }, { width: 16 }
-    ];
+    ws.getRow(2).values = ['序号', '体检日期', '姓名', '订单编号', '数量', '体检套餐', '金额', '业务员', '备注'];
   }
 
   const dateLabel = qianaiDateLabel(preview.dateKey);
   const kept = new Map();
+  const styleRow = ws.getRow(lastFilledRow(ws, 3));
   for (let row = 3; row <= ws.rowCount; row += 1) {
-    const excelRow = ws.getRow(row);
-    const cellDate = String(excelRow.getCell(2).value || '').replace(/\.0(\d)/g, '.$1');
-    if (cellDate === dateLabel) {
-      const name = String(excelRow.getCell(3).value || '');
+    if (qianaiDateOf(ws.getRow(row).getCell(2)) === dateLabel) {
+      const name = String(ws.getRow(row).getCell(3).value || '');
       kept.set(name, {
-        orderNo: String(excelRow.getCell(4).value || ''),
-        salesman: String(excelRow.getCell(8).value || '')
+        orderNo: String(ws.getRow(row).getCell(4).value || ''),
+        salesman: String(ws.getRow(row).getCell(8).value || '')
       });
     }
   }
   for (let row = ws.rowCount; row >= 3; row -= 1) {
-    const cellDate = String(ws.getRow(row).getCell(2).value || '').replace(/\.0(\d)/g, '.$1');
-    if (cellDate === dateLabel) ws.spliceRows(row, 1);
+    if (qianaiDateOf(ws.getRow(row).getCell(2)) === dateLabel) ws.spliceRows(row, 1);
   }
 
   preview.qianai.forEach((row, index) => {
     const prev = kept.get(row.name);
     const orderNo = (prev?.orderNo && /^wxo/i.test(prev.orderNo)) ? prev.orderNo : row.orderNo;
     const salesman = row.salesman || prev?.salesman || '';
-    const excelRow = ws.addRow([
+    const excelRow = ws.addRow([]);
+    copyRowLook(styleRow, excelRow, 9);
+    [
       index + 1,
       dateLabel,
       row.name,
@@ -714,15 +758,14 @@ function writeQianaiSheets(workbook, preview) {
       row.packageName,
       row.amount,
       salesman,
-      row.note
-    ]);
-    excelRow.eachCell((cell) => styleCenter(cell, false));
-    excelRow.getCell(6).alignment = { vertical: 'middle', horizontal: 'left', wrapText: true };
-    excelRow.getCell(7).numFmt = '0.##';
+      ''
+    ].forEach((value, col) => {
+      excelRow.getCell(col + 1).value = value;
+    });
   });
 
-  let summary = workbook.getWorksheet('Sheet1');
-  if (!summary) summary = workbook.addWorksheet('Sheet1');
+  const summary = workbook.getWorksheet('Sheet1');
+  if (!summary) return;
   const prevDate = String(summary.getCell('A2').value || '');
   const sameDay = prevDate.includes(displayDate(preview.dateKey));
   const prevQianaiAddon = parseMoneyCell(summary.getCell('C3').value);
@@ -731,7 +774,6 @@ function writeQianaiSheets(workbook, preview) {
   const prevQianaiMonth = parseMoneyCell(summary.getCell('C6').value);
   const prevOfflineMonth = parseMoneyCell(summary.getCell('C7').value);
   const prevYear = parseMoneyCell(summary.getCell('C8').value);
-
   const qianaiMonth = sameDay
     ? money(prevQianaiMonth - prevQianaiAddon + preview.qianaiAddonTotal)
     : money((prevQianaiMonth || 0) + preview.qianaiAddonTotal);
@@ -742,26 +784,13 @@ function writeQianaiSheets(workbook, preview) {
     ? money(prevYear - prevToday + preview.todayTotal)
     : money((prevYear || 0) + preview.todayTotal);
 
-  safeMerge(summary, 'A1:C1');
-  summary.getCell('A1').value = '加项统计';
-  summary.getCell('A1').font = { name: '宋体', size: 14, bold: true };
-  summary.getCell('A1').alignment = { horizontal: 'center' };
-  ['A2:B2', 'A3:B3', 'A4:B4', 'A5:B5', 'A6:B6', 'A7:B7', 'A8:B8'].forEach((range) => safeMerge(summary, range));
   summary.getCell('A2').value = `时间:${displayDate(preview.dateKey)}`;
-  summary.getCell('C2').value = '金额';
-  summary.getCell('A3').value = '千爱加项';
   summary.getCell('C3').value = preview.qianaiAddonTotal;
-  summary.getCell('A4').value = '线下加项';
   summary.getCell('C4').value = `${preview.offlineInhouse}（店内）+${preview.offlineOutdoor}（外检）`;
-  summary.getCell('A5').value = '今日加项合计';
   summary.getCell('C5').value = preview.todayTotal;
-  summary.getCell('A6').value = '千爱月累计';
   summary.getCell('C6').value = qianaiMonth;
-  summary.getCell('A7').value = '线下月累计';
   summary.getCell('C7').value = offlineMonth;
-  summary.getCell('A8').value = '年累计';
   summary.getCell('C8').value = yearTotal;
-  summary.columns = [{ width: 18 }, { width: 12 }, { width: 36 }];
 }
 
 async function downloadWorkbook(kind) {
@@ -773,15 +802,21 @@ async function downloadWorkbook(kind) {
   const workbook = new ExcelJS.Workbook();
   if (kind === 'addon') {
     if (state.existingAddon) await workbook.xlsx.load(state.existingAddon.slice(0));
-    writeAddonSheet(workbook, state.preview);
+    fillAddonSheet(workbook, state.preview);
     const buffer = await workbook.xlsx.writeBuffer();
-    triggerDownload(buffer, state.existingAddon ? '加项汇总表.xlsx' : `加项汇总表_${sheetNameForDate(state.preview.dateKey)}.xlsx`);
+    triggerDownload(
+      buffer,
+      state.existingAddonName || `加项汇总表_${sheetNameForDate(state.preview.dateKey)}.xlsx`
+    );
     return;
   }
   if (state.existingQianai) await workbook.xlsx.load(state.existingQianai.slice(0));
   writeQianaiSheets(workbook, state.preview);
   const buffer = await workbook.xlsx.writeBuffer();
-  triggerDownload(buffer, state.existingQianai ? '2026千爱体检登记表.xlsx' : `2026千爱体检登记表_${sheetNameForDate(state.preview.dateKey)}.xlsx`);
+  triggerDownload(
+    buffer,
+    state.existingQianaiName || `2026千爱体检登记表_${sheetNameForDate(state.preview.dateKey)}.xlsx`
+  );
 }
 
 function safeMerge(sheet, range) {
@@ -839,13 +874,15 @@ function init() {
   });
   bindDropzone('addonZone', 'addonInput', async (file) => {
     state.existingAddon = await file.arrayBuffer();
+    state.existingAddonName = file.name;
     setFilename('addonName', file);
-    setStatus('已载入加项汇总底稿，下载时会写入/覆盖当日工作表并重算当月累计。', true);
+    setStatus('已载入加项汇总底稿，导出时按这本的格式只填入当天。', true);
   });
   bindDropzone('qianaiZone', 'qianaiInput', async (file) => {
     state.existingQianai = await file.arrayBuffer();
+    state.existingQianaiName = file.name;
     setFilename('qianaiName', file);
-    setStatus('已载入千爱登记底稿，下载时会替换当日到检行，并改写加项统计。', true);
+    setStatus('已载入千爱登记底稿，导出时按这本的格式只追加当天。', true);
   });
   $('dateSelect').addEventListener('change', (event) => {
     state.selectedDate = event.target.value;

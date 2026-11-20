@@ -10,7 +10,7 @@
   <script src="assets/vendor/exceljs.min.js"></script>
   <script src="assets/design-system.js" defer></script>
   <script src="assets/extra-nav.js" defer></script>
-  <script src="front-addon-summary.js" defer></script>
+  <script src="front-addon-summary.js?v=20261120c" defer></script>
 </head>
 <body>
   <main class="container front-addon-page" id="mainContent">
@@ -18,7 +18,7 @@
       <div>
         <span class="section-kicker">DATA WORKBENCH</span>
         <h1>前台加项汇总</h1>
-        <p class="front-addon-lede">每天把「结账付款统计表」放进来，选出当天，导出两张能直接上报的表：加项汇总表、千爱体检登记表。有昨天底稿就一起放，累计会接上。文件只在你电脑里处理。</p>
+        <p class="front-addon-lede">结账表用来筛当天该上报的行；19 日那两本底稿当模板，导出不改原来的 Excel 格式，只把当天填进去。文件只在你电脑里处理。</p>
       </div>
       <button class="info-button" type="button" aria-label="查看说明" data-tooltip="加项汇总=当天结账里的检中加项（院内+外检小项+千爱加项+血型/总检），不含套餐整包和电力外检整包。千爱登记=千爱套餐和健康证到检，加项走加项汇总。结账没有 HIS 加项医生和 wxo 订单号，医生列黄色待补；有底稿时会尽量沿用原来的 wxo。">i</button>
     </header>
@@ -46,17 +46,17 @@
       </article>
 
       <article class="card">
-        <div class="card-header">02 放昨天两本底稿（上报用，建议每次都放）</div>
+        <div class="card-header">02 放底稿（当模板，不改格式）</div>
         <div class="card-body">
           <label class="front-addon-dropzone" id="addonZone" for="addonInput">
             <strong>加项汇总表</strong>
-            <span>覆盖/新增当日工作表，并重算当月累计</span>
+            <span>照这本的格式新增当天工作表</span>
           </label>
           <input id="addonInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传加项汇总表">
           <p class="front-addon-filename" id="addonName">尚未选择文件</p>
           <label class="front-addon-dropzone" id="qianaiZone" for="qianaiInput">
             <strong>千爱体检登记表</strong>
-            <span>替换当日到检行，并改写 Sheet1 加项统计</span>
+            <span>照这本的格式追加当天到检，并改 Sheet1 数字</span>
           </label>
           <input id="qianaiInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传千爱体检登记表">
           <p class="front-addon-filename" id="qianaiName">尚未选择文件</p>
