@@ -8,14 +8,33 @@ const CLINICAL_HINTS = [
   '无痛', '碳13', '碳14', 'C13', 'C14', '血常规', '尿常规', '便常规', '肝肾',
   '糖化', '胰岛素', '性激素', '维生素', '微量', '过敏', '钼靶', '宫颈', '分泌物',
   '支原体', '衣原体', '胸部', '血流', '转氨酶', '肌酐', '尿素', '尿酸', 'HCY',
-  '定量', '酶谱', '半胱', '胃蛋白酶', '呼吸', '肺功能', '眼底', '人体成分'
+  '定量', '酶谱', '半胱', '胃蛋白酶', '呼吸', '肺功能', '眼底', '人体成分',
+  '总检', '淀粉酶', '离子', '免疫', '腋窝', '阴式', '淋巴结', '血型', '报告费',
+  '工本', '隐血', '胶囊'
+];
+
+const STABLE_PRICES = [
+  [/碳14|C14/, 60],
+  [/阴式彩超|阴超/, 25],
+  [/血型/, 8],
+  [/血淀粉酶/, 7],
+  [/粪便常规|大便常规|便常规/, 10],
+  [/甲功五项/, 139],
+  [/甲状腺彩超/, 80],
+  [/颈动脉/, 100],
+  [/幽门螺杆菌抗体/, 51],
+  [/游离前列腺|F-PSA/, 60],
+  [/总前列腺|TPSA/, 60],
+  [/糖类抗原153|CA153/, 60],
+  [/糖类抗原125|CA125/, 60],
+  [/HPV23/, 288]
 ];
 
 const state = {
   checkoutRows: [],
   dates: [],
   selectedDate: '',
-  includeHealthCert: false,
+  includeHealthCert: true,
   existingAddon: null,
   existingQianai: null,
   preview: null
@@ -72,6 +91,11 @@ function displayDate(dateKey) {
   return `${month}月${day}日`;
 }
 
+function qianaiDateLabel(dateKey) {
+  const [year, month, day] = dateKey.split('-').map(Number);
+  return `${year}.${month}.${day}`;
+}
+
 function money(value) {
   const num = Number(value) || 0;
   return Math.round(num * 100) / 100;
@@ -82,6 +106,7 @@ function isPackageToken(name) {
   if (!text) return true;
   if (/加项包|专项体检|健康证|电力外检|普惠基础|营养小屋/.test(text)) return true;
   if (/套餐/.test(text)) return true;
+  if (/职工体检方案|胶囊胃镜/.test(text)) return true;
   if (/^\d{2}.+-/.test(text)) return true;
   return false;
 }
@@ -92,10 +117,23 @@ function isClinicalItem(name) {
   return CLINICAL_HINTS.some((hint) => text.includes(hint));
 }
 
+function isHealthCert(items, type) {
+  return items.some((item) => item.includes('健康证')) || type === '健康证';
+}
+
+function isPackagePriced(items, amount) {
+  const blob = items.join(' ');
+  if (!items.some(isPackageToken)) return false;
+  if (/健康证/.test(blob) && amount <= 80) return true;
+  if (amount >= 399 && /套餐|普惠基础|电力外检|职工体检方案|加项包/.test(blob)) return true;
+  return false;
+}
+
 function shouldKeepAsAddon(items, amount) {
   const clinical = items.filter(isClinicalItem);
   const packageCount = items.filter(isPackageToken).length;
   if (!clinical.length || !(amount > 0)) return false;
+  if (isPackagePriced(items, amount)) return false;
   if (packageCount) return amount < 500;
   if (clinical.length >= 4 && amount >= 400) return false;
   return true;
@@ -108,10 +146,38 @@ function splitChargeItems(charge) {
     .filter(Boolean);
 }
 
-function looksLikePackageRow(items, amount) {
-  const clinical = items.filter(isClinicalItem);
-  if (clinical.length === 0) return true;
-  return !shouldKeepAsAddon(items, amount);
+function knownPrice(name) {
+  const hit = STABLE_PRICES.find(([pattern]) => pattern.test(name));
+  return hit ? hit[1] : 0;
+}
+
+function allocateAmounts(clinical, amount) {
+  const total = money(amount);
+  if (clinical.length === 1) return [total];
+  const assigned = clinical.map(() => 0);
+  let remain = total;
+  const order = clinical
+    .map((name, index) => ({ index, price: knownPrice(name) }))
+    .filter((item) => item.price > 0)
+    .sort((a, b) => b.price - a.price);
+  order.forEach((item) => {
+    if (item.price <= remain + 0.001) {
+      assigned[item.index] = item.price;
+      remain = money(remain - item.price);
+    }
+  });
+  const open = clinical.map((_, index) => index).filter((index) => assigned[index] === 0);
+  if (open.length && remain > 0) {
+    const share = money(remain / open.length);
+    open.forEach((index, pos) => {
+      assigned[index] = pos === open.length - 1 ? money(remain - share * (open.length - 1)) : share;
+    });
+    remain = 0;
+  }
+  if (remain && !open.length) {
+    assigned[clinical.length - 1] = money(assigned[clinical.length - 1] + remain);
+  }
+  return assigned;
 }
 
 function findHeaderIndex(rows) {
@@ -172,19 +238,33 @@ function netCheckoutRows(rows) {
   return output;
 }
 
-function salesmanOf(row) {
-  return String(row['业务经理'] || '').trim()
-    || String(row['名单备注'] || '').trim()
-    || String(row['前台备注'] || '').trim()
-    || String(row['健康顾问'] || '').trim();
+function personNameLike(value) {
+  const text = String(value || '').trim();
+  return /^[\u4e00-\u9fa5]{2,4}$/.test(text);
 }
 
-function packageLabel(items, charge) {
-  const packages = items.filter((item) => !isClinicalItem(item));
-  const text = packages[0] || String(charge || '');
-  if (/健康证/.test(text)) return '健康证';
-  if (/618/.test(text)) return '2026年618';
-  return text.replace(/^\d{2}/, '').slice(0, 24);
+function salesmanOf(row) {
+  const manager = String(row['业务经理'] || '').trim();
+  if (personNameLike(manager)) return manager;
+  const remark = String(row['前台备注'] || '').trim() || String(row['名单备注'] || '').trim();
+  if (personNameLike(remark)) return remark;
+  const advisor = String(row['健康顾问'] || '').trim();
+  if (personNameLike(advisor) && advisor !== '杜永丽') return advisor;
+  const cashier = String(row['结账人'] || '').trim();
+  return personNameLike(cashier) ? cashier : (manager || advisor || cashier);
+}
+
+function addonDoctorOf(row, item) {
+  if (/报告费|总检|工本|血型/.test(item) || String(row['体检人'] || '') === '报告费') {
+    return String(row['结账人'] || '').trim();
+  }
+  return '';
+}
+
+function packageFullName(items, charge) {
+  const packs = items.filter((item) => /套餐|健康证|普惠基础|胶囊胃镜/.test(item) || (isPackageToken(item) && !/加项包/.test(item)));
+  if (packs.length) return packs[0];
+  return items.find((item) => !/加项包/.test(item)) || String(charge || '');
 }
 
 function isQianaiRow(row) {
@@ -196,19 +276,34 @@ function isCancelled(row) {
   return String(row['状态'] || '').includes('取消');
 }
 
-function isReportFee(row) {
+function isNoiseRow(row) {
   const person = String(row['体检人'] || '');
-  const charge = String(row['收费项目'] || '');
-  return person === '报告费' || charge === '总检' || /测试/.test(person);
+  if (/测试/.test(person)) return true;
+  if (person === '报告费') {
+    const items = splitChargeItems(row['收费项目']);
+    const clinical = items.filter((item) => isClinicalItem(item) || /总检|报告费|工本/.test(item));
+    return clinical.length === 0;
+  }
+  return false;
+}
+
+function isReportFeeRow(row, items) {
+  const person = String(row['体检人'] || '');
+  return person === '报告费' || items.some((item) => /总检|报告费|工本费/.test(item));
+}
+
+function visitKey(row, packageName) {
+  return `${row['预约单号'] || row['订单号'] || ''}|${row['体检人'] || ''}|${packageName}`;
 }
 
 function buildPreview(rows, dateKey, includeHealthCert) {
   const sameDay = rows.filter((row) => checkoutDateKey(row) === dateKey);
-  const dayRows = netCheckoutRows(sameDay.filter((row) => !isCancelled(row) && !isReportFee(row)));
+  const dayRows = netCheckoutRows(sameDay.filter((row) => !isCancelled(row) && !isNoiseRow(row)));
 
-  const inhouse = [];
-  const outdoor = [];
+  const addon = [];
   const qianai = [];
+  const issues = [];
+  const visitSeen = new Set();
 
   dayRows.forEach((row) => {
     const items = splitChargeItems(row['收费项目']);
@@ -217,79 +312,128 @@ function buildPreview(rows, dateKey, includeHealthCert) {
     const type = String(row['体检类型'] || '');
     const outdoorFlag = type === '外检';
     const qianaiFlag = isQianaiRow(row);
-    const healthCert = items.some((item) => item.includes('健康证')) || type === '健康证';
+    const healthCert = isHealthCert(items, type);
+    const person = String(row['体检人'] || '');
+    const unit = String(row['所属单位'] || '');
+    const id = String(row['交易批次号'] || row['预约单号'] || '');
+    const datetime = formatClock(row['操作时间'] || row['登记时间']);
 
-    if (qianaiFlag || (includeHealthCert && healthCert)) {
-      if (looksLikePackageRow(items, amount) || healthCert) {
+    const takeVisit = (qianaiFlag || (includeHealthCert && healthCert))
+      && (healthCert || isPackagePriced(items, amount) || (items.some(isPackageToken) && !clinical.length));
+    if (takeVisit && amount > 0) {
+      const packageName = packageFullName(items, row['收费项目']);
+      const key = visitKey(row, packageName);
+      if (!visitSeen.has(key)) {
+        visitSeen.add(key);
         qianai.push({
           date: dateKey,
-          name: row['体检人'] || '',
-          orderNo: row['订单号'] || '',
+          name: person,
+          orderNo: String(row['订单号'] || ''),
           qty: 1,
-          packageName: packageLabel(items, row['收费项目']),
+          packageName,
           amount,
           salesman: salesmanOf(row),
-          note: outdoorFlag ? '外检' : ''
-        });
-      } else if (clinical.length) {
-        const share = money(amount / clinical.length);
-        clinical.forEach((item) => {
-          qianai.push({
-            date: dateKey,
-            name: row['体检人'] || '',
-            orderNo: row['订单号'] || '',
-            qty: 1,
-            packageName: item,
-            amount: share,
-            salesman: salesmanOf(row),
-            note: outdoorFlag ? '外检加项' : '加项'
-          });
+          note: healthCert ? '健康证' : (outdoorFlag ? '外检' : '')
         });
       }
     }
 
+    if (isReportFeeRow(row, items) && amount > 0 && !items.some(isPackageToken)) {
+      const itemName = items.find((item) => /总检|报告费|工本/.test(item)) || items[0] || '报告费';
+      addon.push({
+        name: person || '报告费',
+        gender: row['性别'] || '女',
+        unit,
+        id,
+        datetime,
+        item: itemName,
+        doctor: addonDoctorOf(row, itemName),
+        operator: row['结账人'] || '',
+        amount,
+        type: outdoorFlag ? '外检' : '院内',
+        qianai: qianaiFlag
+      });
+      return;
+    }
+
+    if (
+      items.some((item) => /自选/.test(item))
+      && clinical.length
+      && clinical.every((item) => /心电图/.test(item))
+      && amount < 50
+    ) {
+      return;
+    }
+
     if (!shouldKeepAsAddon(items, amount) || !clinical.length) return;
 
-    const share = money(amount / clinical.length);
-    const doctorHint = String(row['健康顾问'] || '').trim();
-    clinical.forEach((item) => {
-      const record = {
-        name: row['体检人'] || '',
+    const shares = allocateAmounts(clinical, amount);
+    clinical.forEach((item, index) => {
+      addon.push({
+        name: person,
         gender: row['性别'] || '',
-        unit: row['所属单位'] || '',
-        id: String(row['预约单号'] || row['交易批次号'] || ''),
-        datetime: formatClock(row['操作时间'] || row['登记时间']),
+        unit,
+        id,
+        datetime,
         item,
-        doctor: '',
-        doctorHint,
+        doctor: addonDoctorOf(row, item),
         operator: row['结账人'] || '',
-        amount: share,
-        type: outdoorFlag ? '外检' : '院内'
-      };
-      if (outdoorFlag) outdoor.push(record);
-      else inhouse.push(record);
+        amount: shares[index],
+        type: outdoorFlag ? '外检' : '院内',
+        qianai: qianaiFlag
+      });
     });
+
+    if (items.some(isPackageToken)) {
+      issues.push({
+        kind: '套餐夹带加项',
+        name: person,
+        amount,
+        detail: '结账行里套餐和加项写在一起，已按金额拆进加项汇总。若检中没挂这一条，上报前删掉。'
+      });
+    }
+    if (!addonDoctorOf(row, clinical[0] || '')) {
+      issues.push({
+        kind: '加项医生待补',
+        name: person,
+        amount,
+        detail: '结账表没有 HIS 加项医生。血型/总检/报告费已用结账人；其余留空，可对照检中后补。'
+      });
+    }
   });
 
+  addon.sort((a, b) => String(a.datetime).localeCompare(String(b.datetime)) || String(a.name).localeCompare(String(b.name)));
+  qianai.sort((a, b) => String(a.name).localeCompare(String(b.name), 'zh'));
+
+  const inhouse = addon.filter((row) => row.type !== '外检');
+  const outdoor = addon.filter((row) => row.type === '外检');
+  const qianaiAddons = addon.filter((row) => row.qianai);
+  const offlineInhouse = money(inhouse.filter((row) => !row.qianai).reduce((sum, row) => sum + row.amount, 0));
+  const offlineOutdoor = money(outdoor.filter((row) => !row.qianai).reduce((sum, row) => sum + row.amount, 0));
   const inhouseTotal = money(inhouse.reduce((sum, row) => sum + row.amount, 0));
   const outdoorTotal = money(outdoor.reduce((sum, row) => sum + row.amount, 0));
-  const qianaiAddonTotal = money(qianai.filter((row) => row.note.includes('加项')).reduce((sum, row) => sum + row.amount, 0));
+  const addonTotal = money(addon.reduce((sum, row) => sum + row.amount, 0));
+  const qianaiAddonTotal = money(qianaiAddons.reduce((sum, row) => sum + row.amount, 0));
   const qianaiVisitTotal = money(qianai.reduce((sum, row) => sum + row.amount, 0));
-
-  inhouse.sort((a, b) => String(a.datetime).localeCompare(String(b.datetime)));
-  outdoor.sort((a, b) => String(a.datetime).localeCompare(String(b.datetime)));
 
   return {
     dateKey,
     checkoutCount: sameDay.length,
+    addon,
     inhouse,
     outdoor,
     qianai,
+    qianaiAddons,
     inhouseTotal,
     outdoorTotal,
+    addonTotal,
     qianaiAddonTotal,
     qianaiVisitTotal,
-    todayTotal: money(inhouseTotal + outdoorTotal + qianaiAddonTotal)
+    offlineInhouse,
+    offlineOutdoor,
+    offlineTotal: money(offlineInhouse + offlineOutdoor),
+    todayTotal: money(qianaiAddonTotal + offlineInhouse + offlineOutdoor),
+    issues
   };
 }
 
@@ -337,7 +481,7 @@ function escapeHtml(value) {
 }
 
 function showTab(name) {
-  ['inhouse', 'outdoor', 'qianai'].forEach((id) => {
+  ['addon', 'outdoor', 'qianai', 'issues'].forEach((id) => {
     $(`panel-${id}`).hidden = id !== name;
     $(`tab-${id}`).setAttribute('aria-selected', String(id === name));
   });
@@ -350,44 +494,50 @@ function refreshPreview() {
   }
   state.preview = buildPreview(state.checkoutRows, state.selectedDate, state.includeHealthCert);
   const preview = state.preview;
-  $('dayBanner').textContent = `只含 ${displayDate(preview.dateKey)}（按结账「操作时间」），当天结账 ${preview.checkoutCount} 笔。不是多日合计。`;
-  $('statInhouse').textContent = `¥${preview.inhouseTotal}`;
+  $('dayBanner').textContent = `只含 ${displayDate(preview.dateKey)}（按结账「操作时间」）。加项汇总 ${preview.addon.length} 条 / ¥${preview.addonTotal}，可直接导出上报；千爱登记是套餐和健康证到检。`;
+  $('statAddon').textContent = `¥${preview.addonTotal}`;
   $('statOutdoor').textContent = `¥${preview.outdoorTotal}`;
   $('statQianai').textContent = `¥${preview.qianaiVisitTotal}`;
   $('statToday').textContent = `¥${preview.todayTotal}`;
-  $('countInhouse').textContent = `${preview.inhouse.length} 条明细`;
+  $('countAddon').textContent = `${preview.addon.length} 条明细`;
   $('countOutdoor').textContent = `${preview.outdoor.length} 条明细`;
-  $('countQianai').textContent = `${preview.qianai.length} 条明细`;
+  $('countQianai').textContent = `${preview.qianai.length} 条到检`;
 
-  renderTable('panel-inhouse', preview.inhouse, [
+  renderTable('panel-addon', preview.addon, [
     { label: '结账时间', value: (row) => row.datetime },
     { label: '姓名', value: (row) => row.name },
     { label: '单位', value: (row) => row.unit },
     { label: '所加项目', value: (row) => row.item },
     { label: '金额', value: (row) => row.amount },
     { label: '加项医生', value: (row) => row.doctor || '待补' },
-    { label: '参考顾问', value: (row) => row.doctorHint },
-    { label: '结账人', value: (row) => row.operator }
+    { label: '结账人', value: (row) => row.operator },
+    { label: '来源', value: (row) => (row.qianai ? '千爱加项' : row.type) }
+  ]);
+  renderTable('panel-issues', preview.issues, [
+    { label: '类型', value: (row) => row.kind },
+    { label: '姓名', value: (row) => row.name },
+    { label: '金额', value: (row) => row.amount },
+    { label: '说明', value: (row) => row.detail }
   ]);
   renderTable('panel-outdoor', preview.outdoor, [
     { label: '结账时间', value: (row) => row.datetime },
     { label: '姓名', value: (row) => row.name },
     { label: '单位', value: (row) => row.unit },
     { label: '所加项目', value: (row) => row.item },
-    { label: '金额', value: (row) => row.amount },
-    { label: '参考顾问', value: (row) => row.doctorHint }
+    { label: '金额', value: (row) => row.amount }
   ]);
   renderTable('panel-qianai', preview.qianai, [
     { label: '姓名', value: (row) => row.name },
-    { label: '套餐/项目', value: (row) => row.packageName },
+    { label: '套餐', value: (row) => row.packageName },
     { label: '金额', value: (row) => row.amount },
     { label: '业务员', value: (row) => row.salesman },
-    { label: '备注', value: (row) => row.note }
+    { label: '订单号', value: (row) => row.orderNo }
   ]);
   $('previewSection').hidden = false;
   $('downloadAddonBtn').disabled = false;
   $('downloadQianaiBtn').disabled = false;
-  setStatus(`已列出 ${displayDate(preview.dateKey)} 明细。换日期会整表重算，不会把几天加在一起。`, true);
+  $('downloadBothBtn').disabled = false;
+  setStatus(`已按 ${displayDate(preview.dateKey)} 拆好上报两表。建议同时放上昨天的加项汇总和千爱底稿，下载会接在后面并重算累计。`, true);
 }
 
 async function readWorkbookFile(file) {
@@ -408,14 +558,27 @@ async function handleCheckout(file) {
   refreshPreview();
 }
 
-function styleTitle(row) {
-  row.font = { name: '微软雅黑', size: 14, bold: true };
-  row.alignment = { vertical: 'middle', horizontal: 'center' };
-  row.getCell(1).fill = {
-    type: 'pattern',
-    pattern: 'solid',
-    fgColor: { argb: 'FFF3E8D8' }
+function applyBorder(cell) {
+  cell.border = {
+    top: { style: 'thin', color: { argb: 'FF000000' } },
+    left: { style: 'thin', color: { argb: 'FF000000' } },
+    bottom: { style: 'thin', color: { argb: 'FF000000' } },
+    right: { style: 'thin', color: { argb: 'FF000000' } }
   };
+}
+
+function styleCenter(cell, bold) {
+  cell.font = { name: '宋体', size: 11, bold: Boolean(bold) };
+  cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+}
+
+function monthSheetTotal(sheet) {
+  for (let row = sheet.rowCount; row >= 2; row -= 1) {
+    const label = String(sheet.getRow(row).getCell(1).value || '');
+    if (label.includes('累计')) continue;
+    if (label.includes('合计')) return money(sheet.getRow(row).getCell(9).value);
+  }
+  return 0;
 }
 
 function writeAddonSheet(workbook, preview) {
@@ -426,13 +589,19 @@ function writeAddonSheet(workbook, preview) {
   const title = `定西美年大健康${sheetName}加项汇总表`;
   ws.mergeCells('A1:I1');
   ws.getCell('A1').value = title;
-  styleTitle(ws.getRow(1));
+  ws.getCell('A1').font = { name: '宋体', size: 20, bold: true };
+  ws.getCell('A1').alignment = { vertical: 'middle', horizontal: 'center' };
+  ws.getCell('A1').fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF3E8D8' } };
   const headers = ['序号', '姓名', '性别', '单位', 'ID号', '加项日期', '所加项目', '加项医生', '最终价'];
-  ws.getRow(2).values = headers;
-  ws.getRow(2).font = { bold: true };
-  preview.inhouse.forEach((row, index) => {
-    ws.addRow([
-      index + 1,
+  const headerRow = ws.getRow(2);
+  headers.forEach((label, index) => {
+    headerRow.getCell(index + 1).value = label;
+    styleCenter(headerRow.getCell(index + 1), true);
+  });
+  preview.addon.forEach((row, index) => {
+    const excelRow = ws.getRow(index + 3);
+    const values = [
+      String(index + 1),
       row.name,
       row.gender,
       row.unit,
@@ -441,64 +610,158 @@ function writeAddonSheet(workbook, preview) {
       row.item,
       row.doctor,
       row.amount
-    ]);
+    ];
+    values.forEach((value, col) => {
+      const cell = excelRow.getCell(col + 1);
+      cell.value = value;
+      styleCenter(cell, false);
+      if (col === 8) cell.numFmt = '0.##';
+      if (col === 7 && !row.doctor) {
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFFF99' } };
+      }
+    });
   });
-  const totalRow = ws.addRow(['合计', '', '', '', '', '', '', '', preview.inhouseTotal]);
-  ws.mergeCells(`A${totalRow.number}:G${totalRow.number}`);
-  const monthSheets = workbook.worksheets.filter((sheet) => /^\d+\.\d+$/.test(sheet.name));
-  const monthTotal = monthSheets.reduce((sum, sheet) => {
-    const last = sheet.getRow(sheet.rowCount);
-    const label = String(last.getCell(1).value || '');
-    if (label.includes('累计')) {
-      const prev = sheet.getRow(sheet.rowCount - 1);
-      return sum + (Number(prev.getCell(9).value) || 0);
-    }
-    if (label.includes('合计')) return sum + (Number(last.getCell(9).value) || 0);
-    return sum;
-  }, 0);
-  const monthRow = ws.addRow([`${Number(preview.dateKey.slice(5, 7))}月累计`, '', '', '', '', '', '', '', money(monthTotal)]);
-  ws.mergeCells(`A${monthRow.number}:G${monthRow.number}`);
+  const totalRowIndex = preview.addon.length + 3;
+  ws.mergeCells(`A${totalRowIndex}:H${totalRowIndex}`);
+  ws.getCell(`A${totalRowIndex}`).value = '合计';
+  ws.getCell(`I${totalRowIndex}`).value = preview.addonTotal;
+  styleCenter(ws.getCell(`A${totalRowIndex}`), true);
+  styleCenter(ws.getCell(`I${totalRowIndex}`), true);
+  ws.getCell(`I${totalRowIndex}`).numFmt = '0.##';
+
+  const month = Number(preview.dateKey.slice(5, 7));
+  const monthRe = new RegExp(`^${month}\\.\\d+$`);
+  const prior = workbook.worksheets
+    .filter((sheet) => monthRe.test(sheet.name) && sheet.name !== sheetName)
+    .reduce((sum, sheet) => sum + monthSheetTotal(sheet), 0);
+  const monthRowIndex = totalRowIndex + 1;
+  ws.mergeCells(`A${monthRowIndex}:H${monthRowIndex}`);
+  ws.getCell(`A${monthRowIndex}`).value = `${month}月累计`;
+  ws.getCell(`I${monthRowIndex}`).value = money(prior + preview.addonTotal);
+  styleCenter(ws.getCell(`A${monthRowIndex}`), true);
+  styleCenter(ws.getCell(`I${monthRowIndex}`), true);
+  ws.getCell(`I${monthRowIndex}`).numFmt = '0.##';
+
+  for (let row = 1; row <= monthRowIndex; row += 1) {
+    for (let col = 1; col <= 9; col += 1) applyBorder(ws.getRow(row).getCell(col));
+  }
   ws.columns = [
-    { width: 8 }, { width: 10 }, { width: 8 }, { width: 28 }, { width: 22 },
-    { width: 22 }, { width: 28 }, { width: 16 }, { width: 10 }
+    { width: 9 }, { width: 12 }, { width: 8 }, { width: 28 }, { width: 22 },
+    { width: 22 }, { width: 28 }, { width: 12 }, { width: 10 }
   ];
+  ws.getRow(1).height = 28;
 }
 
-function qianaiDateLabel(dateKey) {
-  const [, month, day] = dateKey.split('-').map(Number);
-  return `2026.${month}.${day}`;
+function parseMoneyCell(value) {
+  if (value && typeof value === 'object') {
+    if (typeof value.result === 'number') return money(value.result);
+    if (typeof value.formula === 'string') return parseMoneyCell(value.formula);
+    if (value.text) return parseMoneyCell(value.text);
+  }
+  if (typeof value === 'number') return money(value);
+  const text = String(value || '');
+  const nums = [...text.matchAll(/(\d+(?:\.\d+)?)/g)].map((match) => Number(match[1]));
+  return money(nums.reduce((sum, num) => sum + num, 0));
 }
 
 function writeQianaiSheets(workbook, preview) {
   let ws = workbook.getWorksheet('千爱');
   if (!ws) {
     ws = workbook.addWorksheet('千爱');
-    ws.mergeCells('A1:H1');
+    safeMerge(ws, 'A1:I1');
     ws.getCell('A1').value = '2026年千爱客服部体检登记明细';
-    ws.getRow(2).values = ['序号', '体检日期', '姓名', '订单编号', '数量', '体检套餐', '', '业务员'];
+    ws.getCell('A1').font = { name: '宋体', size: 14, bold: true };
+    ws.getCell('A1').alignment = { vertical: 'middle', horizontal: 'center' };
+    const headers = ['序号', '体检日期', '姓名', '订单编号', '数量', '体检套餐', '金额', '业务员', '备注'];
+    headers.forEach((label, index) => {
+      ws.getRow(2).getCell(index + 1).value = label;
+      styleCenter(ws.getRow(2).getCell(index + 1), true);
+    });
+    ws.columns = [
+      { width: 9 }, { width: 14 }, { width: 12 }, { width: 28 }, { width: 8 },
+      { width: 48 }, { width: 10 }, { width: 14 }, { width: 16 }
+    ];
   }
+
   const dateLabel = qianaiDateLabel(preview.dateKey);
-  for (let row = ws.rowCount; row >= 3; row -= 1) {
-    const cellDate = String(ws.getRow(row).getCell(2).value || '');
-    const normalized = cellDate.replace(/\.0(\d)/g, '.$1');
-    if (normalized === dateLabel || cellDate === dateLabel) ws.spliceRows(row, 1);
+  const kept = new Map();
+  for (let row = 3; row <= ws.rowCount; row += 1) {
+    const excelRow = ws.getRow(row);
+    const cellDate = String(excelRow.getCell(2).value || '').replace(/\.0(\d)/g, '.$1');
+    if (cellDate === dateLabel) {
+      const name = String(excelRow.getCell(3).value || '');
+      kept.set(name, {
+        orderNo: String(excelRow.getCell(4).value || ''),
+        salesman: String(excelRow.getCell(8).value || '')
+      });
+    }
   }
+  for (let row = ws.rowCount; row >= 3; row -= 1) {
+    const cellDate = String(ws.getRow(row).getCell(2).value || '').replace(/\.0(\d)/g, '.$1');
+    if (cellDate === dateLabel) ws.spliceRows(row, 1);
+  }
+
   preview.qianai.forEach((row, index) => {
-    ws.addRow([index + 1, dateLabel, row.name, row.orderNo, row.qty, row.packageName, row.amount, row.salesman, row.note]);
+    const prev = kept.get(row.name);
+    const orderNo = (prev?.orderNo && /^wxo/i.test(prev.orderNo)) ? prev.orderNo : row.orderNo;
+    const salesman = row.salesman || prev?.salesman || '';
+    const excelRow = ws.addRow([
+      index + 1,
+      dateLabel,
+      row.name,
+      orderNo,
+      row.qty,
+      row.packageName,
+      row.amount,
+      salesman,
+      row.note
+    ]);
+    excelRow.eachCell((cell) => styleCenter(cell, false));
+    excelRow.getCell(6).alignment = { vertical: 'middle', horizontal: 'left', wrapText: true };
+    excelRow.getCell(7).numFmt = '0.##';
   });
 
   let summary = workbook.getWorksheet('Sheet1');
   if (!summary) summary = workbook.addWorksheet('Sheet1');
-  summary.mergeCells('A1:C1');
+  const prevDate = String(summary.getCell('A2').value || '');
+  const sameDay = prevDate.includes(displayDate(preview.dateKey));
+  const prevQianaiAddon = parseMoneyCell(summary.getCell('C3').value);
+  const prevOffline = parseMoneyCell(summary.getCell('C4').value);
+  const prevToday = parseMoneyCell(summary.getCell('C5').value);
+  const prevQianaiMonth = parseMoneyCell(summary.getCell('C6').value);
+  const prevOfflineMonth = parseMoneyCell(summary.getCell('C7').value);
+  const prevYear = parseMoneyCell(summary.getCell('C8').value);
+
+  const qianaiMonth = sameDay
+    ? money(prevQianaiMonth - prevQianaiAddon + preview.qianaiAddonTotal)
+    : money((prevQianaiMonth || 0) + preview.qianaiAddonTotal);
+  const offlineMonth = sameDay
+    ? money(prevOfflineMonth - prevOffline + preview.offlineTotal)
+    : money((prevOfflineMonth || 0) + preview.offlineTotal);
+  const yearTotal = sameDay
+    ? money(prevYear - prevToday + preview.todayTotal)
+    : money((prevYear || 0) + preview.todayTotal);
+
+  safeMerge(summary, 'A1:C1');
   summary.getCell('A1').value = '加项统计';
+  summary.getCell('A1').font = { name: '宋体', size: 14, bold: true };
+  summary.getCell('A1').alignment = { horizontal: 'center' };
+  ['A2:B2', 'A3:B3', 'A4:B4', 'A5:B5', 'A6:B6', 'A7:B7', 'A8:B8'].forEach((range) => safeMerge(summary, range));
   summary.getCell('A2').value = `时间:${displayDate(preview.dateKey)}`;
   summary.getCell('C2').value = '金额';
   summary.getCell('A3').value = '千爱加项';
   summary.getCell('C3').value = preview.qianaiAddonTotal;
   summary.getCell('A4').value = '线下加项';
-  summary.getCell('C4').value = `${preview.inhouseTotal}（店内）+${preview.outdoorTotal}（外检）`;
+  summary.getCell('C4').value = `${preview.offlineInhouse}（店内）+${preview.offlineOutdoor}（外检）`;
   summary.getCell('A5').value = '今日加项合计';
   summary.getCell('C5').value = preview.todayTotal;
+  summary.getCell('A6').value = '千爱月累计';
+  summary.getCell('C6').value = qianaiMonth;
+  summary.getCell('A7').value = '线下月累计';
+  summary.getCell('C7').value = offlineMonth;
+  summary.getCell('A8').value = '年累计';
+  summary.getCell('C8').value = yearTotal;
+  summary.columns = [{ width: 18 }, { width: 12 }, { width: 36 }];
 }
 
 async function downloadWorkbook(kind) {
@@ -512,13 +775,27 @@ async function downloadWorkbook(kind) {
     if (state.existingAddon) await workbook.xlsx.load(state.existingAddon.slice(0));
     writeAddonSheet(workbook, state.preview);
     const buffer = await workbook.xlsx.writeBuffer();
-    triggerDownload(buffer, `加项汇总表_${sheetNameForDate(state.preview.dateKey)}.xlsx`);
+    triggerDownload(buffer, state.existingAddon ? '加项汇总表.xlsx' : `加项汇总表_${sheetNameForDate(state.preview.dateKey)}.xlsx`);
     return;
   }
   if (state.existingQianai) await workbook.xlsx.load(state.existingQianai.slice(0));
   writeQianaiSheets(workbook, state.preview);
   const buffer = await workbook.xlsx.writeBuffer();
-  triggerDownload(buffer, `2026千爱体检登记表_${sheetNameForDate(state.preview.dateKey)}.xlsx`);
+  triggerDownload(buffer, state.existingQianai ? '2026千爱体检登记表.xlsx' : `2026千爱体检登记表_${sheetNameForDate(state.preview.dateKey)}.xlsx`);
+}
+
+function safeMerge(sheet, range) {
+  try {
+    sheet.mergeCells(range);
+  } catch (error) {
+    /* already merged in template */
+  }
+}
+
+async function downloadBoth() {
+  await downloadWorkbook('addon');
+  await new Promise((resolve) => setTimeout(resolve, 400));
+  await downloadWorkbook('qianai');
 }
 
 function triggerDownload(buffer, filename) {
@@ -563,12 +840,12 @@ function init() {
   bindDropzone('addonZone', 'addonInput', async (file) => {
     state.existingAddon = await file.arrayBuffer();
     setFilename('addonName', file);
-    setStatus('已载入现有加项汇总，下载时会写入/覆盖当日工作表。', true);
+    setStatus('已载入加项汇总底稿，下载时会写入/覆盖当日工作表并重算当月累计。', true);
   });
   bindDropzone('qianaiZone', 'qianaiInput', async (file) => {
     state.existingQianai = await file.arrayBuffer();
     setFilename('qianaiName', file);
-    setStatus('已载入现有千爱登记表，下载时会替换当日行并更新加项统计。', true);
+    setStatus('已载入千爱登记底稿，下载时会替换当日到检行，并改写加项统计。', true);
   });
   $('dateSelect').addEventListener('change', (event) => {
     state.selectedDate = event.target.value;
@@ -578,11 +855,13 @@ function init() {
     state.includeHealthCert = event.target.checked;
     refreshPreview();
   });
-  $('tab-inhouse').addEventListener('click', () => showTab('inhouse'));
+  $('tab-addon').addEventListener('click', () => showTab('addon'));
   $('tab-outdoor').addEventListener('click', () => showTab('outdoor'));
   $('tab-qianai').addEventListener('click', () => showTab('qianai'));
+  $('tab-issues').addEventListener('click', () => showTab('issues'));
   $('downloadAddonBtn').addEventListener('click', () => downloadWorkbook('addon'));
   $('downloadQianaiBtn').addEventListener('click', () => downloadWorkbook('qianai'));
+  $('downloadBothBtn').addEventListener('click', () => downloadBoth());
 }
 
 init();

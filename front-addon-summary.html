@@ -18,14 +18,14 @@
       <div>
         <span class="section-kicker">DATA WORKBENCH</span>
         <h1>前台加项汇总</h1>
-        <p class="front-addon-lede">上传当日「结账付款统计表」，在浏览器里拆出店内加项、外检加项和千爱登记。可选再上传现有加项汇总表、千爱体检登记表，下载时把当天数据写进去。文件不上传服务器。</p>
+        <p class="front-addon-lede">每天把「结账付款统计表」放进来，选出当天，导出两张能直接上报的表：加项汇总表、千爱体检登记表。有昨天底稿就一起放，累计会接上。文件只在你电脑里处理。</p>
       </div>
-      <button class="info-button" type="button" aria-label="查看说明" data-tooltip="结账表没有加项医生。店内加项按收费项目里的检查项拆分，套餐/加项包/专项/外检套餐不进加项汇总。千爱按单位或订单名称含「千爱」识别。">i</button>
+      <button class="info-button" type="button" aria-label="查看说明" data-tooltip="加项汇总=当天结账里的检中加项（院内+外检小项+千爱加项+血型/总检），不含套餐整包和电力外检整包。千爱登记=千爱套餐和健康证到检，加项走加项汇总。结账没有 HIS 加项医生和 wxo 订单号，医生列黄色待补；有底稿时会尽量沿用原来的 wxo。">i</button>
     </header>
 
     <section class="front-addon-grid">
       <article class="card">
-        <div class="card-header">01 上传结账表</div>
+        <div class="card-header">01 上传当天结账表</div>
         <div class="card-body">
           <label class="front-addon-dropzone" id="checkoutZone" for="checkoutInput">
             <strong>选择或拖入结账付款统计表</strong>
@@ -34,34 +34,46 @@
           <input id="checkoutInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传结账付款统计表">
           <p class="front-addon-filename" id="checkoutName">尚未选择文件</p>
           <label>
-            只出这一天（按结账操作时间，不会把几天加总）
+            只出这一天（按结账操作时间）
             <select id="dateSelect" class="form-select"></select>
           </label>
           <label class="front-addon-check">
-            <input id="includeHealthCert" type="checkbox">
-            健康证也记入千爱登记（含美团等非千爱单位）
+            <input id="includeHealthCert" type="checkbox" checked>
+            非千爱单位的健康证也记入千爱登记
           </label>
           <p class="front-addon-note" id="statusMessage"></p>
         </div>
       </article>
 
       <article class="card">
-        <div class="card-header">02 可选：现有两本底稿</div>
+        <div class="card-header">02 放昨天两本底稿（上报用，建议每次都放）</div>
         <div class="card-body">
           <label class="front-addon-dropzone" id="addonZone" for="addonInput">
             <strong>加项汇总表</strong>
-            <span>有则覆盖/新增当日工作表，并重算当月累计</span>
+            <span>覆盖/新增当日工作表，并重算当月累计</span>
           </label>
           <input id="addonInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传加项汇总表">
           <p class="front-addon-filename" id="addonName">尚未选择文件</p>
           <label class="front-addon-dropzone" id="qianaiZone" for="qianaiInput">
             <strong>千爱体检登记表</strong>
-            <span>有则替换当日行，并改写加项统计</span>
+            <span>替换当日到检行，并改写 Sheet1 加项统计</span>
           </label>
           <input id="qianaiInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传千爱体检登记表">
           <p class="front-addon-filename" id="qianaiName">尚未选择文件</p>
         </div>
       </article>
+    </section>
+
+    <section class="card" id="rulesSection">
+      <div class="card-header">和上报口径怎么对齐</div>
+      <div class="card-body">
+        <ol class="front-addon-rules">
+          <li>加项汇总一张日表：院内加项、外检小项、千爱客户加项、血型/总检。电力外检整包、单位套餐、618/399/599 套餐本身不进这张表。</li>
+          <li>千爱登记只写到检：普惠618、双十一套餐、健康证。李亚丽的 HPV/碳14 进加项汇总，不进千爱登记。</li>
+          <li>结账没有 HIS 的 ID 和加项医生。ID 用交易批次号；加项医生黄色格待补（血型/总检用结账人）。有千爱底稿时，同名尽量沿用原来的 wxo 订单号。</li>
+          <li>套餐和加项写在同一结账行时，按金额拆：399/618 当套餐，51/60/240 当加项。</li>
+        </ol>
+      </div>
     </section>
 
     <section class="card" id="previewSection" hidden>
@@ -70,36 +82,39 @@
         <p class="front-addon-note" id="dayBanner">请先上传结账表并选择日期。</p>
         <div class="front-addon-stats">
           <div class="front-addon-stat">
-            <small>店内加项</small>
-            <strong id="statInhouse">¥0</strong>
-            <small id="countInhouse">0 条</small>
+            <small>加项汇总（上报）</small>
+            <strong id="statAddon">¥0</strong>
+            <small id="countAddon">0 条</small>
           </div>
           <div class="front-addon-stat">
-            <small>外检加项</small>
+            <small>其中外检小项</small>
             <strong id="statOutdoor">¥0</strong>
             <small id="countOutdoor">0 条</small>
           </div>
           <div class="front-addon-stat">
-            <small>千爱登记金额</small>
+            <small>千爱到检（套餐/健康证）</small>
             <strong id="statQianai">¥0</strong>
             <small id="countQianai">0 条</small>
           </div>
           <div class="front-addon-stat">
-            <small>今日加项合计（千爱加项+店内+外检）</small>
+            <small>今日加项合计（千爱加项+线下）</small>
             <strong id="statToday">¥0</strong>
           </div>
         </div>
         <div class="front-addon-tabs">
-          <button type="button" id="tab-inhouse" aria-selected="true">店内加项明细</button>
-          <button type="button" id="tab-outdoor" aria-selected="false">外检加项</button>
-          <button type="button" id="tab-qianai" aria-selected="false">千爱登记</button>
+          <button type="button" id="tab-addon" aria-selected="true">加项汇总明细</button>
+          <button type="button" id="tab-outdoor" aria-selected="false">外检小项</button>
+          <button type="button" id="tab-qianai" aria-selected="false">千爱到检</button>
+          <button type="button" id="tab-issues" aria-selected="false">待核对</button>
         </div>
-        <div id="panel-inhouse"></div>
+        <div id="panel-addon"></div>
         <div id="panel-outdoor" hidden></div>
         <div id="panel-qianai" hidden></div>
+        <div id="panel-issues" hidden></div>
         <div class="front-addon-actions" style="margin-top:1rem">
-          <button type="button" class="button" id="downloadAddonBtn" disabled>下载加项汇总</button>
-          <button type="button" class="button" id="downloadQianaiBtn" disabled>下载千爱登记</button>
+          <button type="button" class="button" id="downloadBothBtn" disabled>导出上报用两张表</button>
+          <button type="button" class="button" id="downloadAddonBtn" disabled>只下载加项汇总</button>
+          <button type="button" class="button" id="downloadQianaiBtn" disabled>只下载千爱登记</button>
         </div>
       </div>
     </section>
