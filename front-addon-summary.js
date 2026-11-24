@@ -773,8 +773,60 @@ function drawDoctorChartImage(preview) {
   return canvas;
 }
 
-function canvasToPng(canvas) {
-  return canvas.toDataURL('image/png');
+function revokeLater(url) {
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+
+function canvasToBlobUrl(canvas) {
+  return new Promise((resolve, reject) => {
+    if (!canvas) {
+      reject(new Error('还没有生成上报图'));
+      return;
+    }
+    if (canvas.toBlob) {
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          reject(new Error('图片导出失败'));
+          return;
+        }
+        resolve(URL.createObjectURL(blob));
+      }, 'image/png');
+      return;
+    }
+    try {
+      resolve(canvas.toDataURL('image/png'));
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+function bindBlobPreview(img, canvas) {
+  if (img.dataset.blobUrl) {
+    URL.revokeObjectURL(img.dataset.blobUrl);
+    delete img.dataset.blobUrl;
+  }
+  if (!canvas) {
+    img.removeAttribute('src');
+    return Promise.resolve();
+  }
+  return canvasToBlobUrl(canvas).then((url) => {
+    if (url.startsWith('blob:')) img.dataset.blobUrl = url;
+    img.src = url;
+  });
+}
+
+function ensureReportCanvases(preview) {
+  if (!preview?.addon?.length) {
+    state.tableCanvas = null;
+    state.chartCanvas = null;
+    return false;
+  }
+  if (!state.tableCanvas || !state.chartCanvas) {
+    state.tableCanvas = drawAddonTableImage(preview);
+    state.chartCanvas = drawDoctorChartImage(preview);
+  }
+  return true;
 }
 
 function renderReportImages(preview) {
@@ -782,8 +834,8 @@ function renderReportImages(preview) {
   const chartImg = $('reportChartImg');
   if (!tableImg || !chartImg) return;
   if (!preview?.addon?.length) {
-    tableImg.removeAttribute('src');
-    chartImg.removeAttribute('src');
+    bindBlobPreview(tableImg, null);
+    bindBlobPreview(chartImg, null);
     state.tableCanvas = null;
     state.chartCanvas = null;
     return;
@@ -791,8 +843,8 @@ function renderReportImages(preview) {
   try {
     state.tableCanvas = drawAddonTableImage(preview);
     state.chartCanvas = drawDoctorChartImage(preview);
-    tableImg.src = canvasToPng(state.tableCanvas);
-    chartImg.src = canvasToPng(state.chartCanvas);
+    bindBlobPreview(tableImg, state.tableCanvas);
+    bindBlobPreview(chartImg, state.chartCanvas);
   } catch (error) {
     state.tableCanvas = null;
     state.chartCanvas = null;
@@ -800,12 +852,38 @@ function renderReportImages(preview) {
   }
 }
 
-function downloadCanvasPng(canvas, filename) {
-  if (!canvas) return;
-  const link = document.createElement('a');
-  link.href = canvasToPng(canvas);
-  link.download = filename;
-  link.click();
+async function downloadCanvasPng(canvas, filename) {
+  try {
+    const url = await canvasToBlobUrl(canvas);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    if (url.startsWith('blob:')) revokeLater(url);
+  } catch (error) {
+    setStatus(error.message, false);
+  }
+}
+
+async function downloadReportPng(kind) {
+  if (!state.preview?.addon?.length) {
+    setStatus('先算出当天加项汇总，再导出上报图。', false);
+    return;
+  }
+  try {
+    ensureReportCanvases(state.preview);
+  } catch (error) {
+    setStatus(`上报图没画出来：${error.message}`, false);
+    return;
+  }
+  const tag = sheetNameForDate(state.preview.dateKey);
+  if (kind === 'table') {
+    await downloadCanvasPng(state.tableCanvas, `加项汇总表_${tag}.png`);
+    return;
+  }
+  await downloadCanvasPng(state.chartCanvas, `加项医生柱状图_${tag}.png`);
 }
 
 function setFilename(id, file) {
@@ -1074,6 +1152,17 @@ function copySheetChrome(from, to) {
   });
 }
 
+function excelSheetRef(sheetName, cell) {
+  const escaped = String(sheetName || '').replace(/'/g, "''");
+  return `'${escaped}'!${cell}`;
+}
+
+function formulaCell(formula, result) {
+  const cell = { formula: String(formula).replace(/^=/, '') };
+  if (result !== undefined && result !== null && result !== '') cell.result = result;
+  return cell;
+}
+
 function fillAddonSheet(workbook, preview) {
   const sheetName = sheetNameForDate(preview.dateKey);
   const template = latestDateSheet(workbook, sheetName);
@@ -1124,8 +1213,13 @@ function fillAddonSheet(workbook, preview) {
 
   const totalRow = preview.addon.length + 3;
   const monthRow = totalRow + 1;
-  writeRowValues(ws, totalRow, ['合计', '', '', '', '', '', '', '', preview.addonTotal], totalStyleRow, 9);
-  writeRowValues(ws, monthRow, [`${month}月累计`, '', '', '', '', '', '', '', money(priorMonth + preview.addonTotal)], monthStyleRow, 9);
+  const lastDataRow = Math.max(3, totalRow - 1);
+  const monthTotal = money(priorMonth + preview.addonTotal);
+  const monthFormula = priorMonthRow
+    ? `${excelSheetRef(template.name, `I${priorMonthRow}`)}+I${totalRow}`
+    : `I${totalRow}`;
+  writeRowValues(ws, totalRow, ['合计', '', '', '', '', '', '', '', formulaCell(`SUM(I3:I${lastDataRow})`, preview.addonTotal)], totalStyleRow, 9);
+  writeRowValues(ws, monthRow, [`${month}月累计`, '', '', '', '', '', '', '', formulaCell(monthFormula, monthTotal)], monthStyleRow, 9);
   safeMerge(ws, `A${totalRow}:H${totalRow}`);
   safeMerge(ws, `A${monthRow}:H${monthRow}`);
 }
@@ -1210,10 +1304,22 @@ function writeQianaiSheets(workbook, preview) {
   summary.getCell('A2').value = `时间:${displayDate(preview.dateKey)}`;
   summary.getCell('C3').value = preview.qianaiAddonTotal;
   summary.getCell('C4').value = `${preview.offlineInhouse}（店内）+${preview.offlineOutdoor}（外检）`;
-  summary.getCell('C5').value = preview.todayTotal;
-  summary.getCell('C6').value = qianaiMonth;
-  summary.getCell('C7').value = offlineMonth;
-  summary.getCell('C8').value = yearTotal;
+  summary.getCell('C5').value = formulaCell(
+    `${preview.offlineInhouse}+${preview.offlineOutdoor}+C3`,
+    preview.todayTotal
+  );
+  summary.getCell('C6').value = formulaCell(
+    `C3+${money(qianaiMonth - preview.qianaiAddonTotal)}`,
+    qianaiMonth
+  );
+  summary.getCell('C7').value = formulaCell(
+    `${preview.offlineInhouse}+${preview.offlineOutdoor}+${money(offlineMonth - preview.offlineTotal)}`,
+    offlineMonth
+  );
+  summary.getCell('C8').value = formulaCell(
+    `C5+${money(yearTotal - preview.todayTotal)}`,
+    yearTotal
+  );
 }
 
 function writeDailySheet(workbook, sheetName, previewRows, dateKey, dateCol, nameCol, columns, valuesOf) {
@@ -1236,7 +1342,7 @@ function writeDailySheet(workbook, sheetName, previewRows, dateKey, dateCol, nam
   previewRows.forEach((row, index) => {
     const excelRow = ws.addRow([]);
     copyRowLook(styleRow, excelRow, columns.length);
-    valuesOf(row, index + 1).forEach((value, col) => {
+    valuesOf(row, index + 1, excelRow.number).forEach((value, col) => {
       excelRow.getCell(col + 1).value = value;
     });
   });
@@ -1251,7 +1357,19 @@ function writeHealthSheet(workbook, preview) {
     9,
     3,
     ['序号', 'ID号码', '姓名', '性别', '民族', '从业地点', '身份证号', '电话', '体检日期', '报错', '备注'],
-    (row, seq) => [seq, row.id, row.name, row.gender, row.nation, row.place, row.idCard, row.phone, row.date, row.ok, '']
+    (row, seq, excelRow) => [
+      seq,
+      row.id,
+      row.name,
+      row.gender,
+      row.nation,
+      row.place,
+      row.idCard,
+      row.phone,
+      row.date,
+      formulaCell(`IF(IF(MOD(MID(G${excelRow},17,1),2),"男","女")=D${excelRow},"对","错")`),
+      ''
+    ]
   );
 }
 
@@ -1275,8 +1393,10 @@ function triggerDownload(buffer, filename) {
   const link = document.createElement('a');
   link.href = url;
   link.download = filename;
+  document.body.appendChild(link);
   link.click();
-  URL.revokeObjectURL(url);
+  link.remove();
+  revokeLater(url);
 }
 
 async function downloadWorkbook(kind) {
@@ -1319,11 +1439,10 @@ async function downloadBoth() {
     await downloadWorkbook(kind);
     await new Promise((resolve) => setTimeout(resolve, 350));
   }
-  if (state.tableCanvas && state.chartCanvas && state.preview) {
-    const tag = sheetNameForDate(state.preview.dateKey);
-    downloadCanvasPng(state.tableCanvas, `加项汇总表_${tag}.png`);
+  if (state.preview?.addon?.length) {
+    await downloadReportPng('table');
     await new Promise((resolve) => setTimeout(resolve, 250));
-    downloadCanvasPng(state.chartCanvas, `加项医生柱状图_${tag}.png`);
+    await downloadReportPng('chart');
   }
 }
 
@@ -1380,14 +1499,8 @@ function init() {
   $('downloadHealthBtn').addEventListener('click', () => downloadWorkbook('health'));
   $('downloadOnboardBtn').addEventListener('click', () => downloadWorkbook('onboard'));
   $('downloadBothBtn').addEventListener('click', () => downloadBoth());
-  $('downloadTablePngBtn').addEventListener('click', () => {
-    if (!state.preview) return;
-    downloadCanvasPng(state.tableCanvas, `加项汇总表_${sheetNameForDate(state.preview.dateKey)}.png`);
-  });
-  $('downloadChartPngBtn').addEventListener('click', () => {
-    if (!state.preview) return;
-    downloadCanvasPng(state.chartCanvas, `加项医生柱状图_${sheetNameForDate(state.preview.dateKey)}.png`);
-  });
+  $('downloadTablePngBtn').addEventListener('click', () => downloadReportPng('table'));
+  $('downloadChartPngBtn').addEventListener('click', () => downloadReportPng('chart'));
 }
 
 init();

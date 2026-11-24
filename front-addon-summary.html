@@ -10,7 +10,7 @@
   <script src="assets/vendor/exceljs.min.js"></script>
   <script src="assets/design-system.js" defer></script>
   <script src="assets/extra-nav.js" defer></script>
-  <script src="front-addon-summary.js?v=20261124e" defer></script>
+  <script src="front-addon-summary.js?v=20261124f" defer></script>
 </head>
 <body>
   <main class="container front-addon-page" id="mainContent">
@@ -94,7 +94,8 @@
           <li>加项汇总 = 客户加选里当天「医生加项 + 前台推荐」，成交价大于 0、未取消。自主加项、团单延展、护理加项不上这张表。</li>
           <li>ID 用体检人 ID。加项医生写成「刘力榕-16895808042765414」这种姓名-编号：优先用当天客户加选，缺编号时用底稿里梳理出的名册补上。柱状图仍按姓名汇总。</li>
           <li>千爱登记只写到检：千爱套餐和健康证，不写检中加项。业务员用结账的业务经理。订单编号只取前台备注里的 wxo 编码，不用结账表的 SOA 订单号。</li>
-          <li>健康证：ID 用预约单号，从业地点用名单备注，民族默认汉。入职同理。身份证、电话这两张日常表里没有，导出后空着，不要手填假数据。</li>
+          <li>健康证：ID 用预约单号，从业地点用名单备注，民族默认汉。入职同理。身份证、电话这两张日常表里没有，导出后空着。报错列保留底稿那种身份证性别校验公式。</li>
+          <li>加项汇总「合计」用 SUM，月累计引用上一张日表的累计格。千爱 Sheet1 的今日合计、月累计、年累计也写成公式，不要只填死数字。</li>
         </ol>
       </div>
     </section>
