@@ -200,6 +200,34 @@
   font-weight: 650;
 }
 
+.front-addon-report-images {
+  display: grid;
+  gap: 1rem;
+}
+
+.front-addon-report-images figure {
+  margin: 0;
+  padding: 0.75rem;
+  overflow: auto;
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-card);
+  background: #fff;
+}
+
+.front-addon-report-images figcaption {
+  margin: 0 0 0.55rem;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.front-addon-report-images img {
+  display: block;
+  width: 100%;
+  max-width: 1100px;
+  height: auto;
+  background: #fff;
+}
+
 @media (max-width: 992px) {
   .front-addon-grid,
   .front-addon-stats {

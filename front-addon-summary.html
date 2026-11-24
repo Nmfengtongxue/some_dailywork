@@ -10,7 +10,7 @@
   <script src="assets/vendor/exceljs.min.js"></script>
   <script src="assets/design-system.js" defer></script>
   <script src="assets/extra-nav.js" defer></script>
-  <script src="front-addon-summary.js?v=20261124a" defer></script>
+  <script src="front-addon-summary.js?v=20261124c" defer></script>
 </head>
 <body>
   <main class="container front-addon-page" id="mainContent">
@@ -122,12 +122,25 @@
         </div>
         <div class="front-addon-tabs">
           <button type="button" id="tab-addon" aria-selected="true">加项汇总</button>
+          <button type="button" id="tab-images" aria-selected="false">上报图</button>
           <button type="button" id="tab-qianai" aria-selected="false">千爱到检</button>
           <button type="button" id="tab-health" aria-selected="false">健康证</button>
           <button type="button" id="tab-onboard" aria-selected="false">入职</button>
           <button type="button" id="tab-issues" aria-selected="false">待核对</button>
         </div>
         <div id="panel-addon"></div>
+        <div id="panel-images" hidden>
+          <div class="front-addon-report-images">
+            <figure>
+              <figcaption>加项汇总表（发给群里的那张格子表）</figcaption>
+              <img id="reportTableImg" alt="加项汇总表">
+            </figure>
+            <figure>
+              <figcaption>加项医生柱状图</figcaption>
+              <img id="reportChartImg" alt="加项医生柱状图">
+            </figure>
+          </div>
+        </div>
         <div id="panel-qianai" hidden></div>
         <div id="panel-health" hidden></div>
         <div id="panel-onboard" hidden></div>
@@ -138,6 +151,8 @@
           <button type="button" class="button" id="downloadQianaiBtn" disabled>千爱登记</button>
           <button type="button" class="button" id="downloadHealthBtn" disabled>健康证</button>
           <button type="button" class="button" id="downloadOnboardBtn" disabled>入职体检</button>
+          <button type="button" class="button" id="downloadTablePngBtn" disabled>汇总表图</button>
+          <button type="button" class="button" id="downloadChartPngBtn" disabled>医生柱状图</button>
         </div>
       </div>
     </section>

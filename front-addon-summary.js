@@ -424,8 +424,271 @@ function buildPreview() {
     offlineInhouse,
     offlineOutdoor,
     offlineTotal: money(offlineInhouse + offlineOutdoor),
-    todayTotal: money(qianaiAddons.reduce((sum, row) => sum + row.amount, 0) + offlineInhouse + offlineOutdoor)
+    todayTotal: money(qianaiAddons.reduce((sum, row) => sum + row.amount, 0) + offlineInhouse + offlineOutdoor),
+    priorMonth: priorMonthFromTemplate(dateKey),
+    doctors: doctorTotals(addon)
   };
+}
+
+function formatAmount(value) {
+  const num = money(value);
+  return Number.isInteger(num) ? String(num) : String(num);
+}
+
+function dateOnly(value, dateKey) {
+  return normalizeDateKey(value) || dateKey;
+}
+
+function doctorTotals(rows) {
+  const map = new Map();
+  rows.forEach((row) => {
+    const name = doctorNameOnly(row.doctor);
+    if (!name) return;
+    map.set(name, money((map.get(name) || 0) + row.amount));
+  });
+  return [...map.entries()]
+    .map(([name, amount]) => ({ name, amount }))
+    .sort((a, b) => b.amount - a.amount || a.name.localeCompare(b.name, 'zh'));
+}
+
+function priorMonthFromTemplate(dateKey) {
+  if (!state.existingAddon || typeof XLSX === 'undefined') return 0;
+  try {
+    const workbook = XLSX.read(state.existingAddon.slice(0), { type: 'array' });
+    const except = sheetNameForDate(dateKey);
+    const sheets = workbook.SheetNames
+      .filter((name) => /^\d+\.\d+$/.test(name) && name !== except)
+      .sort((a, b) => {
+        const [am, ad] = a.split('.').map(Number);
+        const [bm, bd] = b.split('.').map(Number);
+        return am - bm || ad - bd;
+      });
+    const last = sheets[sheets.length - 1];
+    if (!last) return 0;
+    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[last], { header: 1, raw: true, defval: '' });
+    for (let index = rows.length - 1; index >= 0; index -= 1) {
+      if (String(rows[index][0] || '').includes('累计')) return parseMoneyCell(rows[index][8]);
+    }
+  } catch (error) {
+    return 0;
+  }
+  return 0;
+}
+
+const EXCEL_FONT = '"Songti SC","SimSun","NSimSun","STSong","PingFang SC","Microsoft YaHei",serif';
+const EXCEL_BLUE = '#5B9BD5';
+
+function wrapLines(ctx, text, maxWidth) {
+  const source = String(text ?? '');
+  if (!source) return [''];
+  const lines = [];
+  let current = '';
+  for (const ch of source) {
+    const trial = current + ch;
+    if (ctx.measureText(trial).width <= maxWidth) current = trial;
+    else {
+      if (current) lines.push(current);
+      current = ch;
+    }
+  }
+  if (current) lines.push(current);
+  return lines.length ? lines : [''];
+}
+
+function fitFont(ctx, text, maxWidth, size, min) {
+  let current = size;
+  ctx.font = `bold ${current}px ${EXCEL_FONT}`;
+  while (current > min && ctx.measureText(text).width > maxWidth) {
+    current -= 0.5;
+    ctx.font = `bold ${current}px ${EXCEL_FONT}`;
+  }
+  return current;
+}
+
+function drawCenteredLines(ctx, lines, cx, cy, lineHeight) {
+  const top = cy - ((lines.length - 1) * lineHeight) / 2;
+  lines.forEach((line, index) => {
+    ctx.fillText(line, cx, top + index * lineHeight);
+  });
+}
+
+function addonTitle(dateKey) {
+  return `定西美年大健康${sheetNameForDate(dateKey)}加项汇总表`;
+}
+
+function drawAddonTableImage(preview) {
+  const scale = 2;
+  const cols = [
+    { key: 'seq', w: 46, header: '序号' },
+    { key: 'name', w: 64, header: '姓名' },
+    { key: 'gender', w: 42, header: '性别' },
+    { key: 'unit', w: 218, header: '单位' },
+    { key: 'id', w: 156, header: 'ID号' },
+    { key: 'date', w: 78, header: '加项日期' },
+    { key: 'item', w: 122, header: '所加项目' },
+    { key: 'doctor', w: 72, header: '加项医生' },
+    { key: 'amount', w: 62, header: '最终价' }
+  ];
+  const tableW = cols.reduce((sum, col) => sum + col.w, 0);
+  const pad = 3;
+  const titleH = 28;
+  const minRow = 22;
+  const lineH = 14;
+  const month = Number(preview.dateKey.slice(5, 7));
+  const monthTotal = money((preview.priorMonth || 0) + preview.addonTotal);
+
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.font = `11px ${EXCEL_FONT}`;
+  const records = preview.addon.map((row, index) => ({
+    seq: String(index + 1),
+    name: row.name,
+    gender: row.gender,
+    unit: row.unit,
+    id: row.id,
+    date: dateOnly(row.datetime, preview.dateKey),
+    item: row.item,
+    doctor: row.doctor,
+    amount: formatAmount(row.amount)
+  }));
+  const measureRow = (record, header) => {
+    ctx.font = header ? `bold 11px ${EXCEL_FONT}` : `11px ${EXCEL_FONT}`;
+    const lines = cols.map((col) => wrapLines(ctx, header ? col.header : record[col.key], col.w - pad * 2));
+    return Math.max(minRow, Math.max(...lines.map((item) => item.length)) * lineH + 8);
+  };
+  const headerH = measureRow({}, true);
+  const rowHeights = records.map((record) => measureRow(record, false));
+  const footH = 24;
+  const tableH = titleH + headerH + rowHeights.reduce((sum, h) => sum + h, 0) + footH * 2;
+
+  canvas.width = Math.round(tableW * scale);
+  canvas.height = Math.round(tableH * scale);
+  ctx.setTransform(scale, 0, 0, scale, 0, 0);
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, tableW, tableH);
+  ctx.strokeStyle = '#000';
+  ctx.lineWidth = 1;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#000';
+  ctx.font = `bold 16px ${EXCEL_FONT}`;
+  ctx.fillText(addonTitle(preview.dateKey), tableW / 2, titleH / 2);
+  ctx.strokeRect(0.5, 0.5, tableW - 1, tableH - 1);
+
+  const drawRow = (y, h, values, bold) => {
+    ctx.font = bold ? `bold 11px ${EXCEL_FONT}` : `11px ${EXCEL_FONT}`;
+    let x = 0;
+    cols.forEach((col, index) => {
+      ctx.strokeRect(x + 0.5, y + 0.5, col.w, h);
+      const lines = wrapLines(ctx, values[index], col.w - pad * 2);
+      drawCenteredLines(ctx, lines, x + col.w / 2, y + h / 2, lineH);
+      x += col.w;
+    });
+  };
+
+  let y = titleH;
+  drawRow(y, headerH, cols.map((col) => col.header), true);
+  y += headerH;
+  records.forEach((record, index) => {
+    drawRow(y, rowHeights[index], cols.map((col) => record[col.key]), false);
+    y += rowHeights[index];
+  });
+
+  const lastW = cols[cols.length - 1].w;
+  const mergeW = tableW - lastW;
+  [['合计', formatAmount(preview.addonTotal)], [`${month}月累计`, formatAmount(monthTotal)]].forEach((pair) => {
+    ctx.font = '11px ' + EXCEL_FONT;
+    ctx.strokeRect(0.5, y + 0.5, mergeW, footH);
+    ctx.strokeRect(mergeW + 0.5, y + 0.5, lastW, footH);
+    ctx.fillText(pair[0], mergeW / 2, y + footH / 2);
+    ctx.fillText(pair[1], mergeW + lastW / 2, y + footH / 2);
+    y += footH;
+  });
+  return canvas;
+}
+
+function drawDoctorChartImage(preview) {
+  const scale = 2;
+  const doctors = preview.doctors || [];
+  const width = Math.max(640, 120 + doctors.length * 86);
+  const height = 420;
+  const pad = { top: 52, right: 28, bottom: 48, left: 36 };
+  const plotW = width - pad.left - pad.right;
+  const plotH = height - pad.top - pad.bottom;
+  const maxVal = Math.max(1, ...doctors.map((row) => row.amount));
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(width * scale);
+  canvas.height = Math.round(height * scale);
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(scale, 0, 0, scale, 0, 0);
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, width, height);
+  ctx.fillStyle = '#000';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  const title = addonTitle(preview.dateKey);
+  const titleSize = fitFont(ctx, title, width - 40, 16, 12);
+  ctx.font = `${titleSize}px ${EXCEL_FONT}`;
+  ctx.fillText(title, width / 2, 24);
+
+  const n = Math.max(doctors.length, 1);
+  const slot = plotW / n;
+  const barW = Math.min(34, slot * 0.32);
+  ctx.strokeStyle = '#000';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(pad.left, pad.top + plotH + 0.5);
+  ctx.lineTo(pad.left + plotW, pad.top + plotH + 0.5);
+  ctx.stroke();
+
+  doctors.forEach((row, index) => {
+    const barH = (row.amount / maxVal) * (plotH - 28);
+    const x = pad.left + slot * index + (slot - barW) / 2;
+    const y = pad.top + plotH - barH;
+    ctx.fillStyle = EXCEL_BLUE;
+    ctx.fillRect(x, y, barW, barH);
+    ctx.fillStyle = '#000';
+    ctx.font = `12px ${EXCEL_FONT}`;
+    ctx.fillText(formatAmount(row.amount), x + barW / 2, y - 10);
+    ctx.font = `12px ${EXCEL_FONT}`;
+    ctx.fillText(row.name, x + barW / 2, pad.top + plotH + 16);
+  });
+  return canvas;
+}
+
+function canvasToPng(canvas) {
+  return canvas.toDataURL('image/png');
+}
+
+function renderReportImages(preview) {
+  const tableImg = $('reportTableImg');
+  const chartImg = $('reportChartImg');
+  if (!tableImg || !chartImg) return;
+  if (!preview?.addon?.length) {
+    tableImg.removeAttribute('src');
+    chartImg.removeAttribute('src');
+    state.tableCanvas = null;
+    state.chartCanvas = null;
+    return;
+  }
+  try {
+    state.tableCanvas = drawAddonTableImage(preview);
+    state.chartCanvas = drawDoctorChartImage(preview);
+    tableImg.src = canvasToPng(state.tableCanvas);
+    chartImg.src = canvasToPng(state.chartCanvas);
+  } catch (error) {
+    state.tableCanvas = null;
+    state.chartCanvas = null;
+    setStatus(`上报图没画出来：${error.message}`, false);
+  }
+}
+
+function downloadCanvasPng(canvas, filename) {
+  if (!canvas) return;
+  const link = document.createElement('a');
+  link.href = canvasToPng(canvas);
+  link.download = filename;
+  link.click();
 }
 
 function setFilename(id, file) {
@@ -479,7 +742,7 @@ function renderTable(targetId, rows, columns) {
 }
 
 function showTab(name) {
-  ['addon', 'qianai', 'health', 'onboard', 'issues'].forEach((id) => {
+  ['addon', 'images', 'qianai', 'health', 'onboard', 'issues'].forEach((id) => {
     $(`panel-${id}`).hidden = id !== name;
     $(`tab-${id}`).setAttribute('aria-selected', String(id === name));
   });
@@ -550,6 +813,9 @@ function refreshPreview() {
   $('downloadHealthBtn').disabled = !state.checkoutRows.length;
   $('downloadOnboardBtn').disabled = !state.checkoutRows.length;
   $('downloadBothBtn').disabled = false;
+  if ($('downloadTablePngBtn')) $('downloadTablePngBtn').disabled = !preview.addon.length;
+  if ($('downloadChartPngBtn')) $('downloadChartPngBtn').disabled = !preview.addon.length;
+  renderReportImages(preview);
   const missing = [];
   if (!state.addonListRows.length) missing.push('客户加选');
   if (!state.checkoutRows.length) missing.push('结账表');
@@ -933,6 +1199,12 @@ async function downloadBoth() {
     await downloadWorkbook(kind);
     await new Promise((resolve) => setTimeout(resolve, 350));
   }
+  if (state.tableCanvas && state.chartCanvas && state.preview) {
+    const tag = sheetNameForDate(state.preview.dateKey);
+    downloadCanvasPng(state.tableCanvas, `加项汇总表_${tag}.png`);
+    await new Promise((resolve) => setTimeout(resolve, 250));
+    downloadCanvasPng(state.chartCanvas, `加项医生柱状图_${tag}.png`);
+  }
 }
 
 function bindDropzone(zoneId, inputId, hintedKind) {
@@ -978,6 +1250,7 @@ function init() {
     refreshPreview();
   });
   $('tab-addon').addEventListener('click', () => showTab('addon'));
+  $('tab-images').addEventListener('click', () => showTab('images'));
   $('tab-qianai').addEventListener('click', () => showTab('qianai'));
   $('tab-health').addEventListener('click', () => showTab('health'));
   $('tab-onboard').addEventListener('click', () => showTab('onboard'));
@@ -987,6 +1260,14 @@ function init() {
   $('downloadHealthBtn').addEventListener('click', () => downloadWorkbook('health'));
   $('downloadOnboardBtn').addEventListener('click', () => downloadWorkbook('onboard'));
   $('downloadBothBtn').addEventListener('click', () => downloadBoth());
+  $('downloadTablePngBtn').addEventListener('click', () => {
+    if (!state.preview) return;
+    downloadCanvasPng(state.tableCanvas, `加项汇总表_${sheetNameForDate(state.preview.dateKey)}.png`);
+  });
+  $('downloadChartPngBtn').addEventListener('click', () => {
+    if (!state.preview) return;
+    downloadCanvasPng(state.chartCanvas, `加项医生柱状图_${sheetNameForDate(state.preview.dateKey)}.png`);
+  });
 }
 
 init();
