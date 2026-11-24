@@ -10,7 +10,7 @@
   <script src="assets/vendor/exceljs.min.js"></script>
   <script src="assets/design-system.js" defer></script>
   <script src="assets/extra-nav.js" defer></script>
-  <script src="front-addon-summary.js?v=20261120d" defer></script>
+  <script src="front-addon-summary.js?v=20261124a" defer></script>
 </head>
 <body>
   <main class="container front-addon-page" id="mainContent">
@@ -18,23 +18,29 @@
       <div>
         <span class="section-kicker">DATA WORKBENCH</span>
         <h1>前台加项汇总</h1>
-        <p class="front-addon-lede">结账表用来筛当天该上报的行；19 日那两本底稿当模板，导出不改原来的 Excel 格式，只把当天填进去。文件只在你电脑里处理。</p>
+        <p class="front-addon-lede">日常两张表：结账付款统计表 + 客户加选项目列表。按前台上报口径算出加项汇总、千爱登记、健康证、入职体检；底稿只当模板，不改原来的 Excel 格式。文件只在你电脑里处理。</p>
       </div>
-      <button class="info-button" type="button" aria-label="查看说明" data-tooltip="加项汇总=当天结账里的检中加项。结账没有加项医生列，导出时用底稿里同类项目最常见的医生补上。千爱登记=套餐和健康证到检。">i</button>
+      <button class="info-button" type="button" aria-label="查看说明" data-tooltip="加项汇总只收客户加选里的医生加项和前台推荐，不要自主加项。姓名、项目、成交价、体检人ID、加项医生都来自加选；单位用结账的所属单位补。千爱/健康证/入职来自结账。">i</button>
     </header>
 
     <section class="front-addon-grid">
       <article class="card">
-        <div class="card-header">01 上传当天结账表</div>
+        <div class="card-header">01 日常两表</div>
         <div class="card-body">
           <label class="front-addon-dropzone" id="checkoutZone" for="checkoutInput">
-            <strong>选择或拖入结账付款统计表</strong>
-            <span>支持 .xlsx / .xls（实际为 xlsx 的也行）</span>
+            <strong>结账付款统计表</strong>
+            <span>千爱到检、健康证、入职、加项单位都从这里取</span>
           </label>
           <input id="checkoutInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传结账付款统计表">
           <p class="front-addon-filename" id="checkoutName">尚未选择文件</p>
+          <label class="front-addon-dropzone" id="addonListZone" for="addonListInput">
+            <strong>客户加选项目列表</strong>
+            <span>加项汇总按加项来源筛：医生加项 + 前台推荐</span>
+          </label>
+          <input id="addonListInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传客户加选项目列表">
+          <p class="front-addon-filename" id="addonListName">尚未选择文件</p>
           <label>
-            只出这一天（按结账操作时间）
+            只出这一天
             <select id="dateSelect" class="form-select"></select>
           </label>
           <label class="front-addon-check">
@@ -46,20 +52,32 @@
       </article>
 
       <article class="card">
-        <div class="card-header">02 放底稿（当模板，不改格式）</div>
+        <div class="card-header">02 底稿（当模板，不改格式）</div>
         <div class="card-body">
           <label class="front-addon-dropzone" id="addonZone" for="addonInput">
             <strong>加项汇总表</strong>
-            <span>照这本的格式新增当天工作表</span>
+            <span>新增当天 M.D 工作表</span>
           </label>
           <input id="addonInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传加项汇总表">
           <p class="front-addon-filename" id="addonName">尚未选择文件</p>
           <label class="front-addon-dropzone" id="qianaiZone" for="qianaiInput">
             <strong>千爱体检登记表</strong>
-            <span>照这本的格式追加当天到检，并改 Sheet1 数字</span>
+            <span>千爱 sheet 追加当天，并改 Sheet1 数字</span>
           </label>
           <input id="qianaiInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传千爱体检登记表">
           <p class="front-addon-filename" id="qianaiName">尚未选择文件</p>
+          <label class="front-addon-dropzone" id="healthZone" for="healthInput">
+            <strong>健康证</strong>
+            <span>按日追加；身份证、电话结账里没有，留空</span>
+          </label>
+          <input id="healthInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传健康证底稿">
+          <p class="front-addon-filename" id="healthName">尚未选择文件</p>
+          <label class="front-addon-dropzone" id="onboardZone" for="onboardInput">
+            <strong>入职体检</strong>
+            <span>按日追加；身份证号结账里没有，留空</span>
+          </label>
+          <input id="onboardInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传入职体检底稿">
+          <p class="front-addon-filename" id="onboardName">尚未选择文件</p>
         </div>
       </article>
     </section>
@@ -68,10 +86,10 @@
       <div class="card-header">和上报口径怎么对齐</div>
       <div class="card-body">
         <ol class="front-addon-rules">
-          <li>加项汇总一张日表：院内加项、外检小项、千爱客户加项、血型/总检。电力外检整包、单位套餐、618/399/599 套餐本身不进这张表。</li>
-          <li>千爱登记只写到检：普惠618、双十一套餐、健康证。李亚丽的 HPV/碳14 进加项汇总，不进千爱登记。</li>
-          <li>结账表没有「加项医生」列。放上加项汇总底稿后，会按底稿里同类项目最常见的医生写入（只留姓名）。对不上的再留空，血型/总检用结账人。</li>
-          <li>套餐和加项写在同一结账行时，按金额拆：399/618 当套餐，51/60/240 当加项。</li>
+          <li>加项汇总 = 客户加选里当天「医生加项 + 前台推荐」，成交价大于 0、未取消。自主加项、团单延展、护理加项不上这张表。</li>
+          <li>ID 用体检人 ID，加项医生只留姓名（去掉 -工号），最终价用成交价。单位、性别优先用结账表按预约单号补。</li>
+          <li>千爱登记只写到检：千爱套餐和健康证，不写检中加项。业务员用结账的业务经理。</li>
+          <li>健康证：ID 用预约单号，从业地点用名单备注，民族默认汉。入职同理。身份证、电话这两张日常表里没有，导出后空着，不要手填假数据。</li>
         </ol>
       </div>
     </section>
@@ -79,17 +97,12 @@
     <section class="card" id="previewSection" hidden>
       <div class="card-header">03 当日明细</div>
       <div class="card-body">
-        <p class="front-addon-note" id="dayBanner">请先上传结账表并选择日期。</p>
+        <p class="front-addon-note" id="dayBanner">请先上传日常两表并选择日期。</p>
         <div class="front-addon-stats">
           <div class="front-addon-stat">
-            <small>加项汇总（上报）</small>
+            <small>加项汇总（医生+前台）</small>
             <strong id="statAddon">¥0</strong>
             <small id="countAddon">0 条</small>
-          </div>
-          <div class="front-addon-stat">
-            <small>其中外检小项</small>
-            <strong id="statOutdoor">¥0</strong>
-            <small id="countOutdoor">0 条</small>
           </div>
           <div class="front-addon-stat">
             <small>千爱到检（套餐/健康证）</small>
@@ -97,24 +110,34 @@
             <small id="countQianai">0 条</small>
           </div>
           <div class="front-addon-stat">
-            <small>今日加项合计（千爱加项+线下）</small>
-            <strong id="statToday">¥0</strong>
+            <small>健康证</small>
+            <strong id="statHealth">0</strong>
+            <small id="countHealth">人</small>
+          </div>
+          <div class="front-addon-stat">
+            <small>入职体检</small>
+            <strong id="statOnboard">0</strong>
+            <small id="countOnboard">人</small>
           </div>
         </div>
         <div class="front-addon-tabs">
-          <button type="button" id="tab-addon" aria-selected="true">加项汇总明细</button>
-          <button type="button" id="tab-outdoor" aria-selected="false">外检小项</button>
+          <button type="button" id="tab-addon" aria-selected="true">加项汇总</button>
           <button type="button" id="tab-qianai" aria-selected="false">千爱到检</button>
+          <button type="button" id="tab-health" aria-selected="false">健康证</button>
+          <button type="button" id="tab-onboard" aria-selected="false">入职</button>
           <button type="button" id="tab-issues" aria-selected="false">待核对</button>
         </div>
         <div id="panel-addon"></div>
-        <div id="panel-outdoor" hidden></div>
         <div id="panel-qianai" hidden></div>
+        <div id="panel-health" hidden></div>
+        <div id="panel-onboard" hidden></div>
         <div id="panel-issues" hidden></div>
         <div class="front-addon-actions" style="margin-top:1rem">
-          <button type="button" class="button" id="downloadBothBtn" disabled>导出上报用两张表</button>
-          <button type="button" class="button" id="downloadAddonBtn" disabled>只下载加项汇总</button>
-          <button type="button" class="button" id="downloadQianaiBtn" disabled>只下载千爱登记</button>
+          <button type="button" class="button" id="downloadBothBtn" disabled>导出已上传的底稿</button>
+          <button type="button" class="button" id="downloadAddonBtn" disabled>加项汇总</button>
+          <button type="button" class="button" id="downloadQianaiBtn" disabled>千爱登记</button>
+          <button type="button" class="button" id="downloadHealthBtn" disabled>健康证</button>
+          <button type="button" class="button" id="downloadOnboardBtn" disabled>入职体检</button>
         </div>
       </div>
     </section>

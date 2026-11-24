@@ -6,7 +6,7 @@
     name: '前台加项汇总',
     shortName: '前台加项',
     code: '13',
-    description: '上传结账付款统计表，生成当日加项汇总和千爱登记'
+    description: '上传结账表和客户加选，生成加项汇总、千爱登记、健康证、入职体检'
   };
   const inSub = /\/(?:image-splitter|image-cutout|photo-watermark|activity-report|double11-campaign)\//.test(location.pathname);
   const href = `${inSub ? '../' : ''}${extra.path}`;
