@@ -16,6 +16,8 @@ const state = {
   existingHealthName: '',
   existingOnboard: null,
   existingOnboardName: '',
+  doctorIdFromDraft: new Map(),
+  doctorIdFromList: new Map(),
   preview: null
 };
 
@@ -108,6 +110,95 @@ function personNameLike(value) {
 
 function doctorNameOnly(value) {
   return String(value || '').trim().replace(/-\d{8,}$/, '');
+}
+
+function doctorIdForm(value) {
+  const match = String(value || '').trim().match(/^([\u4e00-\u9fa5]{2,4})-(\d{8,})$/);
+  return match ? `${match[1]}-${match[2]}` : '';
+}
+
+function rememberDoctorId(store, value) {
+  const full = doctorIdForm(value);
+  if (!full) return;
+  const name = doctorNameOnly(full);
+  if (!store.has(name)) store.set(name, new Map());
+  const counts = store.get(name);
+  counts.set(full, (counts.get(full) || 0) + 1);
+}
+
+function pickDoctorIds(store) {
+  const output = new Map();
+  store.forEach((counts, name) => {
+    const best = [...counts.entries()].sort((a, b) => b[1] - a[1])[0];
+    if (best) output.set(name, best[0]);
+  });
+  return output;
+}
+
+function resolveDoctor(raw) {
+  const full = doctorIdForm(raw);
+  if (full) return full;
+  const name = doctorNameOnly(raw);
+  if (!name) return '';
+  return state.doctorIdFromDraft.get(name) || state.doctorIdFromList.get(name) || name;
+}
+
+function parseDoctorRosterFromWorkbook(workbook) {
+  const store = new Map();
+  workbook.SheetNames.forEach((sheetName) => {
+    if (!/^\d+\.\d+$/.test(sheetName)) return;
+    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1, raw: false, defval: '' });
+    let headerIndex = -1;
+    let doctorCol = 7;
+    const limit = Math.min(rows.length, 5);
+    for (let index = 0; index < limit; index += 1) {
+      const row = rows[index].map((cell) => String(cell || ''));
+      const doctorAt = row.findIndex((cell) => cell.includes('加项医生'));
+      if (doctorAt >= 0) {
+        headerIndex = index;
+        doctorCol = doctorAt;
+        break;
+      }
+    }
+    if (headerIndex < 0) return;
+    for (let index = headerIndex + 1; index < rows.length; index += 1) {
+      const label = String(rows[index][0] || '');
+      if (label.includes('合计') || label.includes('累计')) break;
+      rememberDoctorId(store, rows[index][doctorCol]);
+    }
+  });
+  state.doctorIdFromDraft = pickDoctorIds(store);
+}
+
+function harvestDoctorsFromAddonList(rows) {
+  const store = new Map();
+  rows.forEach((row) => rememberDoctorId(store, row['加项医生']));
+  state.doctorIdFromList = pickDoctorIds(store);
+}
+
+function mergedDoctorRoster() {
+  const merged = new Map(state.doctorIdFromList);
+  state.doctorIdFromDraft.forEach((full, name) => merged.set(name, full));
+  return [...merged.entries()].sort((a, b) => a[0].localeCompare(b[0], 'zh'));
+}
+
+function renderDoctorRoster() {
+  const box = $('doctorRosterBox');
+  const list = $('doctorRosterList');
+  const note = $('doctorRosterNote');
+  if (!box || !list || !note) return;
+  const rows = mergedDoctorRoster();
+  if (!rows.length) {
+    box.hidden = true;
+    note.textContent = '';
+    return;
+  }
+  box.hidden = false;
+  note.textContent = `已梳理 ${state.doctorIdFromDraft.size} 位底稿编号、${state.doctorIdFromList.size} 位客户加选编号，导出加项医生用「姓名-编号」。`;
+  list.innerHTML = rows.map(([name, full]) => {
+    const fromDraft = state.doctorIdFromDraft.get(name) === full;
+    return `<li><code>${escapeHtml(full)}</code>${fromDraft ? '（底稿）' : '（加选）'}</li>`;
+  }).join('');
 }
 
 function wxoFromText(value) {
@@ -300,7 +391,7 @@ function buildPreview() {
       id: idText(row['体检人ID']),
       datetime: formatClock(row['加项日期']),
       item: String(row['所加项目'] || row['体检项名称'] || '').trim(),
-      doctor: doctorNameOnly(row['加项医生']),
+      doctor: resolveDoctor(row['加项医生']),
       operator: String(row['操作人'] || '').trim(),
       amount,
       source,
@@ -395,6 +486,14 @@ function buildPreview() {
       detail: '没有客户加选项目列表时，加项汇总对不上上报口径，不会从结账表硬拆。'
     });
   }
+  addon.filter((row) => row.doctor && !doctorIdForm(row.doctor)).forEach((row) => {
+    issues.push({
+      kind: '加项医生缺编号',
+      name: row.name,
+      amount: row.amount,
+      detail: `当前是「${row.doctor}」，底稿和客户加选都没有「姓名-编号」。`
+    });
+  });
   addon.filter((row) => !row.unit).forEach((row) => {
     issues.push({
       kind: '单位待补',
@@ -540,11 +639,11 @@ function drawAddonTableImage(preview) {
     { key: 'seq', w: 46, header: '序号' },
     { key: 'name', w: 64, header: '姓名' },
     { key: 'gender', w: 42, header: '性别' },
-    { key: 'unit', w: 218, header: '单位' },
-    { key: 'id', w: 156, header: 'ID号' },
+    { key: 'unit', w: 190, header: '单位' },
+    { key: 'id', w: 148, header: 'ID号' },
     { key: 'date', w: 78, header: '加项日期' },
-    { key: 'item', w: 122, header: '所加项目' },
-    { key: 'doctor', w: 72, header: '加项医生' },
+    { key: 'item', w: 118, header: '所加项目' },
+    { key: 'doctor', w: 128, header: '加项医生' },
     { key: 'amount', w: 62, header: '最终价' }
   ];
   const tableW = cols.reduce((sum, col) => sum + col.w, 0);
@@ -868,10 +967,12 @@ async function ingestFile(file, hintedKind) {
     const rows = rowsToRecords(sheet, ['所加项目', '加项来源']).filter((row) => row['姓名'] || row['所加项目']);
     if (!rows.length) throw new Error('没有读到客户加选明细。');
     state.addonListRows = rows;
+    harvestDoctorsFromAddonList(rows);
     setFilename('addonListName', file);
   } else if (kind === 'addonTpl') {
     state.existingAddon = buffer;
     state.existingAddonName = file.name;
+    parseDoctorRosterFromWorkbook(workbook);
     setFilename('addonName', file);
   } else if (kind === 'qianai') {
     state.existingQianai = buffer;
@@ -892,6 +993,7 @@ async function ingestFile(file, hintedKind) {
   }
   state.dates = unionDates();
   renderDateOptions(state.dates);
+  renderDoctorRoster();
   refreshPreview();
 }
 

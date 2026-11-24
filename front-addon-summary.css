@@ -200,6 +200,23 @@
   font-weight: 650;
 }
 
+.front-addon-roster {
+  margin: 0 0 0.75rem;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.front-addon-roster ul {
+  margin: 0.4rem 0 0;
+  padding-left: 1.2rem;
+  max-height: 12rem;
+  overflow: auto;
+}
+
+.front-addon-roster code {
+  font-size: 0.85em;
+}
+
 .front-addon-report-images {
   display: grid;
   gap: 1rem;
