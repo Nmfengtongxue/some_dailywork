@@ -110,6 +110,15 @@ function doctorNameOnly(value) {
   return String(value || '').trim().replace(/-\d{8,}$/, '');
 }
 
+function wxoFromText(value) {
+  const match = String(value || '').match(/wxo\d+/i);
+  return match ? match[0] : '';
+}
+
+function wxoOrderOf(row) {
+  return wxoFromText(row['前台备注']) || wxoFromText(row['前台备注(不进检中)']);
+}
+
 function salesmanOf(row) {
   const manager = String(row['业务经理'] || '').trim();
   if (personNameLike(manager)) return manager;
@@ -358,7 +367,7 @@ function buildPreview() {
         qianai.push({
           date: dateKey,
           name: person,
-          orderNo: String(row['订单号'] || ''),
+          orderNo: wxoOrderOf(row),
           qty: 1,
           packageName,
           amount,
@@ -367,6 +376,15 @@ function buildPreview() {
         });
       }
     }
+  });
+
+  qianai.filter((row) => !row.orderNo).forEach((row) => {
+    issues.push({
+      kind: '千爱缺wxo订单号',
+      name: row.name,
+      amount: row.amount,
+      detail: '千爱登记的订单编号要用前台备注里的 wxo 编码。结账「订单号」是 SOA，不能填进这一列。前台备注没有 wxo 就留空。'
+    });
   });
 
   if (!state.addonListRows.length) {
@@ -784,7 +802,7 @@ function refreshPreview() {
     { label: '套餐', value: (row) => row.packageName },
     { label: '金额', value: (row) => row.amount },
     { label: '业务员', value: (row) => row.salesman },
-    { label: '订单号', value: (row) => row.orderNo }
+    { label: '订单编号', value: (row) => row.orderNo || '待补（前台备注无wxo）' }
   ]);
   renderTable('panel-health', preview.health, [
     { label: 'ID号码', value: (row) => row.id },
@@ -1048,7 +1066,7 @@ function writeQianaiSheets(workbook, preview) {
 
   preview.qianai.forEach((row, index) => {
     const prev = kept.get(row.name);
-    const orderNo = (prev?.orderNo && /^wxo/i.test(prev.orderNo)) ? prev.orderNo : row.orderNo;
+    const orderNo = wxoFromText(row.orderNo) || wxoFromText(prev?.orderNo) || '';
     const salesman = row.salesman || prev?.salesman || '';
     const excelRow = ws.addRow([]);
     copyRowLook(styleRow, excelRow, 9);
