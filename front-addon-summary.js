@@ -1,12 +1,15 @@
 'use strict';
 
-const REPORT_SOURCES = new Set(['医生加项', '前台推荐']);
+const DOCTOR_SOURCE = '医生加项';
+const FRONT_SOURCE = '前台推荐';
 
 const state = {
   checkoutRows: [],
   addonListRows: [],
   dates: [],
   selectedDate: '',
+  includeFrontRecommend: true,
+  includeDoctorId: true,
   includeHealthCert: true,
   existingAddon: null,
   existingAddonName: '',
@@ -54,7 +57,7 @@ function checkoutDateKey(row) {
 }
 
 function addonListDateKey(row) {
-  return normalizeDateKey(row['加项日期'] || row['结账时间'] || row['登记时间']);
+  return normalizeDateKey(row['结账时间'] || row['加项日期']);
 }
 
 function formatClock(value) {
@@ -135,10 +138,17 @@ function pickDoctorIds(store) {
   return output;
 }
 
+function allowedAddonSources() {
+  const sources = new Set([DOCTOR_SOURCE]);
+  if (state.includeFrontRecommend) sources.add(FRONT_SOURCE);
+  return sources;
+}
+
 function resolveDoctor(raw) {
   const full = doctorIdForm(raw);
+  const name = doctorNameOnly(raw) || String(raw || '').trim();
+  if (!state.includeDoctorId) return name;
   if (full) return full;
-  const name = doctorNameOnly(raw);
   if (!name) return '';
   return state.doctorIdFromDraft.get(name) || state.doctorIdFromList.get(name) || name;
 }
@@ -212,13 +222,7 @@ function wxoOrderOf(row) {
 
 function salesmanOf(row) {
   const manager = String(row['业务经理'] || '').trim();
-  if (personNameLike(manager)) return manager;
-  const remark = String(row['前台备注'] || '').trim() || String(row['名单备注'] || '').trim();
-  if (personNameLike(remark)) return remark;
-  const advisor = String(row['健康顾问'] || '').trim();
-  if (personNameLike(advisor) && advisor !== '杜永丽') return advisor;
-  const cashier = String(row['结账人'] || '').trim();
-  return personNameLike(cashier) ? cashier : (manager || advisor || cashier);
+  return personNameLike(manager) ? manager : '';
 }
 
 function splitChargeItems(charge) {
@@ -262,7 +266,7 @@ function isPackagePriced(items, amount) {
   const blob = items.join(' ');
   if (!items.some(isPackageToken)) return false;
   if (/健康证/.test(blob) && amount <= 80) return true;
-  if (amount >= 399 && /套餐|普惠基础|电力外检|职工体检方案|加项包/.test(blob)) return true;
+  if (amount >= 399 && /套餐|普惠基础|电力外检|职工体检方案|加项包|千爱/.test(blob)) return true;
   return false;
 }
 
@@ -379,7 +383,7 @@ function buildPreview() {
     const amount = money(toNumber(row['成交价']));
     if (!(amount > 0)) return;
     const source = String(row['加项来源'] || '').trim();
-    if (!REPORT_SOURCES.has(source)) return;
+    if (!allowedAddonSources().has(source)) return;
     const checkout = lookupCheckout(row, byReserve, byNameDate, dateKey);
     const unit = String(row['单位名称'] || '').trim() || String(checkout?.['所属单位'] || '').trim();
     const gender = String(row['性别'] || checkout?.['性别'] || '').trim();
@@ -559,12 +563,23 @@ function dateOnly(value, dateKey) {
 function doctorTotals(rows) {
   const map = new Map();
   rows.forEach((row) => {
-    const name = doctorNameOnly(row.doctor);
-    if (!name) return;
-    map.set(name, money((map.get(name) || 0) + row.amount));
+    const label = String(row.doctor || '').trim();
+    if (!label) return;
+    if (!map.has(label)) {
+      map.set(label, { name: label, amount: 0, people: new Set(), count: 0 });
+    }
+    const item = map.get(label);
+    item.amount = money(item.amount + row.amount);
+    item.count += 1;
+    if (row.name) item.people.add(row.name);
   });
-  return [...map.entries()]
-    .map(([name, amount]) => ({ name, amount }))
+  return [...map.values()]
+    .map((item) => ({
+      name: item.name,
+      amount: item.amount,
+      people: item.people.size,
+      count: item.count
+    }))
     .sort((a, b) => b.amount - a.amount || a.name.localeCompare(b.name, 'zh'));
 }
 
@@ -594,6 +609,7 @@ function priorMonthFromTemplate(dateKey) {
 
 const EXCEL_FONT = '"Songti SC","SimSun","NSimSun","STSong","PingFang SC","Microsoft YaHei",serif';
 const EXCEL_BLUE = '#5B9BD5';
+const EXCEL_ORANGE = '#ED7D31';
 
 function wrapLines(ctx, text, maxWidth) {
   const source = String(text ?? '');
@@ -643,7 +659,7 @@ function drawAddonTableImage(preview) {
     { key: 'id', w: 148, header: 'ID号' },
     { key: 'date', w: 78, header: '加项日期' },
     { key: 'item', w: 118, header: '所加项目' },
-    { key: 'doctor', w: 128, header: '加项医生' },
+    { key: 'doctor', w: 168, header: '加项医生' },
     { key: 'amount', w: 62, header: '最终价' }
   ];
   const tableW = cols.reduce((sum, col) => sum + col.w, 0);
@@ -724,15 +740,23 @@ function drawAddonTableImage(preview) {
   return canvas;
 }
 
+function splitDoctorLabel(value) {
+  const full = String(value || '').trim();
+  const match = full.match(/^([\u4e00-\u9fa5]{2,4})-(\d{8,})$/);
+  if (match) return { name: match[1], id: match[2], full };
+  return { name: doctorNameOnly(full) || full, id: '', full };
+}
+
 function drawDoctorChartImage(preview) {
   const scale = 2;
   const doctors = preview.doctors || [];
-  const width = Math.max(640, 120 + doctors.length * 86);
-  const height = 420;
-  const pad = { top: 52, right: 28, bottom: 48, left: 36 };
+  const width = Math.max(680, 140 + doctors.length * 108);
+  const height = 460;
+  const pad = { top: 68, right: 28, bottom: 78, left: 36 };
   const plotW = width - pad.left - pad.right;
   const plotH = height - pad.top - pad.bottom;
-  const maxVal = Math.max(1, ...doctors.map((row) => row.amount));
+  const maxAmount = Math.max(1, ...doctors.map((row) => row.amount));
+  const maxPeople = Math.max(1, ...doctors.map((row) => row.people || 0));
   const canvas = document.createElement('canvas');
   canvas.width = Math.round(width * scale);
   canvas.height = Math.round(height * scale);
@@ -746,11 +770,28 @@ function drawDoctorChartImage(preview) {
   const title = addonTitle(preview.dateKey);
   const titleSize = fitFont(ctx, title, width - 40, 16, 12);
   ctx.font = `${titleSize}px ${EXCEL_FONT}`;
-  ctx.fillText(title, width / 2, 24);
+  ctx.fillText(title, width / 2, 22);
+
+  ctx.font = `11px ${EXCEL_FONT}`;
+  const legend = [
+    { label: '人数', color: EXCEL_ORANGE },
+    { label: '金额', color: EXCEL_BLUE }
+  ];
+  let legendX = width / 2 - 70;
+  legend.forEach((item) => {
+    ctx.fillStyle = item.color;
+    ctx.fillRect(legendX, 42, 12, 12);
+    ctx.fillStyle = '#000';
+    ctx.textAlign = 'left';
+    ctx.fillText(item.label, legendX + 16, 48);
+    legendX += 70;
+  });
+  ctx.textAlign = 'center';
 
   const n = Math.max(doctors.length, 1);
   const slot = plotW / n;
-  const barW = Math.min(34, slot * 0.32);
+  const barW = Math.min(22, slot * 0.28);
+  const gap = 4;
   ctx.strokeStyle = '#000';
   ctx.lineWidth = 1;
   ctx.beginPath();
@@ -759,16 +800,28 @@ function drawDoctorChartImage(preview) {
   ctx.stroke();
 
   doctors.forEach((row, index) => {
-    const barH = (row.amount / maxVal) * (plotH - 28);
-    const x = pad.left + slot * index + (slot - barW) / 2;
-    const y = pad.top + plotH - barH;
+    const peopleH = ((row.people || 0) / maxPeople) * (plotH - 28);
+    const amountH = (row.amount / maxAmount) * (plotH - 28);
+    const groupX = pad.left + slot * index + (slot - (barW * 2 + gap)) / 2;
+    const peopleX = groupX;
+    const amountX = groupX + barW + gap;
+    const peopleY = pad.top + plotH - peopleH;
+    const amountY = pad.top + plotH - amountH;
+    ctx.fillStyle = EXCEL_ORANGE;
+    ctx.fillRect(peopleX, peopleY, barW, peopleH);
     ctx.fillStyle = EXCEL_BLUE;
-    ctx.fillRect(x, y, barW, barH);
+    ctx.fillRect(amountX, amountY, barW, amountH);
     ctx.fillStyle = '#000';
+    ctx.font = `11px ${EXCEL_FONT}`;
+    ctx.fillText(String(row.people || 0), peopleX + barW / 2, peopleY - 10);
+    ctx.fillText(formatAmount(row.amount), amountX + barW / 2, amountY - 10);
+    const parts = splitDoctorLabel(row.name);
     ctx.font = `12px ${EXCEL_FONT}`;
-    ctx.fillText(formatAmount(row.amount), x + barW / 2, y - 10);
-    ctx.font = `12px ${EXCEL_FONT}`;
-    ctx.fillText(row.name, x + barW / 2, pad.top + plotH + 16);
+    ctx.fillText(parts.name, pad.left + slot * index + slot / 2, pad.top + plotH + 16);
+    if (parts.id) {
+      ctx.font = `10px ${EXCEL_FONT}`;
+      ctx.fillText(parts.id, pad.left + slot * index + slot / 2, pad.top + plotH + 32);
+    }
   });
   return canvas;
 }
@@ -954,7 +1007,8 @@ function refreshPreview() {
   }
   state.preview = buildPreview();
   const preview = state.preview;
-  $('dayBanner').textContent = `${displayDate(preview.dateKey)}：加项汇总 ${preview.addon.length} 条 / ¥${preview.addonTotal}（医生加项+前台推荐）；千爱到检 ${preview.qianai.length} 人；健康证 ${preview.health.length} 人；入职 ${preview.onboard.length} 人。`;
+  const sourceLabel = state.includeFrontRecommend ? '医生加项+前台推荐' : '仅医生加项';
+  $('dayBanner').textContent = `${displayDate(preview.dateKey)}：加项汇总 ${preview.addon.length} 条 / ¥${preview.addonTotal}（${sourceLabel}）；千爱到检 ${preview.qianai.length} 人；健康证 ${preview.health.length} 人；入职 ${preview.onboard.length} 人。`;
   $('statAddon').textContent = `¥${preview.addonTotal}`;
   $('statQianai').textContent = `¥${preview.qianaiVisitTotal}`;
   $('statHealth').textContent = String(preview.health.length);
@@ -1010,6 +1064,11 @@ function refreshPreview() {
   $('downloadBothBtn').disabled = false;
   if ($('downloadTablePngBtn')) $('downloadTablePngBtn').disabled = !preview.addon.length;
   if ($('downloadChartPngBtn')) $('downloadChartPngBtn').disabled = !preview.addon.length;
+  renderTable('doctorStatsTable', preview.doctors, [
+    { label: '加项医生', value: (row) => row.name },
+    { label: '人数', value: (row) => row.people },
+    { label: '金额', value: (row) => row.amount }
+  ]);
   renderReportImages(preview);
   const missing = [];
   if (!state.addonListRows.length) missing.push('客户加选');
@@ -1222,6 +1281,19 @@ function fillAddonSheet(workbook, preview) {
   writeRowValues(ws, monthRow, [`${month}月累计`, '', '', '', '', '', '', '', formulaCell(monthFormula, monthTotal)], monthStyleRow, 9);
   safeMerge(ws, `A${totalRow}:H${totalRow}`);
   safeMerge(ws, `A${monthRow}:H${monthRow}`);
+
+  ws.getColumn(11).width = 28;
+  ws.getColumn(12).width = 10;
+  ws.getColumn(13).width = 12;
+  ws.getRow(2).getCell(11).value = '加项医生';
+  ws.getRow(2).getCell(12).value = '人数';
+  ws.getRow(2).getCell(13).value = '金额';
+  preview.doctors.forEach((row, index) => {
+    const excelRow = ws.getRow(index + 3);
+    excelRow.getCell(11).value = row.name;
+    excelRow.getCell(12).value = row.people;
+    excelRow.getCell(13).value = row.amount;
+  });
 }
 
 function qianaiDateOf(cell) {
@@ -1482,6 +1554,14 @@ function init() {
   bindDropzone('onboardZone', 'onboardInput', 'onboard');
   $('dateSelect').addEventListener('change', (event) => {
     state.selectedDate = event.target.value;
+    refreshPreview();
+  });
+  $('includeFrontRecommend').addEventListener('change', (event) => {
+    state.includeFrontRecommend = event.target.checked;
+    refreshPreview();
+  });
+  $('includeDoctorId').addEventListener('change', (event) => {
+    state.includeDoctorId = event.target.checked;
     refreshPreview();
   });
   $('includeHealthCert').addEventListener('change', (event) => {
