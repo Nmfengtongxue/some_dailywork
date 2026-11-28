@@ -637,6 +637,8 @@ function priorMonthFromTemplate(dateKey) {
 const EXCEL_FONT = '"Songti SC","SimSun","NSimSun","STSong","PingFang SC","Microsoft YaHei",serif';
 const CHART_FONT = '"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif';
 const EXCEL_BLUE = '#5B9BD5';
+const EXCEL_GRID = '#D9D9D9';
+const EXCEL_AXIS = '#595959';
 
 function wrapLines(ctx, text, maxWidth) {
   const source = String(text ?? '');
@@ -770,10 +772,10 @@ function drawAddonTableImage(preview) {
 function doctorChartTotals(rows) {
   const map = new Map();
   rows.forEach((row) => {
-    const label = String(row.doctor || '').trim();
-    if (!label) return;
-    if (!map.has(label)) map.set(label, { name: label, amount: 0, people: new Set() });
-    const item = map.get(label);
+    const name = doctorNameOnly(row.doctor);
+    if (!name) return;
+    if (!map.has(name)) map.set(name, { name, amount: 0, people: new Set() });
+    const item = map.get(name);
     item.amount = money(item.amount + row.amount);
     if (row.name) item.people.add(row.name);
   });
@@ -782,25 +784,24 @@ function doctorChartTotals(rows) {
     .sort((a, b) => b.amount - a.amount || a.name.localeCompare(b.name, 'zh'));
 }
 
-function ellipsisLabel(ctx, text, maxWidth) {
-  const source = String(text || '');
-  if (ctx.measureText(source).width <= maxWidth) return source;
-  let current = source;
-  while (current.length > 1 && ctx.measureText(`${current}...`).width > maxWidth) {
-    current = current.slice(0, -1);
-  }
-  return `${current}...`;
+function niceChartMax(value) {
+  const padded = Math.max(1, Number(value) || 1) * 1.12;
+  const mag = 10 ** Math.floor(Math.log10(padded));
+  const n = padded / mag;
+  const nice = n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10;
+  return nice * mag;
 }
 
 function drawDoctorChartImage(preview) {
   const scale = 2;
   const doctors = doctorChartTotals(preview.addon || []);
-  const width = Math.max(720, 80 + doctors.length * 96);
-  const height = 420;
-  const pad = { top: 64, right: 28, bottom: 44, left: 28 };
+  const width = Math.max(920, 160 + doctors.length * 88);
+  const height = 520;
+  const pad = { top: 56, right: 24, bottom: 42, left: 52 };
   const plotW = width - pad.left - pad.right;
   const plotH = height - pad.top - pad.bottom;
-  const maxAmount = Math.max(1, ...doctors.map((row) => row.amount));
+  const maxAmount = niceChartMax(Math.max(0, ...doctors.map((row) => row.amount)));
+  const tickCount = 9;
   const canvas = document.createElement('canvas');
   canvas.width = Math.round(width * scale);
   canvas.height = Math.round(height * scale);
@@ -809,37 +810,46 @@ function drawDoctorChartImage(preview) {
   ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, width, height);
 
-  ctx.fillStyle = '#000';
+  ctx.fillStyle = '#404040';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.font = `16px ${CHART_FONT}`;
   ctx.fillText(addonTitle(preview.dateKey), width / 2, 22);
 
-  ctx.strokeStyle = '#000';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(pad.left, pad.top + plotH + 0.5);
-  ctx.lineTo(pad.left + plotW, pad.top + plotH + 0.5);
-  ctx.stroke();
+  ctx.font = `11px ${CHART_FONT}`;
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'middle';
+  for (let i = 0; i <= tickCount; i += 1) {
+    const value = (maxAmount / tickCount) * i;
+    const y = pad.top + plotH - (value / maxAmount) * plotH;
+    ctx.strokeStyle = i === 0 ? EXCEL_AXIS : EXCEL_GRID;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y + 0.5);
+    ctx.lineTo(pad.left + plotW, y + 0.5);
+    ctx.stroke();
+    ctx.fillStyle = EXCEL_AXIS;
+    ctx.fillText(String(Math.round(value)), pad.left - 8, y);
+  }
 
   const n = Math.max(doctors.length, 1);
   const slot = plotW / n;
-  const barW = Math.min(42, slot * 0.38);
+  const barW = Math.min(46, slot * 0.42);
   doctors.forEach((row, index) => {
-    const barH = (row.amount / maxAmount) * (plotH - 28);
+    const barH = (row.amount / maxAmount) * plotH;
     const x = pad.left + slot * index + (slot - barW) / 2;
     const y = pad.top + plotH - barH;
     const cx = pad.left + slot * index + slot / 2;
     ctx.fillStyle = EXCEL_BLUE;
     ctx.fillRect(x, y, barW, barH);
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = '#404040';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'bottom';
     ctx.font = `12px ${CHART_FONT}`;
-    ctx.fillText(formatAmount(row.amount), cx, y - 6);
+    ctx.fillText(formatAmount(row.amount), cx, Math.max(pad.top + 8, y - 4));
     ctx.textBaseline = 'top';
     ctx.font = `12px ${CHART_FONT}`;
-    ctx.fillText(ellipsisLabel(ctx, row.name, slot - 8), cx, pad.top + plotH + 8);
+    ctx.fillText(row.name, cx, pad.top + plotH + 8);
   });
   return canvas;
 }
@@ -1361,11 +1371,21 @@ function fillAddonSheet(workbook, preview) {
   if (preview.addon.length) {
     const dataStart = 3;
     const dataEnd = lastDataRow;
-    const doctorRange = `$H$${dataStart}:$H$${dataEnd}`;
+    const nameRange = `$J$${dataStart}:$J$${dataEnd}`;
     const personRange = `$B$${dataStart}:$B$${dataEnd}`;
     const amountRange = `$I$${dataStart}:$I$${dataEnd}`;
+    ws.getColumn(10).width = 12;
+    ws.getColumn(10).hidden = true;
+    ws.getRow(2).getCell(10).value = '医生姓名';
+    for (let row = dataStart; row <= dataEnd; row += 1) {
+      ws.getRow(row).getCell(10).value = formulaCell(
+        `IF(H${row}="","",IF(ISNUMBER(FIND("-",H${row})),LEFT(H${row},FIND("-",H${row})-1),H${row}))`,
+        doctorNameOnly(preview.addon[row - dataStart]?.doctor)
+      );
+    }
+
     const chartDoctors = doctorChartTotals(preview.addon);
-    ws.getColumn(11).width = 28;
+    ws.getColumn(11).width = 14;
     ws.getColumn(12).width = 10;
     ws.getColumn(13).width = 12;
     ws.getRow(2).getCell(11).value = '加项医生';
@@ -1376,11 +1396,11 @@ function fillAddonSheet(workbook, preview) {
       const cell = `K${index + 3}`;
       excelRow.getCell(11).value = row.name;
       excelRow.getCell(12).value = formulaCell(
-        `IF(${cell}="","",SUMPRODUCT((${doctorRange}=${cell})*(${personRange}<>"")/COUNTIFS(${doctorRange},${doctorRange},${personRange},${personRange})))`,
+        `IF(${cell}="","",SUMPRODUCT((${nameRange}=${cell})*(${personRange}<>"")/COUNTIFS(${nameRange},${nameRange},${personRange},${personRange})))`,
         row.people
       );
       excelRow.getCell(13).value = formulaCell(
-        `IF(${cell}="","",SUMIF(${doctorRange},${cell},${amountRange}))`,
+        `IF(${cell}="","",SUMIF(${nameRange},${cell},${amountRange}))`,
         row.amount
       );
     });
