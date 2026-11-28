@@ -9,7 +9,7 @@ const state = {
   dates: [],
   selectedDate: '',
   includeFrontRecommend: true,
-  includeDoctorId: true,
+  includeDoctorId: false,
   includeHealthCert: true,
   existingAddon: null,
   existingAddonName: '',
@@ -306,32 +306,23 @@ function isQianaiVisitRow(row, items, amount, healthCert) {
   return isPackagePriced(items, amount);
 }
 
-function applySharedQianaiAmounts(visits) {
+function isOnAccountPay(row) {
+  return /挂账|挂帐/.test(String(row['结算方式'] || '').trim());
+}
+
+function shareQianaiSalesman(visits) {
   const byOrder = new Map();
   visits.forEach((row) => {
-    if (/健康证/.test(`${row.packageName || ''} ${row.note || ''}`)) return;
     const order = String(row.soaOrder || '').trim();
     if (!order) return;
     if (!byOrder.has(order)) byOrder.set(order, []);
     byOrder.get(order).push(row);
   });
   byOrder.forEach((group) => {
-    const byAmt = new Map();
+    const salesman = group.map((row) => row.salesman).find((name) => personNameLike(name));
+    if (!salesman) return;
     group.forEach((row) => {
-      const amt = money(row.amount);
-      if (!(amt > 0)) return;
-      if (!byAmt.has(amt)) byAmt.set(amt, []);
-      byAmt.get(amt).push(row);
-    });
-    byAmt.forEach((people) => {
-      if (people.length < 2) return;
-      people.sort((a, b) => String(a.time || '').localeCompare(String(b.time || '')) || a.name.localeCompare(b.name, 'zh'));
-      people.forEach((row, index) => {
-        row.qty = people.length;
-        if (index === 0) return;
-        row.amount = 0;
-        row.note = row.note || '同码零计费';
-      });
+      if (!row.salesman) row.salesman = salesman;
     });
   });
 }
@@ -449,6 +440,7 @@ function buildPreview() {
     if (isAddonCancelled(row)) return;
     const amount = money(toNumber(row['成交价']));
     if (!(amount > 0)) return;
+    if (isOnAccountPay(row)) return;
     const source = String(row['加项来源'] || '').trim();
     if (!allowedAddonSources().has(source)) return;
     const checkout = lookupCheckout(row, byReserve, byNameDate, dateKey);
@@ -541,7 +533,7 @@ function buildPreview() {
       }
     }
   });
-  applySharedQianaiAmounts(qianai);
+  shareQianaiSalesman(qianai);
 
   qianai.filter((row) => !row.orderNo).forEach((row) => {
     issues.push({
