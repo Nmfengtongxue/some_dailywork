@@ -747,10 +747,13 @@ function doctorChartTotals(rows) {
   rows.forEach((row) => {
     const name = doctorNameOnly(row.doctor);
     if (!name) return;
-    map.set(name, money((map.get(name) || 0) + row.amount));
+    if (!map.has(name)) map.set(name, { name, amount: 0, people: new Set() });
+    const item = map.get(name);
+    item.amount = money(item.amount + row.amount);
+    if (row.name) item.people.add(row.name);
   });
-  return [...map.entries()]
-    .map(([name, amount]) => ({ name, amount }))
+  return [...map.values()]
+    .map((item) => ({ name: item.name, amount: item.amount, people: item.people.size }))
     .sort((a, b) => b.amount - a.amount || a.name.localeCompare(b.name, 'zh'));
 }
 
@@ -767,7 +770,7 @@ function drawDoctorChartImage(preview) {
   const doctors = doctorChartTotals(preview.addon || []);
   const width = Math.max(920, 160 + doctors.length * 88);
   const height = 520;
-  const pad = { top: 48, right: 24, bottom: 42, left: 52 };
+  const pad = { top: 56, right: 24, bottom: 42, left: 52 };
   const plotW = width - pad.left - pad.right;
   const plotH = height - pad.top - pad.bottom;
   const maxAmount = niceChartMax(Math.max(0, ...doctors.map((row) => row.amount)));
@@ -805,19 +808,27 @@ function drawDoctorChartImage(preview) {
   const n = Math.max(doctors.length, 1);
   const slot = plotW / n;
   const barW = Math.min(46, slot * 0.42);
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'top';
   doctors.forEach((row, index) => {
     const barH = (row.amount / maxAmount) * plotH;
     const x = pad.left + slot * index + (slot - barW) / 2;
     const y = pad.top + plotH - barH;
+    const cx = pad.left + slot * index + slot / 2;
     ctx.fillStyle = EXCEL_BLUE;
     ctx.fillRect(x, y, barW, barH);
     ctx.fillStyle = '#404040';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'bottom';
+    ctx.font = `11px ${CHART_FONT}`;
+    ctx.fillText(formatAmount(row.amount), cx, Math.max(pad.top + 8, y - 4));
+    ctx.textBaseline = 'top';
     ctx.font = `12px ${CHART_FONT}`;
-    ctx.fillText(row.name, pad.left + slot * index + slot / 2, pad.top + plotH + 8);
+    ctx.fillText(row.name, cx, pad.top + plotH + 8);
   });
   return canvas;
+}
+
+function canvasToArrayBuffer(canvas) {
+  return canvasToBlobUrl(canvas).then((url) => fetch(url).then((res) => res.arrayBuffer()));
 }
 
 function revokeLater(url) {
@@ -1058,7 +1069,7 @@ function refreshPreview() {
   $('downloadBothBtn').disabled = false;
   if ($('downloadTablePngBtn')) $('downloadTablePngBtn').disabled = !preview.addon.length;
   if ($('downloadChartPngBtn')) $('downloadChartPngBtn').disabled = !preview.addon.length;
-  renderTable('doctorStatsTable', preview.doctors, [
+  renderTable('doctorStatsTable', doctorChartTotals(preview.addon), [
     { label: '加项医生', value: (row) => row.name },
     { label: '人数', value: (row) => row.people },
     { label: '金额', value: (row) => row.amount }
@@ -1276,17 +1287,55 @@ function fillAddonSheet(workbook, preview) {
   safeMerge(ws, `A${totalRow}:H${totalRow}`);
   safeMerge(ws, `A${monthRow}:H${monthRow}`);
 
-  ws.getColumn(11).width = 28;
-  ws.getColumn(12).width = 10;
-  ws.getColumn(13).width = 12;
-  ws.getRow(2).getCell(11).value = '加项医生';
-  ws.getRow(2).getCell(12).value = '人数';
-  ws.getRow(2).getCell(13).value = '金额';
-  preview.doctors.forEach((row, index) => {
-    const excelRow = ws.getRow(index + 3);
-    excelRow.getCell(11).value = row.name;
-    excelRow.getCell(12).value = row.people;
-    excelRow.getCell(13).value = row.amount;
+  if (preview.addon.length) {
+    const dataStart = 3;
+    const dataEnd = lastDataRow;
+    const nameRange = `$J$${dataStart}:$J$${dataEnd}`;
+    const personRange = `$B$${dataStart}:$B$${dataEnd}`;
+    const amountRange = `$I$${dataStart}:$I$${dataEnd}`;
+    ws.getColumn(10).width = 12;
+    ws.getColumn(10).hidden = true;
+    ws.getRow(2).getCell(10).value = '医生姓名';
+    for (let row = dataStart; row <= dataEnd; row += 1) {
+      ws.getRow(row).getCell(10).value = formulaCell(
+        `IF(H${row}="","",IF(ISNUMBER(FIND("-",H${row})),LEFT(H${row},FIND("-",H${row})-1),H${row}))`,
+        doctorNameOnly(preview.addon[row - dataStart]?.doctor)
+      );
+    }
+
+    const chartDoctors = doctorChartTotals(preview.addon);
+    ws.getColumn(11).width = 14;
+    ws.getColumn(12).width = 10;
+    ws.getColumn(13).width = 12;
+    ws.getRow(2).getCell(11).value = '加项医生';
+    ws.getRow(2).getCell(12).value = '人数';
+    ws.getRow(2).getCell(13).value = '金额';
+    chartDoctors.forEach((row, index) => {
+      const excelRow = ws.getRow(index + 3);
+      const cell = `K${index + 3}`;
+      excelRow.getCell(11).value = row.name;
+      excelRow.getCell(12).value = formulaCell(
+        `IF(${cell}="","",SUMPRODUCT((${nameRange}=${cell})*(${personRange}<>"")/COUNTIFS(${nameRange},${nameRange},${personRange},${personRange})))`,
+        row.people
+      );
+      excelRow.getCell(13).value = formulaCell(
+        `IF(${cell}="","",SUMIF(${nameRange},${cell},${amountRange}))`,
+        row.amount
+      );
+    });
+  }
+}
+
+async function embedAddonChart(workbook, preview) {
+  if (!preview?.addon?.length) return;
+  const canvas = drawDoctorChartImage(preview);
+  const buffer = await canvasToArrayBuffer(canvas);
+  const imageId = workbook.addImage({ buffer, extension: 'png' });
+  const ws = workbook.getWorksheet(sheetNameForDate(preview.dateKey));
+  if (!ws) return;
+  ws.addImage(imageId, {
+    tl: { col: 14, row: 1 },
+    ext: { width: 760, height: 420 }
   });
 }
 
@@ -1476,6 +1525,7 @@ async function downloadWorkbook(kind) {
   if (kind === 'addon') {
     if (state.existingAddon) await workbook.xlsx.load(state.existingAddon.slice(0));
     fillAddonSheet(workbook, preview);
+    await embedAddonChart(workbook, preview);
     triggerDownload(await workbook.xlsx.writeBuffer(), state.existingAddonName || `加项汇总表_${sheetNameForDate(preview.dateKey)}.xlsx`);
     return;
   }
