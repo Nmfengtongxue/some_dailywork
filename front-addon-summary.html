@@ -10,7 +10,7 @@
   <script src="assets/vendor/exceljs.min.js"></script>
   <script src="assets/design-system.js" defer></script>
   <script src="assets/extra-nav.js" defer></script>
-  <script src="front-addon-summary.js?v=20261128c" defer></script>
+  <script src="front-addon-summary.js?v=20261128d" defer></script>
 </head>
 <body>
   <main class="container front-addon-page" id="mainContent">
@@ -18,7 +18,7 @@
       <div>
         <span class="section-kicker">DATA WORKBENCH</span>
         <h1>前台加项汇总</h1>
-        <p class="front-addon-lede">日常两张表：结账付款统计表 + 客户加选项目列表。按前台上报口径算出加项汇总、千爱登记、健康证、入职体检；底稿只当模板，不改原来的 Excel 格式。文件只在你电脑里处理。</p>
+        <p class="front-addon-lede">日常两张表：结账付款统计表 + 客户加选项目列表。底稿一般是昨天及更早；导出时新增当天工作表（如 11.28），不改已有日期表。文件只在你电脑里处理。</p>
       </div>
       <button class="info-button" type="button" aria-label="查看说明" data-tooltip="加项汇总只收客户加选里的医生加项和前台推荐，不要自主加项。姓名、项目、成交价、体检人ID、加项医生都来自加选；单位用结账的所属单位补。千爱/健康证/入职来自结账。">i</button>
     </header>
@@ -64,7 +64,7 @@
         <div class="card-body">
           <label class="front-addon-dropzone" id="addonZone" for="addonInput">
             <strong>加项汇总表</strong>
-            <span>新增当天 M.D 工作表</span>
+            <span>底稿是昨天及更早；导出新增当天 M.D，打开停在这一页</span>
           </label>
           <input id="addonInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传加项汇总表">
           <p class="front-addon-filename" id="addonName">尚未选择文件</p>
@@ -75,7 +75,7 @@
           </details>
           <label class="front-addon-dropzone" id="qianaiZone" for="qianaiInput">
             <strong>千爱体检登记表</strong>
-            <span>千爱 sheet 追加当天，并改 Sheet1 数字</span>
+            <span>只追加当天日期行，并改 Sheet1 今日数字；昨天明细不动</span>
           </label>
           <input id="qianaiInput" type="file" accept=".xlsx,.xls" class="front-addon-file" aria-label="上传千爱体检登记表">
           <p class="front-addon-filename" id="qianaiName">尚未选择文件</p>
@@ -104,6 +104,7 @@
           <li>千爱登记只写到检：千爱套餐（含「25千爱-…」这种没有「套餐」二字的名称）和健康证，不写检中加项。业务员只用结账的业务经理；没有就留空，不用名单备注或结账人。订单编号只取前台备注里的 wxo，没有就留空手填。</li>
           <li>健康证：ID 用预约单号，从业地点用名单备注，民族默认汉。入职同理。身份证、电话这两张日常表里没有，导出后空着。报错列保留底稿那种身份证性别校验公式。</li>
           <li>导出 Excel 时：加项合计用 SUM，月累计引用上一张日表；医生人数/金额用公式引用 H/I 列；柱状图一并嵌入当天工作表。千爱 Sheet1 的今日合计、月累计、年累计和健康证报错列也是公式。</li>
+          <li>日期按北京时间。日期下拉默认「今天」。你上传的底稿里已有昨天及更早的 <code>11.27</code> 这类表，导出只新增（或覆盖同名）当天那一张，例如 <code>11.28</code>，标题和千爱体检日期写成 <code>2026.11.28</code>。</li>
         </ol>
       </div>
     </section>

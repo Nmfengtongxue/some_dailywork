@@ -37,10 +37,29 @@ function formatDateKey(year, month, day) {
   return `${year}-${pad2(month)}-${pad2(day)}`;
 }
 
+function beijingTodayKey() {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).format(new Date());
+}
+
+function shanghaiDateKey(value) {
+  if (!(value instanceof Date) || Number.isNaN(value.getTime())) return '';
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).format(value);
+}
+
 function normalizeDateKey(value) {
   if (value === undefined || value === null || value === '') return '';
   if (value instanceof Date && !Number.isNaN(value.getTime())) {
-    return formatDateKey(value.getFullYear(), value.getMonth() + 1, value.getDate());
+    return shanghaiDateKey(value);
   }
   if (typeof value === 'number' && value > 20000 && value < 80000 && window.XLSX?.SSF?.parse_date_code) {
     const parsed = XLSX.SSF.parse_date_code(value);
@@ -62,7 +81,15 @@ function addonListDateKey(row) {
 
 function formatClock(value) {
   if (value instanceof Date && !Number.isNaN(value.getTime())) {
-    return `${formatDateKey(value.getFullYear(), value.getMonth() + 1, value.getDate())} ${pad2(value.getHours())}:${pad2(value.getMinutes())}:${pad2(value.getSeconds())}`;
+    const date = shanghaiDateKey(value);
+    const time = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Shanghai',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    }).format(value);
+    return `${date} ${time}`;
   }
   const text = String(value || '').trim();
   const match = text.match(/(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/);
@@ -947,7 +974,14 @@ function setStatus(message, ok) {
 function unionDates() {
   const fromCheckout = state.checkoutRows.map(checkoutDateKey);
   const fromAddon = state.addonListRows.map(addonListDateKey);
-  return [...new Set([...fromCheckout, ...fromAddon].filter(Boolean))].sort();
+  return [...new Set([...fromCheckout, ...fromAddon, beijingTodayKey()].filter(Boolean))].sort();
+}
+
+function pickDefaultDate(dates, previous) {
+  const today = beijingTodayKey();
+  if (previous && dates.includes(previous)) return previous;
+  if (dates.includes(today)) return today;
+  return dates[dates.length - 1] || today;
 }
 
 function renderDateOptions(dates) {
@@ -957,11 +991,11 @@ function renderDateOptions(dates) {
   dates.forEach((dateKey) => {
     const option = document.createElement('option');
     option.value = dateKey;
-    option.textContent = displayDate(dateKey);
+    option.textContent = dateKey === beijingTodayKey() ? `${displayDate(dateKey)}（今天）` : displayDate(dateKey);
     select.append(option);
   });
   if (dates.length) {
-    select.value = dates.includes(previous) ? previous : dates[dates.length - 1];
+    select.value = pickDefaultDate(dates, previous);
     state.selectedDate = select.value;
   }
 }
@@ -1072,10 +1106,14 @@ function refreshPreview() {
   if (!state.existingQianai) missing.push('千爱底稿');
   if (!state.existingHealth) missing.push('健康证底稿');
   if (!state.existingOnboard) missing.push('入职底稿');
+  const dayLabel = preview.dateKey === beijingTodayKey()
+    ? `${displayDate(preview.dateKey)}（今天）`
+    : displayDate(preview.dateKey);
+  const sheetHint = `会在底稿里新增「${sheetNameForDate(preview.dateKey)}」工作表，昨天及更早的日期表原样保留`;
   setStatus(
     missing.length
-      ? `已算出 ${displayDate(preview.dateKey)}。还差：${missing.join('、')}。有底稿的按原格式导出，没有的也能新出一本。`
-      : `已算出 ${displayDate(preview.dateKey)}，会按底稿原格式填入当天后导出。`,
+      ? `已算出 ${dayLabel}。还差：${missing.join('、')}。有底稿的${sheetHint}；没有的也能新出一本。`
+      : `已算出 ${dayLabel}，${sheetHint}。`,
     true
   );
 }
@@ -1217,6 +1255,48 @@ function formulaCell(formula, result) {
   return cell;
 }
 
+function setActiveWorksheet(workbook, ws) {
+  const index = workbook.worksheets.findIndex((sheet) => sheet === ws || sheet.id === ws.id);
+  if (index < 0) return;
+  workbook.views = [{
+    x: 0,
+    y: 0,
+    width: 120000,
+    height: 40000,
+    firstSheet: 0,
+    activeTab: index,
+    visibility: 'visible'
+  }];
+}
+
+function placeDateSheetAfterLatest(workbook, ws, afterSheet) {
+  const sheets = workbook._worksheets;
+  if (!afterSheet || !Array.isArray(sheets)) {
+    setActiveWorksheet(workbook, ws);
+    return;
+  }
+  const desiredId = afterSheet.id + 1;
+  if (ws.id === desiredId) {
+    setActiveWorksheet(workbook, ws);
+    return;
+  }
+  const currentId = ws.id;
+  delete sheets[currentId];
+  const movers = [];
+  sheets.forEach((sheet, id) => {
+    if (sheet && id >= desiredId) movers.push(sheet);
+  });
+  movers.sort((a, b) => b.id - a.id);
+  movers.forEach((sheet) => {
+    delete sheets[sheet.id];
+    sheet.id += 1;
+    sheets[sheet.id] = sheet;
+  });
+  ws.id = desiredId;
+  sheets[desiredId] = ws;
+  setActiveWorksheet(workbook, ws);
+}
+
 function fillAddonSheet(workbook, preview) {
   const sheetName = sheetNameForDate(preview.dateKey);
   const template = latestDateSheet(workbook, sheetName);
@@ -1227,6 +1307,7 @@ function fillAddonSheet(workbook, preview) {
   const existing = workbook.getWorksheet(sheetName);
   if (existing) workbook.removeWorksheet(existing.id);
   const ws = workbook.addWorksheet(sheetName);
+  placeDateSheetAfterLatest(workbook, ws, template);
 
   if (template) {
     copySheetChrome(template, ws);
@@ -1320,7 +1401,26 @@ async function embedAddonChart(workbook, preview) {
 }
 
 function qianaiDateOf(cell) {
-  return String(cell.value || '').replace(/\.0(\d)/g, '.$1');
+  const value = cell && typeof cell === 'object' && 'value' in cell ? cell.value : cell;
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    return qianaiDateLabel(shanghaiDateKey(value));
+  }
+  if (value && typeof value === 'object') {
+    if (value.result instanceof Date) return qianaiDateOf({ value: value.result });
+    if (value.result !== undefined && value.result !== null && value.result !== '') {
+      return qianaiDateOf({ value: value.result });
+    }
+    if (value.text) return qianaiDateOf({ value: value.text });
+  }
+  const text = String(value || '').trim();
+  const iso = normalizeDateKey(text);
+  if (iso) return qianaiDateLabel(iso);
+  const zh = text.match(/(?:(\d{4})[年.])?(\d{1,2})月(\d{1,2})日?/);
+  if (zh) {
+    const year = zh[1] || beijingTodayKey().slice(0, 4);
+    return qianaiDateLabel(formatDateKey(year, zh[2], zh[3]));
+  }
+  return text.replace(/\.0(\d)/g, '.$1');
 }
 
 function lastFilledRow(sheet, col) {
