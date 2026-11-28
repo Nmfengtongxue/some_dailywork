@@ -297,6 +297,45 @@ function isPackagePriced(items, amount) {
   return false;
 }
 
+function isQianaiVisitRow(row, items, amount, healthCert) {
+  if (!isQianaiRow(row)) return false;
+  if (healthCert) return true;
+  const blob = items.join(' ');
+  if (/套餐|普惠基础|职工体检方案|自选/.test(blob)) return true;
+  if (items.some((item) => /^\d{2}千爱/.test(item))) return true;
+  return isPackagePriced(items, amount);
+}
+
+function applySharedQianaiAmounts(visits) {
+  const byOrder = new Map();
+  visits.forEach((row) => {
+    if (/健康证/.test(`${row.packageName || ''} ${row.note || ''}`)) return;
+    const order = String(row.soaOrder || '').trim();
+    if (!order) return;
+    if (!byOrder.has(order)) byOrder.set(order, []);
+    byOrder.get(order).push(row);
+  });
+  byOrder.forEach((group) => {
+    const byAmt = new Map();
+    group.forEach((row) => {
+      const amt = money(row.amount);
+      if (!(amt > 0)) return;
+      if (!byAmt.has(amt)) byAmt.set(amt, []);
+      byAmt.get(amt).push(row);
+    });
+    byAmt.forEach((people) => {
+      if (people.length < 2) return;
+      people.sort((a, b) => String(a.time || '').localeCompare(String(b.time || '')) || a.name.localeCompare(b.name, 'zh'));
+      people.forEach((row, index) => {
+        row.qty = people.length;
+        if (index === 0) return;
+        row.amount = 0;
+        row.note = row.note || '同码零计费';
+      });
+    });
+  });
+}
+
 function isCancelled(row) {
   return String(row['状态'] || '').includes('取消');
 }
@@ -361,7 +400,8 @@ function netCheckoutRows(rows) {
       return;
     }
     group.forEach((row) => {
-      if (money(row['结账总金额']) > 0) output.push(row);
+      const amt = money(row['结账总金额']);
+      if (amt > 0 || (amt === 0 && isQianaiRow(row))) output.push(row);
     });
   });
   return output;
@@ -480,8 +520,8 @@ function buildPreview() {
     }
 
     const takeVisit = (qianaiFlag || (state.includeHealthCert && healthCert))
-      && (healthCert || isPackagePriced(items, amount));
-    if (takeVisit && amount > 0) {
+      && (healthCert || isQianaiVisitRow(row, items, amount, healthCert) || isPackagePriced(items, amount));
+    if (takeVisit && (amount > 0 || (qianaiFlag && !healthCert))) {
       const packageName = packageFullName(items, row['收费项目']);
       const key = `${reserve}|${person}|${packageName}`;
       if (!visitSeen.has(key)) {
@@ -490,6 +530,8 @@ function buildPreview() {
           date: dateKey,
           name: person,
           orderNo: wxoOrderOf(row),
+          soaOrder: String(row['订单号'] || '').trim(),
+          time: formatClock(row['操作时间']),
           qty: 1,
           packageName,
           amount,
@@ -499,6 +541,7 @@ function buildPreview() {
       }
     }
   });
+  applySharedQianaiAmounts(qianai);
 
   qianai.filter((row) => !row.orderNo).forEach((row) => {
     issues.push({
