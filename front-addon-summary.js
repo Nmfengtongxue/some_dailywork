@@ -1290,7 +1290,7 @@ function safeMerge(sheet, range) {
 function copySheetChrome(from, to) {
   try { to.pageSetup = from.pageSetup; } catch (error) { /* ignore */ }
   try { to.views = from.views; } catch (error) { /* ignore */ }
-  from.columns.forEach((col, index) => {
+  from.columns.slice(0, 9).forEach((col, index) => {
     const target = to.getColumn(index + 1);
     if (col.width) target.width = col.width;
     target.hidden = col.hidden;
@@ -1410,57 +1410,6 @@ function fillAddonSheet(workbook, preview) {
   writeRowValues(ws, monthRow, [`${month}月累计`, '', '', '', '', '', '', '', formulaCell(monthFormula, monthTotal)], monthStyleRow, 9);
   safeMerge(ws, `A${totalRow}:H${totalRow}`);
   safeMerge(ws, `A${monthRow}:H${monthRow}`);
-
-  if (preview.addon.length) {
-    const dataStart = 3;
-    const dataEnd = lastDataRow;
-    const nameRange = `$J$${dataStart}:$J$${dataEnd}`;
-    const personRange = `$B$${dataStart}:$B$${dataEnd}`;
-    const amountRange = `$I$${dataStart}:$I$${dataEnd}`;
-    ws.getColumn(10).width = 12;
-    ws.getColumn(10).hidden = true;
-    ws.getRow(2).getCell(10).value = '医生姓名';
-    for (let row = dataStart; row <= dataEnd; row += 1) {
-      ws.getRow(row).getCell(10).value = formulaCell(
-        `IF(H${row}="","",IF(ISNUMBER(FIND("-",H${row})),LEFT(H${row},FIND("-",H${row})-1),H${row}))`,
-        doctorNameOnly(preview.addon[row - dataStart]?.doctor)
-      );
-    }
-
-    const chartDoctors = doctorChartTotals(preview.addon);
-    ws.getColumn(11).width = 14;
-    ws.getColumn(12).width = 10;
-    ws.getColumn(13).width = 12;
-    ws.getRow(2).getCell(11).value = '加项医生';
-    ws.getRow(2).getCell(12).value = '人数';
-    ws.getRow(2).getCell(13).value = '金额';
-    chartDoctors.forEach((row, index) => {
-      const excelRow = ws.getRow(index + 3);
-      const cell = `K${index + 3}`;
-      excelRow.getCell(11).value = row.name;
-      excelRow.getCell(12).value = formulaCell(
-        `IF(${cell}="","",SUMPRODUCT((${nameRange}=${cell})*(${personRange}<>"")/COUNTIFS(${nameRange},${nameRange},${personRange},${personRange})))`,
-        row.people
-      );
-      excelRow.getCell(13).value = formulaCell(
-        `IF(${cell}="","",SUMIF(${nameRange},${cell},${amountRange}))`,
-        row.amount
-      );
-    });
-  }
-}
-
-async function embedAddonChart(workbook, preview) {
-  if (!preview?.addon?.length) return;
-  const canvas = drawDoctorChartImage(preview);
-  const buffer = await canvasToArrayBuffer(canvas);
-  const imageId = workbook.addImage({ buffer, extension: 'png' });
-  const ws = workbook.getWorksheet(sheetNameForDate(preview.dateKey));
-  if (!ws) return;
-  ws.addImage(imageId, {
-    tl: { col: 14, row: 1 },
-    ext: { width: 760, height: 420 }
-  });
 }
 
 function qianaiDateOf(cell) {
@@ -1668,7 +1617,6 @@ async function downloadWorkbook(kind) {
   if (kind === 'addon') {
     if (state.existingAddon) await workbook.xlsx.load(state.existingAddon.slice(0));
     fillAddonSheet(workbook, preview);
-    await embedAddonChart(workbook, preview);
     triggerDownload(await workbook.xlsx.writeBuffer(), state.existingAddonName || `加项汇总表_${sheetNameForDate(preview.dateKey)}.xlsx`);
     return;
   }
