@@ -608,8 +608,10 @@ function priorMonthFromTemplate(dateKey) {
 }
 
 const EXCEL_FONT = '"Songti SC","SimSun","NSimSun","STSong","PingFang SC","Microsoft YaHei",serif';
-const EXCEL_BLUE = '#5B9BD5';
-const EXCEL_ORANGE = '#ED7D31';
+const CHART_FONT = '"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif';
+const EXCEL_BLUE = '#4472C4';
+const EXCEL_GRID = '#D9D9D9';
+const EXCEL_AXIS = '#595959';
 
 function wrapLines(ctx, text, maxWidth) {
   const source = String(text ?? '');
@@ -740,23 +742,36 @@ function drawAddonTableImage(preview) {
   return canvas;
 }
 
-function splitDoctorLabel(value) {
-  const full = String(value || '').trim();
-  const match = full.match(/^([\u4e00-\u9fa5]{2,4})-(\d{8,})$/);
-  if (match) return { name: match[1], id: match[2], full };
-  return { name: doctorNameOnly(full) || full, id: '', full };
+function doctorChartTotals(rows) {
+  const map = new Map();
+  rows.forEach((row) => {
+    const name = doctorNameOnly(row.doctor);
+    if (!name) return;
+    map.set(name, money((map.get(name) || 0) + row.amount));
+  });
+  return [...map.entries()]
+    .map(([name, amount]) => ({ name, amount }))
+    .sort((a, b) => b.amount - a.amount || a.name.localeCompare(b.name, 'zh'));
+}
+
+function niceChartMax(value) {
+  const padded = Math.max(1, Number(value) || 1) * 1.12;
+  const mag = 10 ** Math.floor(Math.log10(padded));
+  const n = padded / mag;
+  const nice = n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10;
+  return nice * mag;
 }
 
 function drawDoctorChartImage(preview) {
   const scale = 2;
-  const doctors = preview.doctors || [];
-  const width = Math.max(680, 140 + doctors.length * 108);
-  const height = 460;
-  const pad = { top: 68, right: 28, bottom: 78, left: 36 };
+  const doctors = doctorChartTotals(preview.addon || []);
+  const width = Math.max(920, 160 + doctors.length * 88);
+  const height = 520;
+  const pad = { top: 48, right: 24, bottom: 42, left: 52 };
   const plotW = width - pad.left - pad.right;
   const plotH = height - pad.top - pad.bottom;
-  const maxAmount = Math.max(1, ...doctors.map((row) => row.amount));
-  const maxPeople = Math.max(1, ...doctors.map((row) => row.people || 0));
+  const maxAmount = niceChartMax(Math.max(0, ...doctors.map((row) => row.amount)));
+  const tickCount = 9;
   const canvas = document.createElement('canvas');
   canvas.width = Math.round(width * scale);
   canvas.height = Math.round(height * scale);
@@ -764,64 +779,43 @@ function drawDoctorChartImage(preview) {
   ctx.setTransform(scale, 0, 0, scale, 0, 0);
   ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, width, height);
-  ctx.fillStyle = '#000';
+
+  ctx.fillStyle = '#404040';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  const title = addonTitle(preview.dateKey);
-  const titleSize = fitFont(ctx, title, width - 40, 16, 12);
-  ctx.font = `${titleSize}px ${EXCEL_FONT}`;
-  ctx.fillText(title, width / 2, 22);
+  ctx.font = `16px ${CHART_FONT}`;
+  ctx.fillText(addonTitle(preview.dateKey), width / 2, 22);
 
-  ctx.font = `11px ${EXCEL_FONT}`;
-  const legend = [
-    { label: '人数', color: EXCEL_ORANGE },
-    { label: '金额', color: EXCEL_BLUE }
-  ];
-  let legendX = width / 2 - 70;
-  legend.forEach((item) => {
-    ctx.fillStyle = item.color;
-    ctx.fillRect(legendX, 42, 12, 12);
-    ctx.fillStyle = '#000';
-    ctx.textAlign = 'left';
-    ctx.fillText(item.label, legendX + 16, 48);
-    legendX += 70;
-  });
-  ctx.textAlign = 'center';
+  ctx.font = `11px ${CHART_FONT}`;
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'middle';
+  for (let i = 0; i <= tickCount; i += 1) {
+    const value = (maxAmount / tickCount) * i;
+    const y = pad.top + plotH - (value / maxAmount) * plotH;
+    ctx.strokeStyle = i === 0 ? EXCEL_AXIS : EXCEL_GRID;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y + 0.5);
+    ctx.lineTo(pad.left + plotW, y + 0.5);
+    ctx.stroke();
+    ctx.fillStyle = EXCEL_AXIS;
+    ctx.fillText(String(Math.round(value)), pad.left - 8, y);
+  }
 
   const n = Math.max(doctors.length, 1);
   const slot = plotW / n;
-  const barW = Math.min(22, slot * 0.28);
-  const gap = 4;
-  ctx.strokeStyle = '#000';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(pad.left, pad.top + plotH + 0.5);
-  ctx.lineTo(pad.left + plotW, pad.top + plotH + 0.5);
-  ctx.stroke();
-
+  const barW = Math.min(46, slot * 0.42);
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
   doctors.forEach((row, index) => {
-    const peopleH = ((row.people || 0) / maxPeople) * (plotH - 28);
-    const amountH = (row.amount / maxAmount) * (plotH - 28);
-    const groupX = pad.left + slot * index + (slot - (barW * 2 + gap)) / 2;
-    const peopleX = groupX;
-    const amountX = groupX + barW + gap;
-    const peopleY = pad.top + plotH - peopleH;
-    const amountY = pad.top + plotH - amountH;
-    ctx.fillStyle = EXCEL_ORANGE;
-    ctx.fillRect(peopleX, peopleY, barW, peopleH);
+    const barH = (row.amount / maxAmount) * plotH;
+    const x = pad.left + slot * index + (slot - barW) / 2;
+    const y = pad.top + plotH - barH;
     ctx.fillStyle = EXCEL_BLUE;
-    ctx.fillRect(amountX, amountY, barW, amountH);
-    ctx.fillStyle = '#000';
-    ctx.font = `11px ${EXCEL_FONT}`;
-    ctx.fillText(String(row.people || 0), peopleX + barW / 2, peopleY - 10);
-    ctx.fillText(formatAmount(row.amount), amountX + barW / 2, amountY - 10);
-    const parts = splitDoctorLabel(row.name);
-    ctx.font = `12px ${EXCEL_FONT}`;
-    ctx.fillText(parts.name, pad.left + slot * index + slot / 2, pad.top + plotH + 16);
-    if (parts.id) {
-      ctx.font = `10px ${EXCEL_FONT}`;
-      ctx.fillText(parts.id, pad.left + slot * index + slot / 2, pad.top + plotH + 32);
-    }
+    ctx.fillRect(x, y, barW, barH);
+    ctx.fillStyle = '#404040';
+    ctx.font = `12px ${CHART_FONT}`;
+    ctx.fillText(row.name, pad.left + slot * index + slot / 2, pad.top + plotH + 8);
   });
   return canvas;
 }
