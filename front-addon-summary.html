@@ -10,7 +10,7 @@
   <script src="assets/vendor/exceljs.min.js"></script>
   <script src="assets/design-system.js" defer></script>
   <script src="assets/extra-nav.js" defer></script>
-  <script src="front-addon-summary.js?v=20261128b" defer></script>
+  <script src="front-addon-summary.js?v=20261128c" defer></script>
 </head>
 <body>
   <main class="container front-addon-page" id="mainContent">
@@ -100,7 +100,7 @@
       <div class="card-body">
         <ol class="front-addon-rules">
           <li>加项汇总按客户加选的结账日收当天「医生加项」，没有结账时间才用加项日期。勾选「前台推荐也计入」时再加上前台推荐。成交价大于 0、未取消。自主加项不上这张表。</li>
-          <li>ID 用体检人 ID。加项医生默认写成「苏丹-1689…」这种姓名-编号。柱状图按姓名汇总金额，柱顶标金额；人数和金额在导出表里用 COUNTIFS / SUMIF 引用当天明细。</li>
+          <li>ID 用体检人 ID。加项医生默认写成「苏丹-1689…」这种姓名-编号。柱状图按这位医生合计金额，柱顶标出合计数；横轴名称过长时和 Excel 一样显示成「苏丹…」。</li>
           <li>千爱登记只写到检：千爱套餐（含「25千爱-…」这种没有「套餐」二字的名称）和健康证，不写检中加项。业务员只用结账的业务经理；没有就留空，不用名单备注或结账人。订单编号只取前台备注里的 wxo，没有就留空手填。</li>
           <li>健康证：ID 用预约单号，从业地点用名单备注，民族默认汉。入职同理。身份证、电话这两张日常表里没有，导出后空着。报错列保留底稿那种身份证性别校验公式。</li>
           <li>导出 Excel 时：加项合计用 SUM，月累计引用上一张日表；医生人数/金额用公式引用 H/I 列；柱状图一并嵌入当天工作表。千爱 Sheet1 的今日合计、月累计、年累计和健康证报错列也是公式。</li>
@@ -150,7 +150,7 @@
               <img id="reportTableImg" alt="加项汇总表">
             </figure>
             <figure>
-              <figcaption>加项医生柱状图（按金额，横轴只写姓名）</figcaption>
+              <figcaption>加项医生柱状图（合计金额标在柱顶）</figcaption>
               <img id="reportChartImg" alt="加项医生柱状图">
             </figure>
             <div id="doctorStatsTable"></div>
